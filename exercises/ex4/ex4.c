@@ -14,6 +14,7 @@ void fillVectorNumerically(Vector inpt){
 double getVectorSum(Vector inpt){
 	double sum = 0.0;
 
+	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum)
 	for (int i = 0; i < inpt->glob_len; ++i){
 		sum += inpt->data[i];
 	}
@@ -49,7 +50,6 @@ int main(int argc, char const *argv[]){
 	}
 
 	//Compute the differences
-	#pragma omp parallel for schedule(guided 2)
 	for (int i = 0; i < kValues->glob_len; ++i){
 		difference->data[i] = (pow(PI, 2.0)/6.0) - getVectorSum(vectorList[i]);
 	}
