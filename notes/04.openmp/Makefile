@@ -19,9 +19,9 @@ openmp_notes.pdf: CriticalSection.pdf \
 		  serial-sections.c
 
 		  # run twice to resolve references
-		  pdflatex -output-directory ../tmp openmp_notes.tex
-		  cp referanser.bib ../tmp
-		  cd ../tmp && bibtex openmp_notes
-		  pdflatex -output-directory ../tmp openmp_notes.tex
-		  pdflatex -output-directory ../tmp openmp_notes.tex
-		  mv ../tmp/openmp_notes.pdf ..
+		  pdflatex openmp_notes.tex
+		  #cp referanser.bib ../tmp
+		  #cd ../tmp && bibtex openmp_notes
+		  #pdflatex -output-directory ../tmp openmp_notes.tex
+		  #pdflatex -output-directory ../tmp openmp_notes.tex
+		  #mv ../tmp/openmp_notes.pdf ..
