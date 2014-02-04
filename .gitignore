@@ -19,3 +19,8 @@
 
 # Sublime files
 *.sublime*
+
+#PDF files
+*.aux
+*.log
+*.pdf
