@@ -49,12 +49,13 @@ int main(int argc, char const *argv[]){
 	}
 
 	//Compute the differences
+	#pragma omp parallel for schedule(guided 2)
 	for (int i = 0; i < kValues->glob_len; ++i){
 		difference->data[i] = (pow(PI, 2.0)/6.0) - getVectorSum(vectorList[i]);
 	}
 
 	//Print the differences
-	printf("\nBelow are the differences of the sums of vectors with the values: v[i] = 1/i^2,\nwhere n = 2^k, and k has been given different values.");
+	printf("\nBelow are the differences of the sums of vectors with the values: v[i] = 1/i^2,\nwhere n = 2^k, and k has been given different values.\n");
 	for (int i = 0; i < kValues->glob_len; ++i){
 		printf("With k = %d, the difference is: %.2f\n",
 			i+1, difference->data[i]);
