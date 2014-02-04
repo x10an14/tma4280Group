@@ -14,7 +14,7 @@ void fillVectorNumerically(Vector inpt){
 double getVectorSum(Vector inpt){
 	double sum = 0.0;
 
-	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum)
+	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum) //Add if-defs for later
 	for (int i = 0; i < inpt->glob_len; ++i){
 		sum += inpt->data[i];
 	}
@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]){
 	int vecLength = 0;
 
 	if(argc <= 1){
-		printf("Too few arguments given!\nProgram aborted.\n");
+		printf("Too few arguments given!\n\tProgram aborted.\n");
 		return -1;
 	} else{
 		vecLength = atoi(argv[1]);
