@@ -1,12 +1,13 @@
-#include "../../examples/common/common.h"
-#include "ex4.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../../examples/common/common.h"
+#include "ex4.h"
+
 void fillVectorNumerically(Vector inpt){
 	for (int i = 0; i < inpt->glob_len; ++i){
-		inpt->data[i] = 1.0/(i+1);
+		inpt->data[i] = 1.0/pow((i+1), 2.0);
 	}
 }
 
