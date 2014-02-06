@@ -15,7 +15,7 @@ double getVectorSum(Vector inpt){
 	double sum = 0.0;
 
 	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum) //Add if-defs for later
-	for (int i = 0; i < inpt->glob_len; ++i){
+	for (int i = (inpt->glob_len - 1); i >= 0; --i){
 		sum += inpt->data[i];
 	}
 
@@ -55,10 +55,10 @@ int main(int argc, char const *argv[]){
 	}
 
 	//Print the differences
-	printf("\nBelow are the differences of the sums of vectors with the values: v[i] = 1/i^2,\nwhere n = 2^k, and k has been given different values.\n");
+	printf("\nBelow are the differences of the sums of vectors with the values: v[i] = 1/i^2,\nwhere n = 2^k, and k has been given different values:\n");
 	for (int i = 0; i < kValues->glob_len; ++i){
 		printf("With k = %d, the difference is: %.2f\n",
-			i+1, difference->data[i]);
+			(int) kValues->data[i], difference->data[i]);
 	}
 
 	return 0;
