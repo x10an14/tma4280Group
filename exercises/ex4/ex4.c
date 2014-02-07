@@ -6,19 +6,18 @@
 #include "../../examples/common/common.h"
 #include "ex4.h"
 
-int rank,                      // Rank of this process
-    size,                      // Total number of processes
-    vecLength;				   // Vector length
+int rank,					// Rank of this process
+	size,					// Total number of processes
+	vecLength;				// Vector length
 
 //MPI datatype
 MPI_Datatype vector;
 
 //Function for creating and committing MPI datatypes
-void create_types() {
-	
+void create_types(){
 	//Creating vector type
 	MPI_Type_vector(vecLength, 1, vecLength, MPI_FLOAT, &vector);
-    MPI_Type_commit(&vector);
+	MPI_Type_commit(&vector);
 }
 
 void fillVectorNumerically(Vector inpt){
@@ -49,23 +48,24 @@ int main(int argc, char *argv[]){
 	} else{
 		vecLength = atoi(argv[1]);
 	}
-	
+
 	// TODO: IMPORTANT! Make all MPI code dependent on presence of MPI. E.g. make IFDEFs
 	// Initialize MPI, get rank and size
 	MPI_Init(&argc, &argv); // argc: number of args, argv: arg-vector // TODO: Change?
+
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    
+
     // Create data-type(s)
     create_types();
-	
+
 	// Let rank 0 generate vector "v"
 	if (rank == 0)
 	{
 		Vector numericV = createVector(vecLength);
 		fillVectorNumerically(numericV);
 	}
-	
+
 	// TODO: Complete function call, Scatter data to MPI ranks
 	/* void *sendbuf, int sendcnt, MPI_Datatype sendtype, 
                void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root, 
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]){
 	int gather_res = MPI_Gather(void *sendbuf, int sendcnt, vector, 
                void *recvbuf, int recvcnt, vector, 
                0, MPI_COMM_WORLD);
-	
+
 	//Set up vectors and "help-vectors" for computing the difference with different k-values
 	Vector kValues = createVector(12);
 	Vector difference = createVector(12);
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]){
 		printf("With k = %d, the difference is: %.2f\n",
 			(int) kValues->data[i], difference->data[i]);
 	}
-	
+
 	//MPI cleanup
 	MPI_Type_free(&vector);
 	MPI_Finalize();
