@@ -1,9 +1,28 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <mpi.h>
 
 #include "../../examples/common/common.h"
 #include "ex4.h"
+
+int rank,                      // Rank of this process
+    size,                      // Total number of processes
+    vecLength;				   // Vector length
+    
+//MPI communicator
+MPI_comm comm;
+
+//MPI datatype
+MPI_datatype vector;
+
+//Function for creating and committing MPI datatypes
+void create_types() {
+	
+	//Creating vector type
+	MPI_Type_vector(vecLength, 1, vecLength, MPI_FLOAT, &vector);
+    MPI_Type_commit(&vector);
+}
 
 void fillVectorNumerically(Vector inpt){
 	for (int i = 0; i < inpt->glob_len; ++i){
@@ -23,7 +42,7 @@ double getVectorSum(Vector inpt){
 }
 
 int main(int argc, char const *argv[]){
-	int vecLength = 0;
+	vecLength = 0;
 
 	if(argc <= 1){
 		printf("Too few arguments given!\n\tProgram aborted.\n");
@@ -31,14 +50,29 @@ int main(int argc, char const *argv[]){
 	} else{
 		vecLength = atoi(argv[1]);
 	}
-
+	
+	//Initialize MPI, get rank and size
+	MPI_Init(&argc, &argv); //argc: number of args, argv: arg-vector //TODO: Change?
+	MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	
+	//TODO: We don't need a communicator for 1D topology?
+    
+    // Create data-type(s)
+    create_types();
+	
+	//TODO: Only do if rank 0
 	//Generate vector "v"
 	Vector numericV = createVector(vecLength);
 	fillVectorNumerically(numericV);
-
-	//Compute sum of "v" on one processor.
+	
+	//TODO: Scatter data to MPI ranks
+	
+	//Compute sum of "v" on processor(s).
 	//double vSum = getVectorSum(numericV);
-
+	
+	// TODO: Gather sums to rank 0 (preferably by binary tree for efficiency)
+	
 	//Set up vectors and "help-vectors" for computing the difference with different k-values
 	Vector kValues = createVector(12);
 	Vector difference = createVector(12);
@@ -60,6 +94,10 @@ int main(int argc, char const *argv[]){
 		printf("With k = %d, the difference is: %.2f\n",
 			(int) kValues->data[i], difference->data[i]);
 	}
+	
+	//MPI cleanup
+	MPI_Type_free(&vector);
+	MPI_Finalize();
 
 	return 0;
 }
