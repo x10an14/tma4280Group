@@ -9,12 +9,9 @@
 int rank,                      // Rank of this process
     size,                      // Total number of processes
     vecLength;				   // Vector length
-    
-//MPI communicator
-MPI_comm comm;
 
 //MPI datatype
-MPI_datatype vector;
+MPI_Datatype vector;
 
 //Function for creating and committing MPI datatypes
 void create_types() {
@@ -41,7 +38,7 @@ double getVectorSum(Vector inpt){
 	return sum;
 }
 
-int main(int argc, char const *argv[]){
+int main(int argc, char *argv[]){
 	vecLength = 0;
 
 	if(argc <= 1){
@@ -55,16 +52,16 @@ int main(int argc, char const *argv[]){
 	MPI_Init(&argc, &argv); //argc: number of args, argv: arg-vector //TODO: Change?
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	
-	//TODO: We don't need a communicator for 1D topology?
     
     // Create data-type(s)
     create_types();
 	
-	//TODO: Only do if rank 0
-	//Generate vector "v"
-	Vector numericV = createVector(vecLength);
-	fillVectorNumerically(numericV);
+	// Let rank 0 generate vector "v"
+	if (rank == 0)
+	{
+		Vector numericV = createVector(vecLength);
+		fillVectorNumerically(numericV);
+	}
 	
 	//TODO: Scatter data to MPI ranks
 	
