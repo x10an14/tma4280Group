@@ -8,7 +8,7 @@
 
 int rank,					// Rank of this process
 	size,					// Total number of processes
-	vecLength;				// Vector length
+	vecLength;				// Vector vecLength
 
 //MPI datatype
 MPI_Datatype vector;
@@ -21,7 +21,7 @@ void create_types(){
 }
 
 void fillVectorNumerically(Vector inpt){
-	for (int i = 0; i < inpt->glob_len; ++i){
+	for (int i = 0; i < inpt->len; ++i){
 		inpt->data[i] = 1.0/pow((i+1), 2.0);
 	}
 }
@@ -30,7 +30,7 @@ double getVectorSum(Vector inpt){
 	double sum = 0.0;
 
 	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum) //Add if-defs for later
-	for (int i = (inpt->glob_len - 1); i >= 0; --i){
+	for (int i = (inpt->len - 1); i >= 0; --i){
 		sum += inpt->data[i];
 	}
 
