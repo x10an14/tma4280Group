@@ -9,7 +9,7 @@ add_subdirectory(../common common)
 
 include_directories(${COMMON_INCLUDE_PATHS})
 add_definitions(${COMMON_DEFINITIONS})
-list(APPEND CMAKE_C_FLAGS ${COMMON_C_FLAGS})
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_C_FLAGS}")
 
 set(FLAG 0)
 foreach(OPT 0 1 2 3)
