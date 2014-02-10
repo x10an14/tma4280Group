@@ -30,43 +30,28 @@ int main(int argc, char *argv[]){
 	double wTime = 0.0;
 
 	#ifdef HAVE_MPI
-		//We can safely call it at this point in time because only rank 0 should be initialized afaik?
-		init_app(argc, argv, &rank, &size);
-		wTime = WallTime();
+	//We can safely call it at this point in time because only rank 0 should be initialized afaik?
+	init_app(argc, argv, &rank, &size);
+	wTime = WallTime();
 	#endif
 
-	if(rank == 0 && argc <= 3){
-		printf("Too few arguments given!\n\tProgram aborted.\n");
-		return -1;
-	} else{
-		vecLength = atoi(argv[1]);
-		rank = atoi(argv[2]);
-		size = atoi(argv[3]);
+	if(rank == 0){
+		if(argc <= 1){
+			printf("Too few arguments given!\n\tProgram aborted.\n");
+			return -1;
+		} else{
+			vecLength = atoi(argv[1]);
+			// Let rank 0 generate vector "v"
+			#ifdef HAVE_MPI
+			Vector numericV = createVectorMPI(vecLength,
+				&WorldComm/*Is this correct? Should it be SelfComm?*/,
+				 );
+			(numericV);
+			#else
+
+			#endif
+		}
 	}
-
-	// Let rank 0 generate vector "v"
-	#ifdef HAVE_MPI
-	if (rank == 0){
-		Vector numericV = createVector(vecLength);
-		fillVectorNumerically(numericV);
-	}
-	#endif
-
-	// TODO: Complete function call, Scatter data to MPI ranks
-	/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
-			   void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
-			   MPI_Comm com */
-	//int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);
-
-	// TODO: Convert to summing on local vector-piece if MPI is in use.
-	//Compute sum of "v" on processor(s).
-	//double vSum = getVectorSum(numericV);
-
-	// TODO: Complete function call, Gather sums to rank 0 (preferably by binary tree for efficiency)
-	/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
-			   void *recvbuf, int recvcnt, MPI_Datatype recvtype,
-			   int root, MPI_Comm comm */
-	//int gather_res = MPI_Gather(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);
 
 	//Set up vectors and "help-vectors" for computing the difference with different k-values
 	Vector kValues = createVector(12);
