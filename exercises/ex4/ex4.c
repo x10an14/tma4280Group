@@ -29,80 +29,70 @@ double getVectorSum(Vector inpt, int start, int end){
 // TODO: Add at argv[2] for number of MPI ranks
 int main(int argc, char *argv[]){
 	//Initialization of variables
-	int vecLength = 0, rank = 0, size = 0, useOpenMP = 0;
-	Vector kValues, difference, *vectorList;
+	int vecLength = 0, rank = 0, size = 1, k = 1;
+	double glob_sum  = 0.0, loc_sum = 0.0, actual_sum = (pow(PI, 2.0)/6.0);
+	Vector kVector;
 
 	//Initialization of time
 	double wTime = WallTime();
 
 	//Initialization of MPI
-	init_app(&argc, argv, &rank, &size); //We can safely call it at this point in time because only rank 0 should be initialized afaik?
+	init_app(&argc, argv, &rank, &size);
+
+	if(argc <= 1){ //Check that we got vecLength and useOpenMP params
+		//The above check _should_(?) work if I have understood how MPI_Init() does its job. My impression is that it should receive argc and argv as call-by-reference, and "clean them up", such that they correspond with the expected arguments given at runtime.
+		//(AFAIK they do not at normally correspond as such due to MPI complexities).
+		printf("Too few arguments given!\n\tProgram aborted.\n");
+		return -1;
+	}
+	k = atoi(argv[1]);
+	vecLength = (int) pow(2.0, (double) k);
 
 	//Pre-work to be done by the "master node", AKA node with rank==0:
 	if(rank == 0){
-		if(argc <= 2){ //Check that we got vecLength and useOpenMP params
-			//The above check _should_(?) work if I have understood how MPI_Init() does its job. My impression is that it should receive argc and argv as call-by-reference, and "clean them up", such that they correspond with the expected arguments given at runtime.
-			//(AFAIK they do not at normally correspond as such due to MPI complexities).
-			printf("Too few arguments given!\n\tProgram aborted.\n");
-			return -1;
-		} else{
-			vecLength = (int) pow(2.0, (double) atoi(argv[1]));
-			useOpenMP = atoi(argv[2]);
+		//Let rank 0 generate vector
+		kVector = createVector(vecLength);
+		fillVectorNumerically(kVector);
 
-			// Let rank 0 generate vector "v"
-			#ifdef HAVE_MPI //Create and fill data structures
-				Vector numericV = createVectorMPI(vecLength, &WorldComm/*Is this correct? Should it be SelfComm?*/, 0 /*No idea what this variable is for...*/);
-				fillVectorNumerically(numericV);
-			#else
-				//Set up vectors and "help-vectors" for computing the difference with different k-values
-				kValues = createVector(12);
-				difference = createVector(12);
-				vectorList = (Vector*) malloc(12*sizeof(Vector));
-				for (int i = 0; i < kValues->glob_len; ++i){
-					kValues->data[i] = 3+i;
-					vectorList[i] = createVector(3+i);
-					fillVectorNumerically(vectorList[i]);
-				}
-			#endif
-			//TODO: Ensure that the above code works as intended/it should, and then split (scatter?) the work to each node
-		}
+		#ifdef HAVE_MPI
+			//Send vector pieces to all nodes (ranks)
+			/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
+					void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
+					MPI_Comm com */
+			/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);*/
+
+			//Does the below out-commented function call belong here? What's its intention?
+			/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
+				void *recvbuf, int recvcnt, MPI_Datatype recvtype,
+				int root, MPI_Comm comm */
+		#else
+			//Progress as if there's no extra nodes.
+
+		#endif
 	}
 
-	//TODO: Make each node execute its job. No clue how... as of yet...
-	#ifdef HAVE_MPI
-		// TODO: Complete function call, Scatter data to MPI ranks
-		/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
-				void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
-				MPI_Comm com */
-		/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);*/
+	//Figure out the smart way to have a buffer locally and universally, so that each process (rank) can compute it's local sum
+	if(size == 0){
+		glob_sum = getVectorSum(kVector, 0, kVector->glob_len);
+	} else{
+		//For making the code more readable, I make each rank calculate its steps.
+		int step = pow(2.0, 1.0*rank*k/size), next_step = (pow(2.0, 1.0*(rank+1)*k/size) - 1);
 
-	// TODO: Convert to summing on local vector-piece if MPI is in use.
-	//Compute sum of "v" on processor(s).
-	//double vSum = getVectorSum(numericV);
-
-	// TODO: Complete function call, Gather sums to rank 0 (preferably by binary tree for efficiency)
-	/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
-			void *recvbuf, int recvcnt, MPI_Datatype recvtype,
-			int root, MPI_Comm comm */
-	/*int gather_res = MPI_Gather(void *sendbuf, int sendcnt, vector,
-			void *recvbuf, int recvcnt, vector,
-			0, MPI_COMM_WORLD);*/
-	#else
-
-	#endif
-
-	if(rank == 0){ //If no MPI, just execute the code as usual.
-		//Compute the differences
-		for (int i = 0; i < kValues->glob_len; ++i){
-			difference->data[i] = (pow(PI, 2.0)/6.0) - getVectorSum(vectorList[i]);
+		//Probably won't work, we need to malloc each local sum?
+		if(rank == 0){
+			loc_sum = getVectorSum(kVector, 0, (int) pow(2.0, 1.0*k/size)-1.0);
+		} else{
+			loc_sum = getVectorSum(kVector, step, next_step);
 		}
 	}
 
 	//TODO: Collect and add up all sums from all nodes into the node with rank == 0 again, so that it can report the result. All MPI implementation of this is lacking.
-	#ifdef HAVE_MPI
-
-	#else
-	//Perhaps unnecessary clause? Maybe the "else" can be dropped. I suspect so...
+	#ifdef HAVE_MPI //Receive the data from all MPI processes
+		//TODO: Figure out how MPI_Receive works.
+		//TODO: This section of code should collect all the loc_sums into glob_sum
+		/*int gather_res = MPI_Gather(void *sendbuf, int sendcnt, vector,
+			void *recvbuf, int recvcnt, vector,
+			0, MPI_COMM_WORLD);*/
 	#endif
 
 	if(rank == 0){ //Enclosure of all "non-MPI" calls and variable-use with if(rank == 0), so as to make sure to avoid wrong use of variables during runtime.
@@ -111,12 +101,13 @@ int main(int argc, char *argv[]){
 		wTime = WallTime() - wTime;
 		//TODO: Find out how to report elapsed time in human-readable format.
 
+		//If we don't have MPI, the sum should be in the above buffer.
+		glob_sum = actual_sum - glob_sum;
+
 		//Print the differences
-		printf("\nBelow are the differences of the sums of vectors with the values: v[i] = 1/i^2,\nwhere n = 2^k, and k has been given different values:\n");
-		for (int i = 0; i < kValues->glob_len; ++i){
-			printf("With k = %d, the difference is: %.2f\n",
-				(int) kValues->data[i], difference->data[i]);
-		}
+		printf("\nBelow is the difference of the sum between the vector of length n, with n of vectors with the values: v[i] = 1/i^2,\nwhere n = 2^k, and k has been given different values:\n");
+		printf("With k = %d, the difference is: %.2f\n", k, glob_sum);
+		printf("Time it took to complete: %f seconds.\n", wTime);
 	}
 
 	//MPI cleanup
