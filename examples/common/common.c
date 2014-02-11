@@ -9,12 +9,12 @@ MPI_Comm WorldComm;
 MPI_Comm SelfComm;
 #endif
 
-void init_app(int argc, char** argv, int* rank, int* size)
+void init_app(int* argc, char** argv, int* rank, int* size)
 {
 #ifdef HAVE_MPI
 #ifdef HAVE_OPENMP
   int aquired;
-  MPI_Init_thread(&argc, &argv, MPI_THREAD_FUNNELED, &aquired);
+  MPI_Init_thread(argc, &argv, MPI_THREAD_FUNNELED, &aquired);
   MPI_Comm_rank(MPI_COMM_WORLD, rank);
   if (*rank == 0) {
     printf("aquired MPI threading level: ");
@@ -28,7 +28,7 @@ void init_app(int argc, char** argv, int* rank, int* size)
       printf("MPI_THREAD_MULTIPLE\n");
   }
 #else
-  MPI_Init(&argc, &argv);
+  MPI_Init(argc, &argv);
 #endif
   MPI_Comm_size(MPI_COMM_WORLD, size);
   MPI_Comm_rank(MPI_COMM_WORLD, rank);

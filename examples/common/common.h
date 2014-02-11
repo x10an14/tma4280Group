@@ -49,7 +49,7 @@ typedef matrix_t* Matrix;
 //! \param argv The command line parameters
 //! \param[out] rank The process' rank within the MPI_COMM_WORLD is returned here
 //! \param[out] size The size of the MPI_COMM_WORLD is returned here
-void init_app(int argc, char** argv, int* rank, int* size);
+void init_app(int* argc, char** argv, int* rank, int* size);
 
 //! \brief Close down the application, possibly deinitializing MPI
 void close_app();

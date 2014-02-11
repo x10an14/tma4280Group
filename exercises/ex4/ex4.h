@@ -5,6 +5,6 @@
 double PI = (double) 3.1415926535897932384626433832795028841971693993751058;
 
 void fillVectorNumerically(Vector inpt);
-double getVectorSum(Vector inpt);
+double getVectorSum(Vector inpt, int useOpenMP);
 
 #endif
