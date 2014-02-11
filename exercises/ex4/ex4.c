@@ -60,11 +60,6 @@ int main(int argc, char *argv[]){
 					void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
 					MPI_Comm com */
 			/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);*/
-
-			//Does the below out-commented function call belong here? What's its intention?
-			/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
-				void *recvbuf, int recvcnt, MPI_Datatype recvtype,
-				int root, MPI_Comm comm */
 		#else
 			//Progress as if there's no extra nodes.
 
