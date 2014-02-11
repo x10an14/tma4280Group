@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <mpi.h>
+//#include <mpi.h> //Already included in common.h (below)
 
 #include "../../examples/common/common.h"
 #include "ex4.h"
