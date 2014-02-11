@@ -14,37 +14,30 @@ void fillVectorNumerically(Vector inpt){
 
 double getVectorSum(Vector inpt, int start, int end){
 	double sum = 0.0;
-
 	//Let the compiler decide whether OpenMP is run or not.
 	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum)
 	for (int i = end; i >= start; --i){
 		sum += inpt->data[i];
 	}
-
 	return sum;
 }
 
 // TODO: TOP PRIORITY! Use common.h convenience functions for MPI
-//First attempt/iteration of above TODO has been done.
-// TODO: Add at argv[2] for number of MPI ranks
 int main(int argc, char *argv[]){
 	//Initialization of variables
 	int vecLength = 0, rank = 0, size = 1, k = 1;
-	double glob_sum  = 0.0, loc_sum = 0.0, actual_sum = (pow(PI, 2.0)/6.0);
+	double glob_sum  = 0.0, loc_sum = 0.0, actual_sum = (pow(PI, 2.0)/6.0), diff = 0.0;
+	double wTime = WallTime(); //Initialization of time
 	Vector kVector;
-
-	//Initialization of time
-	double wTime = WallTime();
 
 	//Initialization of MPI
 	init_app(&argc, argv, &rank, &size);
 
-	if(argc <= 1){ //Check that we got vecLength and useOpenMP params
-		//The above check _should_(?) work if I have understood how MPI_Init() does its job. My impression is that it should receive argc and argv as call-by-reference, and "clean them up", such that they correspond with the expected arguments given at runtime.
-		//(AFAIK they do not at normally correspond as such due to MPI complexities).
+	if(argc <= 1){ //Check that we got our k parameter
 		printf("Too few arguments given!\n\tProgram aborted.\n");
 		return -1;
 	}
+
 	k = atoi(argv[1]);
 	vecLength = (int) pow(2.0, (double) k);
 
@@ -65,14 +58,11 @@ int main(int argc, char *argv[]){
 			/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
 				void *recvbuf, int recvcnt, MPI_Datatype recvtype,
 				int root, MPI_Comm comm */
-		#else
-			//Progress as if there's no extra nodes.
-
 		#endif
 	}
 
 	//Figure out the smart way to have a buffer locally and universally, so that each process (rank) can compute it's local sum
-	if(size == 0){
+	if(size == 1){
 		glob_sum = getVectorSum(kVector, 0, kVector->glob_len);
 	} else{
 		//For making the code more readable, I make each rank calculate its steps.
@@ -95,19 +85,13 @@ int main(int argc, char *argv[]){
 			0, MPI_COMM_WORLD);*/
 	#endif
 
-	if(rank == 0){ //Enclosure of all "non-MPI" calls and variable-use with if(rank == 0), so as to make sure to avoid wrong use of variables during runtime.
+	if(rank == 0){
 		//Get the elapsed time
-		//TODO: Confirm this is the correct way
 		wTime = WallTime() - wTime;
-		//TODO: Find out how to report elapsed time in human-readable format.
 
-		//If we don't have MPI, the sum should be in the above buffer.
-		glob_sum = actual_sum - glob_sum;
-
-		//Print the differences
-		printf("\nBelow is the difference of the sum between the vector of length n, with n of vectors with the values: v[i] = 1/i^2,\nwhere n = 2^k, and k has been given different values:\n");
-		printf("With k = %d, the difference is: %.2f\n", k, glob_sum);
-		printf("Time it took to complete: %f seconds.\n", wTime);
+		//Print the time and difference
+		printf("Time:\t%f\n", wTime*1000.0);	//Milliseconds.
+		printf("Diff:\t%9f\n\n", (actual_sum - glob_sum)*1000.0);	//The difference with the k given as parameter.
 	}
 
 	//MPI cleanup
