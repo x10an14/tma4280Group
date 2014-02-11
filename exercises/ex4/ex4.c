@@ -75,7 +75,25 @@ int main(int argc, char *argv[]){
 
 	//TODO: Make each node execute its job. No clue how... as of yet...
 	#ifdef HAVE_MPI
+		// TODO: Complete function call, Scatter data to MPI ranks
+		/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
+				void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
+				MPI_Comm com */
+		/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector,
+				void *recvbuf, int recvcnt, vector, 0,
+				MPI_COMM_WORLD);*/
 
+	// TODO: Convert to summing on local vector-piece if MPI is in use.
+	//Compute sum of "v" on processor(s).
+	//double vSum = getVectorSum(numericV);
+
+	// TODO: Complete function call, Gather sums to rank 0 (preferably by binary tree for efficiency)
+	/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
+			void *recvbuf, int recvcnt, MPI_Datatype recvtype,
+			int root, MPI_Comm comm */
+	/*int gather_res = MPI_Gather(void *sendbuf, int sendcnt, vector,
+			void *recvbuf, int recvcnt, vector,
+			0, MPI_COMM_WORLD);*/
 	#else
 
 	#endif
