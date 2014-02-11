@@ -12,19 +12,14 @@ void fillVectorNumerically(Vector inpt){
 	}
 }
 
-double getVectorSum(Vector inpt, int useOpenMP){
+double getVectorSum(Vector inpt, int start, int end){
 	double sum = 0.0;
 
-	#ifdef HAVE_OPENMP && useOpenMP //Will this "if-test" work? Need to check. Compiler only gives warning (and it says it does so "by default")...?
-		#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum) //Add if-defs for later
-		for (int i = (inpt->len - 1); i >= 0; --i){
-			sum += inpt->data[i];
-		}
-	#else
-		for (int i = (inpt->len - 1); i >= 0; --i){
-			sum += inpt->data[i];
-		}
-	#endif
+	//Let the compiler decide whether OpenMP is run or not.
+	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum)
+	for (int i = end; i >= start; --i){
+		sum += inpt->data[i];
+	}
 
 	return sum;
 }
@@ -79,9 +74,7 @@ int main(int argc, char *argv[]){
 		/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
 				void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
 				MPI_Comm com */
-		/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector,
-				void *recvbuf, int recvcnt, vector, 0,
-				MPI_COMM_WORLD);*/
+		/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);*/
 
 	// TODO: Convert to summing on local vector-piece if MPI is in use.
 	//Compute sum of "v" on processor(s).
@@ -101,7 +94,7 @@ int main(int argc, char *argv[]){
 	if(rank == 0){ //If no MPI, just execute the code as usual.
 		//Compute the differences
 		for (int i = 0; i < kValues->glob_len; ++i){
-			difference->data[i] = (pow(PI, 2.0)/6.0) - getVectorSum(vectorList[i], useOpenMP);
+			difference->data[i] = (pow(PI, 2.0)/6.0) - getVectorSum(vectorList[i]);
 		}
 	}
 
@@ -125,6 +118,7 @@ int main(int argc, char *argv[]){
 				(int) kValues->data[i], difference->data[i]);
 		}
 	}
+
 	//MPI cleanup
 	close_app();
 
