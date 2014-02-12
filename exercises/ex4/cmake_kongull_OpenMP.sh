@@ -1,3 +1,8 @@
+#Load necessary modules (this should be done each time you log into shell).
+module load intelcomp
+module load openmpi/1.4.3-intel
+module load cmake
+
 #Create CMAKE sub-folders
 mkdir debug release -p
 
