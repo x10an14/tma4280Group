@@ -25,10 +25,10 @@ double getVectorSum(Vector inpt, int start, int end){
 // TODO: TOP PRIORITY! Use common.h convenience functions for MPI
 int main(int argc, char *argv[]){
 	//Initialization of variables
-	int vecLength = 0, rank = 0, size = 1, k = 1;
-	double glob_sum  = 0.0, loc_sum = 0.0, actual_sum = (pow(PI, 2.0)/6.0), diff = 0.0;
-	double wTime = WallTime(); //Initialization of time
 	Vector kVector;
+	double wTime = WallTime(); //Initialization of time
+	int vecLength = 0, rank = 0, size = 1, k = 1;
+	double glob_sum  = 0.0, loc_sum = 0.0, actual_sum = (pow(PI, 2.0)/6.0);
 
 	//Initialization of MPI
 	init_app(&argc, argv, &rank, &size);
@@ -53,11 +53,6 @@ int main(int argc, char *argv[]){
 					void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
 					MPI_Comm com */
 			/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);*/
-
-			//Does the below out-commented function call belong here? What's its intention?
-			/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
-				void *recvbuf, int recvcnt, MPI_Datatype recvtype,
-				int root, MPI_Comm comm */
 		#endif
 	}
 
@@ -90,8 +85,8 @@ int main(int argc, char *argv[]){
 		wTime = WallTime() - wTime;
 
 		//Print the time and difference
-		printf("Time:\t%f\n", wTime*1000.0);	//Milliseconds.
-		printf("Diff:\t%9f\n\n", (actual_sum - glob_sum)*1000.0);	//The difference with the k given as parameter.
+		printf("1k*diff:\t%f\n", (actual_sum - glob_sum)*1000.0);	//The difference with the k given as parameter.
+		printf("ms:\t\t%f\n\n|", wTime*1000.0);						//Milliseconds.
 	}
 
 	//MPI cleanup
