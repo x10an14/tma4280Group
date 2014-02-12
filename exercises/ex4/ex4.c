@@ -73,11 +73,8 @@ int main(int argc, char *argv[]){
 
 	//TODO: Collect and add up all sums from all nodes into the node with rank == 0 again, so that it can report the result. All MPI implementation of this is lacking.
 	#ifdef HAVE_MPI //Receive the data from all MPI processes
-		//TODO: Figure out how MPI_Receive works.
-		//TODO: This section of code should collect all the loc_sums into glob_sum
-		/*int gather_res = MPI_Gather(void *sendbuf, int sendcnt, vector,
-			void *recvbuf, int recvcnt, vector,
-			0, MPI_COMM_WORLD);*/
+		//TODO: Make the below commented function call work.
+		//MPI_Reduce(void *sendbuf, void *recvbuf, int 0, MPI_Datatype datatype, /*Keep*/MPI_SUM, /*Keep*/0, /*Keep*/WorldComm)
 	#endif
 
 	if(rank == 0){
