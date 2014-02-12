@@ -1,5 +1,5 @@
 #Load necessary modules (this should be done each time you log into shell).
-module load intelcomp
+module load intelcomp/13.0.1
 module load openmpi/1.4.3-intel
 module load cmake
 
