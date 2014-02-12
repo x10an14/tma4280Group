@@ -24,3 +24,18 @@
 *.aux
 *.log
 *.pdf
+*.lof
+*.toc
+*.lot
+
+#Exercise 4 specific folders
+exercises/ex4/debug/
+exercises/ex4/release/
+
+#Exercise 5 specific folders
+exercises/ex5/debug/
+exercises/ex5/release/
+
+#Exercise 6 specific folders
+exercises/ex5/debug/
+exercises/ex5/release/
