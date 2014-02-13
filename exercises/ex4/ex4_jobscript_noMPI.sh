@@ -11,7 +11,7 @@
 
 # Name of the job
 ###PBS -N myjob
-#PBS -N ex4_debug_no_MPI
+#PBS -N ex4_jobscript_noMPI
 
 # Account to run job (change the account name: See https://www.hpc.ntnu.no/display/hpc/Kongull+Batch+Scheduling)
 #PBS -A freecycle
