@@ -52,7 +52,7 @@ KMP_AFFINITY="granularity=fine, compact"
 runFile=debug/ex4
 
 for i in $(seq 3 14);
-	do
-		echo 'k: '$i #There will be an empty newline between these two commands (AKA "\n\n")
+	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
+		echo 'k: '$i
 		OMP_NUM_THREADS=3 $runFile $1
 	done
