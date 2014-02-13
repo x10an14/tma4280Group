@@ -31,17 +31,16 @@
 # Specify an email address to be notified on begin, abort, and end
 #PBS -M chrischa@stud.ntnu.no
 
-# Ask Arne Morten what this below line is for?
+# Make errors go into the .o file, instead of splitting output to .o and .e
 ###PBS -j oe
 
 ###### !!!!!make sure this is correct before you run this script!!!! ######
 # Cd to work directory
-cd /home/chrischa/Documents/tma4280Group/exercises/ex4/
+cd ${PBS_O_WORKDIR}
 
 module load intelcomp/13.0.1
 module load openmpi/1.4.3-intel #Should we load this module when we just test compile too?
 KMP_AFFINITY="granularity=fine, compact"
-
 
 #For-loop example in bash
 #for i in $(seq x y);
