@@ -46,13 +46,14 @@ int main(int argc, char *argv[]){
 		//Let rank 0 generate vector
 		kVector = createVector(vecLength);
 		fillVectorNumerically(kVector);
-
+		
+		// TODO: We need to have a local vector variable to catch the ranks vector piece.
 		#ifdef HAVE_MPI
 			//Send vector pieces to all nodes (ranks)
 			/* void *sendbuf, int sendcnt, MPI_Datatype sendtype,
 					void *recvbuf, int recvcnt, MPI_Datatype recvtype, int root,
 					MPI_Comm com */
-			/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, MPI_COMM_WORLD);*/
+			/*int scatter_res = MPI_Scatter(void *sendbuf, int sendcnt, vector, void *recvbuf, int recvcnt, vector, 0, WorldComm);*/
 		#endif
 	}
 
@@ -63,18 +64,25 @@ int main(int argc, char *argv[]){
 		//For making the code more readable, I make each rank calculate its steps.
 		int step = pow(2.0, 1.0*rank*k/size), next_step = (pow(2.0, 1.0*(rank+1)*k/size) - 1);
 
-		//Probably won't work, we need to malloc each local sum?
+		//Probably won't work, we need to malloc each local sum? NOTE: I don't think it's neccesary to malloc the sums
 		if(rank == 0){
 			loc_sum = getVectorSum(kVector, 0, (int) pow(2.0, 1.0*k/size)-1.0);
 		} else{
 			loc_sum = getVectorSum(kVector, step, next_step);
 		}
 	}
-
+	
 	//TODO: Collect and add up all sums from all nodes into the node with rank == 0 again, so that it can report the result. All MPI implementation of this is lacking.
 	#ifdef HAVE_MPI //Receive the data from all MPI processes
 		//TODO: Make the below commented function call work.
-		//MPI_Reduce(void *sendbuf, void *recvbuf, int 0, MPI_Datatype datatype, /*Keep*/MPI_SUM, /*Keep*/0, /*Keep*/WorldComm)
+		
+		// COMMENT by ERLEND: sendbuf = array of local sum(s) (which is just a variable in the case of 1 element), recvbuf is an array which is sizeof(datatype)*count, so assuming loc_sum is a double 		//	=> count = 1 and datatype = MPI_FLOAT (all elements sum to one)
+		// 					  
+		// Suggested function:
+		//MPI_Reduce(loc_sum, glob_sum, 1, MPI_FLOAT, MPI_SUM, 0, WorldComm);
+		
+		// This is the default which I keept for reference, in case I'm too sleep deprived and writing nonsense.
+		//MPI_Reduce(void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype, /*Keep*/MPI_SUM, /*Keep*/0, /*Keep*/WorldComm)
 	#endif
 
 	if(rank == 0){
