@@ -21,8 +21,8 @@
 #PBS -l walltime=00:08:00
 
 # Specify resources number of nodes:cores per node
-#PBS -l nodes=1:ppn=1
-###PBS -l nodes=4:ppn=12:default
+###PBS -l nodes=1:ppn=1
+#PBS -l nodes=4:ppn=12:default
 
 # Specify queue to submit to: default, bigmem, express or default
 ###PBS -q express !!!! We are not permitted to run in this queue for this subject. !!!!
@@ -39,8 +39,8 @@
 cd ${PBS_O_WORKDIR}
 
 module load intelcomp/13.0.1
-module load openmpi/1.4.3-intel #Should we load this module when we just test compile too?
-#KMP_AFFINITY="granularity=fine, compact"
+module load openmpi/1.4.3-intel
+KMP_AFFINITY="granularity=fine, compact"
 
 #For-loop example in bash
 #for i in $(seq x y);
@@ -48,8 +48,11 @@ module load openmpi/1.4.3-intel #Should we load this module when we just test co
 #		<bash command1>;<bash command2>;etc;
 #	done
 
+#Set this variable to be the path where you expect the compiled program to be after line 39 in this script.
+runFile=debug/ex4
+
 for i in $(seq 3 14);
 	do
-		echo $i #There will be an empty newline between these two commands (AKA "\n\n")
-		OMP_NUM_THREADS=3 mpirun -npernode 12 debug/ex4 $1
+		echo 'k: '$i #There will be an empty newline between these two commands (AKA "\n\n")
+		OMP_NUM_THREADS=3 mpirun -npernode 12 $runFile $1
 	done
