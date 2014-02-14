@@ -54,5 +54,5 @@ runFile=debug/ex4
 for i in $(seq 3 14);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 		echo 'k: '$i
-		OMP_NUM_THREADS=3 $runFile $1
+		OMP_NUM_THREADS=3 $runFile $i
 	done
