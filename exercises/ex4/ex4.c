@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
 		{
 			int err_status = 0;
 			// Check pointers
-			if (&(kVector->data) == NULL || &kVector == NULL || &WorldComm == NULL || &(kVector->len) == NULL || &fullVector->data == NULL)
+			if (&(kVector->data) == NULL || kVector == NULL || WorldComm == NULL || &(kVector->len) == NULL || &(fullVector->data) == NULL)
 			{
 				err_status = 1;
 			}
