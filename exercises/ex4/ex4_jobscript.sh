@@ -38,7 +38,7 @@
 # Cd to work directory
 cd ${PBS_O_WORKDIR}
 
-module load intelcomp/13.0.1
+module load intelcomp
 module load openmpi/1.4.3-intel
 KMP_AFFINITY="granularity=fine, compact"
 
