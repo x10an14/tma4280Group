@@ -52,11 +52,7 @@ escapeinside={\%*}{*)}			% if you want to add a comment within your code
 
 \addtocounter{chapter}{1}
 
-%%%% 		INTRODUCTION			%%%
-
-% \setcounter{chapter}{1}
-
-%\chapter{The one-chapter report}
+\clearpage
 \section{Introduction}
 For the programming belonging to this problem set, see $\textit{ex4.c}$ file in
 the zipped archive attached to this report. This program calculates the
@@ -120,16 +116,22 @@ $\textit{MPI\_Reduce()}$, $\textit{MPI\_Gather()}$, $\textit{MPI\_Init()}$,
 $\textit{MPI\_Finalize()}$, and so on. Not all of these are necessary, but a
 minimum subset of these are. Such as, $\textit{MPI\_Init()}$ and $\textit{
 MPI\_Finalize()}$, and then one of the $\textit{MPI\_Scatter()}$ or
-$\textit{MPI\_Send()}$ alternatives to send data among the processes used by MPI. Likewise there are multiple alternatives
-for $\textit{MPI\_Gather()}$ and $\textit{MPI\_Reduce()}$, but you only need
-one of the alternatives to receive data from the other processes used by MPI.
+$\textit{MPI\_Send()}$ alternatives to send data among the processes used by
+MPI. Likewise there are multiple alternatives for $\textit{MPI\_Gather()}$ and
+$\textit{MPI\_Reduce()}$, but you only need one of the alternatives to receive
+data from the other processes used by MPI.
 
-In our solution, implemented in the attached code, we utilized the following MPI functions:
+In our solution, implemented in the attached code, we utilized the following MPI
+functions:
 
 \begin{itemize}
 	\item{$\textit{MPI\_Init()}$ and $\textit{
-MPI\_Finalize()}$ through the provided \textit{common.c} \textit{common.h} framework.}
-	\item{$\textit{MPI\_Scatter()}$ and $\textit{MPI\_Reduce()}$ were used to send and receive data between the processes respectively. $\textit{MPI\_Reduce()}$ also aided us by performing the summing necessary between the processes for us, storing the result in a specified variable.}
+MPI\_Finalize()}$ through the provided \textit{common.c} \textit{common.h}
+framework.}
+	\item{$\textit{MPI\_Scatter()}$ and $\textit{MPI\_Reduce()}$ were used to
+send and receive data between the processes respectively.
+$\textit{MPI\_Reduce()}$ also aided us by performing the summing necessary
+between the processes for us, storing the result in a specified variable.}
 \end{itemize}
 
 These function calls are considered more convenient for the purpose of this
@@ -143,7 +145,9 @@ Had we implemented MPI through the use of an $\textit{MPI\_Send()}$ alternative
 and/or a $\textit{MPI\_Gather()}$ alternative, we would have to modify the code
 such that it could take care of the concurrency through the use of something
 
-\todo[inline]{ERLEND!!! This is where you wanted to come in. The two above paragraphs was what we had written when you told us you wanted to take over this part. }
+\todo[inline]{ERLEND!!! This is where you wanted to come in. The two above
+paragraphs was what we had written when you told us you wanted to take over this
+part. }
 
 \todo[inline]{ANSWER QUESTION 6!!!!!}
 
@@ -151,9 +155,15 @@ such that it could take care of the concurrency through the use of something
 
 \section{Program Load}
 
-The computational load of any given program is usually given as an $X$ value of \textit{FLOPS} (FLoating-point Operation per Second). Since we do not know how the CPU architecture on Kongull works, we cannot calculate the amount of FLOPS needed for our program.
+The computational load of any given program is usually given as an $X$ value of
+\textit{FLOPS} (FLoating-point Operation per Second). Since we do not know how
+the CPU architecture on Kongull works, we cannot calculate the amount of FLOPS
+needed for our program.
 
-What we can do however, is calculate the amount of \textit{FLOP}s (FLoating-point OPerations) that our program needs to complete. Since this program computes the sum of a Hyperharmonic finite series, below we detail the math behind the programs computations.
+What we can do however, is calculate the amount of \textit{FLOP}s (FLoating-
+point OPerations) that our program needs to complete. Since this program
+computes the sum of a Hyperharmonic finite series, below we detail the math
+behind the programs computations.
 
 \subsection{Mathematical computation}
 
@@ -165,16 +175,19 @@ series is as follows;
 \end{equation}
 
 Analyzing how many FLOPs are required for generating a term $v_i$, we see that
-it requires a multiplication ($i\cdot i = i^2 = X$) and a division ($\frac{1}{X}$).
-A total of 2 FLOPs. So to generate a Hyperharmonic series of $n$ terms, requires
-$2n$ FLOPs. Below we detail the formula used in the program for this problem set
-when calculating the sum of our finite length Hyperharmonic series.
+it requires a multiplication ($i\cdot i = i^2 = X$) and a division
+($\frac{1}{X}$). A total of 2 FLOPs. So to generate a Hyperharmonic series of
+$n$ terms, requires $2n$ FLOPs. Below we detail the formula used in the program
+for this problem set when calculating the sum of our finite length Hyperharmonic
+series.
 
 \begin{equation}
 	S_n = \sum_{i=1}^{n} v_i
 \end{equation}
 
-The total amount of FLOPs needed for computing (2) will then be $2n + n = 3n$. Thus, as we have use $k$ to define $n=2^k$ the computational cost of our program can be described as; $2^k\cdot 3$ FLOPs.
+The total amount of FLOPs needed for computing (2) will then be $2n + n = 3n$.
+Thus, as we have use $k$ to define $n=2^k$ the computational cost of our program
+can be described as; $2^k\cdot 3$ FLOPs.
 
 \subsection{Load-balancing}
 
@@ -184,15 +197,16 @@ be $2^k$ long, and that our MPI implementation should only run on a system using
 $P$ processors where $P$ is a power of 2.
 
 Hence, the summation cost of the double-values in the vector of length $2^k$ can
-always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The parallellism is
-possible due to the fact that all partial sums are completely independent of
-each other. \newline
+always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The
+parallellism is possible due to the fact that all partial sums are completely
+independent of each other. \newline
+
+\todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some extra pre-processing?}
 
 Therefore, we believe that you can safely conclude that within the parameters
 given in this problem set, this problem is very attractive to solve through
 parallell processing.
 
-\todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some extra pre-processing?}
 
 
 % \input{chapters/implementation}
@@ -201,7 +215,7 @@ parallell processing.
 % \input{chapters/conclusion}
 
 %\lstlistoflistings
-\listoffigures
-\listoftables
+% \listoffigures
+% \listoftables
 
 \end{document}

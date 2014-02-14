@@ -52,58 +52,21 @@ int main(int argc, char *argv[]){
 		fillVectorNumerically(fullVector);
 	}
 
+	if(rank == 0){
+		printf("vecLength: %d\nsize: %d\nvecLength/size: %d\n", vecLength, size, vecLength/size);
+	}
+
 	//How we enabled the program to both run with and without MPI
 	#ifdef HAVE_MPI
 		kVector = createVectorMPI(vecLength/size, &WorldComm, 1); //If we have MPI, make each process makes its own kVector (in addition to fullVector in rank == 0)
 		kVector->len = vecLength/size;
-		
-		//ERROR TESTING:
-		int err_rnk1 = 0;
-		int err_rnk2 = 0;
-		int err_rnk3 = 0;
-		
-		MPI_Request req[3];
-		
-		if (rank == 0)
-		{
-			MPI_Irecv(&err_rnk1, 1, MPI_INT, 1, 0, WorldComm, req);
-			MPI_Irecv(&err_rnk2, 1, MPI_INT, 1, 0, WorldComm, req + 1);
-			MPI_Irecv(&err_rnk3, 1, MPI_INT, 1, 0, WorldComm,req + 2);
-		}
-		else
-		{
-			int err_status = 2;
-			// Check pointers
-			if (&(kVector->data) == NULL || kVector == NULL || WorldComm == NULL || &(kVector->len) == NULL || &(fullVector->data) == NULL)
-			{
-				err_status = 1;
-			}
-			// Send status to rank 0
-			MPI_Send(&err_status, 1, MPI_INT, 0, 0, WorldComm);
-			
-		}
-		
-		MPI_Status stat[3];
-		
-		MPI_Wait(req, stat);
-		MPI_Wait(req + 1, stat + 1);
-		MPI_Wait(req + 2, stat + 2);
-		
-		if (rank == 0)
-		{
-			printf("err_rnk1: %d \r\n",err_rnk1);
-			printf("err_rnk2: %d \r\n",err_rnk2);
-			printf("err_rnk3: %d \r\n",err_rnk3);
-			
-		}
-		// END ERROR testing
-		
+
 		//Send vector pieces to all nodes (ranks)
 		scatter_res = MPI_Scatter(fullVector->data, kVector->len, MPI_DOUBLE, kVector->data, kVector->len, MPI_DOUBLE, 0, WorldComm);
-		if (rank == 0)
+		if (rank == 0 && scatter_res != MPI_SUCCESS)
 			printf("Scatter result code: %d \r\n", scatter_res);
 		//Calculate sum in each node/rank
-		loc_sum = getVectorSum(kVector, 0, vecLength/size);
+		loc_sum = getVectorSum(kVector, 0, vecLength/size -1);
 		//Receive all sums into the glob_sum variable on rank == 0 node
 		receive_res = MPI_Reduce(&loc_sum, &glob_sum, 1, MPI_DOUBLE, MPI_SUM, 0, WorldComm);
 		//kVector is of no more use to this program
