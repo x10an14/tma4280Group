@@ -44,26 +44,38 @@ int main(int argc, char *argv[]){
 	//Pre-work to be done by the "master node", AKA node with rank==0:
 	if(rank == 0){
 		//Let rank 0 generate vector
-		fullVector = createVector(vecLength);
+		#ifdef HAVE_MPI
+			fullVector = createVectorMPI(vecLength, &WorldComm, 1);
+		#else
+			fullVector = createVector(vecLength);
+		#endif
 		fillVectorNumerically(fullVector);
+	}
+
+	if(rank == 0){
+		printf("vecLength: %d\nsize: %d\nvecLength/size: %d\n", vecLength, size, vecLength/size);
 	}
 
 	//How we enabled the program to both run with and without MPI
 	#ifdef HAVE_MPI
-		kVector = createVector(vecLength/size); //If we have MPI, make each process makes its own kVector (in addition to fullVector in rank == 0)
+		kVector = createVectorMPI(vecLength/size, &WorldComm, 1); //If we have MPI, make each process makes its own kVector (in addition to fullVector in rank == 0)
 		kVector->len = vecLength/size;
 
 		//Send vector pieces to all nodes (ranks)
-		scatter_res = MPI_Scatter(fullVector->data, vecLength, MPI_DOUBLE, kVector->data, vecLength/size, MPI_DOUBLE, 0, WorldComm);
+		scatter_res = MPI_Scatter(fullVector->data, kVector->len, MPI_DOUBLE, kVector->data, kVector->len, MPI_DOUBLE, 0, WorldComm);
+		if (rank == 0 && scatter_res != MPI_SUCCESS)
+			printf("Scatter result code: %d \r\n", scatter_res);
 		//Calculate sum in each node/rank
-		loc_sum = getVectorSum(kVector, 0, vecLength/size);
+		loc_sum = getVectorSum(kVector, 0, vecLength/size -1);
 		//Receive all sums into the glob_sum variable on rank == 0 node
 		receive_res = MPI_Reduce(&loc_sum, &glob_sum, 1, MPI_DOUBLE, MPI_SUM, 0, WorldComm);
 		//kVector is of no more use to this program
-		free(kVector);
+		freeVector(kVector);
+		if (rank == 0)
+			freeVector(fullVector);
 	#else
 		glob_sum = getVectorSum(fullVector, 0, vecLength);
-		free(fullVector);
+		freeVector(fullVector);
 	#endif
 
 	//Finish program
