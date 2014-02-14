@@ -61,50 +61,64 @@ sum for an infinite Hyperharmonic series. This program is able to compute the
 difference between the two in the following scenarioes;
 
 \begin{enumerate}
-	\item{Using one thread and a single process on a single processing core
+	\item[(i)]{Using one thread and a single process on a single processing core
 for the program's computations.}
-	\item{Using one process and multiple threads concurrently on a single
+	\item[(ii)]{Using one process and multiple threads concurrently on a single
 processing core for the program's computations.}
-	\item{Using multiple processing cores concurrently for the program's
+	\item[(iii)]{Using multiple processing cores concurrently for the program's
 computations.}
-	\item{Using multiple threads on multiple processing cores concurrently for
+	\item[(iv)]{Using multiple threads on multiple processing cores concurrently for
 the program's computations.}
-	\label{RunMode}
 \end{enumerate}
+
 \todo{FIX CAPTION!}
 
 \section{Series $S_n$}
 
-A \textit{Hyperharmonic} series is a series of the following form;
+A \textit{Hyperharmonic} series is a mathematical series with the following form;
 
-\begin{displaymath}
-	\sum_{i=1}^{n} \frac{1}{i^p}, \quad \quad with \quad n = \infty.
-	\ref{HyperSeries}
-\end{displaymath}
+\begin{figure}[h]
+	\begin{equation}
+		\sum_{i=1}^{\infty} \frac{1}{i^p}
+	\end{equation}
+	\caption{Hyperharmonic series}
+	\label{HyperSeries}
+\end{figure}
+
+In this problemset, the relevant form of the abovementioned Hyperharmonic figure
+that we're interested in is displayed below;
+
+\begin{figure}[h]
+	\begin{equation}
+		S_n = \sum_{i=1}^{n} \frac{1}{i^2}
+	\end{equation}
+	\caption{The $n$-th partial Hyperharmonic sum when $p = 2$}
+	\label{HyperSum}
+\end{figure}
 
 This problem set wants us to write a program with $n = 2^k$, where $k$ is given
 as parameter at \todo{Confirm phrasing of program initiation}program start. This
 problem set also specifies $p$ to be a constant; $p = 2$. With $p = 2$, the sum
 of this Hyperharmonic series converges to $\frac{\pi^2}{6}$.
 
-The objective of the problem set is to compute the difference between
-$\frac{\pi^2}{6}$ and the sum of a finite series where $n = 2^k$, with $\{k \in
-\mathbb{N} : k \in [3, 14]\}$. This difference is what the program written for
-this problem set is supposed to calculate.
+The objective of the problem set is to compute the difference between $S =
+\lim_{n \to \infty}S_n$ and the partial sum $S_n$ as figured in (\ref{HyperSum}).
+The problem set wants the program to compute these differences with $n = 2^k$,
+with $\{k \in \mathbb{N} : k \in [3, 14]\}$.
 
 \section{Concurrency Implementation}
 
 The program was developed in iterations. The first iteration ran on a single
 thread in a single process on a single processor core, in a non-concurrent
 sequential fashion. The second iteration introduced running the program as
-mentioned in item 2 in \cite{RunMode}. This was enabled by putting the following
+mentioned in item (ii) in \cite{RunMode}. This was enabled by putting the following
 line into our \textit{ex4.c} file.
 
 % \begin{lslisting}
 % 	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum)
 % \end{lslisting}
 
-The third iteration focused on combining items 3 and 4 from \cite{RunMode}.
+The third iteration focused on combining items (iii) and (iv) from \cite{RunMode}.
 Since OpenMP is enabled through the use of pragmas, making the code run with MPI
 was then only a matter of choosing the right compiler and compilation switches.
 Hence, in effect the third iteration only focused on implementing MPI into the
@@ -141,7 +155,7 @@ between the processes is needed to coordinate the concurrency. All the summing
 is done independently of any other summing (besides the final summing performed
 by $\textit{MPI\_Reduce()}$).
 
-Had we implemented MPI through the use of an $\textit{MPI\_Send()}$ alternative
+Had we implemented MPI through the use of a $\textit{MPI\_Send()}$ alternative
 and/or a $\textit{MPI\_Gather()}$ alternative, we would have to modify the code
 such that it could take care of the concurrency through the use of something
 
@@ -155,15 +169,10 @@ part. }
 
 \section{Program Load}
 
-The computational load of any given program is usually given as an $X$ value of
-\textit{FLOPS} (FLoating-point Operation per Second). Since we do not know how
-the CPU architecture on Kongull works, we cannot calculate the amount of FLOPS
-needed for our program.
-
-What we can do however, is calculate the amount of \textit{FLOP}s (FLoating-
-point OPerations) that our program needs to complete. Since this program
-computes the sum of a Hyperharmonic finite series, below we detail the math
-behind the programs computations.
+The computational load (mathematical complexity) of our program can be given as
+the amount of \textit{FLoating-point OPerations} (FLOPs) it needs to complete
+for a given input. Since this program computes the sum of a Hyperharmonic finite
+series, below we detail the math behind the program's computations.
 
 \subsection{Mathematical computation}
 
@@ -181,11 +190,7 @@ $n$ terms, requires $2n$ FLOPs. Below we detail the formula used in the program
 for this problem set when calculating the sum of our finite length Hyperharmonic
 series.
 
-\begin{equation}
-	S_n = \sum_{i=1}^{n} v_i
-\end{equation}
-
-The total amount of FLOPs needed for computing (2) will then be $2n + n = 3n$.
+The total amount of FLOPs needed for computing (\ref{HyperSum}) will then be $2n + n = 3n$.
 Thus, as we have use $k$ to define $n=2^k$ the computational cost of our program
 can be described as; $2^k\cdot 3$ FLOPs.
 
