@@ -72,7 +72,7 @@ int main(int argc, char *argv[]){
 		}
 		else
 		{
-			int err_status = 0;
+			int err_status = 2;
 			// Check pointers
 			if (&(kVector->data) == NULL || kVector == NULL || WorldComm == NULL || &(kVector->len) == NULL || &(fullVector->data) == NULL)
 			{
@@ -82,6 +82,13 @@ int main(int argc, char *argv[]){
 			MPI_Send(&err_status, 1, MPI_INT, 0, 0, WorldComm);
 			
 		}
+		
+		MPI_Status stat[3];
+		
+		MPI_Wait(req, stat);
+		MPI_Wait(req + 1, stat + 1);
+		MPI_Wait(req + 2, stat + 2);
+		
 		if (rank == 0)
 		{
 			printf("err_rnk1: %d \r\n",err_rnk1);
