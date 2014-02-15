@@ -6,9 +6,9 @@ mkdir debug release -p
 #Delete whatever was there before
 rm -rf debug/* release/*
 
-module load intelcomp
-module load openmpi/1.4.3-intel
-module load cmake
+# module load intelcomp
+# module load openmpi/1.4.3-intel
+# module load cmake
 
 #Create makefiles for each sub-folder
 cd debug/

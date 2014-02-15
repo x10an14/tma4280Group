@@ -4,9 +4,9 @@ mkdir debug release -p
 #Delete whatever was there before
 rm -rf debug/* release/*
 
-module load intelcomp
-module load openmpi/1.4.3-intel
-module load cmake
+# module load intelcomp
+# module load openmpi/1.4.3-intel
+# module load cmake
 
 #Flag to turn off OpenMP, TODO: Make bash ask if you want to use OpenMP
 #  -DENABLE_OPENMP=0
