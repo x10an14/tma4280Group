@@ -1,0 +1,63 @@
+Warning: Permanently added 'compute-1-5' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.361995.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-1-6' (RSA) to the list of known hosts.
+k: 3
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	117.512015
+ms:	44.448137
+
+k: 4
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	60.587533
+ms:	44.499159
+
+k: 5
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	30.766804
+ms:	44.649124
+
+k: 6
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	15.503565
+ms:	45.591116
+
+k: 7
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	7.782062
+ms:	44.584036
+
+k: 8
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	3.898631
+ms:	46.360016
+
+k: 9
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	1.951219
+ms:	44.854879
+
+k: 10
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	0.976086
+ms:	46.095133
+
+k: 11
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	0.488162
+ms:	45.268059
+
+k: 12
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	0.244111
+ms:	45.782804
+
+k: 13
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	0.122063
+ms:	46.280146
+
+k: 14
+aquired MPI threading level: MPI_THREAD_SINGLE
+diff:	0.061033
+ms:	49.057007
+
