@@ -22,7 +22,7 @@
 
 # Specify resources number of nodes:cores per node
 ###PBS -l nodes=1:ppn=1
-#PBS -l nodes=4:ppn=12:default
+#PBS -l nodes=1:ppn=8:default
 
 # Specify queue to submit to: default, bigmem, express or default
 ###PBS -q express !!!! We are not permitted to run in this queue for this subject. !!!!
@@ -54,5 +54,5 @@ runFile=release/ex4
 for i in $(seq 3 14);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 		echo 'k: '$i
-		OMP_NUM_THREADS=3 mpirun -npernode 12 $runFile $i
+		OMP_NUM_THREADS=3 mpirun -npernode 8 $runFile $i
 	done
