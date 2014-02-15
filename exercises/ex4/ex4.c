@@ -24,10 +24,12 @@ double getVectorSum(Vector inpt, int start, int end){
 
 int main(int argc, char *argv[]){
 	//Initialization of variables
-	Vector kVector, fullVector;
+	int vecLength = 0, k = 3, rank = 0, size = 1, \
+		scatter_res = 0, receive_res = 0;
 	double wTime = WallTime(); //Initialization of time
-	int vecLength = 0, rank = 0, size = 1, k = 3, scatter_res = 0, receive_res = 0;
-	double glob_sum = 0.0, loc_sum = 0, actual_sum = (pow(PI, 2.0)/6.0);
+	Vector kVector, fullVector;
+	rank = 0; size = 1; scatter_res = 0; receive_res = 0;
+	double glob_sum = 0.0, loc_sum = 0.0, actual_sum = (pow(PI, 2.0)/6.0);
 
 	//Initialization of MPI
 	init_app(&argc, argv, &rank, &size);
@@ -43,32 +45,38 @@ int main(int argc, char *argv[]){
 
 	//Pre-work to be done by the "master node", AKA node with rank==0:
 	if(rank == 0){
-		//Let rank 0 generate vector
-		#ifdef HAVE_MPI
-			fullVector = createVectorMPI(vecLength, &WorldComm, 1);
-		#else
-			fullVector = createVector(vecLength);
-		#endif
+		fullVector = createVector(vecLength);
 		fillVectorNumerically(fullVector);
-	}
 
-	if(rank == 0){
-		printf("vecLength: %d\nsize: %d\nvecLength/size: %d\n", vecLength, size, vecLength/size);
+		/*printf("vecLength: %d\nsize: %d\nvecLength/size: %d\n", \
+			vecLength, size, vecLength/size);*/
+		// printf("fullVector length: %d\n", fullVector->glob_len);
+		/*printf("fullVector[0], [1], and [glob_len]: [%f] [%f] [%f]\n", \
+			fullVector->data[0], fullVector->data[1], \
+			fullVector->data[fullVector->glob_len]);*/
 	}
 
 	//How we enabled the program to both run with and without MPI
 	#ifdef HAVE_MPI
-		kVector = createVectorMPI(vecLength/size, &WorldComm, 1); //If we have MPI, make each process makes its own kVector (in addition to fullVector in rank == 0)
+		// kVector = createVectorMPI(vecLength/size, &WorldComm, 1); //If we have MPI, make each process makes its own kVector (in addition to fullVector in rank == 0)
+		kVector = createVector(vecLength/size); //If we have MPI, make each process makes its own kVector (in addition to fullVector in rank == 0)
 		kVector->len = vecLength/size;
 
 		//Send vector pieces to all nodes (ranks)
-		scatter_res = MPI_Scatter(fullVector->data, kVector->len, MPI_DOUBLE, kVector->data, kVector->len, MPI_DOUBLE, 0, WorldComm);
-		if (rank == 0 && scatter_res != MPI_SUCCESS)
+		scatter_res = MPI_Scatter(fullVector->data, kVector->len, \
+			MPI_DOUBLE, kVector->data, kVector->len, MPI_DOUBLE, 0, WorldComm);
+		if (rank == 0 && scatter_res != MPI_SUCCESS){
 			printf("Scatter result code: %d \r\n", scatter_res);
+			printf("kVector length: %d\n", kVector->glob_len);
+			printf("kVector[0], [1], and [glob_len]: [%f] [%f] [%f]\n", \
+				kVector->data[0], kVector->data[1], \
+				kVector->data[kVector->len]);
+		}
 		//Calculate sum in each node/rank
 		loc_sum = getVectorSum(kVector, 0, vecLength/size -1);
 		//Receive all sums into the glob_sum variable on rank == 0 node
-		receive_res = MPI_Reduce(&loc_sum, &glob_sum, 1, MPI_DOUBLE, MPI_SUM, 0, WorldComm);
+		receive_res = MPI_Reduce(&loc_sum, &glob_sum, 1, \
+			MPI_DOUBLE, MPI_SUM, 0, WorldComm);
 		//kVector is of no more use to this program
 		freeVector(kVector);
 		if (rank == 0)
@@ -85,7 +93,8 @@ int main(int argc, char *argv[]){
 
 		//Error reporting
 		if(scatter_res != MPI_SUCCESS || receive_res != MPI_SUCCESS){
-			printf("scatter_res: %d\nreceive_res: %d\n", scatter_res, receive_res);
+			printf("scatter_res: %d\nreceive_res: %d\n", \
+				scatter_res, receive_res);
 		}
 
 		//Print the time and difference
