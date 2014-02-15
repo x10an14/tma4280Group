@@ -16,17 +16,17 @@ void init_app(int* argc, char** argv, int* rank, int* size)
   int aquired;
   MPI_Init_thread(argc, &argv, MPI_THREAD_FUNNELED, &aquired);
   MPI_Comm_rank(MPI_COMM_WORLD, rank);
-  if (*rank == 0) {
-    printf("aquired MPI threading level: ");
-    if (aquired == MPI_THREAD_SINGLE)
-      printf("MPI_THREAD_SINGLE\n");
-    if (aquired == MPI_THREAD_FUNNELED)
-      printf("MPI_THREAD_FUNNELED\n");
-    if (aquired == MPI_THREAD_SERIALIZED)
-      printf("MPI_THREAD_SERIALIZED\n");
-    if (aquired == MPI_THREAD_MULTIPLE)
-      printf("MPI_THREAD_MULTIPLE\n");
-  }
+  // if (*rank == 0) {
+  //   printf("aquired MPI threading level: ");
+  //   if (aquired == MPI_THREAD_SINGLE)
+  //     printf("MPI_THREAD_SINGLE\n");
+  //   if (aquired == MPI_THREAD_FUNNELED)
+  //     printf("MPI_THREAD_FUNNELED\n");
+  //   if (aquired == MPI_THREAD_SERIALIZED)
+  //     printf("MPI_THREAD_SERIALIZED\n");
+  //   if (aquired == MPI_THREAD_MULTIPLE)
+  //     printf("MPI_THREAD_MULTIPLE\n");
+  // }
 #else
   MPI_Init(argc, &argv);
 #endif
