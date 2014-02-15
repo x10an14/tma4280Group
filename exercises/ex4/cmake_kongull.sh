@@ -4,9 +4,7 @@ mkdir debug release -p
 #Delete whatever was there before
 rm -rf debug/* release/*
 
-module load intelcomp/13.0.1
-module load atlas/3.8.3
-module load lapack/3.3.0
+module load intelcomp
 module load openmpi/1.4.3-intel
 module load cmake
 

@@ -98,8 +98,8 @@ int main(int argc, char *argv[]){
 		}
 
 		//Print the time and difference
-		printf("diff:\t%f\n", (actual_sum - glob_sum)*1000.0);	//The difference with the k given as parameter, multiplied by 1000.
-		printf("ms:\t%f\n\n", wTime*1000.0);					//Milliseconds.
+		printf("%d:\t%f\n", k, (actual_sum - glob_sum)*1000.0);	//The difference with the k given as parameter, multiplied by 1000.
+		printf("%f\n\n", wTime*1000.0);					//Milliseconds.
 	}
 
 	//MPI cleanup
