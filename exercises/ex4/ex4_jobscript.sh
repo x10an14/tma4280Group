@@ -22,7 +22,7 @@
 
 # Specify resources number of nodes:cores per node
 ###PBS -l nodes=1:ppn=1
-#PBS -l nodes=1:ppn=8:default
+#PBS -l nodes=2:ppn=2:default
 
 # Specify queue to submit to: default, bigmem, express or default
 ###PBS -q express !!!! We are not permitted to run in this queue for this subject. !!!!
@@ -49,10 +49,10 @@ KMP_AFFINITY="granularity=fine, compact"
 #	done
 
 #Set this variable to be the path where you expect the compiled program to be after line 39 in this script.
-runFile=release/ex4
+runFile=debug/ex4
 
 for i in $(seq 3 14);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 		echo 'k: '$i
-		OMP_NUM_THREADS=3 mpirun -npernode 8 $runFile $i
+		mpirun -npernode 2 $runFile $i
 	done
