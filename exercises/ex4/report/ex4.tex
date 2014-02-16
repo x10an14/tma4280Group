@@ -1,42 +1,20 @@
 %Exercise 4 LaTeX report for TMA 4280
 \documentclass[fontsize=11pt,paper=a4,titlepage]{report}
-% \usepackage{float} %dunno yet??, probably replaced by amsfonts
-\usepackage{listings}
-\usepackage{color}
-\usepackage{amsfonts}	%For \mathbb
-\usepackage{caption}	%Dunno yet
-\usepackage{todonotes}	%For \todo
-
-\lstset{ %
-language=C,						% choose the language of the code
-basicstyle=\footnotesize,		% the size of the fonts that are used for the code
-numbers=left,					% where to put the line-numbers
-numberstyle=\footnotesize,		% the size of the fonts that are used for the line-numbers
-stepnumber=1,					% the step between two line-numbers. If it is 1 each line will be numbered
-numbersep=5pt,					% how far the line-numbers are from the code
-backgroundcolor=\color{white},	% choose the background color. You must add \usepackage{color}
-showspaces=false,				% show spaces adding particular underscores
-showstringspaces=false,			% underline spaces within strings
-showtabs=false,					% show tabs within strings adding particular underscores
-frame=single,					% adds a frame around the code
-tabsize=4,						% sets default tabsize to 2 spaces
-captionpos=b,					% sets the caption-position to bottom
-breaklines=true,				% sets automatic line breaking
-breakatwhitespace=false,		% sets if automatic breaks should only happen at whitespace
-escapeinside={\%*}{*)}			% if you want to add a comment within your code
-}
+\input{config} %config.tex file in same directory
 
 \begin{document}
-%\input{config} %config.tex file in same directory
+
 \begin{center}
 
+%\lstlistoflistings
+% \listoffigures
+% \listoftables
 
 {\huge Problem set 4}\\[0.5cm]
 
 \textsc{\LARGE TMA4280}\\[0.5cm]
-\textsc{\large Introduction to supercomputing -}\\%[1cm]
+\textsc{\large Introduction to supercomputing -}\\
 \textsc{\large Mandatory problem set}\\[0.6cm]
-
 
 \begin{table}[h]
 \centering
@@ -63,74 +41,77 @@ difference between the sum of a finite Hyperharmonic series and the convergence
 sum for an infinite Hyperharmonic series. This program is able to compute the
 difference between the two in the following scenarioes;
 
+\todo[inline]{Check if it's correct to say ``potentially multiple cores'', or if
+I misunderstood how MPI is implemented on kongull.}
+
 \begin{table}[h]
-	\begin{tabular}{lll}
-	a & b &c  \\
-	d & e & f \\
-	g & h & i \\
-	j & k & l \\
-	\end{tabular}
+	\begin{tabularx}{\linewidth}{c|X|X|}
+			OpenMP/MPI	& OpenMP off & OpenMP on	\\ \hline
+			MPI off		& Using one thread and a single process on a single
+processing core for the program's computations. & Using one process with
+multiple threads on a single processing core for the program's
+computations. \\ \hline
+			MPI on		& Using multiple processes potentially running on
+multiple cores concurrently for the program's computations. & Using multiple
+threads in multiple processes running on potentially multiple cores concurrently
+for the program's computations. \\ \hline
+	\end{tabularx}
+	\caption{Different runmodes for the program in this problem set.}
+	\label{tab:RunModes}
 \end{table}
-
-\begin{enumerate}
-	\item[(i)]{Using one thread and a single process on a single processing core
-for the program's computations.}
-	\item[(ii)]{Using one process and multiple threads concurrently on a single
-processing core for the program's computations.}
-	\item[(iii)]{Using multiple processing cores concurrently for the program's
-computations.}
-	\item[(iv)]{Using multiple threads on multiple processing cores concurrently for
-the program's computations.}
-\end{enumerate}
-
-\todo{FIX CAPTION!}
 
 \section{Series $S_n$}
 
-A \textit{Hyperharmonic} series is a mathematical series with the following form;
+Below, in equation~\ref{eq:HyperSeries}, the form of a~\textit{Hyperharmonic}
+series is shown.
 
-\begin{figure}[h]
-	\begin{equation}
-		\sum_{i=1}^{\infty} \frac{1}{i^p}
-	\end{equation}
-	\caption{Hyperharmonic series}
-	\label{HyperSeries}
-\end{figure}
+\begin{equation}
+	\sum_{i=1}^{\infty} \frac{1}{i^p}
+	\label{eq:HyperSeries}
+\end{equation}
 
-In this problemset, the relevant form of the abovementioned Hyperharmonic figure
-that we're interested in is displayed below;
+However, this problem set only asks for the sum of a certain subset of
+Hyperharmonic series, when $p = 2$. Below, equation~\ref{eq:HyperSum} shows how
+to calculate the sum of such a Hyperharmonic series.
 
-\begin{figure}[h]
-	\begin{equation}
-		S_n = \sum_{i=1}^{n} \frac{1}{i^2}
-	\end{equation}
-	\caption{The $n$-th partial Hyperharmonic sum when $p = 2$}
-	\label{HyperSum}
-\end{figure}
+\begin{equation}
+	S_n = \sum_{i=1}^{n} \frac{1}{i^2}
+	\label{eq:HyperSum}
+\end{equation}
 
-This problem set wants us to write a program with $n = 2^k$, where $k$ is given
-as parameter at \todo{Confirm phrasing of program initiation}program start. This
-problem set also specifies $p$ to be a constant; $p = 2$. With $p = 2$, the sum
-of this Hyperharmonic series converges to $\frac{\pi^2}{6}$.
+This problem set asks for a program that can calculate the sum of Hyperharmonic
+series of the form shown in equation~\ref{eq:HyperSeries}, of finite length $n$.
 
-The objective of the problem set is to compute the difference between $S =
-\lim_{n \to \infty}S_n$ and the partial sum $S_n$ as figured in (\ref{HyperSum}).
-The problem set wants the program to compute these differences with $n = 2^k$,
-with $\{k \in \mathbb{N} : k \in [3, 14]\}$.
+Since the problem set wants us to develop a program which can concurrently
+calculate this sum in parallel on $P = 2^m$ discrete processors, this problem
+set also specifies that $n$ should follow certain conditions; $n = 2^k$, where
+$k$ is given as parameter on the form $\{k \in \mathbb{N} : k \in [3, 14]\}$.
+
+\begin{equation}
+	\frac{\pi^2}{6} = \lim_{n \to \infty}S_n = \sum_{i=1}^{\infty} \frac{1}{i^2}
+	\label{eq:HyperActualSum}
+\end{equation}
+
+So, after having detailed that $S = \lim_{n \to \infty}S_n$ converges to $\frac{
+\pi^2}{6}$, and exactly which finite lengths of $n$ the problem set is
+interested in. It is our understanding that this problem set is interested in
+the students developing the abovementioned parallel program to calculate the
+difference between the sum given in equation~\ref{eq:HyperActualSum} and the sum
+when $n$ is of a given length, decided by $k$.
 
 \section{Concurrency Implementation}
 
 The program was developed in iterations. The first iteration ran on a single
 thread in a single process on a single processor core, in a non-concurrent
 sequential fashion. The second iteration introduced running the program as
-mentioned in item (ii) in \cite{RunMode}. This was enabled by putting the following
-line into our \textit{ex4.c} file.
+mentioned in the top-right cell of table~\ref{tab:RunModes}. This was enabled by
+putting the following line into our \textit{ex4.c} file.
 
-% \begin{lslisting}
-% 	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum)
-% \end{lslisting}
+\lstinputlisting[firstline=17,lastline=21,firstnumber=17,label=lst:OpenMP]{
+../ex4.c}
 
-The third iteration focused on combining items (iii) and (iv) from \cite{RunMode}.
+The third iteration focused on enabling the program to run in the runmode
+corresponding to the bottom-right cell of table~\ref{tab:RunModes}.
 Since OpenMP is enabled through the use of pragmas, making the code run with MPI
 was then only a matter of choosing the right compiler and compilation switches.
 Hence, in effect the third iteration only focused on implementing MPI into the
@@ -160,9 +141,9 @@ $\textit{MPI\_Reduce()}$ also aided us by performing the summing necessary
 between the processes for us, storing the result in a specified variable.}
 \end{itemize}
 
-These function calls are considered more convenient for the purpose of this
-problem set. This due to the fact that the problem is relatively simple, and
-easy to load-balance. Hence, no complicated send/receive inter-communication
+These function calls are considered more convenient considering the purpose of
+this problem set. This due to the fact that the problem is relatively simple,
+and easy to load-balance. Hence, no complicated send/receive inter-communication
 between the processes is needed to coordinate the concurrency. All the summing
 is done independently of any other summing (besides the final summing performed
 by $\textit{MPI\_Reduce()}$).
@@ -175,15 +156,57 @@ such that it could take care of the concurrency through the use of something
 paragraphs was what we had written when you told us you wanted to take over this
 part. }
 
-\todo[inline]{ANSWER QUESTION 6!!!!!}
+\todo[inline]{ANSWER QUESTION 6!!!!! (Check final section first!)}
 
 \section{Program Load}
 
 \subsection{Memory requirement}
 
+The program developed for this problem set requires a certain amount of
+available memory to run. There are several factors and variables to take into
+account, which can all differ according to the runmodes of the program (level of
+parallelism or lack thereof) and circumstance.
 
-\todo[inline]{ANSWER QUESTION 7!!!!!}
+Since the problem set specifies the circumstance $n \gg 1$, we will ignore the
+neglegible extra memory needed for OpenMP. This is also because a set of threads
+managed by OpenMP, specifically performing a summation (as shown in
+subsection~\ref{lst:OpenMP}), will have a neglegible impact on the program's
+memory usage.
 
+Hence, below there are two equations where we detail how we believe the \textit{
+non-neglegible} memory requirement should behave when run in a single process,
+or in $m$ processes with input decided by variable $k$ as a deciding factor in
+either case.
+
+\todo[inline]{Bother to count supVars? Erlend, you who's got OpenMP experience,
+what do you think? If so, update/fix footnote 1 and above paragraphs.}
+
+\begin{equation}
+	noMPImem = supVars\footnote{This amount is static, and very neglegible
+compared to the sum describing the size of the vector.} + \sum_{i=1}^{2^k}
+sizeof(double)
+	\label{eq:NoMPI-Mem}
+\end{equation}
+
+\begin{equation}
+	MPImem = noMPImem + (m-1)\footnote{m = amount of processes the program is
+run on concurrently though MPI.} \cdot supVars + m \cdot \sum_{i=1}^{2^{k-m}}
+sizeof(double)
+	\label{eq:MPI-Mem}
+\end{equation}
+
+As detailed above in equation~\ref{eq:MPI-Mem} (parallell circumstance), you can
+see that the memory requirement ``noMPImem'' detailed in
+equation~\ref{eq:noMPI-Mem} (serial circumstance), will always be present.
+However, the sum term in equation~\ref{eq:MPImem} can be thought of as a
+duplication of the sum representing the memory required for the length of the
+vector representing the Hyperharmonic series in equation~\ref{eq:noMPImem}.
+
+The only difference being that its memory requirement is spread across the $m$
+processes.
+
+\todo[inline]{Need to know if MPI spreads across processors or only processes
+before I can finish this!!! (Question 7)}
 
 \subsection{Mathematical computation}
 
@@ -206,9 +229,9 @@ $n$ terms, requires $2n$ FLOPs. Below we detail the formula used in the program
 for this problem set when calculating the sum of our finite length Hyperharmonic
 series.
 
-The total amount of FLOPs needed for computing (\ref{HyperSum}) will then be $2n + n = 3n$.
-Thus, as we have use $k$ to define $n=2^k$ the computational cost of our program
-can be described as; $2^k\cdot 3$ FLOPs.
+The total amount of FLOPs needed for computing (\ref{eq:HyperSum}) will then be
+$2n + n = 3n$. Thus, as we have use $k$ to define $n=2^k$ the computational cost
+of our program can be described as; $2^k\cdot 3$ FLOPs.
 
 \subsection{Load-balancing}
 
@@ -222,21 +245,15 @@ always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The
 parallellism is possible due to the fact that all partial sums are completely
 independent of each other. \newline
 
-\todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some extra pre-processing?}
+\todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some
+extra pre-processing?}
 
 Therefore, we believe that you can safely conclude that within the parameters
 given in this problem set, this problem is very attractive to solve through
 parallell processing.
 
+\section{Results}
 
-
-% \input{chapters/implementation}
-% \input{chapters/methodology}
-% \input{chapters/results}
-% \input{chapters/conclusion}
-
-%\lstlistoflistings
-% \listoffigures
-% \listoftables
+\todo[inline]{Implement this? I imagine this is where question 6 should be...}
 
 \end{document}
