@@ -33,7 +33,9 @@ escapeinside={\%*}{*)}			% if you want to add a comment within your code
 
 {\huge Problem set 4}\\[0.5cm]
 
-\textsc{\LARGE TMA4280 \newline Introduction to supercomputing - \newline Mandatory problem set}\\[2cm]
+\textsc{\LARGE TMA4280}\\[0.5cm]
+\textsc{\large Introduction to supercomputing -}\\%[1cm]
+\textsc{\large Mandatory problem set}\\[0.6cm]
 
 
 \begin{table}[h]
@@ -54,11 +56,21 @@ escapeinside={\%*}{*)}			% if you want to add a comment within your code
 
 \clearpage
 \section{Introduction}
+
 For the programming belonging to this problem set, see $\textit{ex4.c}$ file in
 the zipped archive attached to this report. This program calculates the
 difference between the sum of a finite Hyperharmonic series and the convergence
 sum for an infinite Hyperharmonic series. This program is able to compute the
 difference between the two in the following scenarioes;
+
+\begin{table}[h]
+	\begin{tabular}{lll}
+	a & b &c  \\
+	d & e & f \\
+	g & h & i \\
+	j & k & l \\
+	\end{tabular}
+\end{table}
 
 \begin{enumerate}
 	\item[(i)]{Using one thread and a single process on a single processing core
@@ -165,16 +177,20 @@ part. }
 
 \todo[inline]{ANSWER QUESTION 6!!!!!}
 
+\section{Program Load}
+
+\subsection{Memory requirement}
+
+
 \todo[inline]{ANSWER QUESTION 7!!!!!}
 
-\section{Program Load}
+
+\subsection{Mathematical computation}
 
 The computational load (mathematical complexity) of our program can be given as
 the amount of \textit{FLoating-point OPerations} (FLOPs) it needs to complete
 for a given input. Since this program computes the sum of a Hyperharmonic finite
 series, below we detail the math behind the program's computations.
-
-\subsection{Mathematical computation}
 
 The mathematical operation needed to generate each term of the Hyperharmonic
 series is as follows;
