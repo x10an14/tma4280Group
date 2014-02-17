@@ -26,6 +26,11 @@
 \large{\today}
 \vfill
 \section*{Abstract}
+This report describes a program made to compute the sum of a Hyperharmonic series, through a finite approximation, and comparing said sum to the known convergence of the infinite series.
+
+It covers the serial implementation of an algorithm, and exploitation of parallelization through the OpenMP API and OpenMPI Library, in order to improve the efficiency and speed of the program.
+
+Finally it covers the results from utilizing parallelization, and analyzes the utility of using parallelization to speed up this task.
 \todo[inline]{EMPTY!}
 
 \end{center}
@@ -52,7 +57,7 @@ processing core for the program's computations. & Using one process with
 multiple threads on a single processing core for the program's
 computations. \\ \hline
 			MPI on		& Using multiple processes potentially running on
-multiple cores concurrently for the program's computations. & Using multiple
+multiple cores concurrently for the program's computations. & Usiqsub unauthorized request msg=group aclng multiple
 threads in multiple processes running on potentially multiple cores concurrently
 for the program's computations. \\ \hline
 	\end{tabularx}
@@ -130,7 +135,7 @@ data from the other processes used by MPI.
 
 In our solution, implemented in the attached code, we utilized the following MPI
 functions:
-
+\todo[inline]{Possibly change the wording in the description of Scatter/Reduce. They both include sending and receiving. Change to distribute/gather instead?}
 \begin{itemize}
 	\item{$\textit{MPI\_Init()}$ and $\textit{
 MPI\_Finalize()}$ through the provided \textit{common.c} \textit{common.h}
@@ -254,7 +259,7 @@ extra pre-processing? ADDED: Review this:}
 
 It should be mentioned that the program does some pre-processing serially, mandated by the task and
 by MPI. The initialization is neccessary and unavoidable, and the generation of the vector would probably
-not benefit much (if at all) by parallelization. Either way, these parts are negilible parts of the overall runtime for problem sizes of any considerable size.  
+not benefit much (if at all) by parallelization. Either way, the initialization will be approximately constant no matter the problem size, and the initial vector generation would probably not benefit much (if at all) by any attempt at parallelizing; the overhead attached would dominate any gain.
 
 \section{Results}
 
