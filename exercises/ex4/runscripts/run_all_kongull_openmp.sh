@@ -1,31 +1,29 @@
-cd /home/$USER/tma4280Group/exercises/ex4
+cd /home/$USER/tma4280Group/exercises/ex4/runscripts/
 #Create CMAKE sub-folder
-mkdir release -p
+mkdir release_mpi -p
 
 #Delete whatever was there before
-rm -rf release/*
+rm -rf release_mpi/*
 
-cd release/
+cd release_mpi/
 CXX=icpc CC=icc FC=ifort cmake .. -DCMAKE_BUILD_TYPE=Release
 make clean && make
-
 chmod +x ex4
 
-cd ../runscripts/openmp/
-mkdir 1n1ppn 1n2ppn 1n4ppn 1n8ppn -p
+cd ../runscripts/mpi/
+chmod +x 1n1ppn.sh
+chmod +x 1n2ppn.sh
+chmod +x 1n4ppn.sh
+chmod +x 1n8ppn.sh
 
-cd 1n1ppn/
-chmod +x ../n1ppn.sh
-qsub ../n1ppn.sh
+mkdir 1n1ppn -p && cd 1n1ppn
+qsub ../1n1ppn.sh
 
-cd ../1n2ppn/
-chmod +x ../n2ppn.sh
-qsub ../n2ppn.sh
+mkdir ../1n2ppn -p && cd ../1n2ppn
+qsub ../1n2ppn.sh
 
-cd ../1n4ppn/
-chmod +x ../n4ppn.sh
-qsub ../n4ppn.sh
+mkdir ../1n4ppn -p && cd ../1n4ppn
+qsub ../1n4ppn.sh
 
-cd ../1n8ppn/
-chmod +x ../n8ppn.sh
-qsub ../n8ppn.sh
+mkdir ../1n8ppn -p && cd ../1n8ppn
+qsub ../1n8ppn.sh
