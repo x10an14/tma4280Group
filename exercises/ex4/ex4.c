@@ -15,7 +15,7 @@ void fillVectorNumerically(Vector inpt){
 double getVectorSum(Vector inpt, int start, int end){
 	double sum = 0.0;
 	//Let the compiler decide whether OpenMP is run or not.
-	#pragma omp parallel for schedule(dynamic, 5) reduction(+:sum)
+	#pragma omp parallel for schedule(guided, 1) reduction(+:sum)
 	for (int i = end; i >= start; --i){
 		sum += inpt->data[i];
 	}
@@ -47,13 +47,6 @@ int main(int argc, char *argv[]){
 	if(rank == 0){
 		fullVector = createVector(vecLength);
 		fillVectorNumerically(fullVector);
-
-		/*printf("vecLength: %d\nsize: %d\nvecLength/size: %d\n", \
-			vecLength, size, vecLength/size);*/
-		// printf("fullVector length: %d\n", fullVector->glob_len);
-		/*printf("fullVector[0], [1], and [glob_len]: [%f] [%f] [%f]\n", \
-			fullVector->data[0], fullVector->data[1], \
-			fullVector->data[fullVector->glob_len]);*/
 	}
 
 	//How we enabled the program to both run with and without MPI
@@ -72,6 +65,7 @@ int main(int argc, char *argv[]){
 				kVector->data[0], kVector->data[1], \
 				kVector->data[kVector->len]);
 		}
+
 		//Calculate sum in each node/rank
 		loc_sum = getVectorSum(kVector, 0, vecLength/size -1);
 		//Receive all sums into the glob_sum variable on rank == 0 node
