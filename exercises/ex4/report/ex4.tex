@@ -266,9 +266,17 @@ parallell processing.
 
 \todo[inline]{Implement this? I imagine this is where question 6 should be...}
 
+\subsection{General about results}
+
 \subsection{Serial implementation}
 
 \subsection{OpenMP implementation}
+When running on 3 Open MP threads with no MPI, the runtime behaved about cubically
+with respect to the input size ($n=2^k$). However, it showed no significant increase in
+runtime until k = 17, something which indicates that the initialization and overhead dominates the runtime
+in the problem sizes specified in the task, so the size must be increased to gain any significant data.
+
+\todo[inline]{Add more data on more OMP threads if time allows.}
 
 \subsection{MPI implementation}
 
