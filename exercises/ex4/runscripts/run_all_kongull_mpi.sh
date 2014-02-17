@@ -1,3 +1,4 @@
+cd /home/$USER/tma4280Group/exercises/ex4/runscripts/
 #Create CMAKE sub-folder
 mkdir ../release -p
 
