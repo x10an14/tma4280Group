@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#PBS -N ex4_jobscript
+#PBS -N ex4_2n12ppn_k8_28
 #PBS -A freecycle
 #PBS -l walltime=00:08:00
 #PBS -l nodes=2:ppn=12:default
@@ -12,6 +12,8 @@ cd ${PBS_O_WORKDIR}
 module load intelcomp
 module load openmpi/1.4.3-intel
 KMP_AFFINITY="granularity=fine, compact"
+
+cd kongull_outpt
 
 for i in $(seq 8 28);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
