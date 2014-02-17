@@ -1,9 +1,9 @@
 cd /home/$USER/tma4280Group/exercises/ex4/runscripts/
 #Create CMAKE sub-folder
-mkdir release_openmp -p
+mkdir r../elease_openmp -p
 
 #Delete whatever was there before
-rm -rf release_openmp/*
+rm -rf ../release_openmp/*
 
 cd ../release_openmp/
 CXX=icpc CC=icc FC=ifort cmake .. -DCMAKE_BUILD_TYPE=Release

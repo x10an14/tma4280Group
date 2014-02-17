@@ -17,5 +17,5 @@ KMP_AFFINITY="granularity=fine, compact"
 for i in $(seq 4 28);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 		echo 'k: '$i
-		mpirun -npernode 4 ../../../release/ex4 $i
+		mpirun -npernode 4 ../../../release_mpi/ex4 $i
 	done

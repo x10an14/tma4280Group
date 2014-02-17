@@ -1,11 +1,11 @@
 cd /home/$USER/tma4280Group/exercises/ex4/runscripts/
 #Create CMAKE sub-folder
-mkdir ../release -p
+mkdir ../release_mpi -p
 
 #Delete whatever was there before
-rm -rf ../release/*
+rm -rf ../release_mpi/*
 
-cd ../release/
+cd ../release_mpi/
 CXX=icpc CC=icc FC=ifort cmake .. -DCMAKE_BUILD_TYPE=Release  -DENABLE_OPENMP=0
 make clean && make
 chmod +x ex4
