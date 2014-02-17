@@ -43,22 +43,21 @@ For the programming belonging to this problem set, see $\textit{ex4.c}$ file in
 the zipped archive attached to this report. This program calculates the
 difference between the sum of a finite Hyperharmonic series and the convergence
 sum for an infinite Hyperharmonic series. This program is able to compute the
-difference between the two in the following scenarioes;
-
-\todo[inline]{Check if it's correct to say ``potentially multiple cores'', or if
-I misunderstood how MPI is implemented on kongull.}
+difference between the two in the following scenarioes listed below in
+table~\ref{tab:RunModes}.
 
 \begin{table}[h]
 	\begin{tabularx}{\linewidth}{c|X|X|}
 			OpenMP/MPI	& OpenMP off & OpenMP on	\\ \hline
-			MPI off		& Using one thread and a single process on a single
-processing core for the program's computations. & Using one process with
-multiple threads on a single processing core for the program's
-computations. \\ \hline
-			MPI on		& Using multiple processes potentially running on
-multiple cores concurrently for the program's computations. & Usiqsub unauthorized request msg=group aclng multiple
-threads in multiple processes running on potentially multiple cores concurrently
-for the program's computations. \\ \hline
+			MPI off		& Using one thread and a single process for running the
+computations serially on one processing core. & Using one process with multiple
+threads on a single processing core for running the computations concurrently
+across the threads. \\ \hline
+			MPI on		& Using multiple processes with a single thread each,
+potentially running on multiple cores concurrently for the programs
+computations. & Using multiple threads in multiple processes running on
+potentially multiple cores concurrently for the programs computations. \\
+\hline
 	\end{tabularx}
 	\caption{Different runmodes for the program in this problem set.}
 	\label{tab:RunModes}
@@ -96,12 +95,11 @@ $k$ is given as parameter on the form $\{k \in \mathbb{N} : k \in [3, 14]\}$.
 	\label{eq:HyperActualSum}
 \end{equation}
 
-So, after having detailed that $S = \lim_{n \to \infty}S_n$ converges to $\frac{
-\pi^2}{6}$, and exactly which finite lengths of $n$ the problem set is
-interested in. It is our understanding that this problem set is interested in
-the students developing the abovementioned parallel program to calculate the
-difference between the sum given in equation~\ref{eq:HyperActualSum} and the sum
-when $n$ is of a given length, decided by $k$.
+So, after having detailed that $S = \lim_{n \to \infty}S_n$ in the above
+equation~\ref{eq:HyperActualSum}, we see that its sum converges to $\frac{
+\pi^2}{6}$. It is the difference between this sum and the sum of finite length
+Hyperharmonic series the problem set is interested in, and our program
+calculates both serially and in parallel.
 
 \section{Concurrency Implementation}
 
@@ -111,7 +109,7 @@ sequential fashion. The second iteration introduced running the program as
 mentioned in the top-right cell of table~\ref{tab:RunModes}. This was enabled by
 putting the following line into our \textit{ex4.c} file.
 
-\lstinputlisting[firstline=17,lastline=21,firstnumber=17,label=lst:OpenMP]{
+\lstinputlisting[firstline=18,lastline=18,firstnumber=18,label=lst:OpenMP]{
 ../ex4.c}
 
 The third iteration focused on enabling the program to run in the runmode
@@ -139,10 +137,10 @@ functions:
 	\item{$\textit{MPI\_Init()}$ and $\textit{
 MPI\_Finalize()}$ through the provided \textit{common.c} \textit{common.h}
 framework.}
-	\item{$\textit{MPI\_Scatter()}$ and $\textit{MPI\_Reduce()}$ were used to distribute
-	and gather data respectively, and
-	$\textit{MPI\_Reduce()}$ also aided us by performing the summing necessary
-	between the processes for us, storing the result in a specified variable.}
+	\item{$\textit{MPI\_Scatter()}$ and $\textit{MPI\_Reduce()}$ were used to
+distribute 	and gather data respectively, and $\textit{MPI\_Reduce()}$ also
+aided us by performing the summing necessary between the processes for us,
+storing the result in a specified variable.}
 \end{itemize}
 
 These function calls are considered more convenient considering the purpose of
@@ -174,9 +172,9 @@ account, which can all differ according to the runmodes of the program (level of
 parallelism or lack thereof) and circumstance.
 
 Since the problem set specifies the circumstance $n \gg 1$, we will ignore the
-neglegible extra memory needed for OpenMP. This is also because a set of threads
+neglegible extra memory needed for OpenMP. This is because a set of threads
 managed by OpenMP, specifically performing a summation (as shown in
-subsection~\ref{lst:OpenMP}), will have a neglegible impact on the program's
+subsection~\ref{lst:OpenMP}), will have an insignificant impact on the programs
 memory usage.
 
 Hence, below there are two equations where we detail how we believe the \textit{
@@ -214,7 +212,7 @@ processes.
 The computational load (mathematical complexity) of our program can be given as
 the amount of \textit{\textbf{Fl}oating-point \textbf{Op}erations} (FLOPs) it
 needs to complete for a given input. Since this program computes the sum of a
-Hyperharmonic finite series, below we detail the math behind the program's
+Hyperharmonic finite series, below we detail the math behind the programs
 computations.
 
 The mathematical operation needed to generate each term of the Hyperharmonic
@@ -232,8 +230,8 @@ for this problem set when calculating the sum of our finite length Hyperharmonic
 series.
 
 The total amount of FLOPs needed for computing (\ref{eq:HyperSum}) will then be
-$2n + n = 3n$. Thus, as we have use $k$ to define $n=2^k$ the computational cost
-of our program can be described as; $2^k\cdot 3$ FLOPs.
+$2n + n = 3n$. Thus, as we have used $k$ to define $n=2^k$ the computational
+cost of our program can be described as; $2^k\cdot 3$ FLOPs.
 
 \subsection{Load-balancing}
 
@@ -267,5 +265,13 @@ parallell processing.
 \section{Results}
 
 \todo[inline]{Implement this? I imagine this is where question 6 should be...}
+
+\subsection{Serial implementation}
+
+\subsection{OpenMP implementation}
+
+\subsection{MPI implementation}
+
+\subsection{MPI + OpenMP implementation}
 
 \end{document}
