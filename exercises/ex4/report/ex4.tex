@@ -148,18 +148,21 @@ between the processes is needed to coordinate the concurrency. All the summing
 is done independently of any other summing (besides the final summing performed
 by $\textit{MPI\_Reduce()}$).
 
-MPI could also have been used through the use of  the $\textit{MPI\_Send()}$ 
-and/or $\textit{MPI\_Gather()}$ functions. This would have provided more detailed
-controll over the data (location and communication), but this is not neccessary for
-solving this problem and might actually be harmful to efficiency. This is due to potential
-added overhead for communication and variable assignment. (It is here assumed that the implementation
-of $\textit{MPI\_Reduce()}$ is more efficient than any manual summing and use of Send/Gather would be).
+MPI could also have been used through the use of the $\textit{MPI\_Send()}$
+and/or $\textit{MPI\_Gather()}$ functions. This would have provided more
+detailed controll over the data (location and communication), but this is not
+neccessary for solving this problem and might actually be harmful to efficiency.
+This is due to potential added overhead for communication and variable
+assignment. (It is here assumed that the implementation of
+$\textit{MPI\_Reduce()}$ is more efficient than any manual summing and use of
+Send/Gather would be).
 
 \todo[inline]{ANSWER QUESTION 6!!!!! (Check final section first!)}
 
 \section{Program Load}
 
 \subsection{Memory requirement}
+\label{subsec:MemReq}
 
 The program developed for this problem set requires a certain amount of
 available memory to run. There are several factors and variables to take into
@@ -174,8 +177,8 @@ memory usage.
 
 Hence, below there are two equations where we detail how we believe the \textit{
 non-neglegible} memory requirement should behave when run in a single process,
-or in $m$ processes with input decided by variable $k$ as a deciding factor in
-either case.
+or in $P$ processes with input size decided by variable $k$ as a deciding factor
+in either case.
 
 \todo[inline]{Bother to count supVars? Erlend, you who's got OpenMP experience,
 what do you think? If so, update/fix footnote 1 and above paragraphs.}
@@ -188,9 +191,9 @@ sizeof(double)
 \end{equation}
 
 \begin{equation}
-	MPImem = noMPImem + (m-1)\footnote{m = amount of processes the program is
-run on concurrently though MPI.} \cdot supVars + m \cdot \sum_{i=1}^{2^{k-m}}
-sizeof(double)
+	MPImem = noMPImem + (P-1)\footnote{P = $2^m$ = amount of processes the
+program is run on concurrently though MPI.} \cdot supVars + P \cdot
+\sum_{i=1}^{2^{k-m}} sizeof(double)
 	\label{eq:MPI-Mem}
 \end{equation}
 
@@ -201,7 +204,7 @@ However, the sum term in equation~\ref{eq:MPImem} can be thought of as a
 duplication of the sum representing the memory required for the length of the
 vector representing the Hyperharmonic series in equation~\ref{eq:noMPImem}.
 
-The only difference being that its memory requirement is spread across the $m$
+The only difference being that its memory requirement is spread across the $P$
 processes.
 
 \todo[inline]{Need to know if MPI spreads across processors or only processes
@@ -252,9 +255,13 @@ parallell processing.
 \todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some
 extra pre-processing? ADDED: Review this:}
 
-It should be mentioned that the program does some pre-processing serially, mandated by the task and
-by MPI. The initialization is neccessary and unavoidable, and the generation of the vector would probably
-not benefit much (if at all) by parallelization. Either way, these parts are negilible parts of the overall runtime for problem sizes of any considerable size.  
+It should be mentioned that the program does some pre-processing serially,
+mandated by the task and by MPI. The initialization is neccessary and
+unavoidable, and the generation of the vector would probably not benefit much
+(if at all) by parallelization. Either way, the computations involved in these
+parts are negilible compared to the overall runtime for problem sizes of any
+considerable size\footnote{$n \gg 1$, as referenced in
+subsection~\ref{subsec:MemReq}.}.
 
 \section{Results}
 
