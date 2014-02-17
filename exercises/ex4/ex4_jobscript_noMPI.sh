@@ -51,7 +51,7 @@ KMP_AFFINITY="granularity=fine, compact"
 #Set this variable to be the path where you expect the compiled program to be after line 39 in this script.
 runFile=release/ex4
 
-for i in $(seq 3 14);
+for i in $(seq 3 28);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 		echo 'k: '$i
 		OMP_NUM_THREADS=3 $runFile $i
