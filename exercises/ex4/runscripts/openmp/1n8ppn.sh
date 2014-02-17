@@ -17,5 +17,5 @@ KMP_AFFINITY="granularity=fine, compact"
 for i in $(seq 3 28);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 		echo 'k: '$i
-		OMP_NUM_THREADS=8 ../../../release/ex4 $i
+		OMP_NUM_THREADS=8 ../../../release_openmp/ex4 $i
 	done
