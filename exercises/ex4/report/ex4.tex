@@ -148,13 +148,12 @@ between the processes is needed to coordinate the concurrency. All the summing
 is done independently of any other summing (besides the final summing performed
 by $\textit{MPI\_Reduce()}$).
 
-Had we implemented MPI through the use of a $\textit{MPI\_Send()}$ alternative
-and/or a $\textit{MPI\_Gather()}$ alternative, we would have to modify the code
-such that it could take care of the concurrency through the use of something
-
-\todo[inline]{ERLEND!!! This is where you wanted to come in. The two above
-paragraphs was what we had written when you told us you wanted to take over this
-part. }
+MPI could also have been used through the use of  the $\textit{MPI\_Send()}$ 
+and/or $\textit{MPI\_Gather()}$ functions. This would have provided more detailed
+controll over the data (location and communication), but this is not neccessary for
+solving this problem and might actually be harmful to efficiency. This is due to potential
+added overhead for communication and variable assignment. (It is here assumed that the implementation
+of $\textit{MPI\_Reduce()}$ is more efficient than any manual summing and use of Send/Gather would be).
 
 \todo[inline]{ANSWER QUESTION 6!!!!! (Check final section first!)}
 
@@ -209,6 +208,7 @@ processes.
 before I can finish this!!! (Question 7)}
 
 \subsection{Mathematical computation}
+\todo[inline]{Consider changing from FLoating-point OP... to Floating-point Op.. (acr. FLOPS)}
 
 The computational load (mathematical complexity) of our program can be given as
 the amount of \textit{FLoating-point OPerations} (FLOPs) it needs to complete
@@ -245,12 +245,16 @@ always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The
 parallellism is possible due to the fact that all partial sums are completely
 independent of each other. \newline
 
-\todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some
-extra pre-processing?}
-
 Therefore, we believe that you can safely conclude that within the parameters
 given in this problem set, this problem is very attractive to solve through
 parallell processing.
+
+\todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some
+extra pre-processing? ADDED: Review this:}
+
+It should be mentioned that the program does some pre-processing serially, mandated by the task and
+by MPI. The initialization is neccessary and unavoidable, and the generation of the vector would probably
+not benefit much (if at all) by parallelization. Either way, these parts are negilible parts of the overall runtime for problem sizes of any considerable size.  
 
 \section{Results}
 
