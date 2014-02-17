@@ -5,7 +5,7 @@ mkdir release_openmp -p
 #Delete whatever was there before
 rm -rf release_openmp/*
 
-cd release_openmp/
+cd ../release_openmp/
 CXX=icpc CC=icc FC=ifort cmake .. -DCMAKE_BUILD_TYPE=Release
 make clean && make
 chmod +x ex4
