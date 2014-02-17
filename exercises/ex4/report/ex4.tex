@@ -26,6 +26,11 @@
 \large{\today}
 \vfill
 \section*{Abstract}
+This report describes a program made to compute the sum of a Hyperharmonic series, through a finite approximation, and comparing said sum to the known convergence of the infinite series.
+
+It covers the serial implementation of an algorithm, and exploitation of parallelization through the OpenMP API and OpenMPI Library, in order to improve the efficiency and speed of the program.
+
+Finally it covers the results from utilizing parallelization, and analyzes the utility of using parallelization to speed up this task.
 \todo[inline]{EMPTY!}
 
 \end{center}
@@ -52,7 +57,7 @@ processing core for the program's computations. & Using one process with
 multiple threads on a single processing core for the program's
 computations. \\ \hline
 			MPI on		& Using multiple processes potentially running on
-multiple cores concurrently for the program's computations. & Using multiple
+multiple cores concurrently for the program's computations. & Usiqsub unauthorized request msg=group aclng multiple
 threads in multiple processes running on potentially multiple cores concurrently
 for the program's computations. \\ \hline
 	\end{tabularx}
@@ -130,7 +135,7 @@ data from the other processes used by MPI.
 
 In our solution, implemented in the attached code, we utilized the following MPI
 functions:
-
+\todo[inline]{Possibly change the wording in the description of Scatter/Reduce. They both include sending and receiving. Change to distribute/gather instead?}
 \begin{itemize}
 	\item{$\textit{MPI\_Init()}$ and $\textit{
 MPI\_Finalize()}$ through the provided \textit{common.c} \textit{common.h}
@@ -184,10 +189,11 @@ in either case.
 what do you think? If so, update/fix footnote 1 and above paragraphs.}
 
 \begin{equation}
-	noMPImem = supVars\footnote{This amount is static, and very neglegible
-compared to the sum describing the size of the vector.} + \sum_{i=1}^{2^k}
+	noMPImem = supVars\footnote{supVars = support Variables. This amount is
+static, and very neglegible compared to the sum describing the size of the
+vector.} + \sum_{i=1}^{2^k}
 sizeof(double)
-	\label{eq:NoMPI-Mem}
+	\label{eq:noMPI-Mem}
 \end{equation}
 
 \begin{equation}
@@ -200,9 +206,9 @@ program is run on concurrently though MPI.} \cdot supVars + P \cdot
 As detailed above in equation~\ref{eq:MPI-Mem} (parallell circumstance), you can
 see that the memory requirement ``noMPImem'' detailed in
 equation~\ref{eq:noMPI-Mem} (serial circumstance), will always be present.
-However, the sum term in equation~\ref{eq:MPImem} can be thought of as a
+However, the sum term in equation~\ref{eq:MPI-Mem} can be thought of as a
 duplication of the sum representing the memory required for the length of the
-vector representing the Hyperharmonic series in equation~\ref{eq:noMPImem}.
+vector representing the Hyperharmonic series in equation~\ref{eq:noMPI-Mem}.
 
 The only difference being that its memory requirement is spread across the $P$
 processes.
@@ -211,12 +217,12 @@ processes.
 before I can finish this!!! (Question 7)}
 
 \subsection{Mathematical computation}
-\todo[inline]{Consider changing from FLoating-point OP... to Floating-point Op.. (acr. FLOPS)}
 
 The computational load (mathematical complexity) of our program can be given as
-the amount of \textit{FLoating-point OPerations} (FLOPs) it needs to complete
-for a given input. Since this program computes the sum of a Hyperharmonic finite
-series, below we detail the math behind the program's computations.
+the amount of \textit{\textbf{Fl}oating-point \textbf{Op}erations} (FLOPs) it
+needs to complete for a given input. Since this program computes the sum of a
+Hyperharmonic finite series, below we detail the math behind the program's
+computations.
 
 The mathematical operation needed to generate each term of the Hyperharmonic
 series is as follows;
@@ -238,10 +244,23 @@ of our program can be described as; $2^k\cdot 3$ FLOPs.
 
 \subsection{Load-balancing}
 
-The program is very well load-balanced for this problem set. The problem set
-specifies the length of our vectors (representing the Hyperharmonic series) to
-be $2^k$ long, and that our MPI implementation should only run on a system using
-$P$ processors where $P$ is a power of 2.
+The program developed is very well load-balanced for this problem set. The
+problem set specifies the length of the vectors (representing the Hyperharmonic
+series) to be $2^k$ long, and that our MPI implementation should only run on a
+system using $P$ processors where $P$ is a power of 2.
+
+It should be mentioned that the program does some pre-processing serially,
+mandated by the task and by MPI. The initialization is neccessary and
+unavoidable, and the generation of the vector would probably not benefit much
+(if at all) by parallelization.
+
+Either way, the neglegible computations involved in the initialization of the
+problem will be negilible compared to the overall  runtime for problem sizes of
+any considerable size\footnote{$n \gg 1$, as  referenced in
+subsection~\ref{subsec:MemReq}.}. This stands equally true for the  initial
+generation of the vector representing the Hyperharmonic series of the problem
+set. In any attempt at parallelizing the vector generation, the  necessary
+overhead would dominate any gain.
 
 Hence, the summation cost of the double-values in the vector of length $2^k$ can
 always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The
@@ -251,17 +270,6 @@ independent of each other. \newline
 Therefore, we believe that you can safely conclude that within the parameters
 given in this problem set, this problem is very attractive to solve through
 parallell processing.
-
-\todo[inline]{Maybe mention that MPI requires node 0 (rank == 0) to do some
-extra pre-processing? ADDED: Review this:}
-
-It should be mentioned that the program does some pre-processing serially,
-mandated by the task and by MPI. The initialization is neccessary and
-unavoidable, and the generation of the vector would probably not benefit much
-(if at all) by parallelization. Either way, the computations involved in these
-parts are negilible compared to the overall runtime for problem sizes of any
-considerable size\footnote{$n \gg 1$, as referenced in
-subsection~\ref{subsec:MemReq}.}.
 
 \section{Results}
 
