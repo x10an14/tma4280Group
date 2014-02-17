@@ -31,7 +31,6 @@ This report describes a program made to compute the sum of a Hyperharmonic serie
 It covers the serial implementation of an algorithm, and exploitation of parallelization through the OpenMP API and OpenMPI Library, in order to improve the efficiency and speed of the program.
 
 Finally it covers the results from utilizing parallelization, and analyzes the utility of using parallelization to speed up this task.
-\todo[inline]{EMPTY!}
 
 \end{center}
 
@@ -135,15 +134,15 @@ data from the other processes used by MPI.
 
 In our solution, implemented in the attached code, we utilized the following MPI
 functions:
-\todo[inline]{Possibly change the wording in the description of Scatter/Reduce. They both include sending and receiving. Change to distribute/gather instead?}
+
 \begin{itemize}
 	\item{$\textit{MPI\_Init()}$ and $\textit{
 MPI\_Finalize()}$ through the provided \textit{common.c} \textit{common.h}
 framework.}
-	\item{$\textit{MPI\_Scatter()}$ and $\textit{MPI\_Reduce()}$ were used to
-send and receive data between the processes respectively.
-$\textit{MPI\_Reduce()}$ also aided us by performing the summing necessary
-between the processes for us, storing the result in a specified variable.}
+	\item{$\textit{MPI\_Scatter()}$ and $\textit{MPI\_Reduce()}$ were used to distribute
+	and gather data respectively, and
+	$\textit{MPI\_Reduce()}$ also aided us by performing the summing necessary
+	between the processes for us, storing the result in a specified variable.}
 \end{itemize}
 
 These function calls are considered more convenient considering the purpose of
@@ -184,9 +183,6 @@ Hence, below there are two equations where we detail how we believe the \textit{
 non-neglegible} memory requirement should behave when run in a single process,
 or in $P$ processes with input size decided by variable $k$ as a deciding factor
 in either case.
-
-\todo[inline]{Bother to count supVars? Erlend, you who's got OpenMP experience,
-what do you think? If so, update/fix footnote 1 and above paragraphs.}
 
 \begin{equation}
 	noMPImem = supVars\footnote{supVars = support Variables. This amount is
