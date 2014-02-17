@@ -26,13 +26,13 @@
 \large{\today}
 \vfill
 \section*{Abstract}
+\end{center}
+
 This report describes a program made to compute the sum of a Hyperharmonic series, through a finite approximation, and comparing said sum to the known convergence of the infinite series.
 
 It covers the serial implementation of an algorithm, and exploitation of parallelization through the OpenMP API and OpenMPI Library, in order to improve the efficiency and speed of the program.
 
 Finally it covers the results from utilizing parallelization, and analyzes the utility of using parallelization to speed up this task.
-
-\end{center}
 
 \addtocounter{chapter}{1}
 
@@ -74,8 +74,8 @@ series is shown.
 \end{equation}
 
 However, this problem set only asks for the sum of a certain subset of
-Hyperharmonic series, when $p = 2$. Below, equation~\ref{eq:HyperSum} shows how
-to calculate the sum of such a Hyperharmonic series.
+Hyperharmonic series, when $p = 2$. Below, equation~\ref{eq:HyperSum} shows the 
+$n$th partial sum expression of Hyperharmonic series.
 
 \begin{equation}
 	S_n = \sum_{i=1}^{n} \frac{1}{i^2}
@@ -96,10 +96,10 @@ $k$ is given as parameter on the form $\{k \in \mathbb{N} : k \in [3, 14]\}$.
 \end{equation}
 
 So, after having detailed that $S = \lim_{n \to \infty}S_n$ in the above
-equation~\ref{eq:HyperActualSum}, we see that its sum converges to $\frac{
-\pi^2}{6}$. It is the difference between this sum and the sum of finite length
-Hyperharmonic series the problem set is interested in, and our program
-calculates both serially and in parallel.
+equation~\ref{eq:HyperActualSum}, we see that its sum converges to $\frac{\pi^2}{6}$. 
+It is the difference between this sum and the $n$th partial sum of Hyperharmonic 
+series the problem set is interested in, and our program calculates both serially 
+and in parallel.
 
 \section{Concurrency Implementation}
 
@@ -152,8 +152,8 @@ by $\textit{MPI\_Reduce()}$).
 
 MPI could also have been used through the use of the $\textit{MPI\_Send()}$
 and/or $\textit{MPI\_Gather()}$ functions. This would have provided more
-detailed controll over the data (location and communication), but this is not
-neccessary for solving this problem and might actually be harmful to efficiency.
+detailed control over the data (location and communication), but this is not
+necessary for solving this problem and might actually be harmful to efficiency.
 This is due to potential added overhead for communication and variable
 assignment. (It is here assumed that the implementation of
 $\textit{MPI\_Reduce()}$ is more efficient than any manual summing and use of
@@ -172,19 +172,19 @@ account, which can all differ according to the runmodes of the program (level of
 parallelism or lack thereof) and circumstance.
 
 Since the problem set specifies the circumstance $n \gg 1$, we will ignore the
-neglegible extra memory needed for OpenMP. This is because a set of threads
+negligible extra memory needed for OpenMP. This is because a set of threads
 managed by OpenMP, specifically performing a summation (as shown in
 subsection~\ref{lst:OpenMP}), will have an insignificant impact on the programs
 memory usage.
 
 Hence, below there are two equations where we detail how we believe the \textit{
-non-neglegible} memory requirement should behave when run in a single process,
+non-negligible} memory requirement should behave when run in a single process,
 or in $P$ processes with input size decided by variable $k$ as a deciding factor
 in either case.
 
 \begin{equation}
 	noMPImem = supVars\footnote{supVars = support Variables. This amount is
-static, and very neglegible compared to the sum describing the size of the
+static, and very negligible compared to the sum describing the size of the
 vector.} + \sum_{i=1}^{2^k}
 sizeof(double)
 	\label{eq:noMPI-Mem}
@@ -197,7 +197,7 @@ program is run on concurrently though MPI.} \cdot supVars + P \cdot
 	\label{eq:MPI-Mem}
 \end{equation}
 
-As detailed above in equation~\ref{eq:MPI-Mem} (parallell circumstance), you can
+As detailed above in equation~\ref{eq:MPI-Mem} (parallel circumstance), you can
 see that the memory requirement ``noMPImem'' detailed in
 equation~\ref{eq:noMPI-Mem} (serial circumstance), will always be present.
 However, the sum term in equation~\ref{eq:MPI-Mem} can be thought of as a
@@ -219,7 +219,7 @@ The mathematical operation needed to generate each term of the Hyperharmonic
 series is as follows;
 
 \begin{equation}
-	v_i = \frac{1}{i^2}
+	v_i = \frac{1}{i^2}.
 \end{equation}
 
 Analyzing how many FLOPs are required for generating a term $v_i$, we see that
@@ -241,11 +241,11 @@ series) to be $2^k$ long, and that our MPI implementation should only run on a
 system using $P$ processors where $P$ is a power of 2.
 
 It should be mentioned that the program does some pre-processing serially,
-mandated by the task and by MPI. The initialization is neccessary and
+mandated by the task and by MPI. The initialization is necessary and
 unavoidable, and the generation of the vector would probably not benefit much
 (if at all) by parallelization.
 
-Either way, the neglegible computations involved in the initialization of the
+Either way, the negligible computations involved in the initialization of the
 problem will be negilible compared to the overall  runtime for problem sizes of
 any considerable size\footnote{$n \gg 1$, as  referenced in
 subsection~\ref{subsec:MemReq}.}. This stands equally true for the  initial
@@ -255,12 +255,12 @@ overhead would dominate any gain.
 
 Hence, the summation cost of the double-values in the vector of length $2^k$ can
 always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The
-parallellism is possible due to the fact that all partial sums are completely
+parallelism is possible due to the fact that all partial sums are completely
 independent of each other. \newline
 
 Therefore, we believe that you can safely conclude that within the parameters
 given in this problem set, this problem is very attractive to solve through
-parallell processing.
+parallel processing.
 
 \section{Results}
 
