@@ -49,7 +49,7 @@ KMP_AFFINITY="granularity=fine, compact"
 #	done
 
 #Set this variable to be the path where you expect the compiled program to be after line 39 in this script.
-runFile=debug/ex4
+runFile=release/ex4
 
 for i in $(seq 3 14);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
