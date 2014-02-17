@@ -44,22 +44,21 @@ For the programming belonging to this problem set, see $\textit{ex4.c}$ file in
 the zipped archive attached to this report. This program calculates the
 difference between the sum of a finite Hyperharmonic series and the convergence
 sum for an infinite Hyperharmonic series. This program is able to compute the
-difference between the two in the following scenarioes;
-
-\todo[inline]{Check if it's correct to say ``potentially multiple cores'', or if
-I misunderstood how MPI is implemented on kongull.}
+difference between the two in the following scenarioes listed below in
+table~\ref{tab:RunModes}.
 
 \begin{table}[h]
 	\begin{tabularx}{\linewidth}{c|X|X|}
 			OpenMP/MPI	& OpenMP off & OpenMP on	\\ \hline
-			MPI off		& Using one thread and a single process on a single
-processing core for the program's computations. & Using one process with
-multiple threads on a single processing core for the program's
-computations. \\ \hline
-			MPI on		& Using multiple processes potentially running on
-multiple cores concurrently for the program's computations. & Usiqsub unauthorized request msg=group aclng multiple
-threads in multiple processes running on potentially multiple cores concurrently
-for the program's computations. \\ \hline
+			MPI off		& Using one thread and a single process for running the
+computations serially on one processing core. & Using one process with multiple
+threads on a single processing core for running the computations concurrently
+across the threads. \\ \hline
+			MPI on		& Using multiple processes with a single thread each,
+potentially running on multiple cores concurrently for the program's
+computations. & Using multiple threads in multiple processes running on
+potentially multiple cores concurrently for the program's computations. \\
+\hline
 	\end{tabularx}
 	\caption{Different runmodes for the program in this problem set.}
 	\label{tab:RunModes}
@@ -97,7 +96,8 @@ $k$ is given as parameter on the form $\{k \in \mathbb{N} : k \in [3, 14]\}$.
 	\label{eq:HyperActualSum}
 \end{equation}
 
-So, after having detailed that $S = \lim_{n \to \infty}S_n$ converges to $\frac{
+So, after having detailed that $S = \lim_{n \to \infty}S_n$ in the above
+equation~\ref{eq:HyperActualSum}, we see that its sum converges to $\frac{
 \pi^2}{6}$, and exactly which finite lengths of $n$ the problem set is
 interested in. It is our understanding that this problem set is interested in
 the students developing the abovementioned parallel program to calculate the
