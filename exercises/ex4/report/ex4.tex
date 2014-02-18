@@ -28,19 +28,24 @@
 \section*{Abstract}
 \end{center}
 
-This report describes a program made to compute the sum of a Hyperharmonic series, through a finite approximation, and comparing said sum to the known convergence of the infinite series.
+This report describes a program made to compute the sum of a Hyperharmonic
+series, through a finite approximation, and comparing said sum to the known
+convergence of the infinite series.
 
-It covers the serial implementation of an algorithm, and exploitation of parallelization through the OpenMP API and OpenMPI Library, in order to improve the efficiency and speed of the program.
+It covers the serial implementation of the summation algorithm, and exploitation
+of parallelization through the OpenMP API and the Open MPI Library, in order to
+improve the efficiency and speed of the program.
 
-Finally it covers the results from utilizing parallelization, and analyzes the utility of using parallelization to speed up this task.
+Finally it covers the results from utilizing parallelization, and analyzes the
+utility of using parallelization to speed up this task.
 
 \addtocounter{chapter}{1}
 
 \clearpage
 \section{Introduction}
 
-For the programming belonging to this problem set, see $\textit{ex4.c}$ file in
-the zipped archive attached to this report. This program calculates the
+For the programming code belonging to this problem set, see the $\textit{ex4.c}$
+file in the zipped archive attached to this report. This program calculates the
 difference between the sum of a finite Hyperharmonic series and the convergence
 sum for an infinite Hyperharmonic series. This program is able to compute the
 difference between the two in the following scenarioes listed below in
@@ -65,57 +70,58 @@ potentially multiple cores concurrently for the programs computations. \\
 
 \section{Series $S_n$}
 
-Below, in equation~\ref{eq:HyperSeries}, the form of a~\textit{Hyperharmonic}
-series is shown.
+Below (in equation~\ref{eq:HyperSeries}), the form of a~\textit{Hyperharmonic}
+series is shown as
 
 \begin{equation}
-	\sum_{i=1}^{\infty} \frac{1}{i^p}
+	\sum_{i=1}^{\infty} \frac{1}{i^p}.
 	\label{eq:HyperSeries}
 \end{equation}
 
 However, this problem set only asks for the sum of a certain subset of
-Hyperharmonic series, when $p = 2$. Below, equation~\ref{eq:HyperSum} shows the 
-$n$th partial sum expression of Hyperharmonic series.
+Hyperharmonic series, when $p = 2$. Below (in equation~\ref{eq:HyperSum}), the
+$n$th partial sum follows the form
 
 \begin{equation}
-	S_n = \sum_{i=1}^{n} \frac{1}{i^2}
+	S_n = \sum_{i=1}^{n} \frac{1}{i^2}.
 	\label{eq:HyperSum}
 \end{equation}
 
 This problem set asks for a program that can calculate the sum of Hyperharmonic
-series of the form shown in equation~\ref{eq:HyperSeries}, of finite length $n$.
+series of the form shown in equation~\ref{eq:HyperSeries}, of finite length $n$
+as shown in equation~\ref{eq:HyperSum}.
 
 Since the problem set wants us to develop a program which can concurrently
 calculate this sum in parallel on $P = 2^m$ discrete processors, this problem
 set also specifies that $n$ should follow certain conditions; $n = 2^k$, where
 $k$ is given as parameter on the form $\{k \in \mathbb{N} : k \in [3, 14]\}$.
 
+The sum the problem set wants us to find the difference from, is
+
 \begin{equation}
-	\frac{\pi^2}{6} = \lim_{n \to \infty}S_n = \sum_{i=1}^{\infty} \frac{1}{i^2}
+	\frac{\pi^2}{6} = \lim_{n \to \infty}S_n = \sum_{i=1}^{\infty} \frac{1}{i^2}.
 	\label{eq:HyperActualSum}
 \end{equation}
 
-So, after having detailed that $S = \lim_{n \to \infty}S_n$ in the above
-equation~\ref{eq:HyperActualSum}, we see that its sum converges to $\frac{\pi^2}{6}$. 
-It is the difference between this sum and the $n$th partial sum of Hyperharmonic 
-series the problem set is interested in, and our program calculates both serially 
-and in parallel.
+It is the difference between this sum and the $n$th partial sum of Hyperharmonic
+series the problem set is interested in, and our program can calculate both
+serially and in parallel.
 
 \section{Concurrency Implementation}
 
 The program was developed in iterations. The first iteration ran on a single
-thread in a single process on a single processor core, in a non-concurrent
-sequential fashion. The second iteration introduced running the program as
-mentioned in the top-right cell of table~\ref{tab:RunModes}. This was enabled by
-putting the following line into our \textit{ex4.c} file.
+thread in a single process, in a non-concurrent sequential fashion. The second
+iteration introduced running the program as mentioned in the top-right cell of
+table~\ref{tab:RunModes}. This was enabled by putting the following line into
+our \textit{ex4.c} file.
 
 \lstinputlisting[firstline=18,lastline=18,firstnumber=18,label=lst:OpenMP]{
 ../ex4.c}
 
 The third iteration focused on enabling the program to run in the runmode
-corresponding to the bottom-right cell of table~\ref{tab:RunModes}.
-Since OpenMP is enabled through the use of pragmas, making the code run with MPI
-was then only a matter of choosing the right compiler and compilation switches.
+corresponding to the bottom-right cell of table~\ref{tab:RunModes}. Since OpenMP
+is enabled through the use of pragmas, making the code run with MPI alone is
+then only a matter of choosing the right compiler and compilation switches.
 Hence, in effect the third iteration only focused on implementing MPI into the
 program.
 
@@ -130,7 +136,7 @@ MPI. Likewise there are multiple alternatives for $\textit{MPI\_Gather()}$ and
 $\textit{MPI\_Reduce()}$, but you only need one of the alternatives to receive
 data from the other processes used by MPI.
 
-In our solution, implemented in the attached code, we utilized the following MPI
+In our solution, found in the attached code, we utilized the following MPI
 functions:
 
 \begin{itemize}
@@ -147,17 +153,16 @@ These function calls are considered more convenient considering the purpose of
 this problem set. This due to the fact that the problem is relatively simple,
 and easy to load-balance. Hence, no complicated send/receive inter-communication
 between the processes is needed to coordinate the concurrency. All the summing
-is done independently of any other summing (besides the final summing performed
-by $\textit{MPI\_Reduce()}$).
+is done independently of any other sum (besides the final summation performed by
+$\textit{MPI\_Reduce()}$).
 
-MPI could also have been used through the use of the $\textit{MPI\_Send()}$
+MPI could also have been utilized through the use of the $\textit{MPI\_Send()}$
 and/or $\textit{MPI\_Gather()}$ functions. This would have provided more
-detailed control over the data (location and communication), but this is not
-necessary for solving this problem and might actually be harmful to efficiency.
-This is due to potential added overhead for communication and variable
-assignment. (It is here assumed that the implementation of
-$\textit{MPI\_Reduce()}$ is more efficient than any manual summing and use of
-Send/Gather would be).
+detailed control over the data (-location and -communication), but this is not
+necessary for solving this problem. And might in fact harm the efficiency. This
+is due to potential added overhead for communication and variable assignment.
+(This assumes that the library implementation of $\textit{MPI\_Reduce()}$ is
+more efficient than any manual summing through the use of Send/Gather would be).
 
 \section{Program Load}
 
@@ -210,8 +215,8 @@ processes.
 The computational load (mathematical complexity) of our program can be given as
 the amount of \textit{\textbf{Fl}oating-point \textbf{Op}erations} (FLOPs) it
 needs to complete for a given input. Since this program computes the sum of a
-Hyperharmonic finite series, below we detail the math behind the programs
-computations.
+Hyperharmonic finite series, below we detail the math describing the amount of
+FLOPs behind the programs computations.
 
 The mathematical operation needed to generate each term of the Hyperharmonic
 series is as follows;
@@ -223,38 +228,57 @@ series is as follows;
 Analyzing how many FLOPs are required for generating a term $v_i$, we see that
 it requires a multiplication ($i\cdot i = i^2 = X$) and a division
 ($\frac{1}{X}$). A total of 2 FLOPs. So to generate a Hyperharmonic series of
-$n$ terms, requires $2n$ FLOPs. Below we detail the formula used in the program
-for this problem set when calculating the sum of our finite length Hyperharmonic
-series.
+$n$ terms, requires $2n$ FLOPs. In equation~\ref{eq:HyperSum} the formula the
+program used for calculating the sum of the finite length Hyperharmonic series
+is detailed.
 
-The total amount of FLOPs needed for computing (\ref{eq:HyperSum}) will then be
-$2n + n = 3n$. Thus, as we have used $k$ to define $n=2^k$ the computational
-cost of our program can be described as; $2^k\cdot 3$ FLOPs.
+The total amount of FLOPs needed for computing a Hyperharmonic series of length
+$n$ will then be $2n + n = 3n$. Thus, as we have used $k$ to define the length
+of $n$, $n=2^k$, the computational cost of our program can be described as;
+$2^k\cdot 3$ FLOPs.
 
 \subsection{Load-balancing}
 
-The program developed is very well load-balanced for this problem set. The
-problem set specifies the length of the vectors (representing the Hyperharmonic
-series) to be $2^k$ long, and that our MPI implementation should only run on a
-system using $P$ processors where $P$ is a power of 2.
+The program developed is very well load-balanced for this specific problem set.
+The problem set specifies the length of the vectors (representing the
+Hyperharmonic series) to be $2^k$ long, and that our MPI implementation should
+only run on a system using $P$ processors where $P$ is a power of 2.
 
 It should be mentioned that the program does some pre-processing serially,
 mandated by the task and by MPI. The initialization is necessary and
 unavoidable, and the generation of the vector would probably not benefit much
-(if at all) by parallelization.
+(if at all) by parallelization, as the current implementation of the program stands.
 
-Either way, the negligible computations involved in the initialization of the
-problem will be negilible compared to the overall  runtime for problem sizes of
-any considerable size\footnote{$n \gg 1$, as  referenced in
-subsection~\ref{subsec:MemReq}.}. This stands equally true for the  initial
+However, if the problem set did not specify that rank 0 has to generate the
+vector representing the Hyperharmonic series, there is both time and space to be
+saved if each rank generated and  summed each its own parts of the vector. Since
+that is not the case, and it is mandatory in this problem set for rank 0 to
+generate the vector, the potential gain in both memory space would be
+
+\begin{equation}
+	mem\_req = \frac {current\_mem\_req}{2}.
+	\label{eq:mem-req}
+\end{equation}
+
+And the gain in processing time would be
+
+\begin{equation}
+	time\_spent\_generating\_vector = \frac
+{original\_time\_spent\_generating\_vector}{max(rank)+1}.
+	\label{eq:time-req}
+\end{equation}
+
+Either way, the computations involved in the initialization of the
+problem will be insignificant compared to the overall runtime for problem sizes
+of any considerable size\footnote{$n \gg 1$, as referenced in
+subsection~\ref{subsec:MemReq}.}. This stands equally true for the initial
 generation of the vector representing the Hyperharmonic series of the problem
-set. In any attempt at parallelizing the vector generation, the  necessary
-overhead would dominate any gain.
+set.
 
 Hence, the summation cost of the double-values in the vector of length $2^k$ can
 always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The
 parallelism is possible due to the fact that all partial sums are completely
-independent of each other. \newline
+independent of each other.
 
 Therefore, we believe that you can safely conclude that within the parameters
 given in this problem set, this problem is very attractive to solve through
@@ -281,5 +305,7 @@ The local testing showed that this had a larger impact on performance than OpenM
 
 \subsection{MPI + OpenMP implementation}
 The plot showed that a combination of the two parallelization techniques shows the best improvement  
+
+\subsection{Combined implementation}
 
 \end{document}

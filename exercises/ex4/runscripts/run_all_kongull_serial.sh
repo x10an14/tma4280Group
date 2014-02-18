@@ -12,5 +12,7 @@ chmod +x ex4
 
 cd ../runscripts/serial/
 chmod +x kongull_serial_job.sh
-qsub kongull_serial_job.sh
+
+mkdir 1n1ppn -p && cd 1n1ppn
+qsub ../kongull_serial_job.sh
 

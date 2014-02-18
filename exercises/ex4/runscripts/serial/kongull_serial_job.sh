@@ -16,7 +16,7 @@ KMP_AFFINITY="granularity=fine, compact"
 
 for j in $(seq 1 2);
 do
-	for i in $(seq 3 28);
+	for i in $(seq 3 25);
 		do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 			echo 'k: '$i
 			../../../release_serial/ex4 $i
