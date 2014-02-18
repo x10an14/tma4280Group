@@ -1,0 +1,299 @@
+k: 3
+[compute-0-32:30479] *** Process received signal ***
+[compute-0-32:30479] Signal: Segmentation fault (11)
+[compute-0-32:30479] Signal code: Address not mapped (1)
+[compute-0-32:30479] Failing at address: (nil)
+[compute-0-32:30479] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:30479] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:30479] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:30479] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:30479] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 30479 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 4
+[compute-0-32:30502] *** Process received signal ***
+[compute-0-32:30502] Signal: Segmentation fault (11)
+[compute-0-32:30502] Signal code: Address not mapped (1)
+[compute-0-32:30502] Failing at address: (nil)
+[compute-0-32:30502] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:30502] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:30502] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:30502] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:30502] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 30502 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 5
+[compute-0-32:30535] *** Process received signal ***
+[compute-0-32:30535] Signal: Segmentation fault (11)
+[compute-0-32:30535] Signal code: Address not mapped (1)
+[compute-0-32:30535] Failing at address: (nil)
+[compute-0-32:30535] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:30535] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:30535] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:30535] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:30535] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 30535 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 6
+[compute-0-32:30559] *** Process received signal ***
+[compute-0-32:30559] Signal: Segmentation fault (11)
+[compute-0-32:30559] Signal code: Address not mapped (1)
+[compute-0-32:30559] Failing at address: (nil)
+[compute-0-32:30559] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:30559] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:30559] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:30559] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:30559] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 30559 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 7
+[compute-0-32:30806] *** Process received signal ***
+[compute-0-32:30806] Signal: Segmentation fault (11)
+[compute-0-32:30806] Signal code: Address not mapped (1)
+[compute-0-32:30806] Failing at address: (nil)
+[compute-0-32:30806] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:30806] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:30806] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:30806] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:30806] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 30806 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 8
+[compute-0-32:30846] *** Process received signal ***
+[compute-0-32:30846] Signal: Segmentation fault (11)
+[compute-0-32:30846] Signal code: Address not mapped (1)
+[compute-0-32:30846] Failing at address: (nil)
+[compute-0-32:30846] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:30846] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:30846] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:30846] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:30846] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 30846 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 9
+[compute-0-32:30896] *** Process received signal ***
+[compute-0-32:30896] Signal: Segmentation fault (11)
+[compute-0-32:30896] Signal code: Address not mapped (1)
+[compute-0-32:30896] Failing at address: (nil)
+[compute-0-32:30896] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:30896] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:30896] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:30896] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:30896] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 30896 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 10
+[compute-0-32:31179] *** Process received signal ***
+[compute-0-32:31179] Signal: Segmentation fault (11)
+[compute-0-32:31179] Signal code: Address not mapped (1)
+[compute-0-32:31179] Failing at address: (nil)
+[compute-0-32:31179] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31179] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31179] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31179] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31179] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31179 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 11
+[compute-0-32:31207] *** Process received signal ***
+[compute-0-32:31207] Signal: Segmentation fault (11)
+[compute-0-32:31207] Signal code: Address not mapped (1)
+[compute-0-32:31207] Failing at address: (nil)
+[compute-0-32:31207] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31207] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31207] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31207] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31207] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31207 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 12
+[compute-0-32:31237] *** Process received signal ***
+[compute-0-32:31237] Signal: Segmentation fault (11)
+[compute-0-32:31237] Signal code: Address not mapped (1)
+[compute-0-32:31237] Failing at address: (nil)
+[compute-0-32:31237] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31237] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31237] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31237] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31237] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31237 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 13
+[compute-0-32:31279] *** Process received signal ***
+[compute-0-32:31279] Signal: Segmentation fault (11)
+[compute-0-32:31279] Signal code: Address not mapped (1)
+[compute-0-32:31279] Failing at address: (nil)
+[compute-0-32:31279] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31279] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31279] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31279] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31279] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31279 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 14
+[compute-0-32:31322] *** Process received signal ***
+[compute-0-32:31322] Signal: Segmentation fault (11)
+[compute-0-32:31322] Signal code: Address not mapped (1)
+[compute-0-32:31322] Failing at address: (nil)
+[compute-0-32:31322] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31322] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31322] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31322] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31322] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31322 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 15
+[compute-0-32:31474] *** Process received signal ***
+[compute-0-32:31474] Signal: Segmentation fault (11)
+[compute-0-32:31474] Signal code: Address not mapped (1)
+[compute-0-32:31474] Failing at address: (nil)
+[compute-0-32:31474] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31474] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31474] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31474] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31474] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31474 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 16
+[compute-0-32:31506] *** Process received signal ***
+[compute-0-32:31506] Signal: Segmentation fault (11)
+[compute-0-32:31506] Signal code: Address not mapped (1)
+[compute-0-32:31506] Failing at address: (nil)
+[compute-0-32:31506] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31506] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31506] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31506] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31506] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31506 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 17
+[compute-0-32:31530] *** Process received signal ***
+[compute-0-32:31530] Signal: Segmentation fault (11)
+[compute-0-32:31530] Signal code: Address not mapped (1)
+[compute-0-32:31530] Failing at address: (nil)
+[compute-0-32:31530] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31530] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31530] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31530] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31530] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31530 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 18
+[compute-0-32:31555] *** Process received signal ***
+[compute-0-32:31555] Signal: Segmentation fault (11)
+[compute-0-32:31555] Signal code: Address not mapped (1)
+[compute-0-32:31555] Failing at address: (nil)
+[compute-0-32:31555] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31555] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31555] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31555] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31555] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31555 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 19
+[compute-0-32:31674] *** Process received signal ***
+[compute-0-32:31674] Signal: Segmentation fault (11)
+[compute-0-32:31674] Signal code: Address not mapped (1)
+[compute-0-32:31674] Failing at address: (nil)
+[compute-0-32:31674] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31674] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31674] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31674] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31674] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31674 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 20
+[compute-0-32:31695] *** Process received signal ***
+[compute-0-32:31695] Signal: Segmentation fault (11)
+[compute-0-32:31695] Signal code: Address not mapped (1)
+[compute-0-32:31695] Failing at address: (nil)
+[compute-0-32:31695] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31695] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31695] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31695] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31695] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31695 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 21
+[compute-0-32:31711] *** Process received signal ***
+[compute-0-32:31711] Signal: Segmentation fault (11)
+[compute-0-32:31711] Signal code: Address not mapped (1)
+[compute-0-32:31711] Failing at address: (nil)
+[compute-0-32:31711] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31711] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31711] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31711] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31711] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31711 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 22
+[compute-0-32:31756] *** Process received signal ***
+[compute-0-32:31756] Signal: Segmentation fault (11)
+[compute-0-32:31756] Signal code: Address not mapped (1)
+[compute-0-32:31756] Failing at address: (nil)
+[compute-0-32:31756] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31756] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31756] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31756] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31756] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31756 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 23
+[compute-0-32:31936] *** Process received signal ***
+[compute-0-32:31936] Signal: Segmentation fault (11)
+[compute-0-32:31936] Signal code: Address not mapped (1)
+[compute-0-32:31936] Failing at address: (nil)
+[compute-0-32:31936] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:31936] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:31936] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:31936] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:31936] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 31936 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 24
+[compute-0-32:32013] *** Process received signal ***
+[compute-0-32:32013] Signal: Segmentation fault (11)
+[compute-0-32:32013] Signal code: Address not mapped (1)
+[compute-0-32:32013] Failing at address: (nil)
+[compute-0-32:32013] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:32013] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:32013] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:32013] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:32013] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 32013 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 25
+[compute-0-32:32194] *** Process received signal ***
+[compute-0-32:32194] Signal: Segmentation fault (11)
+[compute-0-32:32194] Signal code: Address not mapped (1)
+[compute-0-32:32194] Failing at address: (nil)
+[compute-0-32:32194] [ 0] /lib64/libpthread.so.0 [0x30c340ebe0]
+[compute-0-32:32194] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-0-32:32194] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30c2c1d994]
+[compute-0-32:32194] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-0-32:32194] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 32194 on node compute-0-32.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
