@@ -1,6 +1,6 @@
 cd /home/$USER/tma4280Group/exercises/ex4/runscripts/
 #Create CMAKE sub-folder
-mkdir r../elease_openmp -p
+mkdir ../release_openmp -p
 
 #Delete whatever was there before
 rm -rf ../release_openmp/*

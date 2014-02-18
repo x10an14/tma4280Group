@@ -20,7 +20,7 @@ chmod +x 2n2ppn.sh
 chmod +x 2n4ppn.sh
 chmod +x 2n8ppn.sh
 
-mkdir 1n1ppn -p && cd 1n1ppn/
+mkdir 1n1ppn -p && cd 1n1ppn
 qsub ../1n1ppn.sh
 
 mkdir ../1n2ppn -p && cd ../1n2ppn
