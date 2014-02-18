@@ -1,0 +1,1415 @@
+Warning: Permanently added 'compute-2-14' (RSA) to the list of known hosts.
+k: 8
+[compute-2-14:09625] *** Process received signal ***
+[compute-2-14:09624] *** Process received signal ***
+[compute-2-14:09624] Signal: Segmentation fault (11)
+[compute-2-14:09624] Signal code: Address not mapped (1)
+[compute-2-14:09624] Failing at address: (nil)
+[compute-2-14:09625] Signal: Segmentation fault (11)
+[compute-2-14:09625] Signal code: Address not mapped (1)
+[compute-2-14:09625] Failing at address: (nil)
+[compute-2-14:09621] *** Process received signal ***
+[compute-2-14:09621] Signal: Segmentation fault (11)
+[compute-2-14:09621] Signal code: Address not mapped (1)
+[compute-2-14:09621] Failing at address: (nil)
+[compute-2-14:09623] *** Process received signal ***
+[compute-2-14:09623] Signal: Segmentation fault (11)
+[compute-2-14:09623] Signal code: Address not mapped (1)
+[compute-2-14:09623] Failing at address: (nil)
+[compute-2-14:09626] *** Process received signal ***
+[compute-2-14:09626] Signal: Segmentation fault (11)
+[compute-2-14:09626] Signal code: Address not mapped (1)
+[compute-2-14:09626] Failing at address: (nil)
+[compute-2-14:09622] *** Process received signal ***
+[compute-2-14:09622] Signal: Segmentation fault (11)
+[compute-2-14:09622] Signal code: Address not mapped (1)
+[compute-2-14:09622] Failing at address: (nil)
+[compute-2-14:09625] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09625] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09625] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09625] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09625] *** End of error message ***
+[compute-2-14:09626] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09626] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09626] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09626] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09626] *** End of error message ***
+[compute-2-14:09623] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09627] *** Process received signal ***
+[compute-2-14:09627] Signal: Segmentation fault (11)
+[compute-2-14:09627] Signal code: Address not mapped (1)
+[compute-2-14:09627] Failing at address: (nil)
+[compute-2-14:09621] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09621] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09621] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09621] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09621] *** End of error message ***
+[compute-2-14:09624] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09624] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09624] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09624] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09624] *** End of error message ***
+[compute-2-14:09622] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09622] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09622] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09622] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09622] *** End of error message ***
+[compute-2-14:09627] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09627] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09627] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09627] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09627] *** End of error message ***
+[compute-2-14:09623] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09623] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09623] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09623] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 5 with PID 9625 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+3 total processes killed (some possibly by mpirun during cleanup)
+k: 9
+[compute-2-14:09670] *** Process received signal ***
+[compute-2-14:09670] Signal: Segmentation fault (11)
+[compute-2-14:09670] Signal code: Address not mapped (1)
+[compute-2-14:09670] Failing at address: (nil)
+[compute-2-14:09665] *** Process received signal ***
+[compute-2-14:09665] Signal: Segmentation fault (11)
+[compute-2-14:09665] Signal code: Address not mapped (1)
+[compute-2-14:09665] Failing at address: (nil)
+[compute-2-14:09664] *** Process received signal ***
+[compute-2-14:09664] Signal: Segmentation fault (11)
+[compute-2-14:09664] Signal code: Address not mapped (1)
+[compute-2-14:09664] Failing at address: (nil)
+[compute-2-14:09666] *** Process received signal ***
+[compute-2-14:09666] Signal: Segmentation fault (11)
+[compute-2-14:09666] Signal code: Address not mapped (1)
+[compute-2-14:09666] Failing at address: (nil)
+[compute-2-14:09667] *** Process received signal ***
+[compute-2-14:09667] Signal: Segmentation fault (11)
+[compute-2-14:09667] Signal code: Address not mapped (1)
+[compute-2-14:09667] Failing at address: (nil)
+[compute-2-14:09668] *** Process received signal ***
+[compute-2-14:09668] Signal: Segmentation fault (11)
+[compute-2-14:09668] Signal code: Address not mapped (1)
+[compute-2-14:09668] Failing at address: (nil)
+[compute-2-14:09669] *** Process received signal ***
+[compute-2-14:09669] Signal: Segmentation fault (11)
+[compute-2-14:09669] Signal code: Address not mapped (1)
+[compute-2-14:09669] Failing at address: (nil)
+[compute-2-14:09665] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09665] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09665] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09665] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09665] *** End of error message ***
+[compute-2-14:09670] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09670] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09670] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09670] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09670] *** End of error message ***
+[compute-2-14:09664] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09664] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09664] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09664] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09664] *** End of error message ***
+[compute-2-14:09667] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09667] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09667] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09667] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09667] *** End of error message ***
+[compute-2-14:09666] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09666] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09666] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09666] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09666] *** End of error message ***
+[compute-2-14:09668] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09668] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09668] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09668] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09668] *** End of error message ***
+[compute-2-14:09669] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09669] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09669] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09669] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09669] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 9665 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+6 total processes killed (some possibly by mpirun during cleanup)
+k: 10
+[compute-2-14:09711] *** Process received signal ***
+[compute-2-14:09711] Signal: Segmentation fault (11)
+[compute-2-14:09711] Signal code: Address not mapped (1)
+[compute-2-14:09711] Failing at address: (nil)
+[compute-2-14:09707] *** Process received signal ***
+[compute-2-14:09713] *** Process received signal ***
+[compute-2-14:09707] Signal: Segmentation fault (11)
+[compute-2-14:09707] Signal code: Address not mapped (1)
+[compute-2-14:09707] Failing at address: (nil)
+[compute-2-14:09710] *** Process received signal ***
+[compute-2-14:09708] *** Process received signal ***
+[compute-2-14:09712] *** Process received signal ***
+[compute-2-14:09713] Signal: Segmentation fault (11)
+[compute-2-14:09713] Signal code: Address not mapped (1)
+[compute-2-14:09713] Failing at address: (nil)
+[compute-2-14:09710] Signal: Segmentation fault (11)
+[compute-2-14:09710] Signal code: Address not mapped (1)
+[compute-2-14:09710] Failing at address: (nil)
+[compute-2-14:09708] Signal: Segmentation fault (11)
+[compute-2-14:09708] Signal code: Address not mapped (1)
+[compute-2-14:09708] Failing at address: (nil)
+[compute-2-14:09712] Signal: Segmentation fault (11)
+[compute-2-14:09712] Signal code: Address not mapped (1)
+[compute-2-14:09712] Failing at address: (nil)
+[compute-2-14:09709] *** Process received signal ***
+[compute-2-14:09711] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09711] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09711] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09711] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09711] *** End of error message ***
+[compute-2-14:09713] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09712] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09712] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09712] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09712] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09712] *** End of error message ***
+[compute-2-14:09708] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09708] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09708] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09708] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09708] *** End of error message ***
+[compute-2-14:09709] Signal: Segmentation fault (11)
+[compute-2-14:09709] Signal code: Address not mapped (1)
+[compute-2-14:09709] Failing at address: (nil)
+[compute-2-14:09707] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09707] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09707] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09707] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09707] *** End of error message ***
+[compute-2-14:09710] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09710] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09710] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09710] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09710] *** End of error message ***
+[compute-2-14:09713] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09713] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09713] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09713] *** End of error message ***
+[compute-2-14:09709] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09709] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09709] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09709] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09709] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 9708 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+2 total processes killed (some possibly by mpirun during cleanup)
+k: 11
+[compute-2-14:09752] *** Process received signal ***
+[compute-2-14:09752] Signal: Segmentation fault (11)
+[compute-2-14:09752] Signal code: Address not mapped (1)
+[compute-2-14:09752] Failing at address: (nil)
+[compute-2-14:09753] *** Process received signal ***
+[compute-2-14:09750] *** Process received signal ***
+[compute-2-14:09756] *** Process received signal ***
+[compute-2-14:09753] Signal: Segmentation fault (11)
+[compute-2-14:09753] Signal code: Address not mapped (1)
+[compute-2-14:09753] Failing at address: (nil)
+[compute-2-14:09751] *** Process received signal ***
+[compute-2-14:09755] *** Process received signal ***
+[compute-2-14:09755] Signal: Segmentation fault (11)
+[compute-2-14:09755] Signal code: Address not mapped (1)
+[compute-2-14:09755] Failing at address: (nil)
+[compute-2-14:09756] Signal: Segmentation fault (11)
+[compute-2-14:09756] Signal code: Address not mapped (1)
+[compute-2-14:09756] Failing at address: (nil)
+[compute-2-14:09754] *** Process received signal ***
+[compute-2-14:09750] Signal: Segmentation fault (11)
+[compute-2-14:09750] Signal code: Address not mapped (1)
+[compute-2-14:09750] Failing at address: (nil)
+[compute-2-14:09751] Signal: Segmentation fault (11)
+[compute-2-14:09751] Signal code: Address not mapped (1)
+[compute-2-14:09751] Failing at address: (nil)
+[compute-2-14:09754] Signal: Segmentation fault (11)
+[compute-2-14:09754] Signal code: Address not mapped (1)
+[compute-2-14:09754] Failing at address: (nil)
+[compute-2-14:09752] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09752] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09752] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09752] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09752] *** End of error message ***
+[compute-2-14:09753] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09753] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09753] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09753] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09753] *** End of error message ***
+[compute-2-14:09756] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09756] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09756] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09756] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09756] *** End of error message ***
+[compute-2-14:09751] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09751] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09751] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09751] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09751] *** End of error message ***
+[compute-2-14:09750] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09750] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09750] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09750] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09750] *** End of error message ***
+[compute-2-14:09754] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09754] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09754] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09754] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09754] *** End of error message ***
+[compute-2-14:09755] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09755] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09755] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09755] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09755] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 9752 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 12
+[compute-2-14:09795] *** Process received signal ***
+[compute-2-14:09795] Signal: Segmentation fault (11)
+[compute-2-14:09795] Signal code: Address not mapped (1)
+[compute-2-14:09795] Failing at address: (nil)
+[compute-2-14:09793] *** Process received signal ***
+[compute-2-14:09796] *** Process received signal ***
+[compute-2-14:09796] Signal: Segmentation fault (11)
+[compute-2-14:09796] Signal code: Address not mapped (1)
+[compute-2-14:09796] Failing at address: (nil)
+[compute-2-14:09793] Signal: Segmentation fault (11)
+[compute-2-14:09793] Signal code: Address not mapped (1)
+[compute-2-14:09793] Failing at address: (nil)
+[compute-2-14:09798] *** Process received signal ***
+[compute-2-14:09798] Signal: Segmentation fault (11)
+[compute-2-14:09798] Signal code: Address not mapped (1)
+[compute-2-14:09798] Failing at address: (nil)
+[compute-2-14:09794] *** Process received signal ***
+[compute-2-14:09797] *** Process received signal ***
+[compute-2-14:09794] Signal: Segmentation fault (11)
+[compute-2-14:09794] Signal code: Address not mapped (1)
+[compute-2-14:09794] Failing at address: (nil)
+[compute-2-14:09799] *** Process received signal ***
+[compute-2-14:09797] Signal: Segmentation fault (11)
+[compute-2-14:09797] Signal code: Address not mapped (1)
+[compute-2-14:09797] Failing at address: (nil)
+[compute-2-14:09799] Signal: Segmentation fault (11)
+[compute-2-14:09799] Signal code: Address not mapped (1)
+[compute-2-14:09799] Failing at address: (nil)
+[compute-2-14:09795] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09795] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09795] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09795] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09795] *** End of error message ***
+[compute-2-14:09796] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09793] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09793] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09793] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09793] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09793] *** End of error message ***
+[compute-2-14:09798] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09798] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09798] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09798] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09798] *** End of error message ***
+[compute-2-14:09794] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09794] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09794] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09794] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09794] *** End of error message ***
+[compute-2-14:09797] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09797] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09797] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09797] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09797] *** End of error message ***
+[compute-2-14:09796] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09796] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09796] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09796] *** End of error message ***
+[compute-2-14:09799] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09799] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09799] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09799] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09799] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 9795 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 13
+[compute-2-14:09842] *** Process received signal ***
+[compute-2-14:09842] Signal: Segmentation fault (11)
+[compute-2-14:09842] Signal code: Address not mapped (1)
+[compute-2-14:09842] Failing at address: (nil)
+[compute-2-14:09837] *** Process received signal ***
+[compute-2-14:09841] *** Process received signal ***
+[compute-2-14:09840] *** Process received signal ***
+[compute-2-14:09837] Signal: Segmentation fault (11)
+[compute-2-14:09837] Signal code: Address not mapped (1)
+[compute-2-14:09837] Failing at address: (nil)
+[compute-2-14:09841] Signal: Segmentation fault (11)
+[compute-2-14:09841] Signal code: Address not mapped (1)
+[compute-2-14:09841] Failing at address: (nil)
+[compute-2-14:09840] Signal: Segmentation fault (11)
+[compute-2-14:09840] Signal code: Address not mapped (1)
+[compute-2-14:09840] Failing at address: (nil)
+[compute-2-14:09836] *** Process received signal ***
+[compute-2-14:09839] *** Process received signal ***
+[compute-2-14:09836] Signal: Segmentation fault (11)
+[compute-2-14:09836] Signal code: Address not mapped (1)
+[compute-2-14:09836] Failing at address: (nil)
+[compute-2-14:09839] Signal: Segmentation fault (11)
+[compute-2-14:09839] Signal code: Address not mapped (1)
+[compute-2-14:09839] Failing at address: (nil)
+[compute-2-14:09842] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09842] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09842] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09842] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09842] *** End of error message ***
+[compute-2-14:09838] *** Process received signal ***
+[compute-2-14:09837] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09837] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09837] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09837] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09837] *** End of error message ***
+[compute-2-14:09841] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09841] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09841] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09841] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09841] *** End of error message ***
+[compute-2-14:09838] Signal: Segmentation fault (11)
+[compute-2-14:09838] Signal code: Address not mapped (1)
+[compute-2-14:09838] Failing at address: (nil)
+[compute-2-14:09840] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09840] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09840] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09840] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09840] *** End of error message ***
+[compute-2-14:09839] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09839] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09839] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09839] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09839] *** End of error message ***
+[compute-2-14:09836] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09836] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09836] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09836] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09836] *** End of error message ***
+[compute-2-14:09838] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09838] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09838] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09838] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09838] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 9837 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+3 total processes killed (some possibly by mpirun during cleanup)
+k: 14
+[compute-2-14:09884] *** Process received signal ***
+[compute-2-14:09884] Signal: Segmentation fault (11)
+[compute-2-14:09884] Signal code: Address not mapped (1)
+[compute-2-14:09884] Failing at address: (nil)
+[compute-2-14:09881] *** Process received signal ***
+[compute-2-14:09881] Signal: Segmentation fault (11)
+[compute-2-14:09881] Signal code: Address not mapped (1)
+[compute-2-14:09881] Failing at address: (nil)
+[compute-2-14:09883] *** Process received signal ***
+[compute-2-14:09883] Signal: Segmentation fault (11)
+[compute-2-14:09883] Signal code: Address not mapped (1)
+[compute-2-14:09883] Failing at address: (nil)
+[compute-2-14:09882] *** Process received signal ***
+[compute-2-14:09882] Signal: Segmentation fault (11)
+[compute-2-14:09882] Signal code: Address not mapped (1)
+[compute-2-14:09882] Failing at address: (nil)
+[compute-2-14:09885] *** Process received signal ***
+[compute-2-14:09879] *** Process received signal ***
+[compute-2-14:09880] *** Process received signal ***
+[compute-2-14:09885] Signal: Segmentation fault (11)
+[compute-2-14:09885] Signal code: Address not mapped (1)
+[compute-2-14:09885] Failing at address: (nil)
+[compute-2-14:09879] Signal: Segmentation fault (11)
+[compute-2-14:09879] Signal code: Address not mapped (1)
+[compute-2-14:09879] Failing at address: (nil)
+[compute-2-14:09880] Signal: Segmentation fault (11)
+[compute-2-14:09880] Signal code: Address not mapped (1)
+[compute-2-14:09880] Failing at address: (nil)
+[compute-2-14:09884] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09884] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09884] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09884] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09884] *** End of error message ***
+[compute-2-14:09881] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09881] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09881] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09881] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09881] *** End of error message ***
+[compute-2-14:09883] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09883] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09883] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09883] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09883] *** End of error message ***
+[compute-2-14:09885] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09885] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09885] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09885] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09885] *** End of error message ***
+[compute-2-14:09880] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09880] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09880] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09880] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09880] *** End of error message ***
+[compute-2-14:09879] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09879] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09879] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09879] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09879] *** End of error message ***
+[compute-2-14:09882] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09882] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09882] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09882] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09882] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 9880 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+6 total processes killed (some possibly by mpirun during cleanup)
+k: 15
+[compute-2-14:09923] *** Process received signal ***
+[compute-2-14:09927] *** Process received signal ***
+[compute-2-14:09927] Signal: Segmentation fault (11)
+[compute-2-14:09927] Signal code: Address not mapped (1)
+[compute-2-14:09927] Failing at address: (nil)
+[compute-2-14:09923] Signal: Segmentation fault (11)
+[compute-2-14:09923] Signal code: Address not mapped (1)
+[compute-2-14:09923] Failing at address: (nil)
+[compute-2-14:09928] *** Process received signal ***
+[compute-2-14:09922] *** Process received signal ***
+[compute-2-14:09924] *** Process received signal ***
+[compute-2-14:09926] *** Process received signal ***
+[compute-2-14:09928] Signal: Segmentation fault (11)
+[compute-2-14:09928] Signal code: Address not mapped (1)
+[compute-2-14:09928] Failing at address: (nil)
+[compute-2-14:09925] *** Process received signal ***
+[compute-2-14:09924] Signal: Segmentation fault (11)
+[compute-2-14:09924] Signal code: Address not mapped (1)
+[compute-2-14:09924] Failing at address: (nil)
+[compute-2-14:09926] Signal: Segmentation fault (11)
+[compute-2-14:09926] Signal code: Address not mapped (1)
+[compute-2-14:09926] Failing at address: (nil)
+[compute-2-14:09922] Signal: Segmentation fault (11)
+[compute-2-14:09922] Signal code: Address not mapped (1)
+[compute-2-14:09922] Failing at address: (nil)
+[compute-2-14:09925] Signal: Segmentation fault (11)
+[compute-2-14:09925] Signal code: Address not mapped (1)
+[compute-2-14:09925] Failing at address: (nil)
+[compute-2-14:09923] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09923] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09923] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09923] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09923] *** End of error message ***
+[compute-2-14:09927] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09927] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09927] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09927] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09927] *** End of error message ***
+[compute-2-14:09928] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09928] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09928] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09928] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09928] *** End of error message ***
+[compute-2-14:09924] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09924] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09924] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09924] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09924] *** End of error message ***
+[compute-2-14:09922] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09922] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09922] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09922] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09922] *** End of error message ***
+[compute-2-14:09925] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09925] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09925] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09925] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09925] *** End of error message ***
+[compute-2-14:09926] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09926] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09926] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09926] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09926] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 9923 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 16
+[compute-2-14:09966] *** Process received signal ***
+[compute-2-14:09966] Signal: Segmentation fault (11)
+[compute-2-14:09966] Signal code: Address not mapped (1)
+[compute-2-14:09966] Failing at address: (nil)
+[compute-2-14:09967] *** Process received signal ***
+[compute-2-14:09967] Signal: Segmentation fault (11)
+[compute-2-14:09967] Signal code: Address not mapped (1)
+[compute-2-14:09967] Failing at address: (nil)
+[compute-2-14:09969] *** Process received signal ***
+[compute-2-14:09969] Signal: Segmentation fault (11)
+[compute-2-14:09969] Signal code: Address not mapped (1)
+[compute-2-14:09969] Failing at address: (nil)
+[compute-2-14:09965] *** Process received signal ***
+[compute-2-14:09965] Signal: Segmentation fault (11)
+[compute-2-14:09965] Signal code: Address not mapped (1)
+[compute-2-14:09965] Failing at address: (nil)
+[compute-2-14:09970] *** Process received signal ***
+[compute-2-14:09970] Signal: Segmentation fault (11)
+[compute-2-14:09970] Signal code: Address not mapped (1)
+[compute-2-14:09970] Failing at address: (nil)
+[compute-2-14:09971] *** Process received signal ***
+[compute-2-14:09971] Signal: Segmentation fault (11)
+[compute-2-14:09971] Signal code: Address not mapped (1)
+[compute-2-14:09971] Failing at address: (nil)
+[compute-2-14:09968] *** Process received signal ***
+[compute-2-14:09966] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09966] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09966] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09966] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09966] *** End of error message ***
+[compute-2-14:09967] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09967] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09967] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09967] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09967] *** End of error message ***
+[compute-2-14:09969] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09969] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09969] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09969] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09969] *** End of error message ***
+[compute-2-14:09968] Signal: Segmentation fault (11)
+[compute-2-14:09968] Signal code: Address not mapped (1)
+[compute-2-14:09968] Failing at address: (nil)
+[compute-2-14:09968] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09968] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09968] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09968] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09968] *** End of error message ***
+[compute-2-14:09971] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09971] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09971] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09971] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09971] *** End of error message ***
+[compute-2-14:09965] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09965] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09965] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09965] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09965] *** End of error message ***
+[compute-2-14:09970] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:09970] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:09970] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:09970] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:09970] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 9966 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 17
+[compute-2-14:10013] *** Process received signal ***
+[compute-2-14:10013] Signal: Segmentation fault (11)
+[compute-2-14:10013] Signal code: Address not mapped (1)
+[compute-2-14:10013] Failing at address: (nil)
+[compute-2-14:10009] *** Process received signal ***
+[compute-2-14:10009] Signal: Segmentation fault (11)
+[compute-2-14:10009] Signal code: Address not mapped (1)
+[compute-2-14:10009] Failing at address: (nil)
+[compute-2-14:10011] *** Process received signal ***
+[compute-2-14:10014] *** Process received signal ***
+[compute-2-14:10008] *** Process received signal ***
+[compute-2-14:10010] *** Process received signal ***
+[compute-2-14:10010] Signal: Segmentation fault (11)
+[compute-2-14:10010] Signal code: Address not mapped (1)
+[compute-2-14:10010] Failing at address: (nil)
+[compute-2-14:10011] Signal: Segmentation fault (11)
+[compute-2-14:10011] Signal code: Address not mapped (1)
+[compute-2-14:10011] Failing at address: (nil)
+[compute-2-14:10014] Signal: Segmentation fault (11)
+[compute-2-14:10014] Signal code: Address not mapped (1)
+[compute-2-14:10014] Failing at address: (nil)
+[compute-2-14:10008] Signal: Segmentation fault (11)
+[compute-2-14:10008] Signal code: Address not mapped (1)
+[compute-2-14:10008] Failing at address: (nil)
+[compute-2-14:10012] *** Process received signal ***
+[compute-2-14:10012] Signal: Segmentation fault (11)
+[compute-2-14:10012] Signal code: Address not mapped (1)
+[compute-2-14:10012] Failing at address: (nil)
+[compute-2-14:10013] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10013] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10013] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10013] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10013] *** End of error message ***
+[compute-2-14:10009] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10009] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10009] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10009] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10009] *** End of error message ***
+[compute-2-14:10011] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10011] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10011] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10011] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10011] *** End of error message ***
+[compute-2-14:10008] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10008] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10008] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10008] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10008] *** End of error message ***
+[compute-2-14:10010] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10010] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10010] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10010] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10010] *** End of error message ***
+[compute-2-14:10014] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10014] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10014] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10014] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10014] *** End of error message ***
+[compute-2-14:10012] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10012] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10012] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10012] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10012] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 10009 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 18
+[compute-2-14:10052] *** Process received signal ***
+[compute-2-14:10052] Signal: Segmentation fault (11)
+[compute-2-14:10052] Signal code: Address not mapped (1)
+[compute-2-14:10052] Failing at address: (nil)
+[compute-2-14:10051] *** Process received signal ***
+[compute-2-14:10051] Signal: Segmentation fault (11)
+[compute-2-14:10051] Signal code: Address not mapped (1)
+[compute-2-14:10051] Failing at address: (nil)
+[compute-2-14:10051] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10051] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10051] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10051] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10051] *** End of error message ***
+[compute-2-14:10053] *** Process received signal ***
+[compute-2-14:10053] Signal: Segmentation fault (11)
+[compute-2-14:10053] Signal code: Address not mapped (1)
+[compute-2-14:10053] Failing at address: (nil)
+[compute-2-14:10053] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10053] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10053] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10053] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10053] *** End of error message ***
+[compute-2-14:10054] *** Process received signal ***
+[compute-2-14:10054] Signal: Segmentation fault (11)
+[compute-2-14:10054] Signal code: Address not mapped (1)
+[compute-2-14:10054] Failing at address: (nil)
+[compute-2-14:10054] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10054] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10054] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10054] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10054] *** End of error message ***
+[compute-2-14:10055] *** Process received signal ***
+[compute-2-14:10055] Signal: Segmentation fault (11)
+[compute-2-14:10055] Signal code: Address not mapped (1)
+[compute-2-14:10055] Failing at address: (nil)
+[compute-2-14:10055] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10055] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10055] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10055] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10055] *** End of error message ***
+[compute-2-14:10056] *** Process received signal ***
+[compute-2-14:10056] Signal: Segmentation fault (11)
+[compute-2-14:10056] Signal code: Address not mapped (1)
+[compute-2-14:10056] Failing at address: (nil)
+[compute-2-14:10056] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10056] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10056] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10056] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10056] *** End of error message ***
+[compute-2-14:10057] *** Process received signal ***
+[compute-2-14:10057] Signal: Segmentation fault (11)
+[compute-2-14:10057] Signal code: Address not mapped (1)
+[compute-2-14:10057] Failing at address: (nil)
+[compute-2-14:10057] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10057] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10057] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10057] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10057] *** End of error message ***
+[compute-2-14:10052] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10052] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10052] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10052] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10052] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 10052 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 19
+[compute-2-14:10095] *** Process received signal ***
+[compute-2-14:10095] Signal: Segmentation fault (11)
+[compute-2-14:10095] Signal code: Address not mapped (1)
+[compute-2-14:10095] Failing at address: (nil)
+[compute-2-14:10100] *** Process received signal ***
+[compute-2-14:10100] Signal: Segmentation fault (11)
+[compute-2-14:10100] Signal code: Address not mapped (1)
+[compute-2-14:10100] Failing at address: (nil)
+[compute-2-14:10097] *** Process received signal ***
+[compute-2-14:10097] Signal: Segmentation fault (11)
+[compute-2-14:10097] Signal code: Address not mapped (1)
+[compute-2-14:10097] Failing at address: (nil)
+[compute-2-14:10094] *** Process received signal ***
+[compute-2-14:10096] *** Process received signal ***
+[compute-2-14:10099] *** Process received signal ***
+[compute-2-14:10099] Signal: Segmentation fault (11)
+[compute-2-14:10099] Signal code: Address not mapped (1)
+[compute-2-14:10099] Failing at address: (nil)
+[compute-2-14:10094] Signal: Segmentation fault (11)
+[compute-2-14:10094] Signal code: Address not mapped (1)
+[compute-2-14:10094] Failing at address: (nil)
+[compute-2-14:10096] Signal: Segmentation fault (11)
+[compute-2-14:10096] Signal code: Address not mapped (1)
+[compute-2-14:10096] Failing at address: (nil)
+[compute-2-14:10098] *** Process received signal ***
+[compute-2-14:10095] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10095] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10095] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10095] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10095] *** End of error message ***
+[compute-2-14:10100] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10100] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10100] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10100] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10100] *** End of error message ***
+[compute-2-14:10098] Signal: Segmentation fault (11)
+[compute-2-14:10098] Signal code: Address not mapped (1)
+[compute-2-14:10098] Failing at address: (nil)
+[compute-2-14:10099] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10099] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10099] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10099] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10099] *** End of error message ***
+[compute-2-14:10096] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10096] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10096] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10096] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10096] *** End of error message ***
+[compute-2-14:10094] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10094] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10094] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10094] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10094] *** End of error message ***
+[compute-2-14:10097] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10097] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10097] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10097] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10097] *** End of error message ***
+[compute-2-14:10098] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10098] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10098] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10098] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10098] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 10095 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 20
+[compute-2-14:10138] *** Process received signal ***
+[compute-2-14:10138] Signal: Segmentation fault (11)
+[compute-2-14:10138] Signal code: Address not mapped (1)
+[compute-2-14:10138] Failing at address: (nil)
+[compute-2-14:10143] *** Process received signal ***
+[compute-2-14:10143] Signal: Segmentation fault (11)
+[compute-2-14:10143] Signal code: Address not mapped (1)
+[compute-2-14:10143] Failing at address: (nil)
+[compute-2-14:10139] *** Process received signal ***
+[compute-2-14:10139] Signal: Segmentation fault (11)
+[compute-2-14:10139] Signal code: Address not mapped (1)
+[compute-2-14:10139] Failing at address: (nil)
+[compute-2-14:10140] *** Process received signal ***
+[compute-2-14:10140] Signal: Segmentation fault (11)
+[compute-2-14:10140] Signal code: Address not mapped (1)
+[compute-2-14:10140] Failing at address: (nil)
+[compute-2-14:10137] *** Process received signal ***
+[compute-2-14:10137] Signal: Segmentation fault (11)
+[compute-2-14:10137] Signal code: Address not mapped (1)
+[compute-2-14:10137] Failing at address: (nil)
+[compute-2-14:10137] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10137] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10137] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10137] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10137] *** End of error message ***
+[compute-2-14:10143] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10143] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10143] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10143] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10143] *** End of error message ***
+[compute-2-14:10139] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10139] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10139] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10139] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10139] *** End of error message ***
+[compute-2-14:10141] *** Process received signal ***
+[compute-2-14:10141] Signal: Segmentation fault (11)
+[compute-2-14:10141] Signal code: Address not mapped (1)
+[compute-2-14:10141] Failing at address: (nil)
+[compute-2-14:10141] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10141] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10141] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10141] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10141] *** End of error message ***
+[compute-2-14:10142] *** Process received signal ***
+[compute-2-14:10142] Signal: Segmentation fault (11)
+[compute-2-14:10142] Signal code: Address not mapped (1)
+[compute-2-14:10142] Failing at address: (nil)
+[compute-2-14:10142] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10142] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10142] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10142] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10142] *** End of error message ***
+[compute-2-14:10138] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10138] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10138] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10138] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10138] *** End of error message ***
+[compute-2-14:10140] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10140] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10140] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10140] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10140] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 10137 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+7 total processes killed (some possibly by mpirun during cleanup)
+k: 21
+[compute-2-14:10186] *** Process received signal ***
+[compute-2-14:10186] Signal: Segmentation fault (11)
+[compute-2-14:10186] Signal code: Address not mapped (1)
+[compute-2-14:10186] Failing at address: (nil)
+[compute-2-14:10181] *** Process received signal ***
+[compute-2-14:10181] Signal: Segmentation fault (11)
+[compute-2-14:10181] Signal code: Address not mapped (1)
+[compute-2-14:10181] Failing at address: (nil)
+[compute-2-14:10185] *** Process received signal ***
+[compute-2-14:10180] *** Process received signal ***
+[compute-2-14:10184] *** Process received signal ***
+[compute-2-14:10185] Signal: Segmentation fault (11)
+[compute-2-14:10185] Signal code: Address not mapped (1)
+[compute-2-14:10185] Failing at address: (nil)
+[compute-2-14:10180] Signal: Segmentation fault (11)
+[compute-2-14:10180] Signal code: Address not mapped (1)
+[compute-2-14:10180] Failing at address: (nil)
+[compute-2-14:10184] Signal: Segmentation fault (11)
+[compute-2-14:10184] Signal code: Address not mapped (1)
+[compute-2-14:10184] Failing at address: (nil)
+[compute-2-14:10183] *** Process received signal ***
+[compute-2-14:10180] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10180] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10180] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10180] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10180] *** End of error message ***
+[compute-2-14:10186] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10186] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10186] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10186] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10186] *** End of error message ***
+[compute-2-14:10182] *** Process received signal ***
+[compute-2-14:10182] Signal: Segmentation fault (11)
+[compute-2-14:10182] Signal code: Address not mapped (1)
+[compute-2-14:10182] Failing at address: (nil)
+[compute-2-14:10182] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10182] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10182] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10182] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10182] *** End of error message ***
+[compute-2-14:10184] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10184] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10184] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10184] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10184] *** End of error message ***
+[compute-2-14:10185] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10185] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10185] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10185] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10185] *** End of error message ***
+[compute-2-14:10181] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10181] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10181] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10181] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10181] *** End of error message ***
+[compute-2-14:10183] Signal: Segmentation fault (11)
+[compute-2-14:10183] Signal code: Address not mapped (1)
+[compute-2-14:10183] Failing at address: (nil)
+[compute-2-14:10183] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10183] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10183] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10183] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10183] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 10181 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 22
+[compute-2-14:10229] *** Process received signal ***
+[compute-2-14:10225] *** Process received signal ***
+[compute-2-14:10226] *** Process received signal ***
+[compute-2-14:10226] Signal: Segmentation fault (11)
+[compute-2-14:10226] Signal code: Address not mapped (1)
+[compute-2-14:10226] Failing at address: (nil)
+[compute-2-14:10225] Signal: Segmentation fault (11)
+[compute-2-14:10225] Signal code: Address not mapped (1)
+[compute-2-14:10225] Failing at address: (nil)
+[compute-2-14:10229] Signal: Segmentation fault (11)
+[compute-2-14:10229] Signal code: Address not mapped (1)
+[compute-2-14:10229] Failing at address: (nil)
+[compute-2-14:10225] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10225] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10225] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10225] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10225] *** End of error message ***
+[compute-2-14:10226] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10226] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10226] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10226] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10226] *** End of error message ***
+[compute-2-14:10229] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10229] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10229] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10229] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10229] *** End of error message ***
+[compute-2-14:10224] *** Process received signal ***
+[compute-2-14:10224] Signal: Segmentation fault (11)
+[compute-2-14:10224] Signal code: Address not mapped (1)
+[compute-2-14:10224] Failing at address: (nil)
+[compute-2-14:10227] *** Process received signal ***
+[compute-2-14:10227] Signal: Segmentation fault (11)
+[compute-2-14:10227] Signal code: Address not mapped (1)
+[compute-2-14:10227] Failing at address: (nil)
+[compute-2-14:10228] *** Process received signal ***
+[compute-2-14:10228] Signal: Segmentation fault (11)
+[compute-2-14:10228] Signal code: Address not mapped (1)
+[compute-2-14:10228] Failing at address: (nil)
+[compute-2-14:10230] *** Process received signal ***
+[compute-2-14:10230] Signal: Segmentation fault (11)
+[compute-2-14:10230] Signal code: Address not mapped (1)
+[compute-2-14:10230] Failing at address: (nil)
+[compute-2-14:10224] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10224] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10224] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10224] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10224] *** End of error message ***
+[compute-2-14:10227] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10227] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10227] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10227] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10227] *** End of error message ***
+[compute-2-14:10228] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10228] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10228] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10228] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10228] *** End of error message ***
+[compute-2-14:10230] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10230] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10230] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10230] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10230] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 10225 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+3 total processes killed (some possibly by mpirun during cleanup)
+k: 23
+[compute-2-14:10273] *** Process received signal ***
+[compute-2-14:10273] Signal: Segmentation fault (11)
+[compute-2-14:10273] Signal code: Address not mapped (1)
+[compute-2-14:10273] Failing at address: (nil)
+[compute-2-14:10273] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10273] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10273] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10273] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10273] *** End of error message ***
+[compute-2-14:10267] *** Process received signal ***
+[compute-2-14:10267] Signal: Segmentation fault (11)
+[compute-2-14:10267] Signal code: Address not mapped (1)
+[compute-2-14:10267] Failing at address: (nil)
+[compute-2-14:10267] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10267] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10267] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10267] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10267] *** End of error message ***
+[compute-2-14:10268] *** Process received signal ***
+[compute-2-14:10268] Signal: Segmentation fault (11)
+[compute-2-14:10268] Signal code: Address not mapped (1)
+[compute-2-14:10268] Failing at address: (nil)
+[compute-2-14:10268] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10268] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10268] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10268] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10268] *** End of error message ***
+[compute-2-14:10269] *** Process received signal ***
+[compute-2-14:10269] Signal: Segmentation fault (11)
+[compute-2-14:10269] Signal code: Address not mapped (1)
+[compute-2-14:10269] Failing at address: (nil)
+[compute-2-14:10269] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10269] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10269] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10269] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10269] *** End of error message ***
+[compute-2-14:10270] *** Process received signal ***
+[compute-2-14:10270] Signal: Segmentation fault (11)
+[compute-2-14:10270] Signal code: Address not mapped (1)
+[compute-2-14:10270] Failing at address: (nil)
+[compute-2-14:10270] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10270] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10270] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10270] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10270] *** End of error message ***
+[compute-2-14:10271] *** Process received signal ***
+[compute-2-14:10271] Signal: Segmentation fault (11)
+[compute-2-14:10271] Signal code: Address not mapped (1)
+[compute-2-14:10271] Failing at address: (nil)
+[compute-2-14:10271] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10271] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10271] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10271] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10271] *** End of error message ***
+[compute-2-14:10272] *** Process received signal ***
+[compute-2-14:10272] Signal: Segmentation fault (11)
+[compute-2-14:10272] Signal code: Address not mapped (1)
+[compute-2-14:10272] Failing at address: (nil)
+[compute-2-14:10272] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10272] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10272] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10272] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10272] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 7 with PID 10273 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 24
+[compute-2-14:10310] *** Process received signal ***
+[compute-2-14:10310] Signal: Segmentation fault (11)
+[compute-2-14:10310] Signal code: Address not mapped (1)
+[compute-2-14:10310] Failing at address: (nil)
+[compute-2-14:10316] *** Process received signal ***
+[compute-2-14:10316] Signal: Segmentation fault (11)
+[compute-2-14:10316] Signal code: Address not mapped (1)
+[compute-2-14:10316] Failing at address: (nil)
+[compute-2-14:10315] *** Process received signal ***
+[compute-2-14:10315] Signal: Segmentation fault (11)
+[compute-2-14:10315] Signal code: Address not mapped (1)
+[compute-2-14:10315] Failing at address: (nil)
+[compute-2-14:10312] *** Process received signal ***
+[compute-2-14:10314] *** Process received signal ***
+[compute-2-14:10312] Signal: Segmentation fault (11)
+[compute-2-14:10312] Signal code: Address not mapped (1)
+[compute-2-14:10312] Failing at address: (nil)
+[compute-2-14:10314] Signal: Segmentation fault (11)
+[compute-2-14:10314] Signal code: Address not mapped (1)
+[compute-2-14:10314] Failing at address: (nil)
+[compute-2-14:10313] *** Process received signal ***
+[compute-2-14:10310] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10310] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10310] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10310] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10310] *** End of error message ***
+[compute-2-14:10316] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10316] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10316] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10316] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10316] *** End of error message ***
+[compute-2-14:10313] Signal: Segmentation fault (11)
+[compute-2-14:10313] Signal code: Address not mapped (1)
+[compute-2-14:10313] Failing at address: (nil)
+[compute-2-14:10311] *** Process received signal ***
+[compute-2-14:10311] Signal: Segmentation fault (11)
+[compute-2-14:10311] Signal code: Address not mapped (1)
+[compute-2-14:10311] Failing at address: (nil)
+[compute-2-14:10311] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10311] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10311] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10311] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10311] *** End of error message ***
+[compute-2-14:10315] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10315] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10315] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10315] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10315] *** End of error message ***
+[compute-2-14:10314] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10314] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10314] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10314] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10314] *** End of error message ***
+[compute-2-14:10312] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10312] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10312] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10312] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10312] *** End of error message ***
+[compute-2-14:10313] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10313] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10313] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10313] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10313] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 10310 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 25
+[compute-2-14:10354] *** Process received signal ***
+[compute-2-14:10354] Signal: Segmentation fault (11)
+[compute-2-14:10354] Signal code: Address not mapped (1)
+[compute-2-14:10354] Failing at address: (nil)
+[compute-2-14:10356] *** Process received signal ***
+[compute-2-14:10356] Signal: Segmentation fault (11)
+[compute-2-14:10356] Signal code: Address not mapped (1)
+[compute-2-14:10356] Failing at address: (nil)
+[compute-2-14:10359] *** Process received signal ***
+[compute-2-14:10358] *** Process received signal ***
+[compute-2-14:10360] *** Process received signal ***
+[compute-2-14:10358] Signal: Segmentation fault (11)
+[compute-2-14:10358] Signal code: Address not mapped (1)
+[compute-2-14:10358] Failing at address: (nil)
+[compute-2-14:10357] *** Process received signal ***
+[compute-2-14:10360] Signal: Segmentation fault (11)
+[compute-2-14:10360] Signal code: Address not mapped (1)
+[compute-2-14:10360] Failing at address: (nil)
+[compute-2-14:10357] Signal: Segmentation fault (11)
+[compute-2-14:10357] Signal code: Address not mapped (1)
+[compute-2-14:10357] Failing at address: (nil)
+[compute-2-14:10359] Signal: Segmentation fault (11)
+[compute-2-14:10359] Signal code: Address not mapped (1)
+[compute-2-14:10359] Failing at address: (nil)
+[compute-2-14:10356] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10356] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10356] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10356] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10356] *** End of error message ***
+[compute-2-14:10354] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10354] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10354] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10354] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10354] *** End of error message ***
+[compute-2-14:10355] *** Process received signal ***
+[compute-2-14:10355] Signal: Segmentation fault (11)
+[compute-2-14:10355] Signal code: Address not mapped (1)
+[compute-2-14:10355] Failing at address: (nil)
+[compute-2-14:10360] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10360] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10360] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10360] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10360] *** End of error message ***
+[compute-2-14:10358] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10358] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10358] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10358] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10358] *** End of error message ***
+[compute-2-14:10357] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10357] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10357] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10357] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10357] *** End of error message ***
+[compute-2-14:10355] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10355] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10355] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10355] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10355] *** End of error message ***
+[compute-2-14:10359] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10359] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10359] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10359] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10359] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 10356 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 26
+[compute-2-14:10401] *** Process received signal ***
+[compute-2-14:10401] Signal: Segmentation fault (11)
+[compute-2-14:10401] Signal code: Address not mapped (1)
+[compute-2-14:10401] Failing at address: (nil)
+[compute-2-14:10400] *** Process received signal ***
+[compute-2-14:10400] Signal: Segmentation fault (11)
+[compute-2-14:10400] Signal code: Address not mapped (1)
+[compute-2-14:10400] Failing at address: (nil)
+[compute-2-14:10402] *** Process received signal ***
+[compute-2-14:10401] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10401] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10401] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10401] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10401] *** End of error message ***
+[compute-2-14:10398] *** Process received signal ***
+[compute-2-14:10402] Signal: Segmentation fault (11)
+[compute-2-14:10402] Signal code: Address not mapped (1)
+[compute-2-14:10402] Failing at address: (nil)
+[compute-2-14:10398] Signal: Segmentation fault (11)
+[compute-2-14:10398] Signal code: Address not mapped (1)
+[compute-2-14:10398] Failing at address: (nil)
+[compute-2-14:10400] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10400] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10400] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10400] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10400] *** End of error message ***
+[compute-2-14:10399] *** Process received signal ***
+[compute-2-14:10404] *** Process received signal ***
+[compute-2-14:10399] Signal: Segmentation fault (11)
+[compute-2-14:10399] Signal code: Address not mapped (1)
+[compute-2-14:10399] Failing at address: (nil)
+[compute-2-14:10404] Signal: Segmentation fault (11)
+[compute-2-14:10404] Signal code: Address not mapped (1)
+[compute-2-14:10404] Failing at address: (nil)
+[compute-2-14:10402] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10402] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10402] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10402] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10402] *** End of error message ***
+[compute-2-14:10398] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10398] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10398] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10398] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10398] *** End of error message ***
+[compute-2-14:10399] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10399] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10399] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10399] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10399] *** End of error message ***
+[compute-2-14:10404] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10404] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10404] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10404] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10404] *** End of error message ***
+[compute-2-14:10403] *** Process received signal ***
+[compute-2-14:10403] Signal: Segmentation fault (11)
+[compute-2-14:10403] Signal code: Address not mapped (1)
+[compute-2-14:10403] Failing at address: (nil)
+[compute-2-14:10403] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10403] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10403] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10403] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10403] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 10400 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 27
+[compute-2-14:10447] *** Process received signal ***
+[compute-2-14:10447] Signal: Segmentation fault (11)
+[compute-2-14:10447] Signal code: Address not mapped (1)
+[compute-2-14:10447] Failing at address: (nil)
+[compute-2-14:10441] *** Process received signal ***
+[compute-2-14:10441] Signal: Segmentation fault (11)
+[compute-2-14:10441] Signal code: Address not mapped (1)
+[compute-2-14:10441] Failing at address: (nil)
+[compute-2-14:10441] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10441] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10441] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10441] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10441] *** End of error message ***
+[compute-2-14:10442] *** Process received signal ***
+[compute-2-14:10442] Signal: Segmentation fault (11)
+[compute-2-14:10442] Signal code: Address not mapped (1)
+[compute-2-14:10442] Failing at address: (nil)
+[compute-2-14:10442] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10442] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10442] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10442] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10442] *** End of error message ***
+[compute-2-14:10443] *** Process received signal ***
+[compute-2-14:10443] Signal: Segmentation fault (11)
+[compute-2-14:10443] Signal code: Address not mapped (1)
+[compute-2-14:10443] Failing at address: (nil)
+[compute-2-14:10443] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10443] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10443] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10443] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10443] *** End of error message ***
+[compute-2-14:10444] *** Process received signal ***
+[compute-2-14:10444] Signal: Segmentation fault (11)
+[compute-2-14:10444] Signal code: Address not mapped (1)
+[compute-2-14:10444] Failing at address: (nil)
+[compute-2-14:10444] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10444] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10444] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10444] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10444] *** End of error message ***
+[compute-2-14:10445] *** Process received signal ***
+[compute-2-14:10445] Signal: Segmentation fault (11)
+[compute-2-14:10445] Signal code: Address not mapped (1)
+[compute-2-14:10445] Failing at address: (nil)
+[compute-2-14:10445] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10445] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10445] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10445] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10445] *** End of error message ***
+[compute-2-14:10446] *** Process received signal ***
+[compute-2-14:10446] Signal: Segmentation fault (11)
+[compute-2-14:10446] Signal code: Address not mapped (1)
+[compute-2-14:10446] Failing at address: (nil)
+[compute-2-14:10446] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10446] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10446] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10446] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10446] *** End of error message ***
+[compute-2-14:10447] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10447] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10447] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10447] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10447] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 4 with PID 10444 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+k: 28
+[compute-2-14:10487] *** Process received signal ***
+[compute-2-14:10487] Signal: Segmentation fault (11)
+[compute-2-14:10487] Signal code: Address not mapped (1)
+[compute-2-14:10487] Failing at address: (nil)
+[compute-2-14:10487] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10487] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10487] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10487] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10487] *** End of error message ***
+[compute-2-14:10485] *** Process received signal ***
+[compute-2-14:10485] Signal: Segmentation fault (11)
+[compute-2-14:10485] Signal code: Address not mapped (1)
+[compute-2-14:10485] Failing at address: (nil)
+[compute-2-14:10485] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10485] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10485] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10485] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10485] *** End of error message ***
+[compute-2-14:10488] *** Process received signal ***
+[compute-2-14:10488] Signal: Segmentation fault (11)
+[compute-2-14:10488] Signal code: Address not mapped (1)
+[compute-2-14:10488] Failing at address: (nil)
+[compute-2-14:10488] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10488] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10488] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10488] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10488] *** End of error message ***
+[compute-2-14:10489] *** Process received signal ***
+[compute-2-14:10489] Signal: Segmentation fault (11)
+[compute-2-14:10489] Signal code: Address not mapped (1)
+[compute-2-14:10489] Failing at address: (nil)
+[compute-2-14:10489] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10489] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10489] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10489] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10489] *** End of error message ***
+[compute-2-14:10486] *** Process received signal ***
+[compute-2-14:10490] *** Process received signal ***
+[compute-2-14:10486] Signal: Segmentation fault (11)
+[compute-2-14:10486] Signal code: Address not mapped (1)
+[compute-2-14:10486] Failing at address: (nil)
+[compute-2-14:10490] Signal: Segmentation fault (11)
+[compute-2-14:10490] Signal code: Address not mapped (1)
+[compute-2-14:10490] Failing at address: (nil)
+[compute-2-14:10486] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10486] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10486] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10486] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10486] *** End of error message ***
+[compute-2-14:10490] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10490] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10490] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10490] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10490] *** End of error message ***
+[compute-2-14:10484] *** Process received signal ***
+[compute-2-14:10484] Signal: Segmentation fault (11)
+[compute-2-14:10484] Signal code: Address not mapped (1)
+[compute-2-14:10484] Failing at address: (nil)
+[compute-2-14:10484] [ 0] /lib64/libpthread.so.0 [0x30ad60ebe0]
+[compute-2-14:10484] [ 1] ../../../release_mpi/ex4(main+0x191) [0x403bd1]
+[compute-2-14:10484] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x30ace1d994]
+[compute-2-14:10484] [ 3] ../../../release_mpi/ex4 [0x403989]
+[compute-2-14:10484] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 4 with PID 10487 on node compute-2-14.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------

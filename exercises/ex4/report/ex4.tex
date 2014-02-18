@@ -264,7 +264,7 @@ And the gain in processing time would be
 
 \begin{equation}
 	time\_spent\_generating\_vector = \frac
-{original\_time\_spent\_generating\_vector}{max(rank)+1}.
+{original\_time\_spent\_generating\_vector} {max(rank)+1}.
 	\label{eq:time-req}
 \end{equation}
 
@@ -287,25 +287,72 @@ through parallel processing.
 \section{Results}
 
 \subsection{General about results}
-When testing the results on kongull we had issues with the jobs not progressing fast enough in the queue, and consequently we received little usable data in time for the assignment.
-To somewhat make up for this lack, some data was run on a local machine; a laptop with Ubuntu. This machine, however, only had 2 physical cores, which hampered the testing a lot. During this testing some improvement was shown, but not very much, possibly due to only 2 cores being utilized.
 
-\subsection{Local testing}
-\includegraphics[scale=0.6]{local_data_plot.png}
-Plot of testing locally, that shows improvement, though not to a very large degree, when utilizing parallelisation on 2 cores.
+One can see form all the results that the runtime increases exponentially with
+respect to k, which is natural due to k being the exponent in $n=2^k$. This
+translates to a linear increase in runtime with respect to the problem size (n).
+
 
 \subsection{Serial implementation}
-The serial implementation increases about linearily with respect to the input size n, which indicates that
-the algorithm is sufficiently efficient to use as a base for parallelization.
 
+The serial implementation increases about linearily with respect to the input
+size n, which indicates that the algorithm is sufficiently efficient to use as a
+base for parallelization (summing a vector should be linear in nature).
+
+The timing of the runtime for the serial program is the same as the OpenMP
+runtime for 1 thread (because they execute almost exactly the same way). Refer
+to the next section for a plot of this. What this shows is that the improvement
+to be gained is quite small, and we are certainly nowhere near an ideal (linear)
+speedup from parallelization. That is to say that the program doesn't come close
+to running twice as fast when we double the amount of cores.
+
+This indicates that the serial portion of the computation (at least our
+implementation of it) is much larger than we theoretizised earlier in this
+report.
+
+\clearpage
 \subsection{OpenMP implementation}
 
+Below are the printed plots of the runtime (in ms) of the program for different
+values of k. The naming for the diffenet lines indicate number of threads used.
+1n8ppn means 8 threads were used for example.
+
+\begin{center}
+	\includegraphics[scale=0.4]{chart_1.png}
+\end{center}
+
+\begin{center}
+	\includegraphics[scale=0.5]{chart_2.png}
+\end{center}
+
+As you can see, there is a some improvement to be gained from using multiple
+threads, though the problem size had to be increased from the original limit of
+k=14 in order to get any visible gain.
+
 \subsection{MPI implementation}
-The local testing showed that this had a larger impact on performance than OpenMP, which indicates that doing partial summing, with the final summing done by the Reduce function is more efficient than plain speeding up summing.
+
+The local testing showed that this had a larger impact on performance than
+OpenMP, which indicates that doing partial summing, with the final summing done
+by the Reduce function is more efficient than plain speeding up summing.
 
 \subsection{MPI + OpenMP implementation}
-The plot showed that a combination of the two parallelization techniques shows the best improvement
 
-\subsection{Combined implementation}
+The plot showed that a combination of the two parallelization techniques shows
+the best improvement. In these runs, XnYppn means X nodes and Y processors per
+node. All these were run with 3 OpenMP threads enabled.
+
+\begin{center}
+	\includegraphics[scale=0.45]{chart_3.png}
+\end{center}
+
+\subsection{Conclusion}
+
+We did not see as much improvement from parallelization as expected, and in some
+cases it actually hurts performance to a large degree; namely when we run on 2
+nodes with more than 1 ppn. This leads us to believe that there is some error in
+our reasoning, code and/or understanding of Kongull. But more importantly, there
+is no significant speed-up to be gained in the range specified in the exercise
+(k=3 to 14) due to the computation completing to quickly, or the overhead of
+initialization and printing of results dominating the runtime.
 
 \end{document}
