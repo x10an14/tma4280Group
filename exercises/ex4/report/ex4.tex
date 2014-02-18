@@ -159,8 +159,6 @@ assignment. (It is here assumed that the implementation of
 $\textit{MPI\_Reduce()}$ is more efficient than any manual summing and use of
 Send/Gather would be).
 
-\todo[inline]{ANSWER QUESTION 6!!!!! (Check final section first!)}
-
 \section{Program Load}
 
 \subsection{Memory requirement}
@@ -264,9 +262,10 @@ parallel processing.
 
 \section{Results}
 
-\todo[inline]{Implement this? I imagine this is where question 6 should be...}
-
 \subsection{General about results}
+When testing the results on kongull we had issues with the jobs not progressing fast enough in the queue, and consequently we received little usable data in time for the assignment.
+To somewhat make up for this lack, some data was run on a local machine; a laptop with Ubuntu. This machine, however, only had 2 physical cores, which hampered the testing a lot.
+Refer to image added with delivery for more info, as there was no more time before the deadline.
 
 \subsection{Serial implementation}
 
@@ -276,7 +275,6 @@ with respect to the input size ($n=2^k$). However, it showed no significant incr
 runtime until k = 17, something which indicates that the initialization and overhead dominates the runtime
 in the problem sizes specified in the task, so the size must be increased to gain any significant data.
 
-\todo[inline]{Add more data on more OMP threads if time allows.}
 
 \subsection{MPI implementation}
 
