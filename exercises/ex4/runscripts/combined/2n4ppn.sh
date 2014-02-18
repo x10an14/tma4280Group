@@ -1,11 +1,11 @@
 #!/bin/sh
 
-#PBS -N mpi_2n4ppn
+#PBS -N combined_2n4ppn
 #PBS -A freecycle
 #PBS -q optimist
 #PBS -l walltime=00:08:00
 #PBS -l nodes=2:ppn=4:default
-#PBS -l pmem=1500MB
+###PBS -l pmem=1500MB
 #PBS -j oe
 
 cd ${PBS_O_WORKDIR}
