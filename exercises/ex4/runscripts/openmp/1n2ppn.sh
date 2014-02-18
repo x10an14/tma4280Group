@@ -5,7 +5,7 @@
 #PBS -q optimist
 #PBS -l walltime=00:08:00
 #PBS -l nodes=1:ppn=2:default
-#PBS -l pmem=6000MB
+###PBS -l pmem=6000MB
 #PBS -j oe
 
 cd ${PBS_O_WORKDIR}

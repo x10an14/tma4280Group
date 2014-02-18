@@ -280,17 +280,23 @@ always be divided equally among $P = 2^m$ processors, as long as $k\geq m$. The
 parallelism is possible due to the fact that all partial sums are completely
 independent of each other.
 
-Therefore, we believe that you can safely conclude that within the parameters
-given in this problem set, this problem is very attractive to solve through
-parallel processing.
+Therefore, we are convinced that you can safely conclude that within the
+parameters given in this problem set, this problem is very attractive to solve
+through parallel processing.
 
 \section{Results}
 
 \subsection{General about results}
+<<<<<<< HEAD
 One can see form all the results that the runtime increases exponentially with respect to k, which is natural due to k being the exponent in $n=2^k$. This translates to a linear increase in runtime with respect to the problem size (n).
+=======
+When testing the results on kongull we had issues with the jobs not progressing fast enough in the queue, and consequently we received little usable data in time for the assignment.
+To somewhat make up for this lack, some data was run on a local machine; a laptop with Ubuntu. This machine, however, only had 2 physical cores, which hampered the testing a lot. During this testing some improvement was shown, but not very much, possibly due to only 2 cores being utilized.
+>>>>>>> c92b1d70fb6bd38f29908b9365ffcc815083d5e2
 
 
 \subsection{Serial implementation}
+
 The serial implementation increases about linearily with respect to the input size n, which indicates that 
 the algorithm is sufficiently efficient to use as a base for parallelization (summing a vector should be linear in nature).
 
@@ -320,5 +326,7 @@ The plot showed that a combination of the two parallelization techniques shows t
 \subsection{Conclusion}
 We did not see as much improvement from parallelization as expected, and in some cases it actually hurts performance to a large degree; namely when we run on 2 nodes with more than 1 ppn. This leads us to believe that there is some error in our reasoning, code and/or understanding of Kongull.
 But more importantly, there is no significant speed-up to be gained in the range specified in the exercise (k=3 to 14) due to the computation completing to quickly, or the overhead of initialization and printing of results dominating the runtime.
+
+\subsection{Combined implementation}
 
 \end{document}
