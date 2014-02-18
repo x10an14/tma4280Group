@@ -288,19 +288,23 @@ parallel processing.
 
 \subsection{General about results}
 When testing the results on kongull we had issues with the jobs not progressing fast enough in the queue, and consequently we received little usable data in time for the assignment.
-To somewhat make up for this lack, some data was run on a local machine; a laptop with Ubuntu. This machine, however, only had 2 physical cores, which hampered the testing a lot.
-Refer to image added with delivery for more info, as there was no more time before the deadline.
+To somewhat make up for this lack, some data was run on a local machine; a laptop with Ubuntu. This machine, however, only had 2 physical cores, which hampered the testing a lot. During this testing some improvement was shown, but not very much, possibly due to only 2 cores being utilized.
+
+\subsection{Local testing}
+\includegraphics[scale=0.6]{local_data_plot.png}
+Plot of testing locally, that shows improvement, though not to a very large degree, when utilizing parallelisation on 2 cores.
 
 \subsection{Serial implementation}
+The serial implementation increases about linearily with respect to the input size n, which indicates that 
+the algorithm is sufficiently efficient to use as a base for parallelization.
 
 \subsection{OpenMP implementation}
-When running on 3 Open MP threads with no MPI, the runtime behaved about cubically
-with respect to the input size ($n=2^k$). However, it showed no significant increase in
-runtime until k = 17, something which indicates that the initialization and overhead dominates the runtime
-in the problem sizes specified in the task, so the size must be increased to gain any significant data.
-
 
 \subsection{MPI implementation}
+The local testing showed that this had a larger impact on performance than OpenMP, which indicates that doing partial summing, with the final summing done by the Reduce function is more efficient than plain speeding up summing.
+
+\subsection{MPI + OpenMP implementation}
+The plot showed that a combination of the two parallelization techniques shows the best improvement  
 
 \subsection{Combined implementation}
 
