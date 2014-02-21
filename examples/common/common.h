@@ -76,8 +76,9 @@ Vector createVector(int len);
 //! \param globLen The global vector length
 //! \param comm The communicator to split the vector across
 //! \param allocdata If 0, no data is allocated to vector
+//! \param pad Whether or not to pad vector with space at ends
 //! \return The new vector
-Vector createVectorMPI(int globLen, MPI_Comm* comm, int allocdata);
+Vector createVectorMPI(int globLen, MPI_Comm* comm, int allocdata, int pad);
 #endif
 
 //! \brief Free up memory allocated to a vector
@@ -180,6 +181,13 @@ void evalMeshInternal(Vector u, Vector grid, function1D func);
 //! \param border If 1, space is reserved for boundary in the matrix
 void evalMeshInternal2(Matrix u, Vector grid, function2D func, int boundary);
 
+//! \brief Evaluate a function with a displacement
+//! \param u The resulting values
+//! \param grid The grid
+//! \param func The function to evaluate
+//! \param displ Displacement in grid
+void evalMeshDispl(Vector u, Vector grid, function1D func);
+
 //! \brief Scale a vector
 //! \param alpha The scaling factor
 void scaleVector(Vector u, double alpha);
@@ -232,5 +240,23 @@ void fillVector(Vector u, double alpha);
 //! \param[in] c Number of columns in subblock
 //! \return The subblock
 Matrix subMatrix(const Matrix A, int r_ofs, int r, int c_ofs, int c);
+
+//! \brief Save a matrix to an .asc file
+//! \param A The matrix to save
+//! \param file Filename to save to
+void saveMatrix(const Matrix A, char* file);
+
+//! \brief Collect a parallel vector for operator evaluation
+//! \param u The vector to collect
+void collectVector(Vector u);
+
+//! \brief Print a vector to the terminal for inspection
+//! \param u The vector to print
+void printVector(const Vector u);
+
+//! \brief Clone a vector
+//! \param u Vector to clone
+//! \returns New clone of vector
+Vector cloneVector(const Vector u);
 
 #endif

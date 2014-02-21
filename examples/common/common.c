@@ -56,9 +56,7 @@ Vector createVector(int len)
   result->data = calloc(len, sizeof(double));
   result->len = result->glob_len = len;
   result->stride = 1;
-#ifdef HAVE_MPI
-  result->comm = &SelfComm;
-#endif
+  result->comm = NULL;
   result->comm_size = 1;
   result->comm_rank = 0;
   result->displ = NULL;
@@ -68,14 +66,19 @@ Vector createVector(int len)
 }
 
 #ifdef HAVE_MPI
-Vector createVectorMPI(int glob_len, MPI_Comm* comm, int allocdata)
+Vector createVectorMPI(int glob_len, MPI_Comm* comm, int allocdata, int pad)
 {
+  int padadd=2;
   Vector result = (Vector)calloc(1, sizeof(vector_t));
   result->comm = comm;
   MPI_Comm_size(*comm, &result->comm_size);
   MPI_Comm_rank(*comm, &result->comm_rank);
   splitVector(glob_len, result->comm_size, &result->sizes, &result->displ);
-  result->len = result->sizes[result->comm_rank];
+  if (result->comm_rank == 0)
+    padadd--;
+  if (result->comm_rank == result->comm_size-1)
+    padadd--;
+  result->len = result->sizes[result->comm_rank]+padadd;
   if (allocdata)
     result->data = calloc(result->len, sizeof(double));
   else
@@ -149,7 +152,7 @@ Matrix createMatrixMPI(int n1, int n2, int N1, int N2, MPI_Comm* comm)
   int i, n12;
 
   Matrix result = (Matrix)calloc(1, sizeof(matrix_t));
-  result->as_vec = createVectorMPI(N1*N2, comm, 0);
+  result->as_vec = createVectorMPI(N1*N2, comm, 0, 0);
   n12 = n1;
   if (n1 == -1)
     n1 = result->as_vec->len/N2;
@@ -168,17 +171,17 @@ Matrix createMatrixMPI(int n1, int n2, int N1, int N2, MPI_Comm* comm)
   result->col = malloc(n2*sizeof(Vector));
   for (i=0;i<n2;++i) {
     if (n12 == N1)
-      result->col[i] = createVectorMPI(N1, &SelfComm, 0);
+      result->col[i] = createVectorMPI(N1, &SelfComm, 0, 0);
     else
-      result->col[i] = createVectorMPI(N1, comm, 0);
+      result->col[i] = createVectorMPI(N1, comm, 0, 0);
     result->col[i]->data = result->data[i];
   }
   result->row = malloc(n1*sizeof(Vector));
   for (i=0;i<n1;++i) {
     if (n12 == N1)
-      result->row[i] = createVectorMPI(N2, comm, 0);
+      result->row[i] = createVectorMPI(N2, comm, 0, 0);
     else
-      result->row[i] = createVectorMPI(N2, &SelfComm, 0);
+      result->row[i] = createVectorMPI(N2, &SelfComm, 0, 0);
     result->row[i]->data = result->data[0]+i;
     result->row[i]->stride = n1;
   }
@@ -277,9 +280,19 @@ Vector equidistantMesh(double x0, double x1, int N)
   int i;
 
   for (i=0;i<N+1;++i)
-    result->data[i] = i*h;
+    result->data[i] = x0+i*h;
 
   return result;
+}
+
+void evalMeshDispl(Vector u, Vector grid, function1D func)
+{
+  int i;
+  int startofs=u->displ[u->comm_rank];
+  if (u->comm_rank > 0)
+    startofs--;
+  for (i=0;i<u->len;++i)
+    u->data[i] = func(grid->data[i+startofs]);
 }
 
 void evalMeshInternal(Vector u, Vector grid, function1D func)
@@ -391,4 +404,59 @@ void transposeMatrix(Matrix A, const Matrix B)
   for (i=0;i<B->rows;++i)
     for (j=0;j<B->cols;++j)
       A->data[i][j] = B->data[j][i];
+}
+
+void saveMatrix(const Matrix A, char* file)
+{
+  FILE* f = fopen(file,"wb");
+  int i,j;
+  for (i=0;i<A->rows;++i) {
+    for (j=0;j<A->cols;++j)
+      fprintf(f,"%1.16lf ",A->data[j][i]);
+    fprintf(f,"\n");
+  }
+}
+
+void collectVector(Vector u)
+{
+#ifdef HAVE_MPI
+  int source, dest;
+  // west 
+  MPI_Cart_shift(*u->comm, 0,   -1, &source, &dest);
+  MPI_Sendrecv(u->data+1,        1, MPI_DOUBLE, dest,   0,
+               u->data+u->len-1, 1, MPI_DOUBLE, source, 0, *u->comm, MPI_STATUS_IGNORE);
+
+  // east
+  MPI_Cart_shift(*u->comm,  0,   1, &source, &dest);
+  MPI_Sendrecv(u->data+u->len-2, 1, MPI_DOUBLE, dest,   1,
+               u->data,          1, MPI_DOUBLE, source, 1, *u->comm, MPI_STATUS_IGNORE);
+#endif
+}
+
+void printVector(const Vector u)
+{
+  int i,j;
+  for (j=0;j<u->comm_size;++j) {
+    if (j == u->comm_rank) {
+      printf("rank %i: ", u->comm_rank);
+      for (i=0;i<u->len;++i)
+        printf("%f ", u->data[i]);
+      printf("\n");
+    }
+#ifdef HAVE_MPI
+    if (u->comm)
+      MPI_Barrier(*u->comm);
+#endif
+  }
+}
+
+Vector cloneVector(const Vector u)
+{
+  Vector result = createVector(u->len);
+  result->comm_size = u->comm_size;
+  result->comm_rank = u->comm_rank;
+  result->comm = u->comm;
+  result->glob_len = u->glob_len;
+
+  return result;
 }
