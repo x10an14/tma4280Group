@@ -247,7 +247,8 @@ only run on a system using $P$ processors where $P$ is a power of 2.
 It should be mentioned that the program does some pre-processing serially,
 mandated by the task and by MPI. The initialization is necessary and
 unavoidable, and the generation of the vector would probably not benefit much
-(if at all) by parallelization, as the current implementation of the program stands.
+(if at all) by parallelization, as the current implementation of the program
+stands.
 
 However, if the problem set did not specify that rank 0 has to generate the
 vector representing the Hyperharmonic series, there is both time and space to be
@@ -290,8 +291,7 @@ through parallel processing.
 
 One can see form all the results that the runtime increases exponentially with
 respect to k, which is natural due to k being the exponent in $n=2^k$. This
-translates to a linear increase in runtime with respect to the problem size (n).
-
+translates to a linear increase in runtime with respect to the problem size $n$.
 
 \subsection{Serial implementation}
 
@@ -314,7 +314,7 @@ report.
 \subsection{OpenMP implementation}
 
 Below are the printed plots of the runtime (in ms) of the program for different
-values of k. The naming for the diffenet lines indicate number of threads used.
+values of $k$. The naming for the diffenet lines indicate number of threads used.
 1n8ppn means 8 threads were used for example.
 
 \begin{center}
@@ -327,7 +327,7 @@ values of k. The naming for the diffenet lines indicate number of threads used.
 
 As you can see, there is a some improvement to be gained from using multiple
 threads, though the problem size had to be increased from the original limit of
-k=14 in order to get any visible gain.
+$k = 14$ in order to get any visible gain.
 
 \subsection{MPI implementation}
 
@@ -351,8 +351,9 @@ We did not see as much improvement from parallelization as expected, and in some
 cases it actually hurts performance to a large degree; namely when we run on 2
 nodes with more than 1 ppn. This leads us to believe that there is some error in
 our reasoning, code and/or understanding of Kongull. But more importantly, there
-is no significant speed-up to be gained in the range specified in the exercise
-(k=3 to 14) due to the computation completing to quickly, or the overhead of
-initialization and printing of results dominating the runtime.
+is no significant speed-up to be gained in the range specified in the problem
+set (with $\{k \in \mathbb{N} : k \in [3, 14]\}$) due to the computation
+completing to quickly, or the overhead of initialization and printing of results
+dominating the runtime.
 
 \end{document}
