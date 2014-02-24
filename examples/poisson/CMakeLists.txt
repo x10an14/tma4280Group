@@ -14,6 +14,11 @@ add_library(poisson_common solvers.c poissoncommon.c fst.f)
 add_executable(poisson1D poisson1D.c)
 target_link_libraries(poisson1D poisson_common ${COMMON_LIBRARIES})
 
+if(MPI_FOUND)
+  add_executable(poisson1D-MPI poisson1D-MPI.c)
+  target_link_libraries(poisson1D-MPI poisson_common ${COMMON_LIBRARIES})
+endif()
+
 add_executable(poisson2D poisson2D.c)
 target_link_libraries(poisson2D poisson_common ${COMMON_LIBRARIES})
 

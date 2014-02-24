@@ -353,10 +353,80 @@
 }
 \frame[label=example20]{
   \frametitle{Discretizing the 1D Poisson problem contd.}
+  \lstinputlisting[language=Matlab,basicstyle=\tiny]{poisson1D.m}
+  \lstinputlisting[language=Matlab,basicstyle=\tiny]{source1.m}
+  \lstinputlisting[language=Matlab,basicstyle=\tiny]{conv1.m}
+}
+\frame[label=example21]{
+  \frametitle{Discretizing the 2D Poisson problem}
   \begin{itemize}
-    \lstinputlisting[language=Matlab,basicstyle=\tiny]{poisson1D.m}
-    \lstinputlisting[language=Matlab,basicstyle=\tiny]{source1.m}
-    \lstinputlisting[language=Matlab,basicstyle=\tiny]{conv1.m}
+    \item We now consider the 2D Poisson problem.
+      \[
+        \begin{split}
+          -\nabla^2 u &= f, \hspace{1cm} \text{ in } \Omega = \left(0,L_x\right)\times\left(0,L_y\right), \\
+          u &= 0 \hspace{1cm} \text{ in } \partial\Omega.
+        \end{split}
+      \]
+      \begin{center}
+        \includegraphics[width=3cm]{../../notes/07.poisson-fdm/Poisson2D_Domain}
+      \end{center}
+    \item Introduce the grid, $\left\{x_{i,j}\right\}_{i,j=0}^N$, with $x_{i,j} = \left(x_0+ih_x, y_0+ih_y\right)$, $h_x = \frac{L_x}{N}, h_y = \frac{L_y}{N}$.
+      \begin{center}
+        \includegraphics[width=3cm]{../../notes/07.poisson-fdm/Poisson2D_Grid}
+      \end{center}
   \end{itemize}
+}
+\frame[label=example22]{
+  \frametitle{Discretizing the 2D Poisson problem contd.}
+  \begin{itemize}
+    \item Let $u_{i,j} = u(x_i, y_j)$. We then have two differences;
+      \begin{align*}
+        \frac{u_{i+1,j} - 2 u_{i,j} + u_{i-1,j}}{h_x^2} &\simeq \left( \frac{\partial^2 u}{\partial x^2} \right) \biggl|_{(x_i,y_j)} + \quad\mathcal{O}(h_x^2), \\
+        \frac{u_{i,j+1} - 2 u_{i,j} + u_{i,j-1}}{h_y^2} &\simeq \left( \frac{\partial^2 u}{\partial y^2} \right) \biggl|_{(x_i,y_j)} + \quad\mathcal{O}(h_y^2).
+      \end{align*}
+    \item For simplicity we assume $L_x = L_y$ in the following and thus
+      $h_x = h_y = h$.
+    \item Plugging this into our partial differential equation, we get
+      \begin{align*}
+        -u_{i+1,j}-u_{i-1,j}-u_{i,j+1}-u_{i,j-1}+4u_{i,j} &= h^2 f_{i,j}, i,j=1,\ldots,N-1.
+      \end{align*}
+  \end{itemize}
+}
+\frame[label=example23]{
+  \frametitle{Discretizing the 2D Poisson problem contd.}
+  \begin{itemize}
+    \item Each point couple to their 4 neighbors (NSEW); five point stencil
+      \begin{center}
+        \includegraphics[width=4cm]{../../notes/07.poisson-fdm/FivePointStencil}
+      \end{center}
+  \end{itemize}
+}
+\frame[label=example24]{
+  \frametitle{Discretizing the 2D Poisson problem contd.}
+  \begin{itemize}
+    \item We need a numbering scheme - in order to form the linear system
+      of equations.
+    \item We here use a natural, global numbering scheme; we number row by row.
+      \begin{center}
+        \includegraphics[width=3cm]{../../notes/07.poisson-fdm/NaturalOrdering}
+      \end{center}
+    \item Structure of equation system dependent on numbering scheme chosen.
+  \end{itemize}
+}
+\frame[label=example25]{
+  \frametitle{Discretizing the 2D Poisson problem contd.}
+  \begin{itemize}
+    \item With the chosen numbering scheme, we get the following linear
+      system.
+      \begin{center}
+        \includegraphics[width=8.5cm]{../../notes/07.poisson-fdm/Poisson2D_System}
+      \end{center}
+  \end{itemize}
+}
+\frame[label=example26]{
+  \frametitle{Discretizing the 2D Poisson problem contd.}
+  \lstinputlisting[language=Matlab,basicstyle=\tiny]{poisson2D.m}
+  \lstinputlisting[language=Matlab,basicstyle=\tiny]{source2.m}
+  \lstinputlisting[language=Matlab,basicstyle=\tiny]{conv2.m}
 }
 \end{document}
