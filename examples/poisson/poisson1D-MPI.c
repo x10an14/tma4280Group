@@ -92,7 +92,6 @@ void Poisson1D(Vector u, Vector v)
     u->data[i] -= v->data[i+1];
   }
   u->data[0] = u->data[u->len-1] = 0.0;
-  v->data[0] = v->data[v->len-1] = 0.0;
 }
 
 void Poisson1Dnoborder(Vector u, Vector v)
@@ -108,25 +107,27 @@ void Poisson1Dnoborder(Vector u, Vector v)
   }
 }
 
-Matrix A1D=NULL;
-int A1Dfactored;
+//! \brief A struct describing a subdomain in additive schwarz
+typedef struct {
+  Matrix A;             //!< Poisson operator
+  int Afactored;        //!< Whether or not the operator is factorized
+  int size;             //!< Size of subdomain
+  int from_disp;        //!< Left displacement when creating subdomain vector
+  int to_source_disp;   //!< Left displacement from source recreating full vector
+  int to_dest_disp;     //!< Left displacement in destination recreating full vector
+  int to_dest_size;     //!< Datas to copy to destinatino recreating full vector
+  Matrix Q;             //!< Eigenvectors of Poisson operator
+  Vector lambda;        //!< Eigenvalues of Poisson operator
+} SchwarzSubdomain;
+
+SchwarzSubdomain subdomain;
 
 Vector collectBeforePre(Vector u)
 {
   collectVector(u);
-  Vector result;
-  if (u->comm_rank == 0) {
-    result=createVector(u->len-1);
-    int len=u->len-1;
-    dcopy(&len, u->data+1, &u->stride, result->data, &result->stride);
-  } else if (u->comm_rank == u->comm_size-1) {
-    result=createVector(u->len-1);
-    int len=u->len-1;
-    dcopy(&len, u->data, &u->stride, result->data, &result->stride);
-  } else {
-    result=createVector(u->len);
-    copyVector(result, u);
-  }
+  Vector result=createVector(subdomain.size);
+  dcopy(&subdomain.size, u->data+subdomain.from_disp,
+        &u->stride, result->data, &result->stride);
 
   return result;
 }
@@ -134,17 +135,11 @@ Vector collectBeforePre(Vector u)
 void collectAfterPre(Vector u, const Vector v)
 {
   int source, dest;
-  if (u->comm_rank == 0) {
-    int len=u->len-1;
-    dcopy(&len, v->data, &v->stride, u->data+1, &u->stride);
-  } else if (u->comm_rank == u->comm_size-1) {
-    int len=v->len-1;
-    dcopy(&len, v->data+1, &v->stride, u->data+1, &u->stride);
-  } else
-    copyVector(u, v);
+
+  dcopy(&subdomain.to_dest_size, v->data+subdomain.to_source_disp,
+        &v->stride, u->data+subdomain.to_dest_disp, &u->stride);
 
   // west
-  double recv;
   MPI_Cart_shift(*u->comm, 0,   -1, &source, &dest);
   MPI_Sendrecv(v->data,        1, MPI_DOUBLE, dest,   0,
                u->data, 1, MPI_DOUBLE, source, 0, *u->comm, MPI_STATUS_IGNORE);
@@ -161,13 +156,26 @@ void collectAfterPre(Vector u, const Vector v)
   u->data[0] = u->data[u->len-1] = 0.0;
 }
 
+void DiagonalizationPoisson1D(Vector u, const Vector lambda, const Matrix Q)
+{
+  Vector btilde = createVector(u->len);
+  int i;
+  MxV(btilde, Q, u, 1.0, 0.0, 'T');
+  for (i=0;i<btilde->len;++i)
+    btilde->data[i] /= (lambda->data[i]+alpha);
+  MxV(u, Q, btilde, 1.0, 0.0, 'N');
+  freeVector(btilde);
+}
+
 void Poisson1DPre(Vector u, Vector v)
 {
   Vector tmp = collectBeforePre(v);
-  if (A1D) {
-    llsolve(A1D, tmp, A1Dfactored);
-    A1Dfactored = 1;
-  } else
+  if (subdomain.A) {
+    llsolve(subdomain.A, tmp, subdomain.Afactored);
+    subdomain.Afactored = 1;
+  } else if (subdomain.Q)
+    DiagonalizationPoisson1D(tmp, subdomain.lambda, subdomain.Q);
+  else
     cgMatrixFree(Poisson1Dnoborder, tmp, 1e-10);
   collectAfterPre(u, tmp);
   freeVector(tmp);
@@ -176,7 +184,6 @@ void Poisson1DPre(Vector u, Vector v)
 int main(int argc, char** argv)
 {
   int i, j, N, flag;
-  Matrix A=NULL, Q=NULL;
   Vector b, grid, e, lambda=NULL;
   double time, sum, h, tol=1e-6;
   int rank, size;
@@ -186,19 +193,24 @@ int main(int argc, char** argv)
   init_app(argc, argv, &rank, &size);
 
   if (argc < 3) {
-    printf("need two parameters, N and flag [and tolerance]\n");
+    printf("need two parameters, N and flag [alpha] [tolerance]\n");
     printf(" - N is the problem size (in each direction\n");
     printf(" - flag = 1  -> Matrix-free Gauss-Jacobi iterations\n");
     printf(" - flag = 2  -> Matrix-free red-black Gauss-Seidel iterations\n");
     printf(" - flag = 3  -> Matrix-free CG iterations\n");
-    printf(" - flag = 4  -> Matrix-free additive schwarz preconditioned+Cholesky CG iterations\n");
-    printf(" - flag = 5  -> Matrix-free additive schwarz preconditioned+CG CG iterations\n");
+    printf(" - flag = 4  -> Matrix-free additive schwarz+Cholesky CG iterations\n");
+    printf(" - flag = 5  -> Matrix-free additive schwarz+CG preconditioned CG iterations\n");
+    printf(" - flag = 6  -> Matrix-free additive schwarz+diagonalization preconditioned CG iterations\n");
+    printf(" - alpha is the Helmholtz scaling factor\n");
+    printf(" - tolerance is the residual error tolerance in the iterative scheme\n");
     return 1;
   }
   N=atoi(argv[1]);
   flag=atoi(argv[2]);
   if (argc > 3)
-    tol=atof(argv[3]);
+    alpha = atof(argv[3]);
+  if (argc > 4)
+    tol=atof(argv[4]);
 
   if (N < 0) {
     if (rank == 0)
@@ -207,7 +219,7 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  if (flag < 0 || flag > 5) {
+  if (flag < 0 || flag > 6) {
     if (rank == 0)
       printf("invalid flag given\n");
     close_app();
@@ -233,6 +245,24 @@ int main(int argc, char** argv)
   b = createVectorMPI(N+1, &comm, 1, 1);
   e = createVectorMPI(N+1, &comm, 1, 1);
 
+  // setup subdomain
+  subdomain.A = subdomain.Q = NULL;
+  subdomain.lambda = NULL;
+  if (mpi_top_coords == 0) {
+    subdomain.size = subdomain.to_dest_size = b->len-1;
+    subdomain.from_disp = 1;
+    subdomain.to_source_disp = 0;
+    subdomain.to_dest_disp = 1;
+  } else if (mpi_top_coords == mpi_top_sizes-1) {
+    subdomain.size = b->len-1;
+    subdomain.to_dest_size = b->len-2;
+    subdomain.from_disp = 0;
+    subdomain.to_source_disp = subdomain.to_dest_disp = 1;
+  } else {
+    subdomain.size = subdomain.to_dest_size = b->len;
+    subdomain.from_disp = subdomain.to_source_disp = subdomain.to_dest_disp = 0;
+  }
+
   grid = equidistantMesh(0.0, 1.0, N);
   h = 1.0/N;
 
@@ -243,16 +273,15 @@ int main(int argc, char** argv)
   b->data[0] = b->data[b->len-1] = 0.0;
 
   if (flag == 4) {
-    int size = b->len;
-    if (b->comm_rank == 0)
-      size--;
-    if (b->comm_rank == b->comm_size-1)
-      size--;
-    A1D = createMatrix(size, size);
-    A1Dfactored = 0;
-    diag(A1D, -1, -1.0);
-    diag(A1D, 0, 2.0+alpha);
-    diag(A1D, 1, -1.0);
+    subdomain.A = createMatrix(subdomain.size, subdomain.size);
+    subdomain.Afactored = 0;
+    diag(subdomain.A, -1, -1.0);
+    diag(subdomain.A, 0, 2.0+alpha);
+    diag(subdomain.A, 1, -1.0);
+  }
+  if (flag == 6) {
+    subdomain.lambda = generateEigenValuesP1D(subdomain.size);
+    subdomain.Q = generateEigenMatrixP1D(subdomain.size);
   }
 
   int its=-1;
@@ -270,7 +299,7 @@ int main(int argc, char** argv)
     its=cgMatrixFree(Poisson1D, b, tol);
     sprintf(method,"CG");
   }
-  if (flag == 4 || flag == 5) {
+  if (flag == 4 || flag == 5 || flag == 6) {
     its=pcgMatrixFree(Poisson1D, Poisson1DPre, b, tol);
     sprintf(method,"PCG");
   }
@@ -287,17 +316,17 @@ int main(int argc, char** argv)
   if (rank == 0)
     printf("max error: %e\n", h);
   
-  if (A)
-    freeMatrix(A);
-  if (Q)
-    freeMatrix(Q);
   freeVector(grid);
   freeVector(b);
   freeVector(e);
   if (lambda)
     freeVector(lambda);
-  if (A1D)
-    freeMatrix(A1D);
+  if (subdomain.A)
+    freeMatrix(subdomain.A);
+  if (subdomain.Q)
+    freeMatrix(subdomain.Q);
+  if (subdomain.lambda)
+    freeVector(subdomain.lambda);
 
   MPI_Comm_free(&comm);
 

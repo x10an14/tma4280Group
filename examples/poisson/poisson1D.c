@@ -163,7 +163,7 @@ int main(int argc, char** argv)
   double time, sum, h, tol=1e-4;
 
   if (argc < 3) {
-    printf("need two parameters, N and flag [and tolerance]\n");
+    printf("need two parameters, N and flag [alpha] [tolerance]\n");
     printf(" - N is the problem size (in each direction\n");
     printf(" - flag = 1  -> Dense LU\n");
     printf(" - flag = 2  -> Dense Cholesky\n");
@@ -183,7 +183,10 @@ int main(int argc, char** argv)
   N=atoi(argv[1]);
   flag=atoi(argv[2]);
   if (argc > 3)
-    tol = atof(argv[3]);
+    alpha = atof(argv[3]);
+  if (argc > 4)
+    tol=atof(argv[4]);
+
   if (N < 0) {
     printf("invalid problem size given\n");
     return 2;
@@ -199,7 +202,7 @@ int main(int argc, char** argv)
     return 4;
   }
   if (flag == 12 && (N & (N-1)) != 0) {
-    printf("need a power-of-two for fst-based diagonalization\n");
+    printf("need N to be a power-of-two for fst-based diagonalization\n");
     return 5;
   }
 
