@@ -246,6 +246,43 @@ int cgMatrixFree(MatVecFunc A, Vector b, double tolerance)
   return it;
 }
 
+int cgMatrixFreeMat(MatMatFunc A, Matrix b, double tolerance)
+{
+  int it=0;
+  double rl;
+  Matrix r = cloneMatrix(b);
+  Matrix p = cloneMatrix(b);
+  Matrix buffer = cloneMatrix(b);
+  double dotp = 1000;
+  double rdr = dotp;
+  copyVector(r->as_vec, b->as_vec);
+  fillVector(b->as_vec, 0.0);
+  rl = sqrt(dotproduct(r->as_vec, r->as_vec));
+  while (it < b->as_vec->glob_len && rdr > tolerance*rl) {
+    ++it;
+    if (it == 1) {
+      copyVector(p->as_vec, r->as_vec);
+      dotp = dotproduct(r->as_vec, r->as_vec);
+    } else {
+      double dotp2 = dotproduct(r->as_vec, r->as_vec);
+      double beta = dotp2/dotp;
+      dotp = dotp2;
+      scaleVector(p->as_vec, beta);
+      axpy(p->as_vec, r->as_vec, 1.0);
+    }
+    A(buffer, p);
+    double alpha = dotp/dotproduct(p->as_vec, buffer->as_vec);
+    axpy(b->as_vec, p->as_vec, alpha);
+    axpy(r->as_vec, buffer->as_vec, -alpha);
+    rdr = sqrt(dotproduct(r->as_vec, r->as_vec));
+  }
+  freeMatrix(r);
+  freeMatrix(p);
+  freeMatrix(buffer);
+
+  return it;
+}
+
 int pcgMatrixFree(MatVecFunc A, MatVecFunc pre, Vector b, double tolerance)
 {
   int it=0;
@@ -282,6 +319,46 @@ int pcgMatrixFree(MatVecFunc A, MatVecFunc pre, Vector b, double tolerance)
   freeVector(p);
   freeVector(z);
   freeVector(buffer);
+
+  return it;
+}
+
+int pcgMatrixFreeMat(MatMatFunc A, MatMatFunc pre, Matrix b, double tolerance)
+{
+  int it=0;
+  double rl;
+  Matrix r = cloneMatrix(b);
+  Matrix p = cloneMatrix(b);
+  Matrix z = cloneMatrix(b);
+  Matrix buffer = cloneMatrix(b);
+  double dotp = 1000;
+  double rdr = dotp;
+  copyVector(r->as_vec, b->as_vec);
+  fillVector(b->as_vec, 0.0);
+  rl = sqrt(dotproduct(r->as_vec, r->as_vec));
+  while (it < b->as_vec->glob_len && rdr > tolerance*rl) {
+    pre(z,r);
+    ++it;
+    if (it == 1) {
+      copyVector(p->as_vec, z->as_vec);
+      dotp = dotproduct(r->as_vec, z->as_vec);
+    } else {
+      double dotp2 = dotproduct(r->as_vec, z->as_vec);
+      double beta = dotp2/dotp;
+      dotp = dotp2;
+      scaleVector(p->as_vec, beta);
+      axpy(p->as_vec, z->as_vec, 1.0);
+    }
+    A(buffer, p);
+    double alpha = dotp/dotproduct(p->as_vec, buffer->as_vec);
+    axpy(b->as_vec, p->as_vec, alpha);
+    axpy(r->as_vec, buffer->as_vec, -alpha);
+    rdr = sqrt(dotproduct(r->as_vec, r->as_vec));
+  }
+  freeMatrix(r);
+  freeMatrix(p);
+  freeMatrix(z);
+  freeMatrix(buffer);
 
   return it;
 }
