@@ -288,16 +288,9 @@ through parallel processing.
 \section{Results}
 
 \subsection{General about results}
-
-One can see form all the results that the runtime increases exponentially with
-<<<<<<< HEAD
-respect to k, which is natural due to k being the exponent in $n=2^k$. This
-translates to a linear increase in runtime with respect to the problem size $n$.
-=======
+One can see from all the results that the runtime increases exponentially with
 respect to $k$, which is natural due to k being the exponent in $n=2^k$. This
 translates to a linear increase in runtime with respect to the problem size $n$.
-
->>>>>>> ecb5d411206195069d40b72abc885ce44671b26e
 
 \subsection{Serial implementation}
 
@@ -320,13 +313,8 @@ report.
 \subsection{OpenMP implementation}
 
 Below are the printed plots of the runtime (in ms) of the program for different
-<<<<<<< HEAD
-values of $k$. The naming for the diffenet lines indicate number of threads used.
-1n8ppn means 8 threads were used for example.
-=======
 values of $k$. The naming for the different lines indicate number of threads used.
 $1n8ppn$ means 8 threads were used for example.
->>>>>>> ecb5d411206195069d40b72abc885ce44671b26e
 
 \begin{center}
 	\includegraphics[scale=0.4]{chart_1.png}
@@ -338,11 +326,7 @@ $1n8ppn$ means 8 threads were used for example.
 
 As you can see, there is a some improvement to be gained from using multiple
 threads, though the problem size had to be increased from the original limit of
-<<<<<<< HEAD
 $k = 14$ in order to get any visible gain.
-=======
-$k=14$ in order to get any visible gain.
->>>>>>> ecb5d411206195069d40b72abc885ce44671b26e
 
 \subsection{MPI implementation}
 
