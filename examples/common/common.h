@@ -76,8 +76,9 @@ Vector createVector(int len);
 //! \param globLen The global vector length
 //! \param comm The communicator to split the vector across
 //! \param allocdata If 0, no data is allocated to vector
+//! \param pad Whether or not to pad vector with space at ends
 //! \return The new vector
-Vector createVectorMPI(int globLen, MPI_Comm* comm, int allocdata);
+Vector createVectorMPI(int globLen, MPI_Comm* comm, int allocdata, int pad);
 #endif
 
 //! \brief Free up memory allocated to a vector
@@ -103,9 +104,17 @@ Matrix createMatrix(int n1, int n2);
 //! \param n2 The local number of columns. -1 to split
 //! \param N1 The global number of rows
 //! \param N2 The global number of columns
-//! \param comm The communicator to split the vector across
+//! \param comm The communicator to split the matrix across
 //! \return The new matrix
 Matrix createMatrixMPI(int n1, int n2, int N1, int N2, MPI_Comm* comm);
+
+//! \brief Create a parallel matrix (Fortran format) based on a cartesian topology
+//! \param N1 The global number of rows
+//! \param N2 The global number of columns
+//! \param comm The communicator to split the matrix across
+//! \param pad Whether or not to pad the boundaries of the submatrices
+//! \return The new matrix
+Matrix createMatrixMPICart(int N1, int N2, MPI_Comm* comm, int pad);
 #endif
 
 //! \brief Free up memory allocated to a matrix
@@ -180,6 +189,19 @@ void evalMeshInternal(Vector u, Vector grid, function1D func);
 //! \param border If 1, space is reserved for boundary in the matrix
 void evalMeshInternal2(Matrix u, Vector grid, function2D func, int boundary);
 
+//! \brief Evaluate a function with a displacement
+//! \param u The resulting values
+//! \param grid The grid
+//! \param func The function to evaluate
+void evalMeshDispl(Vector u, Vector grid, function1D func);
+
+//! \brief Evaluate a function with a displacement
+//! \param u The resulting values
+//! \param grid The grid
+//! \param func The function to evaluate
+//! \param mpi_top_coords Positions in grid
+void evalMesh2Displ(Matrix u, Vector grid, function2D func, int* mpi_top_coords);
+
 //! \brief Scale a vector
 //! \param alpha The scaling factor
 void scaleVector(Vector u, double alpha);
@@ -232,5 +254,32 @@ void fillVector(Vector u, double alpha);
 //! \param[in] c Number of columns in subblock
 //! \return The subblock
 Matrix subMatrix(const Matrix A, int r_ofs, int r, int c_ofs, int c);
+
+//! \brief Save a matrix to an .asc file
+//! \param A The matrix to save
+//! \param file Filename to save to
+void saveMatrix(const Matrix A, char* file);
+
+//! \brief Collect a parallel vector for operator evaluation
+//! \param u The vector to collect
+void collectVector(Vector u);
+
+//! \brief Collect a parallel matrix for operator evaluation
+//! \param u The matrix to collect
+void collectMatrix(Matrix u);
+
+//! \brief Print a vector to the terminal for inspection
+//! \param u The vector to print
+void printVector(const Vector u);
+
+//! \brief Clone a vector
+//! \param u Vector to clone
+//! \returns New clone of vector
+Vector cloneVector(const Vector u);
+
+//! \brief Clone a matrix
+//! \param u Matrix to clone
+//! \returns New clone of matrix
+Matrix cloneMatrix(const Matrix u);
 
 #endif

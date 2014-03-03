@@ -27,6 +27,7 @@
 *.lof
 *.toc
 *.lot
+*.synctex.gz
 
 #Exercise 4 specific folders
 exercises/ex4/debug/
