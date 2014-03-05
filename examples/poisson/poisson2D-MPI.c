@@ -114,6 +114,7 @@ void Poisson2D(Matrix u, Matrix v)
     }
   }
   mask(u);
+  mask(v);
 }
 
 void DiagonalizationPoisson2D(Matrix b, const Vector lambda1, const Matrix Q1,
@@ -169,52 +170,32 @@ void collectAfterPre(Matrix u, const Matrix v)
           u->data[j+subdomain.to_dest_disp[0]]+subdomain.to_dest_disp[1],
           &u->col[j]->stride);
   }
-
   // east
   MPI_Cart_shift(*u->as_vec->comm, 0,   1, &source, &dest);
-  MPI_Sendrecv(v->data[v->cols-1]+1, v->rows-2, MPI_DOUBLE, dest,   0,
-               u->data[0]+1, v->rows-2, MPI_DOUBLE, source, 0,
+  MPI_Sendrecv(v->data[v->cols-1], v->rows, MPI_DOUBLE, dest,   0,
+               u->data[0]+1, v->rows, MPI_DOUBLE, source, 0,
                *u->as_vec->comm, MPI_STATUS_IGNORE);
 
-  if (source != MPI_PROC_NULL) {
-    printf("tohere %i\n", u->as_vec->comm_rank);
+  if (source != MPI_PROC_NULL)
     axpy(u->col[1], u->col[0], 1.0);
-  }
-
-  // west
-  MPI_Cart_shift(*u->as_vec->comm,  0, -1, &source2, &dest2);
-  MPI_Sendrecv(v->data[0]+1, v->rows-2, MPI_DOUBLE, dest2,   1,
-               u->data[u->cols-1]+1, v->rows-2, MPI_DOUBLE, source2, 1, 
-               *u->as_vec->comm, MPI_STATUS_IGNORE);
-
-  if (source2 != MPI_PROC_NULL && source != MPI_PROC_NULL) {
-    printf("here %i\n", u->as_vec->comm_rank);
-    axpy(u->col[u->cols-2], u->col[u->cols-1], 1.0);
-  }
 
   Vector sendBuf = createVector(v->cols);
   Vector recvBuf = createVector(v->cols);
 
-  // north
-  MPI_Cart_shift(*u->as_vec->comm, 1, -1, &source, &dest);
-  if (dest != MPI_PROC_NULL)
-    copyVector(sendBuf, v->row[0]);
-
-  MPI_Sendrecv(sendBuf->data, sendBuf->len, MPI_DOUBLE, dest, 2,
-               recvBuf->data, recvBuf->len, MPI_DOUBLE, source, 2,
-               *u->as_vec->comm, MPI_STATUS_IGNORE);
-  if (source != MPI_PROC_NULL)
-    axpy(u->row[u->rows-2], recvBuf, 1.0);
-
   // south
-  MPI_Cart_shift(*u->as_vec->comm, 1, 1, &source, &dest);
-  if (dest != MPI_PROC_NULL)
+  MPI_Cart_shift(*u->as_vec->comm, 1, 1, &source2, &dest2);
+  if (dest2 != MPI_PROC_NULL)
     copyVector(sendBuf, v->row[v->rows-1]);
-  MPI_Sendrecv(sendBuf->data, sendBuf->len, MPI_DOUBLE, dest, 3,
-               recvBuf->data, recvBuf->len, MPI_DOUBLE, source, 3,
+
+  MPI_Sendrecv(sendBuf->data, sendBuf->len, MPI_DOUBLE, dest2, 3,
+               recvBuf->data, recvBuf->len, MPI_DOUBLE, source2, 3,
                *u->as_vec->comm, MPI_STATUS_IGNORE);
-  if (source != MPI_PROC_NULL)
-    axpy(u->row[1], recvBuf, 1.0);
+  if (source2 != MPI_PROC_NULL) {
+    double alpha=1.0;
+    int ext=(source!=MPI_PROC_NULL?1:0);
+    int len=recvBuf->len-1;
+    daxpy(&len, &alpha, recvBuf->data+ext, &recvBuf->stride, u->row[1]->data+(1+ext)*u->row[1]->stride, &u->row[1]->stride);
+  }
 
   mask(u);
 }
@@ -226,6 +207,7 @@ void Poisson2DPre(Matrix u, Matrix v)
   if (subdomain.Q[0])
     DiagonalizationPoisson2D(tmp, subdomain.lambda[0], subdomain.Q[0],
                                   subdomain.lambda[1], subdomain.Q[1]);
+
   collectAfterPre(u, tmp);
   freeMatrix(tmp);
 }
@@ -301,17 +283,16 @@ int main(int argc, char** argv)
       if (mpi_top_sizes[i] == 1)
         dec=2;
       subdomain.size[i] = subdomain.to_dest_size[i] = (i==0?b->cols:b->rows)-dec;
+      if (mpi_top_sizes[i] != 1)
+        subdomain.to_dest_size[i]--;
       subdomain.from_disp[i] = 1;
       subdomain.to_source_disp[i] = 0;
       subdomain.to_dest_disp[i] = 1;
-    } else if (mpi_top_coords[i] == mpi_top_sizes[i]-1) {
-      subdomain.size[i] = (i==0?b->cols:b->rows)-1;
-      subdomain.to_dest_size[i] = subdomain.size[i]-1;
-      subdomain.from_disp[i] = 0;
-      subdomain.to_source_disp[i] = subdomain.to_dest_disp[i] = 1;
     } else {
-      subdomain.size[i] = subdomain.to_dest_size[i] = (i==0?b->rows:b->cols);
-      subdomain.from_disp[i] = subdomain.to_source_disp[i] = subdomain.to_dest_disp[i] = 0;
+      subdomain.size[i] = (i==0?b->cols:b->rows)-(1+(mpi_top_coords[i] == mpi_top_sizes[i-1]?1:0));
+      subdomain.to_dest_size[i] = subdomain.size[i];
+      subdomain.from_disp[i] = 1;
+      subdomain.to_source_disp[i] = 0; subdomain.to_dest_disp[i] = 1;
     }
   }
 

@@ -20,9 +20,6 @@ if(MPI_FOUND)
 
   add_executable(poisson2D-MPI poisson2D-MPI.c)
   target_link_libraries(poisson2D-MPI poisson_common ${COMMON_LIBRARIES})
-
-  add_executable(test-MPI test-MPI.c)
-  target_link_libraries(test-MPI poisson_common ${COMMON_LIBRARIES})
 endif()
 
 add_executable(poisson2D poisson2D.c)
