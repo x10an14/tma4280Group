@@ -113,20 +113,21 @@ void Poisson2D(Matrix u, Matrix v)
       u->data[i][j] -= v->data[i][j+1];
     }
   }
+  mask(u);
 }
 
 void DiagonalizationPoisson2D(Matrix b, const Vector lambda1, const Matrix Q1,
                               const Vector lambda2, const Matrix Q2)
 {
   int i,j;
-  Matrix ut = createMatrix(b->rows, Q2->cols);
-  MxM(ut, b, Q2, 1.0, 0.0, 'N', 'N');
-  MxM(b, Q1, ut, 1.0, 0.0, 'T', 'N');
+  Matrix ut = createMatrix(b->rows, Q1->rows);
+  MxM(ut, b, Q1, 1.0, 0.0, 'N', 'T');
+  MxM(b, Q2, ut, 1.0, 0.0, 'N', 'N');
   for (j=0;j<b->cols;++j)
     for (i=0;i<b->rows;++i)
-      b->data[j][i] /= (lambda1->data[i]+lambda2->data[j]+alpha);
-  MxM(ut, b, Q2, 1.0, 0.0, 'N', 'T');
-  MxM(b, Q1, ut, 1.0, 0.0, 'N', 'N');
+      b->data[j][i] /= (lambda2->data[i]+lambda1->data[j]+alpha);
+  MxM(ut, Q2, b, 1.0, 0.0, 'T', 'N');
+  MxM(b, ut, Q1, 1.0, 0.0, 'N', 'N');
   freeMatrix(ut);
 }
 
@@ -145,31 +146,12 @@ SchwarzSubdomain subdomain;
 
 Matrix collectBeforePre(Matrix u)
 {
-  int i,j,k;
-/*  if (u->as_vec->comm_rank == 3) {*/
-/*    for (i=0;i<u->rows;++i) {*/
-/*      for (j=0;j<u->cols;++j)*/
-/*        printf("%f ", u->data[j][i]);*/
-/*      printf("\n");*/
-/*    }*/
-/*    printf("------\n");*/
-/*  }*/
-/*  MPI_Barrier(*u->as_vec->comm);*/
-/*  collectMatrix(u);*/
-/*  MPI_Barrier(*u->as_vec->comm);*/
-/*  if (u->as_vec->comm_rank == 3) {*/
-/*    for (i=0;i<u->rows;++i) {*/
-/*      for (j=0;j<u->cols;++j)*/
-/*        printf("%f ", u->data[j][i]);*/
-/*      printf("\n");*/
-/*    }*/
-/*    printf("------\n");*/
-/*  }*/
-/*  exit(1);*/
-  Matrix result=createMatrix(subdomain.size[0], subdomain.size[1]);
+  int j;
+  collectMatrix(u);
+  Matrix result=createMatrix(subdomain.size[1], subdomain.size[0]);
   for (j=0;j<result->cols;++j) {
-    dcopy(&subdomain.size[0], u->data[j+subdomain.from_disp[1]]+subdomain.from_disp[0], &u->col[0]->stride,
-          result->data[j], &result->col[0]->stride);
+    dcopy(&subdomain.size[1], u->data[j+subdomain.from_disp[0]]+subdomain.from_disp[1],
+          &u->col[0]->stride, result->data[j], &result->col[0]->stride);
   }
 
   return result;
@@ -178,106 +160,61 @@ Matrix collectBeforePre(Matrix u)
 void collectAfterPre(Matrix u, const Matrix v)
 {
   int i,j;
-  int source, dest;
+  int source, dest, source2, dest2;
 
-  mask(u);
-  for (j=0;j<subdomain.to_dest_size[1];++j) {
-    dcopy(&subdomain.to_dest_size[0],
-          v->data[j+subdomain.to_source_disp[1]]+subdomain.to_source_disp[0],
+  for (j=0;j<subdomain.to_dest_size[0];++j) {
+    dcopy(&subdomain.to_dest_size[1],
+          v->data[j+subdomain.to_source_disp[0]]+subdomain.to_source_disp[1],
           &v->col[j]->stride,
-          u->data[j+subdomain.to_dest_disp[1]]+subdomain.to_dest_disp[0],
+          u->data[j+subdomain.to_dest_disp[0]]+subdomain.to_dest_disp[1],
           &u->col[j]->stride);
   }
 
-/*  if (u->as_vec->comm_rank == 0) {*/
-/*    for (i=0;i<u->rows;++i) {*/
-/*      for (j=0;j<u->cols;++j)*/
-/*        printf("%f ", u->data[j][i]);*/
-/*      printf("\n");*/
-/*    }*/
-/*    printf("------\n");*/
-/*  }*/
-/*  if (u->as_vec->comm_rank == 0) {*/
-/*    for (i=0;i<v->rows;++i) {*/
-/*      for (j=0;j<v->cols;++j)*/
-/*        printf("%f ", v->data[j][i]);*/
-/*      printf("\n");*/
-/*    }*/
-/*    printf("------\n");*/
-/*  }*/
-
-  // south
-  MPI_Cart_shift(*u->as_vec->comm, 1,   -1, &source, &dest);
-  MPI_Sendrecv(v->data[v->cols-1], v->rows, MPI_DOUBLE, dest,   0,
-               u->data[0], v->rows, MPI_DOUBLE, source, 0,
+  // east
+  MPI_Cart_shift(*u->as_vec->comm, 0,   1, &source, &dest);
+  MPI_Sendrecv(v->data[v->cols-1]+1, v->rows-2, MPI_DOUBLE, dest,   0,
+               u->data[0]+1, v->rows-2, MPI_DOUBLE, source, 0,
                *u->as_vec->comm, MPI_STATUS_IGNORE);
-  if (source > -1)
+
+  if (source != MPI_PROC_NULL) {
+    printf("tohere %i\n", u->as_vec->comm_rank);
     axpy(u->col[1], u->col[0], 1.0);
-
-/*  mask(u);*/
-/*  if (u->as_vec->comm_rank == 1) {*/
-/*    for (i=0;i<u->rows;++i) {*/
-/*      for (j=0;j<u->cols;++j)*/
-/*        printf("%f ", u->data[j][i]);*/
-/*      printf("\n");*/
-/*    }*/
-/*    printf("------\n");*/
-/*  }*/
-/*  exit(1);*/
-
-  // north
-  MPI_Cart_shift(*u->as_vec->comm,  1,   1, &source, &dest);
-  MPI_Sendrecv(v->data[0], v->rows, MPI_DOUBLE, dest,   1,
-               u->data[u->cols-1],         v->rows, MPI_DOUBLE, source, 1, 
-               *u->as_vec->comm, MPI_STATUS_IGNORE);
-  if (source > -1)
-    axpy(u->col[u->cols-2], u->col[u->cols-1], 1.0);
-
-  Vector sendBuf = createVector(v->cols-2);
-  Vector recvBuf = createVector(v->cols-2);
+  }
 
   // west
-  MPI_Cart_shift(*u->as_vec->comm, 0, -1, &source, &dest);
-  if (dest != MPI_PROC_NULL) {
-    dcopy(&sendBuf->len, v->row[0]->data+v->row[0]->stride, &v->row[0]->stride,
-          sendBuf->data, &sendBuf->stride);
+  MPI_Cart_shift(*u->as_vec->comm,  0, -1, &source2, &dest2);
+  MPI_Sendrecv(v->data[0]+1, v->rows-2, MPI_DOUBLE, dest2,   1,
+               u->data[u->cols-1]+1, v->rows-2, MPI_DOUBLE, source2, 1, 
+               *u->as_vec->comm, MPI_STATUS_IGNORE);
+
+  if (source2 != MPI_PROC_NULL && source != MPI_PROC_NULL) {
+    printf("here %i\n", u->as_vec->comm_rank);
+    axpy(u->col[u->cols-2], u->col[u->cols-1], 1.0);
   }
+
+  Vector sendBuf = createVector(v->cols);
+  Vector recvBuf = createVector(v->cols);
+
+  // north
+  MPI_Cart_shift(*u->as_vec->comm, 1, -1, &source, &dest);
+  if (dest != MPI_PROC_NULL)
+    copyVector(sendBuf, v->row[0]);
+
   MPI_Sendrecv(sendBuf->data, sendBuf->len, MPI_DOUBLE, dest, 2,
                recvBuf->data, recvBuf->len, MPI_DOUBLE, source, 2,
                *u->as_vec->comm, MPI_STATUS_IGNORE);
-  if (source != MPI_PROC_NULL) {
-    double alpha=1.0;
-    daxpy(&recvBuf->len, &alpha, recvBuf->data, &recvBuf->stride,
-          u->row[u->rows-2]->data+u->row[u->rows-2]->stride, &u->row[u->rows-2]->stride);
-  }
+  if (source != MPI_PROC_NULL)
+    axpy(u->row[u->rows-2], recvBuf, 1.0);
 
-  // east
-  MPI_Cart_shift(*u->as_vec->comm, 0, 1, &source, &dest);
-  if (dest != MPI_PROC_NULL) {
-    dcopy(&sendBuf->len, v->row[v->rows-1]->data+v->row[0]->stride,
-          &v->row[v->rows-1]->stride,
-          sendBuf->data, &sendBuf->stride);
-  }
+  // south
+  MPI_Cart_shift(*u->as_vec->comm, 1, 1, &source, &dest);
+  if (dest != MPI_PROC_NULL)
+    copyVector(sendBuf, v->row[v->rows-1]);
   MPI_Sendrecv(sendBuf->data, sendBuf->len, MPI_DOUBLE, dest, 3,
                recvBuf->data, recvBuf->len, MPI_DOUBLE, source, 3,
                *u->as_vec->comm, MPI_STATUS_IGNORE);
-  if (source != MPI_PROC_NULL) {
-    double alpha=1.0;
-    daxpy(&recvBuf->len, &alpha, recvBuf->data, &recvBuf->stride,
-          u->row[1]->data+u->row[1]->stride, &u->row[1]->stride);
-  }
-
-/*  mask(u);*/
-/*  if (u->as_vec->comm_rank == 0) {*/
-/*    for (i=0;i<u->rows;++i) {*/
-/*      for (j=0;j<u->cols;++j)*/
-/*        printf("%f ", u->data[j][i]);*/
-/*      printf("\n");*/
-/*    }*/
-/*    printf("------\n");*/
-/*  }*/
-/*  exit(1);*/
-
+  if (source != MPI_PROC_NULL)
+    axpy(u->row[1], recvBuf, 1.0);
 
   mask(u);
 }
@@ -285,6 +222,7 @@ void collectAfterPre(Matrix u, const Matrix v)
 void Poisson2DPre(Matrix u, Matrix v)
 {
   Matrix tmp = collectBeforePre(v);
+  mask(v);
   if (subdomain.Q[0])
     DiagonalizationPoisson2D(tmp, subdomain.lambda[0], subdomain.Q[0],
                                   subdomain.lambda[1], subdomain.Q[1]);
@@ -362,12 +300,12 @@ int main(int argc, char** argv)
       int dec=1;
       if (mpi_top_sizes[i] == 1)
         dec=2;
-      subdomain.size[i] = subdomain.to_dest_size[i] = (i==0?b->rows:b->cols)-dec;
+      subdomain.size[i] = subdomain.to_dest_size[i] = (i==0?b->cols:b->rows)-dec;
       subdomain.from_disp[i] = 1;
       subdomain.to_source_disp[i] = 0;
       subdomain.to_dest_disp[i] = 1;
     } else if (mpi_top_coords[i] == mpi_top_sizes[i]-1) {
-      subdomain.size[i] = (i==0?b->rows:b->cols)-1;
+      subdomain.size[i] = (i==0?b->cols:b->rows)-1;
       subdomain.to_dest_size[i] = subdomain.size[i]-1;
       subdomain.from_disp[i] = 0;
       subdomain.to_source_disp[i] = subdomain.to_dest_disp[i] = 1;

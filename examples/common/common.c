@@ -227,15 +227,16 @@ Matrix createMatrixMPICart(int N1, int N2, MPI_Comm* comm, int pad)
   // allocate data
   Matrix result = (Matrix)calloc(1, sizeof(matrix_t));
   result->as_vec = createVectorMPI(N1*N2, comm, 0, 0);
-  result->rows = split[0][coords[0]]+pads[0];
-  result->cols = split[1][coords[1]]+pads[1];
+  result->rows = split[1][coords[1]]+pads[1];
+  result->cols = split[0][coords[0]]+pads[0];
   result->as_vec->len = result->rows*result->cols;
+  MPI_Comm_rank(*comm,&result->as_vec->comm_rank);
   result->glob_rows = N1;
   result->glob_cols = N2;
   result->data = calloc(result->cols,sizeof(double*));
   result->as_vec->data = result->data[0] = calloc(result->as_vec->len,sizeof(double));
   for (i=1; i < result->cols; ++i)
-    result->data[i] = result->data[i-1] + split[0][coords[0]]+pads[0];
+    result->data[i] = result->data[i-1] + result->rows;
 
   // allocate column vectors
   result->col = calloc(result->cols,sizeof(Vector));
@@ -244,6 +245,7 @@ Matrix createMatrixMPICart(int N1, int N2, MPI_Comm* comm, int pad)
     result->col[i]->data = result->data[i];
     result->col[i]->len = result->rows;
     result->col[i]->stride = 1;
+    result->col[i]->comm_rank = result->as_vec->comm_rank;
     result->col[i]->displ = calloc(dims[1],sizeof(int));
     memcpy(result->col[i]->displ, disp[1], dims[1]*sizeof(int));
     result->col[i]->sizes = calloc(dims[1],sizeof(int));
@@ -257,6 +259,7 @@ Matrix createMatrixMPICart(int N1, int N2, MPI_Comm* comm, int pad)
     result->row[i]->data = result->data[0]+i;
     result->row[i]->stride = result->rows;
     result->row[i]->len = result->cols;
+    result->row[i]->comm_rank = result->as_vec->comm_rank;
     result->row[i]->displ = calloc(dims[0],sizeof(int));
     memcpy(result->row[i]->displ, disp[0], dims[0]*sizeof(int));
     result->row[i]->sizes = calloc(dims[0],sizeof(int));
@@ -351,7 +354,7 @@ void MxM(Matrix U, Matrix A, Matrix V, double alpha, double beta,
     ldb = K;
   }
   else {
-    N = A->rows;
+    N = V->rows;
     K = V->cols;
     ldb = N;
   }
@@ -395,13 +398,13 @@ void evalMeshDispl(Vector u, Vector grid, function1D func)
 void evalMesh2Displ(Matrix b, Vector grid, function2D func, int* mpi_top_coords)
 {
   int i, j;
-  for (j=1;j<b->cols-1;++j) {
-    int dispy=mpi_top_coords[1]==0?0:1;
-    for (i=1;i<b->rows-1;++i) {
-      int dispx=mpi_top_coords[0]==0?0:1;
+  for (i=1;i<b->cols-1;++i) {
+    int dispx=mpi_top_coords[0]==0?0:1;
+    for (j=1;j<b->rows-1;++j) {
+      int dispy=mpi_top_coords[1]==0?0:1;
       double x = grid->data[i+b->row[0]->displ[mpi_top_coords[0]]-dispx];
       double y = grid->data[j+b->col[0]->displ[mpi_top_coords[1]]-dispy];
-      b->data[j][i] = func(x,y);
+      b->data[i][j] = func(x,y);
     }
   }
 }
@@ -560,24 +563,23 @@ void collectMatrix(Matrix u)
 #ifdef HAVE_MPI
   int source, dest;
 
-  // south
-  MPI_Cart_shift(*u->as_vec->comm, 1, 1, &source, &dest);
+  // east
+  MPI_Cart_shift(*u->as_vec->comm, 0, 1, &source, &dest);
   MPI_Sendrecv(u->data[u->cols-2], u->rows, MPI_DOUBLE, dest, 0,
                u->data[0], u->rows, MPI_DOUBLE, source, 0,
                *u->as_vec->comm, MPI_STATUS_IGNORE);
 
-  // north
-  MPI_Cart_shift(*u->as_vec->comm, 1, -1, &source, &dest);
+  // west
+  MPI_Cart_shift(*u->as_vec->comm, 0, -1, &source, &dest);
   MPI_Sendrecv(u->data[1], u->rows, MPI_DOUBLE, dest, 1,
                u->data[u->cols-1], u->rows, MPI_DOUBLE, source, 1,
                *u->as_vec->comm, MPI_STATUS_IGNORE);
 
-
   Vector sendBuf = createVector(u->cols);
   Vector recvBuf = createVector(u->cols);
 
-  // west
-  MPI_Cart_shift(*u->as_vec->comm, 0, -1, &source, &dest);
+  // north
+  MPI_Cart_shift(*u->as_vec->comm, 1, -1, &source, &dest);
   if (dest != MPI_PROC_NULL)
     copyVector(sendBuf,u->row[1]);
   MPI_Sendrecv(sendBuf->data, sendBuf->len, MPI_DOUBLE, dest, 2,
@@ -586,8 +588,8 @@ void collectMatrix(Matrix u)
   if (source != MPI_PROC_NULL)
     copyVector(u->row[u->rows-1], recvBuf);
 
-  // east
-  MPI_Cart_shift(*u->as_vec->comm, 0, 1, &source, &dest);
+  // south
+  MPI_Cart_shift(*u->as_vec->comm, 1, 1, &source, &dest);
   if (dest != MPI_PROC_NULL)
     copyVector(sendBuf, u->row[u->rows-2]);
   MPI_Sendrecv(sendBuf->data, sendBuf->len, MPI_DOUBLE, dest, 2,
