@@ -1,5 +1,5 @@
 /*
-  C-program to solve the two-dimensional Poisson equation on 
+  C-program to solve the two-dimensional Poisson equation on
   a unit square using one-dimensional eigenvalue decompositions
   and fast sine transforms
 
@@ -60,6 +60,11 @@ main(int argc, char **argv )
     }
   }
   for (j=0; j < m; j++) {
+  	/*b = input og result matrise,
+  	*n = størrelse av b
+  	*z = midlertidig matrise nødvendig for å kalkulere med imaginære tall
+  	*nn = størrelsen av z, = 4*n
+  	*/
     fst_(b[j], &n, z, &nn);
   }
 
@@ -68,13 +73,13 @@ main(int argc, char **argv )
   for (i=0; i < m; i++) {
     fstinv_(bt[i], &n, z, &nn);
   }
-  
+
   for (j=0; j < m; j++) {
     for (i=0; i < m; i++) {
       bt[j][i] = bt[j][i]/(diag[i]+diag[j]);
     }
   }
-  
+
   for (i=0; i < m; i++) {
     fst_(bt[i], &n, z, &nn);
   }
