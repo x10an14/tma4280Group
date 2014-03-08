@@ -7,6 +7,9 @@
 #include "../../examples/poisson/solvers.h"
 #include "../../examples/poisson/possioncommon.h"
 
+//! \brief value of pi
+#define M_PI 3.14159265358979323846
+
 /*Whatever we want specific to our solution/implementation.*/
 
 MPI_Comm WorldComm;
@@ -21,6 +24,7 @@ typedef vector_t *Vector;
 typedef struct{
 	double **data;
 	Vector as_vec;
+	Vector *row;
 	MPI_Comm *comm;
 	int comm_size;
 	int comm_rank;
