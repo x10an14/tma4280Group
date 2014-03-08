@@ -116,9 +116,30 @@ int main(int argc, char *argv[]){
 	diagMat->data = (double*) calloc(matrixSize, sizeof(double));
 	f_TempMat->data = (double*) malloc(matrixTempSize*sizeof(double));
 
+	/*	The rest of the initialization of structures, making sure that the matrix and diagMat variables only contain what each process needs	*/
 
-		MPI_Comm_free(&WorldComm);
-		MPI_Comm_free(&SelfComm);
-		MPI_Finalize();
+	/*		Implementation of the fst_() call			*/
+
+	/*		Implementation of the transpose				*/
+
+	/*		Implementation of the fstinv_() call		*/
+
+	/*		Implementation of the "tensor" operation		*/
+
+	/*	//Namely this:
+	*	bt[i][j] = bt[i][j] / (diag[i] + diag[j])
+	*/
+
+	/*		Implementation of the fst_() call			*/
+
+	/*		Implementation of the transpose				*/
+
+	/*		Implementation of the fstinv_() call		*/
+
+	/*		Closing up and freeing variables			*/
+
+	MPI_Comm_free(&WorldComm);
+	MPI_Comm_free(&SelfComm);
+	MPI_Finalize();
 	return 0;
 }
