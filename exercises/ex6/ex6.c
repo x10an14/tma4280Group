@@ -8,6 +8,10 @@ Vector createVector(int len){
 
 Matrix createMatrix(int rows, int cols){
 	Matrix result = (Matrix) calloc(1, sizof(matrix_t));
+	result->cols = cols;
+	result->rows = rows;
+	result->comm_size = 1;
+	result->comm_rank = 0;
 	result->as_vec = createVector(rows*cols);
 
 }
@@ -30,13 +34,13 @@ void splitVector(int globLen, int size, int** len, int** displ){
 	}
 }
 
-/* DO NOT USE THE COMMONS LIBRARY!
+/*DO NOT USE THE COMMONS LIBRARY!
 *IF ANYTHING IN THE COMMONS LIBRARY IS OF USE, COPY IT OVER.
 *THE COMMONS LIBRARY HAS TOO MUCH "UNNECESSARY DATA/JUNK"
 */
 
 int int main(int argc, char *argv[]){
-	Matrix matrix, tempMatrix, transposedMatrix;
+	Matrix matrix, tempMatrix, transposedMatrix, fMatrix, fTempMatrix;
 	int *size, *displacement;
 	int matrixSize, matrixTempSize, n, rank = 0, mpiSize = 1;
 	init_app(&argc, argv);
@@ -53,6 +57,7 @@ int int main(int argc, char *argv[]){
 
 	//Do something with splitVector and *size and *displacement
 	splitVector(matrixSize, mpiSize, &size, &displacement);
+
 
 	//We need to set up the rest of the variables and use the data given to us by splitVector in a smart manner.
 
