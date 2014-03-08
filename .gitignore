@@ -40,5 +40,7 @@ exercises/ex5/debug/
 exercises/ex5/release/
 
 #Exercise 6 specific folders
+exercises/ex6/ex/debug/
+exercises/ex6/ex/release/
 exercises/ex6/debug/
 exercises/ex6/release/

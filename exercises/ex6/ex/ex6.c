@@ -1,13 +1,18 @@
 #include "ex6.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <mpi.h>
 
 Vector createVector(int len){
-	Vector result = (Vector) calloc(1, sizof(vector_t));
+	Vector result = (Vector) calloc(1, sizeof(vector_t));
 	result->len = len;
 	result->data = NULL;
+
+	return result;
 }
 
 Matrix createMatrix(int rows, int cols){
-	Matrix result = (Matrix) calloc(1, sizof(matrix_t));
+	Matrix result = (Matrix) calloc(1, sizeof(matrix_t));
 
 	result->cols = cols;
 	result->rows = rows;
@@ -31,7 +36,7 @@ Matrix createMatrix(int rows, int cols){
 		result->row[i]->data = result->data[i];
 	}
 
-	return result:
+	return result;
 }
 
 //Copied from common.c, minor edits.
@@ -39,7 +44,7 @@ void splitVector(int globLen, int size, int** len, int** displ){
 	*len = calloc(size,sizeof(int));
 	*displ = calloc(size,sizeof(int));
 
-	for (i=0; i < size; ++i){
+	for (int i=0; i < size; ++i){
 		(*len)[i] = globLen/size;
 
 		if (globLen % size && i >= (size - (globLen % size))){
@@ -57,38 +62,63 @@ void splitVector(int globLen, int size, int** len, int** displ){
 *THE COMMONS LIBRARY HAS TOO MUCH "UNNECESSARY DATA/JUNK"
 */
 
-int int main(int argc, char *argv[]){
-	Matrix matrix, tempMat, transpMat, f_Mat, f_TempMat, diagMat;
-	int *size, *displacement;
-	int matrixSize, matrixTempSize, n, rank, mpiSize;
-	double h = 1.0;
-	init_app(&argc, argv, &rank, &mpiSize);
+int main(int argc, char *argv[]){
+	Matrix	/*The "work"-matrix*/matrix, \
+			/*The transposed version of the matrix*/transpMat;
+	Vector	/*The diagonal matrix*/diagMat, \
+			/*The fourier-transform temp-store-matrix*/f_TempMat;
 
-	if (argc < 2 && argv[1] > 4 && argv[1]%2 == 0){
+	//Lists keeping division of MPI labour-division of processes
+	int *size, *displacement;
+
+	//Just general variables used in each process.
+	int matrixSize, matrixTempSize, n, rank, mpiSize, acquired;
+	double h = 1.0;
+
+	//General MPI startup/setup
+	#ifdef HAVE_OPENMP
+	MPI_Init_thread(&argc, &argv, MPI_THREAD_FUNNELED, &acquired);
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	#else
+	MPI_init(&argc, &argv);
+	#endif
+	MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	MPI_Comm_dup(MPI_COMM_WORLD, &WorldComm);
+	MPI_Comm_dup(MPI_COMM_SELF, &SelfComm);
+
+	//Check for comandline argument
+	if (argc < 2 && atoi(argv[1]) <= 4 && atoi(argv[1])%2 != 0){
 		printf("Need a problem size! And it should be a power of 2 greater than 4!\n");
-		return;
+		//MPI_Comm_free(&WorldComm);
+		//MPI_Comm_free(&SelfComm);
+		MPI_Finalize();
+		return -1;
 	}
 
 	/*			Initializing variables		*/
-
-	//We need to set up the rest of the variables and use the data given to us by splitVector in a smart manner.
-	//Do something with splitVector and *size and *displacement
-	splitVector(matrixSize, mpiSize, &size, &displacement);
 
 	n = atoi(argv[1]);
 	matrixSize = n-1;
 	matrixTempSize = matrixSize*4;
 	h /= n;
 
+	//We need to set up the rest of the variables and use the data given to us by splitVector in a smart manner.
+	//Do something with splitVector and *size and *displacement
+	splitVector(matrixSize, mpiSize, &size, &displacement);
+
 	/*			Initializing structures		*/
 	//Use a MPI communicator? We have two defined in the .h file. Maybe make createMatrix() set that for us.
-	diagMat = createVector(m);
-	matrix = createMatrix(m, m);
-	transpMat = createMatrix(m, m);
+	diagMat = createVector(matrixSize);
 	f_TempMat = createVector(matrixTempSize);
-	diagMat->data = (double*) calloc(m, sizeof(double));
+	matrix = createMatrix(matrixSize, matrixSize);
+	transpMat = createMatrix(matrixSize, matrixSize);
+	diagMat->data = (double*) calloc(matrixSize, sizeof(double));
 	f_TempMat->data = (double*) malloc(matrixTempSize*sizeof(double));
 
 
+		MPI_Comm_free(&WorldComm);
+		MPI_Comm_free(&SelfComm);
+		MPI_Finalize();
 	return 0;
 }
