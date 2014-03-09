@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
 	MPI_Comm_dup(MPI_COMM_SELF, &SelfComm);
 
 	//Check for comandline argument
-	if (argc < 2 && atoi(argv[1]) <= 4 && atoi(argv[1])%2 != 0){
+	if (argc < 2 || atoi(argv[1]) <= 4 || atoi(argv[1])%2 != 0){
 		printf("Need a problem size! And it should be a power of 2 greater than 4!\n");
 		//MPI_Comm_free(&WorldComm);
 		//MPI_Comm_free(&SelfComm);
@@ -127,7 +127,7 @@ int main(int argc, char *argv[]){
 	/*		Implementation of the "tensor" operation		*/
 
 	/*	//Namely this:
-	*	bt[i][j] = bt[i][j] / (diag[i] + diag[j])
+	*	transpMat->data[i][j] /= (diagMat->data[i] + diagMat->data[j]);
 	*/
 
 	/*		Implementation of the fst_() call			*/
