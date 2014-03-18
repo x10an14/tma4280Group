@@ -95,6 +95,40 @@ void printIntVector(int *ptr, int length){
 	printf("]\n");
 }
 
+/* Arranges the sendbuffer properly before sending
+ * Assumes the rows are arranged continually in the vector
+ */
+void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, int rowcnt, int *sizearr, int sizearrlength)
+{
+	int elements, counter, process;
+	
+	for(int i = 0; i < rowcnt; i++){	// One pass per row
+		
+		process = 0; 
+		elements = sizearr[process];	// Elements to go to the first process
+		counter  = 0;					// Counter for how many elements have been moved
+		
+		for(int j = 0; j < rowlenght; j++){	// Iterate through row
+			if ((counter + 1 > elements) && !(process > sizearrlength -1)) 
+			{ 
+				counter = 0;
+				process++;
+				elements = sizearr[process];
+			}
+			
+			sendbuf[1*i + j] = vector[];
+		}				
+	}
+}
+
+/* Function to re-arrange the receive-buffer into a correctly continous piece of memory (vector) 
+ * 
+ */
+void recvBufRearr(double *recvbuf, double *vector, double *rows, int rcvprrwprprc, int rowlength, int rowcnt, int processes)
+{
+	// TODO	
+}
+
 #define TEST 0
 
 /*DO NOT USE THE COMMONS LIBRARY!
