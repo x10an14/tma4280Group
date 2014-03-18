@@ -42,8 +42,8 @@ add_library(common ../fst.f)
 # The C based ex6 application
 add_executable(ex6 ex6.c)
 
-# The Fortran based poisson application
-add_executable(poisson-f ../poisson.f)
+## The Fortran based poisson application
+#add_executable(poisson-f ../poisson.f)
 
 # Link to libraries
 target_link_libraries(ex6 common ${DEPLIBS_C})
@@ -52,4 +52,4 @@ target_link_libraries(ex6 common ${DEPLIBS_C})
 set_target_properties(ex6 PROPERTIES LINKER_LANGUAGE C)
 
 # Link to libraries
-target_link_libraries(poisson-f common ${DEPLIBS_F})
+target_link_libraries(common ${DEPLIBS_F})

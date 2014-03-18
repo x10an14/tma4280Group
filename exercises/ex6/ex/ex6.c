@@ -1,9 +1,10 @@
 #include "ex6.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <mpi.h>
 
-/* THIS FUNCTION DOES NOT ALLOCATE ACTUAL VECTOR DATA MEMORY! */
+/* This function does NOT allocate the vector memory data! */
 Vector createVector(int len){
 	Vector result = (Vector) calloc(1, sizeof(vector_t));
 	result->len = len;
@@ -49,7 +50,7 @@ void splitVector(int globLen, int size, int** len, int** displ){
 	for (int i=0; i < size; ++i){
 		(*len)[i] = globLen/size;
 
-		if (globLen % size && i >= (size - (globLen % size))){
+		if (globLen % size && i >= (size - globLen % size)){
 			(*len)[i]++;
 		}
 
@@ -95,6 +96,7 @@ void printIntVector(int *ptr, int length){
 	printf("]\n");
 }
 
+
 /* Arranges the sendbuffer properly before sending
  * Assumes the rows are arranged continually in the vector
  */
@@ -129,7 +131,31 @@ void recvBufRearr(double *recvbuf, double *vector, double *rows, int rcvprrwprpr
 	// TODO	
 }
 
-#define TEST 0
+void freeVector(Vector inpt){
+	free(inpt->data);
+	free(inpt);
+}
+
+void freeMatrix(Matrix inpt){
+	for (int i = 0; i < inpt->rows; ++i){
+		free(inpt->row[i]);
+	}
+	free(inpt->row);
+	free(inpt->as_vec);
+	free(inpt->data[0]);
+	free(inpt->data);
+	free(inpt);
+}
+
+void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
+	*h = 1.0/n;
+	*h *= *h;
+	*globRowLen = n-1;
+	*tempMatSz = n*4;
+}
+
+#define TEST 1
+int print = 0;
 
 /*DO NOT USE THE COMMONS LIBRARY!
 *IF ANYTHING IN THE COMMONS LIBRARY IS OF USE, COPY IT OVER.
@@ -140,92 +166,120 @@ int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
 			/*The transposed version of the matrix*/transpMat;
 	Vector	/*The diagonal matrix*/diagMat, \
-			/*The fourier-transform temp-store-matrix*/f_TempMat;
+			/*The fourier-transform temp-store-matrix*/f_tempMat;
 
-	//Lists keeping division of MPI labour-division of processes
-	int *size, *displacement;
+	//Lists for holding how many rows per process (due to MPI division of labour), AKA MPI variables...
+	int *size, *displacement, rank = 0, mpiSize = 1, acquired;
 
-	//Just general variables used in each process.
-	int matrixSize, matrixTempSize, n = 0, rank = 0, mpiSize = 1, acquired;
-	double h = 1.0;
+	//Global variables
+	double h;
+	int globRowLen, n;
 
-	//General MPI startup/setup
+	//Process specific variables
+	int tempMatSz, diagPos, locMatSz, procRowAmnt;
+
+	/*		General MPI startup/setup		*/
 	#ifdef HAVE_OPENMP
 	MPI_Init_thread(&argc, &argv, MPI_THREAD_FUNNELED, &acquired);
 	#else
-	MPI_init(&argc, &argv);
+	MPI_Init(&argc, &argv);
 	#endif
 	MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	MPI_Comm_dup(MPI_COMM_WORLD, &WorldComm);
 	MPI_Comm_dup(MPI_COMM_SELF, &SelfComm);
 
-	//Check for comandline argument
+	//Check for correct commandline argument
+	//Remove the section comments in the if-test when we want to test "live"/production/release version.
 	if (argc < 2 /*|| atoi(argv[1]) < 4 || atoi(argv[1])%2 != 0*/){
 		printf("Need a problem size! And it should be a power of 2 greater than or equal to 4!\n");
-		//MPI_Comm_free(&WorldComm);
-		//MPI_Comm_free(&SelfComm);
 		MPI_Finalize();
 		return -1;
-	} else{
-		n = atoi(argv[1]);
 	}
 
 	/*			Initializing variables		*/
-	h /= (double) n;
-	matrixSize = n-1;
-	splitVector(matrixSize, mpiSize, &size, &displacement);
+	n = atoi(argv[1]);
+	VariableInitz(n, &h, &globRowLen, &tempMatSz);
+	splitVector(globRowLen, mpiSize, &size, &displacement);
+	procRowAmnt = size[rank];
+	locMatSz = globRowLen*procRowAmnt;
+	diagPos = (globRowLen*displacement[rank]);
 
-	if(rank == TEST){
-		printf("n: %i\nmatrixSize: %i\nmpiSize: %i\n\n", n, matrixSize, mpiSize);
+	if(rank == TEST && print){
+		printf("n: %i\nglobRowLen: %i\nmpiSize: %i\n\n", n, globRowLen, mpiSize);
 		printf("Size vector:\n");
 		printIntVector(size, mpiSize);
 		printf("Displacement vector:\n");
 		printIntVector(displacement, mpiSize);
+		printf("\nSize of rank %i matrix: %ix%i\n", TEST, n-1, size[TEST]);
 	}
-
-	matrixSize = size[rank];
-	matrixTempSize = matrixSize*4;
 
 	/*			Initializing structures		*/
-	//Use a MPI communicator? We have two defined in the .h file. Maybe make createMatrix() set that for us.
-	diagMat = createVector(matrixSize);
-	f_TempMat = createVector(matrixTempSize);
-	matrix = createMatrix(matrixSize, matrixSize);
-	transpMat = createMatrix(matrixSize, matrixSize);
-	diagMat->data = (double*) malloc(matrixSize*sizeof(double));
-	f_TempMat->data = (double*) malloc(matrixTempSize*sizeof(double));
+	diagMat = createVector(locMatSz);
+	f_tempMat = createVector(tempMatSz);
+	matrix = createMatrix(procRowAmnt, globRowLen);
+	transpMat = createMatrix(procRowAmnt, globRowLen);
+	diagMat->data = (double*) malloc(locMatSz*sizeof(double));
+	f_tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 
-
-	if(rank == TEST){
-
+	for (int i = 0; i < locMatSz; ++i){
+		//Filling the diagonal matrix
+		diagMat->data[i] = (double) 2.0*(1-cos(diagPos + 1)*M_PI/(double)n);
+		++diagPos;
+		//Filling up the work-matrix
+		matrix->as_vec->data[i] = h;
 	}
 
+	if(rank == TEST && print){
+		printf("Diagonal matrix for rank == %i:\n", TEST);
+		printDoubleVector(diagMat->data, locMatSz);
+	}
 
-	/*	The rest of the initialization of structures, making sure that the matrix and diagMat variables only contain what each process needs	*/
+	/*		Implementation of the first fst_() call			*/
+	for (int i = 0; i < procRowAmnt; ++i){
+		fst_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+	}
 
-	/*		Implementation of the fst_() call			*/
+	/*		Implementation of the first transpose				*/
 
-	/*		Implementation of the transpose				*/
+	//ERLEND! =DDD
 
-	/*		Implementation of the fstinv_() call		*/
+	/*		Implementation of the first fstinv_() call		*/
+	for (int i = 0; i < procRowAmnt; ++i){
+		fstinv_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+	}
 
 	/*		Implementation of the "tensor" operation		*/
+	for (int i = 0; i < procRowAmnt; ++i){
+		for (int j = 0; j < procRowAmnt; ++j){
+			transpMat->data[i][j] /= (diagMat->data[j] + diagMat->data[i]);
+		}
+	}
 
-	/*	//Namely this:
-	*	transpMat->data[i][j] /= (diagMat->data[i] + diagMat->data[j]);
-	*/
+	/*		Implementation of the second fst_() call			*/
+	for (int i = 0; i < procRowAmnt; ++i){
+		fst_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+	}
 
-	/*		Implementation of the fst_() call			*/
+	/*		Implementation of the second transpose				*/
 
-	/*		Implementation of the transpose				*/
+	//ERLEND! =DDD
 
-	/*		Implementation of the fstinv_() call		*/
+	/*		Implementation of the second fstinv_() call		*/
+	for (int i = 0; i < procRowAmnt; ++i){
+		fstinv_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+	}
 
 	/*		Closing up and freeing variables			*/
+	freeMatrix(matrix);
+	freeMatrix(transpMat);
+	freeVector(diagMat);
+	freeVector(f_tempMat);
 
-	MPI_Comm_free(&WorldComm);
-	MPI_Comm_free(&SelfComm);
-	MPI_Finalize();
+	if(rank == 0){
+		MPI_Comm_free(&WorldComm);
+		MPI_Comm_free(&SelfComm);
+		MPI_Finalize();
+	}
 	return 0;
 }
