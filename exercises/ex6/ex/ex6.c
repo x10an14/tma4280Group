@@ -103,32 +103,32 @@ void printIntVector(int *ptr, int length){
 void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, int rowcnt, int *sizearr, int sizearrlength)
 {
 	int elements, counter, process;
-	
+
 	for(int i = 0; i < rowcnt; i++){	// One pass per row
-		
-		process = 0; 
+
+		process = 0;
 		elements = sizearr[process];	// Elements to go to the first process
 		counter  = 0;					// Counter for how many elements have been moved
-		
+
 		for(int j = 0; j < rowlenght; j++){	// Iterate through row
-			if ((counter + 1 > elements) && !(process > sizearrlength -1)) 
-			{ 
+			if ((counter + 1 > elements) && !(process > sizearrlength -1))
+			{
 				counter = 0;
 				process++;
 				elements = sizearr[process];
 			}
-			
+
 			sendbuf[1*i + j] = vector[];
-		}				
+		}
 	}
 }
 
-/* Function to re-arrange the receive-buffer into a correctly continous piece of memory (vector) 
- * 
+/* Function to re-arrange the receive-buffer into a correctly continous piece of memory (vector)
+ *
  */
 void recvBufRearr(double *recvbuf, double *vector, double *rows, int rcvprrwprprc, int rowlength, int rowcnt, int processes)
 {
-	// TODO	
+	// TODO
 }
 
 void freeVector(Vector inpt){
@@ -176,7 +176,7 @@ int main(int argc, char *argv[]){
 	int globRowLen, n;
 
 	//Process specific variables
-	int tempMatSz, diagPos, locMatSz, procRowAmnt;
+	int tempMatSz, locMatSz, procRowAmnt;
 
 	/*		General MPI startup/setup		*/
 	#ifdef HAVE_OPENMP
@@ -203,7 +203,6 @@ int main(int argc, char *argv[]){
 	splitVector(globRowLen, mpiSize, &size, &displacement);
 	procRowAmnt = size[rank];
 	locMatSz = globRowLen*procRowAmnt;
-	diagPos = (globRowLen*displacement[rank]);
 
 	if(rank == TEST && print){
 		printf("n: %i\nglobRowLen: %i\nmpiSize: %i\n\n", n, globRowLen, mpiSize);
@@ -215,17 +214,21 @@ int main(int argc, char *argv[]){
 	}
 
 	/*			Initializing structures		*/
-	diagMat = createVector(locMatSz);
+	diagMat = createVector(globRowLen);
 	f_tempMat = createVector(tempMatSz);
 	matrix = createMatrix(procRowAmnt, globRowLen);
 	transpMat = createMatrix(procRowAmnt, globRowLen);
 	diagMat->data = (double*) malloc(locMatSz*sizeof(double));
 	f_tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 
-	for (int i = 0; i < locMatSz; ++i){
+	#pragma omp parallel for schedule(guided, 1)
+	for (int i = 0; i < globRowLen; ++i){
 		//Filling the diagonal matrix
-		diagMat->data[i] = (double) 2.0*(1-cos(diagPos + 1)*M_PI/(double)n);
-		++diagPos;
+		diagMat->data[i] = (double) 2.0*(1-cos(i + 1)*M_PI/(double)n);
+	}
+
+	#pragma omp parallel for schedule(guided, 1)
+	for (int i = 0; i < locMatSz; ++i){
 		//Filling up the work-matrix
 		matrix->as_vec->data[i] = h;
 	}
@@ -235,8 +238,9 @@ int main(int argc, char *argv[]){
 		printDoubleVector(diagMat->data, locMatSz);
 	}
 
-	/*		Implementation of the first fst_() call			*/
+	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
+		//Implementation of the first fst_() call
 		fst_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
 	}
 
@@ -244,20 +248,21 @@ int main(int argc, char *argv[]){
 
 	//ERLEND! =DDD
 
-	/*		Implementation of the first fstinv_() call		*/
+	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
+		//Implementation of the first fstinv_() call
 		fstinv_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
 	}
 
 	/*		Implementation of the "tensor" operation		*/
 	for (int i = 0; i < procRowAmnt; ++i){
-		for (int j = 0; j < procRowAmnt; ++j){
-			transpMat->data[i][j] /= (diagMat->data[j] + diagMat->data[i]);
+		for (int j = 0; j < globRowLen; ++j){
+			transpMat->data[i][j] /= diagMat->data[j] + diagMat->data[i];
 		}
 	}
 
-	/*		Implementation of the second fst_() call			*/
 	for (int i = 0; i < procRowAmnt; ++i){
+		//Implementation of the second fst_() call
 		fst_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
 	}
 
@@ -265,10 +270,13 @@ int main(int argc, char *argv[]){
 
 	//ERLEND! =DDD
 
-	/*		Implementation of the second fstinv_() call		*/
+	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
+		//Implementation of the second fstinv_() call
 		fstinv_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
 	}
+
+	/*		Print time? (not yet implemented)		*/
 
 	/*		Closing up and freeing variables			*/
 	freeMatrix(matrix);
@@ -281,5 +289,6 @@ int main(int argc, char *argv[]){
 		MPI_Comm_free(&SelfComm);
 		MPI_Finalize();
 	}
+
 	return 0;
 }
