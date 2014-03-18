@@ -1,9 +1,10 @@
 #include "ex6.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <mpi.h>
 
-/* THIS FUNCTION DOES NOT ALLOCATE ACTUAL VECTOR DATA MEMORY! */
+/* This function does NOT allocate the vector memory data! */
 Vector createVector(int len){
 	Vector result = (Vector) calloc(1, sizeof(vector_t));
 	result->len = len;
@@ -49,7 +50,7 @@ void splitVector(int globLen, int size, int** len, int** displ){
 	for (int i=0; i < size; ++i){
 		(*len)[i] = globLen/size;
 
-		if (globLen % size && i >= (size - (globLen % size))){
+		if (globLen % size && i >= (size - globLen % size)){
 			(*len)[i]++;
 		}
 
@@ -95,7 +96,7 @@ void printIntVector(int *ptr, int length){
 	printf("]\n");
 }
 
-#define TEST 0
+#define TEST 1
 
 /*DO NOT USE THE COMMONS LIBRARY!
 *IF ANYTHING IN THE COMMONS LIBRARY IS OF USE, COPY IT OVER.
@@ -112,7 +113,7 @@ int main(int argc, char *argv[]){
 	int *size, *displacement;
 
 	//Just general variables used in each process.
-	int matrixSize, matrixTempSize, n = 0, rank = 0, mpiSize = 1, acquired;
+	int globMatSz, tempMatSz, n = 0, rank = 0, mpiSize = 1, acquired, diagPos, locMatSz, globVecLen, h2;
 	double h = 1.0;
 
 	//General MPI startup/setup
@@ -139,36 +140,46 @@ int main(int argc, char *argv[]){
 
 	/*			Initializing variables		*/
 	h /= (double) n;
-	matrixSize = n-1;
-	splitVector(matrixSize, mpiSize, &size, &displacement);
+	h2 = h*h;
+	globVecLen = n-1;
+	globMatSz = n-1;
+	splitVector(globMatSz, mpiSize, &size, &displacement);
+	diagPos = (globMatSz*displacement[rank]);
+	locMatSz = globMatSz*size[rank];
+	globMatSz = size[rank];
+	tempMatSz = n*4;
 
 	if(rank == TEST){
-		printf("n: %i\nmatrixSize: %i\nmpiSize: %i\n\n", n, matrixSize, mpiSize);
+		printf("n: %i\nglobMatSz: %i\nmpiSize: %i\n\n", n, globMatSz, mpiSize);
 		printf("Size vector:\n");
 		printIntVector(size, mpiSize);
 		printf("Displacement vector:\n");
 		printIntVector(displacement, mpiSize);
-	}
 
-	matrixSize = size[rank];
-	matrixTempSize = matrixSize*4;
+		printf("\nSize of rank %i matrix: %ix%i\n", TEST, n-1, size[TEST]);
+	}
 
 	/*			Initializing structures		*/
-	//Use a MPI communicator? We have two defined in the .h file. Maybe make createMatrix() set that for us.
-	diagMat = createVector(matrixSize);
-	f_TempMat = createVector(matrixTempSize);
-	matrix = createMatrix(matrixSize, matrixSize);
-	transpMat = createMatrix(matrixSize, matrixSize);
-	diagMat->data = (double*) malloc(matrixSize*sizeof(double));
-	f_TempMat->data = (double*) malloc(matrixTempSize*sizeof(double));
+	//Use a MPI communicator? We have two of them defined in the .h file. Maybe make createMatrix() set that for us.
+	diagMat = createVector(locMatSz);
+	f_TempMat = createVector(tempMatSz);
+	matrix = createMatrix(globVecLen, size[rank]);
+	transpMat = createMatrix(globVecLen, size[rank]);
+	diagMat->data = (double*) malloc(locMatSz*sizeof(double));
+	f_TempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 
-
-	if(rank == TEST){
-
+	/*		Filling up structures with data			*/
+	for (int i = 0; i < locMatSz; ++i){
+		//Filling the diagonal matrix
+		diagMat->data[i] = (double) 2.0*(1-cos(diagPos + 1)*M_PI/(double)n);
+		++diagPos;
+		matrix->as_vec->data[i] = h2;
 	}
 
-
-	/*	The rest of the initialization of structures, making sure that the matrix and diagMat variables only contain what each process needs	*/
+	if(rank == TEST){
+		printf("Diagonal matrix for rank == %i:\n", TEST);
+		printDoubleVector(diagMat->data, locMatSz);
+	}
 
 	/*		Implementation of the fst_() call			*/
 
@@ -190,8 +201,10 @@ int main(int argc, char *argv[]){
 
 	/*		Closing up and freeing variables			*/
 
-	MPI_Comm_free(&WorldComm);
-	MPI_Comm_free(&SelfComm);
-	MPI_Finalize();
+	if(rank == 0){
+		MPI_Comm_free(&WorldComm);
+		MPI_Comm_free(&SelfComm);
+		MPI_Finalize();
+	}
 	return 0;
 }
