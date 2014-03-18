@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <mpi.h>
 
+/* THIS FUNCTION DOES NOT ALLOCATE ACTUAL VECTOR DATA MEMORY! */
 Vector createVector(int len){
 	Vector result = (Vector) calloc(1, sizeof(vector_t));
 	result->len = len;
@@ -11,6 +12,7 @@ Vector createVector(int len){
 	return result;
 }
 
+/*While this function does allocate memory for the matrix data*/
 Matrix createMatrix(int rows, int cols){
 	Matrix result = (Matrix) calloc(1, sizeof(matrix_t));
 
@@ -57,6 +59,44 @@ void splitVector(int globLen, int size, int** len, int** displ){
 	}
 }
 
+void printDoubleMatrix(double **ptr, int height, int width){
+	for (int i = 0; i < height; ++i){
+		printf("[%.2f", ptr[i][0]);
+		for (int j = 1; j < width; ++j){
+			printf(",\t%.2f", ptr[i][j]);
+		}
+		printf("\t]\n");
+	}
+}
+
+void printDoubleVector(double *ptr, int length){
+	printf("[%.2f", ptr[0]);
+	for (int i = 1; i < length; ++i){
+		printf(",\t%.2f", ptr[i]);
+	}
+	printf("]\n");
+}
+
+void printIntMatrix(int **ptr, int height, int width){
+	for (int i = 0; i < height; ++i){
+		printf("[%i", ptr[i][0]);
+		for (int j = 1; j < width; ++j){
+			printf(",\t%i", ptr[i][j]);
+		}
+		printf("\t]\n");
+	}
+}
+
+void printIntVector(int *ptr, int length){
+	printf("[%i", ptr[0]);
+	for (int i = 1; i < length; ++i){
+		printf(",\t%i", ptr[i]);
+	}
+	printf("]\n");
+}
+
+#define TEST 0
+
 /*DO NOT USE THE COMMONS LIBRARY!
 *IF ANYTHING IN THE COMMONS LIBRARY IS OF USE, COPY IT OVER.
 *THE COMMONS LIBRARY HAS TOO MUCH "UNNECESSARY DATA/JUNK"
@@ -72,13 +112,12 @@ int main(int argc, char *argv[]){
 	int *size, *displacement;
 
 	//Just general variables used in each process.
-	int matrixSize, matrixTempSize, n, rank, mpiSize, acquired;
+	int matrixSize, matrixTempSize, n = 0, rank = 0, mpiSize = 1, acquired;
 	double h = 1.0;
 
 	//General MPI startup/setup
 	#ifdef HAVE_OPENMP
 	MPI_Init_thread(&argc, &argv, MPI_THREAD_FUNNELED, &acquired);
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	#else
 	MPI_init(&argc, &argv);
 	#endif
@@ -88,24 +127,31 @@ int main(int argc, char *argv[]){
 	MPI_Comm_dup(MPI_COMM_SELF, &SelfComm);
 
 	//Check for comandline argument
-	if (argc < 2 || atoi(argv[1]) <= 4 || atoi(argv[1])%2 != 0){
-		printf("Need a problem size! And it should be a power of 2 greater than 4!\n");
+	if (argc < 2 /*|| atoi(argv[1]) < 4 || atoi(argv[1])%2 != 0*/){
+		printf("Need a problem size! And it should be a power of 2 greater than or equal to 4!\n");
 		//MPI_Comm_free(&WorldComm);
 		//MPI_Comm_free(&SelfComm);
 		MPI_Finalize();
 		return -1;
+	} else{
+		n = atoi(argv[1]);
 	}
 
 	/*			Initializing variables		*/
-
-	n = atoi(argv[1]);
+	h /= (double) n;
 	matrixSize = n-1;
-	matrixTempSize = matrixSize*4;
-	h /= n;
-
-	//We need to set up the rest of the variables and use the data given to us by splitVector in a smart manner.
-	//Do something with splitVector and *size and *displacement
 	splitVector(matrixSize, mpiSize, &size, &displacement);
+
+	if(rank == TEST){
+		printf("n: %i\nmatrixSize: %i\nmpiSize: %i\n\n", n, matrixSize, mpiSize);
+		printf("Size vector:\n");
+		printIntVector(size, mpiSize);
+		printf("Displacement vector:\n");
+		printIntVector(displacement, mpiSize);
+	}
+
+	matrixSize = size[rank];
+	matrixTempSize = matrixSize*4;
 
 	/*			Initializing structures		*/
 	//Use a MPI communicator? We have two defined in the .h file. Maybe make createMatrix() set that for us.
@@ -113,8 +159,14 @@ int main(int argc, char *argv[]){
 	f_TempMat = createVector(matrixTempSize);
 	matrix = createMatrix(matrixSize, matrixSize);
 	transpMat = createMatrix(matrixSize, matrixSize);
-	diagMat->data = (double*) calloc(matrixSize, sizeof(double));
+	diagMat->data = (double*) malloc(matrixSize*sizeof(double));
 	f_TempMat->data = (double*) malloc(matrixTempSize*sizeof(double));
+
+
+	if(rank == TEST){
+
+	}
+
 
 	/*	The rest of the initialization of structures, making sure that the matrix and diagMat variables only contain what each process needs	*/
 
