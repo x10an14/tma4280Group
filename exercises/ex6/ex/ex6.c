@@ -97,43 +97,43 @@ void printIntVector(int *ptr, int length){
 }
 
 
-/* Arranges the sendbuffer properly before sending
- * Assumes the rows are arranged continually in the vector
- */
-void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, int rowcnt, int *sizearr, int sizearrlength)
-{
-	int elements, counter, process;
+// /* Arranges the sendbuffer properly before sending
+//  * Assumes the rows are arranged continually in the vector
+//  */
+// void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, int rowcnt, int *sizearr, int sizearrlength)
+// {
+// 	int elements, counter, process;
 
-	for(int i = 0; i < rowcnt; i++){	// One pass per row
+// 	for(int i = 0; i < rowcnt; i++){	// One pass per row
 
-		process = 0;
-		elements = sizearr[process];	// Elements to go to the first process
-		counter  = 0;					// Counter for how many elements have been moved
+// 		process = 0;
+// 		elements = sizearr[process];	// Elements to go to the first process
+// 		counter  = 0;					// Counter for how many elements have been moved
 
-		for(int j = 0; j < rowlenght; j++){	// Iterate through row
-			if ((counter + 1 > elements) && !(process > sizearrlength -1))
-			{
-				counter = 0;
-				process++;
-				elements = sizearr[process];
-			}
+// 		for(int j = 0; j < rowlenght; j++){	// Iterate through row
+// 			if ((counter + 1 > elements) && !(process > sizearrlength -1))
+// 			{
+// 				counter = 0;
+// 				process++;
+// 				elements = sizearr[process];
+// 			}
 
-			sendbuf[1*i + j] = vector[];
-		}
-	}
-}
+// 			sendbuf[1*i + j] = vector[];
+// 		}
+// 	}
+// }
 
-/* Function to re-arrange the receive-buffer into a correctly continous piece of memory (vector)
- *
- */
-void recvBufRearr(double *recvbuf, double *vector, double *rows, int rcvprrwprprc, int rowlength, int rowcnt, int processes)
-{
-	// TODO
-}
+// /* Function to re-arrange the receive-buffer into a correctly continous piece of memory (vector)
+//  *
+//  */
+// void recvBufRearr(double *recvbuf, double *vector, double *rows, int rcvprrwprprc, int rowlength, int rowcnt, int processes)
+// {
+// 	// TODO
+// }
 
 void freeVector(Vector inpt){
 	free(inpt->data);
-	free(inpt);
+	// free(inpt);
 }
 
 void freeMatrix(Matrix inpt){
@@ -144,7 +144,7 @@ void freeMatrix(Matrix inpt){
 	free(inpt->as_vec);
 	free(inpt->data[0]);
 	free(inpt->data);
-	free(inpt);
+	// free(inpt);
 }
 
 void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
@@ -155,7 +155,7 @@ void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
 }
 
 #define TEST 1
-int print = 0;
+int print = 1;
 
 /*DO NOT USE THE COMMONS LIBRARY!
 *IF ANYTHING IN THE COMMONS LIBRARY IS OF USE, COPY IT OVER.
@@ -164,9 +164,9 @@ int print = 0;
 
 int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
-			/*The transposed version of the matrix*/transpMat;
-	Vector	/*The diagonal matrix*/diagMat, \
+			/*The transposed version of the matrix*/transpMat, \
 			/*The fourier-transform temp-store-matrix*/f_tempMat;
+	Vector	/*The diagonal matrix*/diagMat;
 
 	//Lists for holding how many rows per process (due to MPI division of labour), AKA MPI variables...
 	int *size, *displacement, rank = 0, mpiSize = 1, acquired;
@@ -215,16 +215,15 @@ int main(int argc, char *argv[]){
 
 	/*			Initializing structures		*/
 	diagMat = createVector(globRowLen);
-	f_tempMat = createVector(tempMatSz);
 	matrix = createMatrix(procRowAmnt, globRowLen);
+	f_tempMat = createMatrix(procRowAmnt, tempMatSz);
 	transpMat = createMatrix(procRowAmnt, globRowLen);
 	diagMat->data = (double*) malloc(locMatSz*sizeof(double));
-	f_tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 
 	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < globRowLen; ++i){
 		//Filling the diagonal matrix
-		diagMat->data[i] = (double) 2.0*(1-cos(i + 1)*M_PI/(double)n);
+		diagMat->data[i] = (double) 2.0*(1.0-cos(i + 1.0)*M_PI/(double)n);
 	}
 
 	#pragma omp parallel for schedule(guided, 1)
@@ -241,48 +240,51 @@ int main(int argc, char *argv[]){
 	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fst_() call
-		fst_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		fst_(matrix->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
 	}
 
-	/*		Implementation of the first transpose				*/
+	/*		Implementation of the first transpose			*/
 
 	//ERLEND! =DDD
 
 	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fstinv_() call
-		fstinv_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		fstinv_(transpMat->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
 	}
 
 	/*		Implementation of the "tensor" operation		*/
+	//Which for-loop level should get the open mp pragma?
+	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
 		for (int j = 0; j < globRowLen; ++j){
 			transpMat->data[i][j] /= diagMat->data[j] + diagMat->data[i];
 		}
 	}
 
+	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fst_() call
-		fst_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		fst_(transpMat->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
 	}
 
-	/*		Implementation of the second transpose				*/
+	/*		Implementation of the second transpose			*/
 
 	//ERLEND! =DDD
 
 	#pragma omp parallel for schedule(guided, 1)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fstinv_() call
-		fstinv_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		fstinv_(matrix->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
 	}
 
-	/*		Print time? (not yet implemented)		*/
+	/*		Print time? (not yet implemented)				*/
 
-	/*		Closing up and freeing variables			*/
+	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix);
 	freeMatrix(transpMat);
+	freeMatrix(f_tempMat);
 	freeVector(diagMat);
-	freeVector(f_tempMat);
 
 	if(rank == 0){
 		MPI_Comm_free(&WorldComm);
