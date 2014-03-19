@@ -1,8 +1,9 @@
-#include "ex6.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <mpi.h>
+
+#include "ex6.h"
 
 /* This function does NOT allocate the vector memory data! */
 Vector createVector(int len){
@@ -220,13 +221,13 @@ int main(int argc, char *argv[]){
 	transpMat = createMatrix(procRowAmnt, globRowLen);
 	diagMat->data = (double*) malloc(locMatSz*sizeof(double));
 
-	#pragma omp parallel for schedule(guided, 1)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < globRowLen; ++i){
 		//Filling the diagonal matrix
 		diagMat->data[i] = (double) 2.0*(1.0-cos(i + 1.0)*M_PI/(double)n);
 	}
 
-	#pragma omp parallel for schedule(guided, 1)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < locMatSz; ++i){
 		//Filling up the work-matrix
 		matrix->as_vec->data[i] = h;
@@ -237,7 +238,7 @@ int main(int argc, char *argv[]){
 		printDoubleVector(diagMat->data, locMatSz);
 	}
 
-	#pragma omp parallel for schedule(guided, 1)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fst_() call
 		fst_(matrix->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
@@ -247,7 +248,7 @@ int main(int argc, char *argv[]){
 
 	//ERLEND! =DDD
 
-	#pragma omp parallel for schedule(guided, 1)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fstinv_() call
 		fstinv_(transpMat->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
@@ -255,14 +256,14 @@ int main(int argc, char *argv[]){
 
 	/*		Implementation of the "tensor" operation		*/
 	//Which for-loop level should get the open mp pragma?
-	#pragma omp parallel for schedule(guided, 1)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		for (int j = 0; j < globRowLen; ++j){
 			transpMat->data[i][j] /= diagMat->data[j] + diagMat->data[i];
 		}
 	}
 
-	#pragma omp parallel for schedule(guided, 1)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fst_() call
 		fst_(transpMat->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
@@ -272,7 +273,7 @@ int main(int argc, char *argv[]){
 
 	//ERLEND! =DDD
 
-	#pragma omp parallel for schedule(guided, 1)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fstinv_() call
 		fstinv_(matrix->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
