@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <math.h>
 #include <mpi.h>
+#ifdef HAVE_OPENMP
+#include <omp.h>
+#endif
 
 #include "ex6.h"
 
@@ -97,6 +100,25 @@ void printIntVector(int *ptr, int length){
 	printf("]\n");
 }
 
+int getMaxThreads(){
+#ifdef HAVE_OPENMP
+	return omp_get_max_threads();
+#else
+	return 1;
+#endif
+}
+
+double WallTime(){
+#ifdef HAVE_MPI
+	return MPI_Wtime();
+#elif defined(HAVE_OPENMP)
+	return omp_get_wtime();
+#else
+	struct timeval tmpTime;
+	gettimeofday(&tmpTime,NULL);
+	return tmpTime.tv_sec + tmpTime.tv_usec/1.0e6;
+#endif
+}
 
 // /* Arranges the sendbuffer properly before sending
 //  * Assumes the rows are arranged continually in the vector
@@ -155,7 +177,7 @@ void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
 	*tempMatSz = n*4;
 }
 
-#define TEST 1
+#define TEST 0
 int print = 1;
 
 /*DO NOT USE THE COMMONS LIBRARY!
@@ -165,9 +187,9 @@ int print = 1;
 
 int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
-			/*The transposed version of the matrix*/transpMat, \
-			/*The fourier-transform temp-store-matrix*/f_tempMat;
-	Vector	/*The diagonal matrix*/diagMat;
+			/*The transposed version of the matrix*/transpMat;
+	Vector	/*The diagonal matrix*/diagMat, \
+			/*The fourier-transform temp-store-matrix*/tempMat;
 
 	//Lists for holding how many rows per process (due to MPI division of labour), AKA MPI variables...
 	int *size, *displacement, rank = 0, mpiSize = 1, acquired;
@@ -215,9 +237,9 @@ int main(int argc, char *argv[]){
 	}
 
 	/*			Initializing structures		*/
+	tempMat = createVector(tempMatSz);
 	diagMat = createVector(globRowLen);
 	matrix = createMatrix(procRowAmnt, globRowLen);
-	f_tempMat = createMatrix(procRowAmnt, tempMatSz);
 	transpMat = createMatrix(procRowAmnt, globRowLen);
 	diagMat->data = (double*) malloc(locMatSz*sizeof(double));
 
@@ -235,23 +257,23 @@ int main(int argc, char *argv[]){
 
 	if(rank == TEST && print){
 		printf("Diagonal matrix for rank == %i:\n", TEST);
-		printDoubleVector(diagMat->data, locMatSz);
+		printDoubleVector(diagMat->data, globRowLen);
 	}
 
-	#pragma omp parallel for schedule(static)
+	#pragma omp parallel for schedule(static) private(tempMat)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fst_() call
-		fst_(matrix->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
+		fst_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
 	/*		Implementation of the first transpose			*/
 
 	//ERLEND! =DDD
 
-	#pragma omp parallel for schedule(static)
+	#pragma omp parallel for schedule(static) private(tempMat)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fstinv_() call
-		fstinv_(transpMat->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
+		fstinv_(transpMat->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
 	/*		Implementation of the "tensor" operation		*/
@@ -263,20 +285,20 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	#pragma omp parallel for schedule(static)
+	#pragma omp parallel for schedule(static) private(tempMat)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fst_() call
-		fst_(transpMat->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
+		fst_(transpMat->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
 	/*		Implementation of the second transpose			*/
 
 	//ERLEND! =DDD
 
-	#pragma omp parallel for schedule(static)
+	#pragma omp parallel for schedule(static) private(tempMat)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fstinv_() call
-		fstinv_(matrix->data[i], &globRowLen, f_tempMat->data[i], &tempMatSz);
+		fstinv_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
 	/*		Print time? (not yet implemented)				*/
@@ -284,7 +306,7 @@ int main(int argc, char *argv[]){
 	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix);
 	freeMatrix(transpMat);
-	freeMatrix(f_tempMat);
+	freeVector(tempMat);
 	freeVector(diagMat);
 
 	if(rank == 0){
