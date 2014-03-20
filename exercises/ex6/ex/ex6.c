@@ -110,7 +110,7 @@ void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, i
 		elements = sizearr[process];	// Elements to go to the first process
 		counter  = 0;					// Counter for how many elements have been moved
 		
-		for(int j = 0; j < rowlenght; j++){	// Iterate through row
+		for(int j = 0; j < rowlength; j++){	// Iterate through row
 			if ((counter + 1 > elements) && !(process > sizearrlength -1)) 
 			{ 
 				counter = 0;
@@ -118,17 +118,12 @@ void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, i
 				elements = sizearr[process];
 			}
 			
-			sendbuf[1*i + j] = vector[];
+			for(int k = 0; k < elements; k++)
+			{
+				sendbuf[1*i + j] = vector[rowlength*(rows) + k];
+			}
 		}				
 	}
-}
-
-/* Function to re-arrange the receive-buffer into a correctly continous piece of memory (vector) 
- * 
- */
-void recvBufRearr(double *recvbuf, double *vector, double *rows, int rcvprrwprprc, int rowlength, int rowcnt, int processes)
-{
-	// TODO	
 }
 
 void freeVector(Vector inpt){
