@@ -178,7 +178,7 @@ void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
 }
 
 #define TEST 0
-int print = 1;
+int print = 0;
 
 /*DO NOT USE THE COMMONS LIBRARY!
 *IF ANYTHING IN THE COMMONS LIBRARY IS OF USE, COPY IT OVER.
@@ -260,9 +260,10 @@ int main(int argc, char *argv[]){
 		printDoubleVector(diagMat->data, globRowLen);
 	}
 
-	#pragma omp parallel for schedule(static) private(tempMat)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fst_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 		fst_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
@@ -270,9 +271,10 @@ int main(int argc, char *argv[]){
 
 	//ERLEND! =DDD
 
-	#pragma omp parallel for schedule(static) private(tempMat)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fstinv_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 		fstinv_(transpMat->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
@@ -285,9 +287,10 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	#pragma omp parallel for schedule(static) private(tempMat)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fst_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 		fst_(transpMat->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
@@ -295,9 +298,10 @@ int main(int argc, char *argv[]){
 
 	//ERLEND! =DDD
 
-	#pragma omp parallel for schedule(static) private(tempMat)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the second fstinv_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 		fstinv_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
@@ -312,8 +316,8 @@ int main(int argc, char *argv[]){
 	if(rank == 0){
 		MPI_Comm_free(&WorldComm);
 		MPI_Comm_free(&SelfComm);
-		MPI_Finalize();
 	}
 
+	MPI_Finalize();
 	return 0;
 }
