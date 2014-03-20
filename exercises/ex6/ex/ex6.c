@@ -1,8 +1,12 @@
-#include "ex6.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <mpi.h>
+#ifdef HAVE_OPENMP
+#include <omp.h>
+#endif
+
+#include "ex6.h"
 
 /* This function does NOT allocate the vector memory data! */
 Vector createVector(int len){
@@ -96,7 +100,6 @@ void printIntVector(int *ptr, int length){
 	printf("]\n");
 }
 
-
 /* Arranges the sendbuffer properly before sending
  * Assumes the rows are arranged continually in the vector
  */
@@ -126,9 +129,29 @@ void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, i
 	}
 }
 
+int getMaxThreads(){
+#ifdef HAVE_OPENMP
+	return omp_get_max_threads();
+#else
+	return 1;
+#endif
+}
+
+double WallTime(){
+#ifdef HAVE_MPI
+	return MPI_Wtime();
+#elif defined(HAVE_OPENMP)
+	return omp_get_wtime();
+#else
+	struct timeval tmpTime;
+	gettimeofday(&tmpTime,NULL);
+	return tmpTime.tv_sec + tmpTime.tv_usec/1.0e6;
+#endif
+}
+
 void freeVector(Vector inpt){
 	free(inpt->data);
-	free(inpt);
+	// free(inpt);
 }
 
 void freeMatrix(Matrix inpt){
@@ -139,7 +162,7 @@ void freeMatrix(Matrix inpt){
 	free(inpt->as_vec);
 	free(inpt->data[0]);
 	free(inpt->data);
-	free(inpt);
+	// free(inpt);
 }
 
 void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
@@ -149,7 +172,7 @@ void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
 	*tempMatSz = n*4;
 }
 
-#define TEST 1
+#define TEST 0
 int print = 0;
 
 /*DO NOT USE THE COMMONS LIBRARY!
@@ -161,7 +184,7 @@ int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
 			/*The transposed version of the matrix*/transpMat;
 	Vector	/*The diagonal matrix*/diagMat, \
-			/*The fourier-transform temp-store-matrix*/f_tempMat;
+			/*The fourier-transform temp-store-matrix*/tempMat;
 
 	//Lists for holding how many rows per process (due to MPI division of labour), AKA MPI variables...
 	int *size, *displacement, rank = 0, mpiSize = 1, acquired;
@@ -171,7 +194,7 @@ int main(int argc, char *argv[]){
 	int globRowLen, n;
 
 	//Process specific variables
-	int tempMatSz, diagPos, locMatSz, procRowAmnt;
+	int tempMatSz, locMatSz, procRowAmnt;
 
 	/*		General MPI startup/setup		*/
 	#ifdef HAVE_OPENMP
@@ -198,7 +221,6 @@ int main(int argc, char *argv[]){
 	splitVector(globRowLen, mpiSize, &size, &displacement);
 	procRowAmnt = size[rank];
 	locMatSz = globRowLen*procRowAmnt;
-	diagPos = (globRowLen*displacement[rank]);
 
 	if(rank == TEST && print){
 		printf("n: %i\nglobRowLen: %i\nmpiSize: %i\n\n", n, globRowLen, mpiSize);
@@ -210,71 +232,87 @@ int main(int argc, char *argv[]){
 	}
 
 	/*			Initializing structures		*/
-	diagMat = createVector(locMatSz);
-	f_tempMat = createVector(tempMatSz);
+	tempMat = createVector(tempMatSz);
+	diagMat = createVector(globRowLen);
 	matrix = createMatrix(procRowAmnt, globRowLen);
 	transpMat = createMatrix(procRowAmnt, globRowLen);
 	diagMat->data = (double*) malloc(locMatSz*sizeof(double));
-	f_tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 
-	for (int i = 0; i < locMatSz; ++i){
+	#pragma omp parallel for schedule(static)
+	for (int i = 0; i < globRowLen; ++i){
 		//Filling the diagonal matrix
-		diagMat->data[i] = (double) 2.0*(1-cos(diagPos + 1)*M_PI/(double)n);
-		++diagPos;
+		diagMat->data[i] = (double) 2.0*(1.0-cos(i + 1.0)*M_PI/(double)n);
+	}
+
+	#pragma omp parallel for schedule(static)
+	for (int i = 0; i < locMatSz; ++i){
 		//Filling up the work-matrix
 		matrix->as_vec->data[i] = h;
 	}
 
 	if(rank == TEST && print){
 		printf("Diagonal matrix for rank == %i:\n", TEST);
-		printDoubleVector(diagMat->data, locMatSz);
+		printDoubleVector(diagMat->data, globRowLen);
 	}
 
-	/*		Implementation of the first fst_() call			*/
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
-		fst_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		//Implementation of the first fst_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
+		fst_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
-	/*		Implementation of the first transpose				*/
+	/*		Implementation of the first transpose			*/
 
 	//ERLEND! =DDD
 
-	/*		Implementation of the first fstinv_() call		*/
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
-		fstinv_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		//Implementation of the first fstinv_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
+		fstinv_(transpMat->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
 	/*		Implementation of the "tensor" operation		*/
+	//Which for-loop level should get the open mp pragma?
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
-		for (int j = 0; j < procRowAmnt; ++j){
-			transpMat->data[i][j] /= (diagMat->data[j] + diagMat->data[i]);
+		for (int j = 0; j < globRowLen; ++j){
+			transpMat->data[i][j] /= diagMat->data[j] + diagMat->data[i];
 		}
 	}
 
-	/*		Implementation of the second fst_() call			*/
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
-		fst_(transpMat->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		//Implementation of the second fst_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
+		fst_(transpMat->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
-	/*		Implementation of the second transpose				*/
+	/*		Implementation of the second transpose			*/
 
 	//ERLEND! =DDD
 
-	/*		Implementation of the second fstinv_() call		*/
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
-		fstinv_(matrix->data[i], &locMatSz, f_tempMat->data, &tempMatSz);
+		//Implementation of the second fstinv_() call
+		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
+		fstinv_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
 
-	/*		Closing up and freeing variables			*/
+	/*		Print time? (not yet implemented)				*/
+
+	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix);
 	freeMatrix(transpMat);
+	freeVector(tempMat);
 	freeVector(diagMat);
-	freeVector(f_tempMat);
 
 	if(rank == 0){
 		MPI_Comm_free(&WorldComm);
 		MPI_Comm_free(&SelfComm);
-		MPI_Finalize();
 	}
+
+	MPI_Finalize();
 	return 0;
 }

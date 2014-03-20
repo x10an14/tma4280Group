@@ -14,6 +14,10 @@
 
 /*Whatever we want specific to our solution/implementation.*/
 
+//The necessary prototyping of the fourier sine transform functions
+void fst_(double *v, int *n, double *w, int *nn);
+void fstinv_(double *v, int *n, double *w, int *nn);
+
 #ifdef HAVE_MPI
 MPI_Comm WorldComm;
 MPI_Comm SelfComm;
