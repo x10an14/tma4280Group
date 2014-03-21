@@ -299,9 +299,10 @@ int main(int argc, char *argv[]){
 
 	/*		Implementation of the second transpose			*/
 	
-	// TODO: Same as prev transpose
-
-	//ERLEND! =DDD
+	// Arrange send buffer(using same buffer as last time
+	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize);
+	
+	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
