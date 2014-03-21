@@ -103,28 +103,30 @@ void printIntVector(int *ptr, int length){
 /* Arranges the sendbuffer properly before sending
  * Assumes the rows are arranged continually in the vector
  */
-void sendArrange(double *sendbuf, double *vector, double *rows, int rowlength, int rowcnt, int *sizearr, int sizearrlength)
+void sendArrange(double *sendbuf, double *vector, int rowlength, int rowcnt, int *sizearr, int sizearrlength)
 {
-	int elements, counter, process;
+	int elements, counter, process, destoffset;
 	
 	for(int i = 0; i < rowcnt; i++){	// One pass per row
 		
 		process = 0; 
 		elements = sizearr[process];	// Elements to go to the first process
 		counter  = 0;					// Counter for how many elements have been moved
+		destoffset = 0;					// Destination offset for elements (i.e. which process is this being sent to)
 		
 		for(int j = 0; j < rowlength; j++){	// Iterate through row
-			if ((counter + 1 > elements) && !(process > sizearrlength -1)) 
+		
+			if ((counter + 1 >= elements) && !(process > sizearrlength -1)) 
 			{ 
 				counter = 0;
 				process++;
+				destoffset += elements*rowcnt;
 				elements = sizearr[process];
 			}
 			
-			for(int k = 0; k < elements; k++)
-			{
-				sendbuf[1*i + j] = vector[rowlength*(rows) + k];
-			}
+			sendbuf[i*elements + counter + destoffset] = vector[i*rowlength + j];
+			counter++;
+								
 		}				
 	}
 }
@@ -263,7 +265,12 @@ int main(int argc, char *argv[]){
 	}
 
 	/*		Implementation of the first transpose			*/
-
+	// TODO: Call sendArrange to set up send buffer
+	double * sendbuf;	// TODO: Allocate
+	MPI_Alltoallv(sendbuf, /*splitvec result*/, /*send displacement array*/, MPI_DOUBLE, /*recvcount array. Splitvec result here too*/, /*recv displ array. same as send one*/, MPI_DOUBLE, /*communicator*/);
+	
+	// TODO: Invert matrix
+	
 	//ERLEND! =DDD
 
 	#pragma omp parallel for schedule(static)
@@ -290,6 +297,8 @@ int main(int argc, char *argv[]){
 	}
 
 	/*		Implementation of the second transpose			*/
+	
+	// TODO: Same as prev transpose
 
 	//ERLEND! =DDD
 
