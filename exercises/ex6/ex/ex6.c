@@ -324,7 +324,6 @@ int main(int argc, char *argv[]){
 	freeVector(diagMat);
 	if(rank == 0){
 		MPI_Comm_free(&WorldComm);
-		MPI_Comm_free(&SelfComm);
 	}
 	MPI_Finalize();
 

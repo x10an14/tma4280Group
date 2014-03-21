@@ -20,7 +20,6 @@ void fstinv_(double *v, int *n, double *w, int *nn);
 
 #ifdef HAVE_MPI
 MPI_Comm WorldComm;
-MPI_Comm SelfComm;
 #endif
 
 typedef struct{
