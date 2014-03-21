@@ -107,7 +107,7 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
 {
 	int elements, counter, process, destoffset;
 	
-	for(int i = 0; i < rowcnt; i++){	// One pass per row
+	for(int i = 0; i < colcnt; i++){	// One pass per row
 
 		process = 0;
 		elements = sizearr[process];	// Elements to go to the first process
@@ -193,9 +193,9 @@ int main(int argc, char *argv[]){
 
 	//Global variables
 	double h;
-	if (rank == 0){
-		double time = WallTime()
-	}
+	//if (rank == 0){
+		double time = WallTime();
+	//}
 	int globRowLen, n;
 
 	//Process specific variables
@@ -272,7 +272,7 @@ int main(int argc, char *argv[]){
 	// Arrange send buffer
 	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize);
 	
-	MPI_Alltoallv(sendbuf, size, displacement, MPI_DOUBLE, size, displacement, MPI_DOUBLE, &WorldComm);
+	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
