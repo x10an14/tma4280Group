@@ -101,30 +101,30 @@ void printIntVector(int *ptr, int length){
 }
 
 /* Arranges the sendbuffer properly before sending
- * Assumes the rows are arranged continually in the vector
+ * Assumes the columns are arranged continually in the vector
  */
-void sendArrange(double *sendbuf, double *vector, int rowlength, int rowcnt, int *sizearr, int sizearrlength)
+void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int *sizearr, int sizearrlength)
 {
 	int elements, counter, process, destoffset;
 	
 	for(int i = 0; i < rowcnt; i++){	// One pass per row
-		
-		process = 0; 
+
+		process = 0;
 		elements = sizearr[process];	// Elements to go to the first process
 		counter  = 0;					// Counter for how many elements have been moved
 		destoffset = 0;					// Destination offset for elements (i.e. which process is this being sent to)
 		
-		for(int j = 0; j < rowlength; j++){	// Iterate through row
-		
-			if ((counter + 1 >= elements) && !(process > sizearrlength -1)) 
-			{ 
+
+		for(int j = 0; j < collength; j++){	// Iterate through row
+			if ((counter + 1 >= elements) && !(process > sizearrlength -1))
+			{
 				counter = 0;
 				process++;
-				destoffset += elements*rowcnt;
+				destoffset += elements*colcnt;
 				elements = sizearr[process];
 			}
 			
-			sendbuf[i*elements + counter + destoffset] = vector[i*rowlength + j];
+			sendbuf[i*elements + counter + destoffset] = vector[i*collength + j];
 			counter++;
 								
 		}				
@@ -153,7 +153,7 @@ double WallTime(){
 
 void freeVector(Vector inpt){
 	free(inpt->data);
-	// free(inpt);
+	free(inpt);
 }
 
 void freeMatrix(Matrix inpt){
@@ -164,7 +164,7 @@ void freeMatrix(Matrix inpt){
 	free(inpt->as_vec);
 	free(inpt->data[0]);
 	free(inpt->data);
-	// free(inpt);
+	free(inpt);
 }
 
 void VariableInitz(int n, double *h, int *globRowLen, int *tempMatSz){
@@ -193,6 +193,9 @@ int main(int argc, char *argv[]){
 
 	//Global variables
 	double h;
+	if (rank == 0){
+		double time = WallTime()
+	}
 	int globRowLen, n;
 
 	//Process specific variables
@@ -207,7 +210,7 @@ int main(int argc, char *argv[]){
 	MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	MPI_Comm_dup(MPI_COMM_WORLD, &WorldComm);
-	MPI_Comm_dup(MPI_COMM_SELF, &SelfComm);
+	//MPI_Comm_dup(MPI_COMM_SELF, &SelfComm);
 
 	//Check for correct commandline argument
 	//Remove the section comments in the if-test when we want to test "live"/production/release version.
@@ -265,13 +268,11 @@ int main(int argc, char *argv[]){
 	}
 
 	/*		Implementation of the first transpose			*/
-	// TODO: Call sendArrange to set up send buffer
-	double * sendbuf;	// TODO: Allocate
-	MPI_Alltoallv(sendbuf, /*splitvec result*/, /*send displacement array*/, MPI_DOUBLE, /*recvcount array. Splitvec result here too*/, /*recv displ array. same as send one*/, MPI_DOUBLE, /*communicator*/);
+	double * sendbuf = malloc(sizeof(double)*globRowLen*procRowAmnt);
+	// Arrange send buffer
+	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize);
 	
-	// TODO: Invert matrix
-	
-	//ERLEND! =DDD
+	MPI_Alltoallv(sendbuf, size, displacement, MPI_DOUBLE, size, displacement, MPI_DOUBLE, &WorldComm);
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
@@ -310,18 +311,21 @@ int main(int argc, char *argv[]){
 	}
 
 	/*		Print time? (not yet implemented)				*/
+	if(rank == 0){
+		time = WallTime() - time;
+		printf("t: %g\n", time);
+	}
 
 	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix);
 	freeMatrix(transpMat);
 	freeVector(tempMat);
 	freeVector(diagMat);
-
 	if(rank == 0){
 		MPI_Comm_free(&WorldComm);
 		MPI_Comm_free(&SelfComm);
 	}
-
 	MPI_Finalize();
+
 	return 0;
 }
