@@ -47,10 +47,13 @@ Matrix createMatrix(int rows, int cols){
 }
 
 //Copied from common.c, minor edits.
-void splitVector(int globLen, int size, int** len, int** displ){
-	*len = calloc(size,sizeof(int));
-	*displ = calloc(size,sizeof(int));
+void splitVector(int globLen, int size, int rank, int** len, int** displ, int **transpCount, int **transpDisp){
+	*len = (int*) malloc(size*sizeof(int));
+	*displ = (int*) malloc(size*sizeof(int));
+	*transpDisp = (int*) malloc(size*sizeof(int));
+	*transpCount = (int*) malloc(size*sizeof(int));
 
+	//"Old" splitvector loop
 	for (int i=0; i < size; ++i){
 		(*len)[i] = globLen/size;
 
@@ -61,6 +64,16 @@ void splitVector(int globLen, int size, int** len, int** displ){
 		if (i < size-1){
 			(*displ)[i+1] = (*displ)[i]+(*len)[i];
 		}
+	}
+
+	//Added loop for transpose purposes
+	for (int i = 0; i < size; ++i){
+		(*transpCount)[i] = (*len)[rank]*(*len)[i];
+		int tmp = 0;
+		for (int j = 1; j <= i; ++j){
+			tmp += (*len)[rank]*(*len)[j-1];
+		}
+		(*transpDisp)[i] = tmp;
 	}
 }
 
@@ -158,15 +171,23 @@ void freeMatrix(Matrix inpt){
 	free(inpt);
 }
 
-void VariableInitz(int n, double *h, int *globColLen, int *tempMatSz){
-	*h = 1.0/n;
-	*h *= *h;
-	*globColLen = n-1;
-	*tempMatSz = n*4;
+void preTransp(Matrix data, double **sendbuf, int *size, int *scount, int *sdisp, int mpiSize, int rank){
+	(*sendbuf) = (double*) malloc(data->cols*data->rows*sizeof(double));
+
+	for (int p = 0; p < mpiSize; ++p){ //For each process
+		int j_start = sdisp[p]/size[rank];
+		int j_end = (sdisp[p] + scount[p]) / size[rank];
+		for (int i = 0; i < size[i]; ++i){ //For each coloumn
+			for (int j = j_start; j < j_end; ++j){ //Copy the section of the coloumn corresponding to each process into sendbuf
+				(*sendbuf)[cntr] = data->data[i][j];
+				cntr++;
+			}
+		}
+	}
 }
 
 #define TEST 0
-int print = 0;
+int print = 1;
 
 int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
@@ -174,8 +195,8 @@ int main(int argc, char *argv[]){
 	Vector	/*The diagonal matrix*/diagMat, \
 			/*The fourier-transform temp-store-matrix*/tempMat;
 
-	//Lists for holding how many rows per process (due to MPI division of labour), AKA MPI variables...
-	int *size, *displacement, rank = 0, mpiSize = 1, acquired;
+	//Lists for holding how many cols per process (due to MPI division of labour), AKA MPI variables...
+	int *size, *displ, *transpCount, *transpDisp, rank = 0, mpiSize = 1, acquired;
 
 	//Global variables
 	double h, time;
@@ -204,18 +225,21 @@ int main(int argc, char *argv[]){
 
 	/*			Initializing variables		*/
 	n = atoi(argv[1]);
-	VariableInitz(n, &h, &globColLen, &tempMatSz);
-	splitVector(globColLen, mpiSize, &size, &displacement);
-	procColAmnt = size[rank];
-	locMatSz = globColLen*procColAmnt;
+	h = (double) 1.0/(n*n); globColLen = n-1; tempMatSz = n*4;
+	splitVector(globColLen, mpiSize, rank, &size, &displ, &transpCount, &transpDisp);
+	procColAmnt = size[rank]; locMatSz = globColLen*procColAmnt;
 
 	if(rank == TEST && print){
-		printf("n: %i\nglobColLen: %i\nmpiSize: %i\n\n", n, globColLen, mpiSize);
+		printf("\nn: %i\nglobColLen: %i\nmpiSize: %i\n\n", n, globColLen, mpiSize);
 		printf("Size vector:\n");
 		printIntVector(size, mpiSize);
 		printf("Displacement vector:\n");
-		printIntVector(displacement, mpiSize);
+		printIntVector(displ, mpiSize);
 		printf("\nSize of rank %i matrix: %ix%i\n", TEST, n-1, size[TEST]);
+		printf("Scount:\n");
+		printIntVector(transpCount, mpiSize);
+		printf("Sdisp\n");
+		printIntVector(transpDisp, mpiSize);
 	}
 
 	/*			Initializing structures		*/
@@ -261,22 +285,22 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	if (rank == 0){
+	if (rank == TEST && print){
 		printf("Before transpose:\n");
 		printDoubleMatrix(transpTest->data, 3, 3);
 	}
-	double *tst = calloc(9, sizeof(double));
-	sendArrange(tst, transpTest->data[0], 3, 3, size, mpiSize);
-	MPI_Alltoallv(&tst, size, displacement, MPI_DOUBLE, transpTest->data[0], size, displacement, MPI_DOUBLE, WorldComm);
+	//double *tst = calloc(9, sizeof(double));
+	//sendArrange(tst, transpTest->data[0], 3, 3, size, mpiSize);
+	//MPI_Alltoallv(&tst, size, displ, MPI_DOUBLE, transpTest->data[0], size, displ, MPI_DOUBLE, WorldComm);
 
-	if(rank == 0){
+	if(rank == TEST && print){
 		printf("\nAfter transpose:\n");
 		printDoubleMatrix(transpTest->data, 3, 3);
 		printf("\n");
 	}
 
 	/*sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize); // Arrange send buffer
-	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
+	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procColAmnt; ++i){
@@ -304,7 +328,7 @@ int main(int argc, char *argv[]){
 	/*		Implementation of the second transpose			*/
 	//Arrange send buffer(using same buffer as last time)
 	/*sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
-	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
+	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procColAmnt; ++i){
