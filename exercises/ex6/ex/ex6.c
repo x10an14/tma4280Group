@@ -46,6 +46,58 @@ Matrix createMatrix(int rows, int cols){
 	return result;
 }
 
+void freeVector(Vector inpt){
+	free(inpt->data);
+	free(inpt);
+}
+
+void freeMatrix(Matrix inpt){
+	for (int i = 0; i < inpt->cols; ++i){
+		free(inpt->col[i]);
+	}
+	free(inpt->col);
+	free(inpt->as_vec);
+	free(inpt->data[0]);
+	free(inpt->data);
+	free(inpt);
+}
+
+void printDoubleMatrix(double **ptr, int rows, int cols){
+	for (int i = 0; i < rows; ++i){
+		printf("[%.2f", ptr[i][0]);
+		for (int j = 1; j < cols; ++j){
+			printf(",\t%.2f", ptr[i][j]);
+		}
+		printf("]\n");
+	}
+}
+
+void printDoubleVector(double *ptr, int length){
+	printf("[%.2f", ptr[0]);
+	for (int i = 1; i < length; ++i){
+		printf(",\t%.2f", ptr[i]);
+	}
+	printf("]\n");
+}
+
+void printIntMatrix(int **ptr, int rows, int cols){
+	for (int i = 0; i < rows; ++i){
+		printf("[%i", ptr[i][0]);
+		for (int j = 1; j < cols; ++j){
+			printf(",\t%i", ptr[i][j]);
+		}
+		printf("]\n");
+	}
+}
+
+void printIntVector(int *ptr, int length){
+	printf("[%i", ptr[0]);
+	for (int i = 1; i < length; ++i){
+		printf(",\t%i", ptr[i]);
+	}
+	printf("]\n");
+}
+
 //Copied from common.c, minor edits.
 void splitVector(int globLen, int size, int rank, int** len, int** displ, int **scount, int **sdisp){
 	*len = (int*) malloc(size*sizeof(int));
@@ -77,40 +129,20 @@ void splitVector(int globLen, int size, int rank, int** len, int** displ, int **
 	}
 }
 
-void printDoubleMatrix(double **ptr, int rows, int cols){
-	for (int i = 0; i < rows; ++i){
-		printf("[%.2f", ptr[i][0]);
-		for (int j = 1; j < cols; ++j){
-			printf(",\t%.2f", ptr[i][j]);
-		}
-		printf("\t]\n");
-	}
+int getMaxThreads(){
+	#ifdef HAVE_OPENMP
+		return omp_get_max_threads();
+	#else
+		return 1;
+	#endif
 }
 
-void printDoubleVector(double *ptr, int length){
-	printf("[%.2f", ptr[0]);
-	for (int i = 1; i < length; ++i){
-		printf(",\t%.2f", ptr[i]);
-	}
-	printf("]\n");
-}
-
-void printIntMatrix(int **ptr, int rows, int cols){
-	for (int i = 0; i < rows; ++i){
-		printf("[%i", ptr[i][0]);
-		for (int j = 1; j < cols; ++j){
-			printf(",\t%i", ptr[i][j]);
-		}
-		printf("\t]\n");
-	}
-}
-
-void printIntVector(int *ptr, int length){
-	printf("[%i", ptr[0]);
-	for (int i = 1; i < length; ++i){
-		printf(",\t%i", ptr[i]);
-	}
-	printf("]\n");
+double WallTime(){
+	/*#ifdef defined(HAVE_OPENMP)
+		return omp_get_wtime();
+	#else*/
+		return MPI_Wtime();
+	//#endif
 }
 
 /* Arranges the sendbuffer properly before sending
@@ -137,38 +169,6 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
 			counter++;
 		}
 	}
-}
-
-int getMaxThreads(){
-	#ifdef HAVE_OPENMP
-		return omp_get_max_threads();
-	#else
-		return 1;
-	#endif
-}
-
-double WallTime(){
-	/*#ifdef defined(HAVE_OPENMP)
-		return omp_get_wtime();
-	#else*/
-		return MPI_Wtime();
-	//#endif
-}
-
-void freeVector(Vector inpt){
-	free(inpt->data);
-	free(inpt);
-}
-
-void freeMatrix(Matrix inpt){
-	for (int i = 0; i < inpt->cols; ++i){
-		free(inpt->col[i]);
-	}
-	free(inpt->col);
-	free(inpt->as_vec);
-	free(inpt->data[0]);
-	free(inpt->data);
-	free(inpt);
 }
 
 void preTransp(Matrix inpt, Matrix outpt, int *size, int *scount, int *sdisp, int mpiSize, int rank){
@@ -206,22 +206,74 @@ void fillWithNaturalNumbers(Matrix inpt, int rank, int *size, int totSize){
 		for (int i = 0; i < rank; ++i){
 			start += size[i];
 		}
-		val += start*globColLen;
+		val += start*inpt->rows;
 	}
 
 	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < locMatSz; ++i){
+	for (int i = 0; i < totSize; ++i){
 		//Filling up the work-matrix
-		mat->as_vec->data[i] = (double) val+i;
+		inpt->as_vec->data[i] = (double) val+i;
 	}
 }
 
 void fillWithConstant(Matrix inpt, int totSize, double constant){
 	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < locMatSz; ++i){
+	for (int i = 0; i < totSize; ++i){
 		//Filling up the work-matrix
-		matrix->as_vec->data[i] = constant;
+		inpt->as_vec->data[i] = constant;
 	}
+}
+
+void callFourier(Matrix inpt, Matrix tmp){
+	#ifdef HAVE_OPENMP
+		int thrds = tmp->cols, runs = inpt->cols/thrds, \
+					remains = inpt->cols%thrds, cntr = 0;
+		for (int i = 0; i < runs; ++i){
+			#pragma omp parallel for schedule(static) shared(cntr)
+			for (int j = 0; j < thrds; ++j){
+				fst_(inpt->data[cntr], &inpt->rows, tmp->data[j], &tmp->rows);
+				++cntr;
+			}
+		}
+
+		//If inpt->cols%threads != 0, then the following for-loop is necessary
+		#pragma omp parallel for schedule(static) shared(cntr)
+		for (int i = 0; i < remains; ++i){
+			fst_(inpt->data[cntr], &inpt->rows, tmp->data[i], &tmp->rows);
+			++cntr;
+		}
+	#else
+		#pragma omp parallel for schedule(static)
+		for (int i = 0; i < inpt->cols; ++i){
+			fst_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
+		}
+	#endif
+}
+
+void callFourierInvrs(Matrix inpt, Matrix tmp){
+	#ifdef HAVE_OPENMP
+		int thrds = tmp->cols, runs = inpt->cols/thrds, \
+					remains = inpt->cols%thrds, cntr = 0;
+		for (int i = 0; i < runs; ++i){
+			#pragma omp parallel for schedule(static) shared(cntr)
+			for (int j = 0; j < thrds; ++j){
+				fstinv_(inpt->data[cntr], &inpt->rows, tmp->data[j], &tmp->rows);
+				++cntr;
+			}
+		}
+
+		//If inpt->cols%threads != 0, then the following for-loop is necessary
+		#pragma omp parallel for schedule(static) shared(cntr)
+		for (int i = 0; i < remains; ++i){
+			fstinv_(inpt->data[cntr], &inpt->rows, tmp->data[i], &tmp->rows);
+			++cntr;
+		}
+	#else
+		#pragma omp parallel for schedule(static)
+		for (int i = 0; i < inpt->cols; ++i){
+			fst_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
+		}
+	#endif
 }
 
 #define TEST 0
@@ -229,11 +281,11 @@ int print = 1;
 
 int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
-			/*The transposed version of the matrix*/transpMat;
-	Vector	/*The diagonal matrix*/diagMat, \
+			/*The transposed version of the matrix*/transpMat, \
 			/*The fourier-transform temp-store-matrix*/tempMat;
+	Vector	/*The diagonal matrix*/diagMat;
 
-	//Lists for holding how many cols per process (due to MPI division of labour), AKA MPI variables...
+	//Lists for holding how many cols per process (due to MPI division of labour), AKA MPI variables++...
 	int *size, *displ, *scount, *sdisp, rank = 0, mpiSize = 1, acquired;
 
 	//Global variables
@@ -281,10 +333,10 @@ int main(int argc, char *argv[]){
 	}
 
 	/*			Initializing structures		*/
-	tempMat = createVector(tempMatSz);
 	diagMat = createVector(globColLen);
 	matrix = createMatrix(globColLen, procColAmnt);
 	transpMat = createMatrix(globColLen, procColAmnt);
+	tempMat = createMatrix(getMaxThreads(), tempMatSz);
 	diagMat->data = (double*) malloc(globColLen*sizeof(double));
 	//Transpose temporary buffer
 	double *sendbuf = calloc(locMatSz, sizeof(double));
@@ -305,12 +357,7 @@ int main(int argc, char *argv[]){
 		printDoubleVector(diagMat->data, globColLen);
 	}
 
-	/*#pragma omp parallel for schedule(static)
-	for (int i = 0; i < procColAmnt; ++i){
-		//Implementation of the first fst_() call
-		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-		fst_(matrix->data[i], &globColLen, tempMat->data, &tempMatSz);
-	}*/
+	callFourier(matrix, tempMat);
 
 	/*		Implementation of the first transpose			*/
 	if (rank == TEST && print){
@@ -336,12 +383,7 @@ int main(int argc, char *argv[]){
 	/*sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize); // Arrange send buffer
 	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
 
-	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < procColAmnt; ++i){
-		//Implementation of the first fstinv_() call
-		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-		fstinv_(matrix->data[i], &globColLen, tempMat->data, &tempMatSz);
-	}*/
+	callFourierInvrs(matrix, tempMat);
 
 	/*		Implementation of the "tensor" operation		*/
 	//Which for-loop level should get the open mp pragma?
@@ -352,27 +394,17 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < procColAmnt; ++i){
-		//Implementation of the second fst_() call
-		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-	//fst_(matrix->data[i], &globColLen, tempMat->data, &tempMatSz);
-	}*/
+	callFourier(matrix, tempMat);
 
 	/*		Implementation of the second transpose			*/
 	//Arrange send buffer(using same buffer as last time)
 	/*preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
-	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);*/
+	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 
-	/*sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
+	sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
 	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
 
-	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < procColAmnt; ++i){
-		//Implementation of the second fstinv_() call
-		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-	//fstinv_(matrix->data[i], &globColLen, tempMat->data, &tempMatSz);
-	}*/
+	callFourierInvrs(matrix, tempMat);
 
 	/*		Print time? (not yet implemented)				*/
 	if(rank == TEST){
@@ -382,8 +414,8 @@ int main(int argc, char *argv[]){
 
 	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix);
+	freeMatrix(tempMat);
 	freeMatrix(transpMat);
-	freeVector(tempMat);
 	freeVector(diagMat);
 	if(rank == 0){
 		MPI_Comm_free(&WorldComm);
