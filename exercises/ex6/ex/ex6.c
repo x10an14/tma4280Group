@@ -172,8 +172,8 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
 	}
 }
 
-void preTransp(Matrix inpt, Matrix outpt, int *size, int *scount, int *sdisp, int mpiSize, int rank){
-	int cntr = 0, cols = size[rank];
+void packTransp(Matrix inpt, Matrix outpt, int *scount, int *sdisp, int mpiSize, int rank){
+	int cntr = 0, cols = inpt->cols;
 	for (int p = 0; p < mpiSize; ++p){ //For each process
 		/*if (rank == 0){
 			printf("\nprocess:%i\n", p);
@@ -199,16 +199,8 @@ void preTransp(Matrix inpt, Matrix outpt, int *size, int *scount, int *sdisp, in
 	}
 }
 
-void fillWithNaturalNumbers(Matrix inpt, int rank, int *size, int totSize){
-	double val = 1;
-
-	if (rank > 0){
-		int start = 0;
-		for (int i = 0; i < rank; ++i){
-			start += size[i];
-		}
-		val += start*inpt->rows;
-	}
+void fillWithNaturalNumbers(Matrix inpt, int rank, int *displ, int totSize){
+	double val = (displ[rank]*inpt->rows) + 1;
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < totSize; ++i){
@@ -275,6 +267,37 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 			fst_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
 		}
 	#endif
+}
+
+void unpackTransp(Matrix mat, Matrix receive, int mpiSize, int rank, int *scount, int *sdisp){
+	//HUSK Å BYTTE "2" PÅ DE TO INDRE FOR-LØKKENE!!!! (Det skal være size[p]!!!!! (Tror jeg))
+	int cntr = 0, h_start, h_end;
+
+	for (int i = 0; i < 2; i += 1){
+		h_start = sdisp[0]; h_end = h_start + scount[0];
+		for (int h = h_start; h < h_end; h += 2){ //Loop over all even offsets in a section
+			if (rank == 1){
+				printf("Copying %g from receive into %i in mat\n", receive->as_vec->data[h+i], cntr);
+			}
+			mat->as_vec->data[cntr] = receive->as_vec->data[h+i];
+			++cntr;
+		}
+
+		for (int p = 1; p < mpiSize; ++p){ //Loop over all the sections
+			h_start = sdisp[p];
+			h_end = h_start + scount[p];
+
+			for (int h = h_start; h < h_end; h += 2){ //Loop over all even offsets in a section
+				if (rank == 1){
+					printf("Copying %g from receive into %i in mat\n", receive->as_vec->data[h+i], cntr);
+				}
+				mat->as_vec->data[cntr] = receive->as_vec->data[h+i];
+				++cntr;
+			}
+		}
+	}
+
+
 }
 
 #define TEST 1
@@ -348,7 +371,7 @@ int main(int argc, char *argv[]){
 		diagMat->data[i] = (double) 2.0*(1.0-cos(i + 1.0)*M_PI/(double)n);
 	}
 
-	fillWithNaturalNumbers(matrix, rank, size, locMatSz);
+	fillWithNaturalNumbers(matrix, rank, displ, locMatSz);
 	//fillWithConstant(matrix, locMatSz, h);
 
 	time = WallTime();
@@ -367,20 +390,21 @@ int main(int argc, char *argv[]){
 		printDoubleVector(transpMat->data[0], locMatSz);
 	}
 
-				/*Christians implementation*/
-	preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
+	/*				Christians implementation				*/
+	packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
 	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	unpackTransp(transpMat, matrix, mpiSize, rank, scount, sdisp);
 
-				/*Erlends implementation*/
+	/*				Erlends implementation				*/
 	//sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
 	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 
 	if(rank == TEST && print){
 		printf("\nAfter transpose:\n");
 		printf("matrix:\n");
-		printDoubleMatrix(matrix->data, matrix->cols, matrix->rows);
+		printDoubleMatrix(transpMat->data, matrix->cols, matrix->rows);
 		printf("transpMat:\n");
-		printDoubleVector(transpMat->data[0], locMatSz);
+		printDoubleVector(matrix->data[0], locMatSz);
 		printf("\n");
 	}
 
@@ -404,7 +428,7 @@ int main(int argc, char *argv[]){
 	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
 
 	//Arrange send buffer(using same buffer as last time)
-	/*preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
+	/*packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
 	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 
 	sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
