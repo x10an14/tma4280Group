@@ -198,7 +198,7 @@ void preTransp(Matrix inpt, Matrix outpt, int *size, int *scount, int *sdisp, in
 	}
 }
 
-#define TEST 2
+#define TEST 1
 int print = 1;
 
 int main(int argc, char *argv[]){
@@ -261,7 +261,7 @@ int main(int argc, char *argv[]){
 	transpMat = createMatrix(globColLen, procColAmnt);
 	diagMat->data = (double*) malloc(globColLen*sizeof(double));
 	//Transpose temporary buffer
-	double *sendbuf = calloc(globColLen*procColAmnt, sizeof(double));
+	double *sendbuf = calloc(locMatSz, sizeof(double));
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < diagMat->len; ++i){
@@ -307,8 +307,9 @@ int main(int argc, char *argv[]){
 		printf("transpMat:\n");
 		printDoubleVector(transpMat->data[0], locMatSz);
 	}
+
 	preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
-	//MPI_Alltoallv(transpMat->data[0], size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
+	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 
 	if(rank == TEST && print){
 		printf("\nAfter transpose:\n");
@@ -326,7 +327,7 @@ int main(int argc, char *argv[]){
 	for (int i = 0; i < procColAmnt; ++i){
 		//Implementation of the first fstinv_() call
 		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-		fstinv_(transpMat->data[i], &globColLen, tempMat->data, &tempMatSz);
+		fstinv_(matrix->data[i], &globColLen, tempMat->data, &tempMatSz);
 	}*/
 
 	/*		Implementation of the "tensor" operation		*/
@@ -334,7 +335,7 @@ int main(int argc, char *argv[]){
 	/*#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procColAmnt; ++i){
 		for (int j = 0; j < globColLen; ++j){
-			transpMat->data[i][j] /= diagMat->data[j] + diagMat->data[i];
+			matrix->data[i][j] /= diagMat->data[j] + diagMat->data[i];
 		}
 	}
 
@@ -342,11 +343,14 @@ int main(int argc, char *argv[]){
 	for (int i = 0; i < procColAmnt; ++i){
 		//Implementation of the second fst_() call
 		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-	//fst_(transpMat->data[i], &globColLen, tempMat->data, &tempMatSz);
+	//fst_(matrix->data[i], &globColLen, tempMat->data, &tempMatSz);
 	}*/
 
 	/*		Implementation of the second transpose			*/
 	//Arrange send buffer(using same buffer as last time)
+	/*preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
+	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);*/
+
 	/*sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
 	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
 
