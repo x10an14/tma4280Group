@@ -47,11 +47,11 @@ Matrix createMatrix(int rows, int cols){
 }
 
 //Copied from common.c, minor edits.
-void splitVector(int globLen, int size, int rank, int** len, int** displ, int **transpCount, int **transpDisp){
+void splitVector(int globLen, int size, int rank, int** len, int** displ, int **scount, int **sdisp){
 	*len = (int*) malloc(size*sizeof(int));
-	*displ = (int*) malloc(size*sizeof(int));
-	*transpDisp = (int*) malloc(size*sizeof(int));
-	*transpCount = (int*) malloc(size*sizeof(int));
+	*displ = (int*) calloc(size, sizeof(int));
+	*sdisp = (int*) malloc(size*sizeof(int));
+	*scount = (int*) malloc(size*sizeof(int));
 
 	//"Old" splitvector loop
 	for (int i=0; i < size; ++i){
@@ -68,12 +68,12 @@ void splitVector(int globLen, int size, int rank, int** len, int** displ, int **
 
 	//Added loop for transpose purposes
 	for (int i = 0; i < size; ++i){
-		(*transpCount)[i] = (*len)[rank]*(*len)[i];
+		(*scount)[i] = (*len)[rank]*(*len)[i];
 		int tmp = 0;
 		for (int j = 1; j <= i; ++j){
 			tmp += (*len)[rank]*(*len)[j-1];
 		}
-		(*transpDisp)[i] = tmp;
+		(*sdisp)[i] = tmp;
 	}
 }
 
@@ -171,15 +171,14 @@ void freeMatrix(Matrix inpt){
 	free(inpt);
 }
 
-void preTransp(Matrix data, double **sendbuf, int *size, int *scount, int *sdisp, int mpiSize, int rank){
-	(*sendbuf) = (double*) malloc(data->cols*data->rows*sizeof(double));
-
+void preTransp(Matrix inpt, Matrix sendbuf, int *size, int *scount, int *sdisp, int mpiSize, int rank){
+	int cntr = 0;
 	for (int p = 0; p < mpiSize; ++p){ //For each process
 		int j_start = sdisp[p]/size[rank];
 		int j_end = (sdisp[p] + scount[p]) / size[rank];
 		for (int i = 0; i < size[i]; ++i){ //For each coloumn
 			for (int j = j_start; j < j_end; ++j){ //Copy the section of the coloumn corresponding to each process into sendbuf
-				(*sendbuf)[cntr] = data->data[i][j];
+				sendbuf->as_vec->data[cntr] = inpt->data[i][j];
 				cntr++;
 			}
 		}
@@ -196,7 +195,7 @@ int main(int argc, char *argv[]){
 			/*The fourier-transform temp-store-matrix*/tempMat;
 
 	//Lists for holding how many cols per process (due to MPI division of labour), AKA MPI variables...
-	int *size, *displ, *transpCount, *transpDisp, rank = 0, mpiSize = 1, acquired;
+	int *size, *displ, *scount, *sdisp, rank = 0, mpiSize = 1, acquired;
 
 	//Global variables
 	double h, time;
@@ -226,7 +225,7 @@ int main(int argc, char *argv[]){
 	/*			Initializing variables		*/
 	n = atoi(argv[1]);
 	h = (double) 1.0/(n*n); globColLen = n-1; tempMatSz = n*4;
-	splitVector(globColLen, mpiSize, rank, &size, &displ, &transpCount, &transpDisp);
+	splitVector(globColLen, mpiSize, rank, &size, &displ, &scount, &sdisp);
 	procColAmnt = size[rank]; locMatSz = globColLen*procColAmnt;
 
 	if(rank == TEST && print){
@@ -235,11 +234,11 @@ int main(int argc, char *argv[]){
 		printIntVector(size, mpiSize);
 		printf("Displacement vector:\n");
 		printIntVector(displ, mpiSize);
-		printf("\nSize of rank %i matrix: %ix%i\n", TEST, n-1, size[TEST]);
+		printf("\nSize of rank %i matrix: %ix%i\n", TEST, procColAmnt, globColLen);
 		printf("Scount:\n");
-		printIntVector(transpCount, mpiSize);
+		printIntVector(scount, mpiSize);
 		printf("Sdisp\n");
-		printIntVector(transpDisp, mpiSize);
+		printIntVector(sdisp, mpiSize);
 	}
 
 	/*			Initializing structures		*/
