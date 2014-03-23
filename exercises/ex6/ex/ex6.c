@@ -103,7 +103,7 @@ void printIntVector(int *ptr, int length){
 /* Arranges the sendbuffer properly before sending
  * Assumes the columns are arranged continually in the vector
  */
-void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int *sizearr, int sizearrlength)
+void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int *sizearr, int sizearrlength, int * displvec)
 {
 	int elements, counter, process, destoffset;
 	
@@ -116,11 +116,11 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
 		
 
 		for(int j = 0; j < collength; j++){	// Iterate through row
-			if ((counter + 1 >= elements) && !(process > sizearrlength -1))
+			if ((counter + 1 > elements) && !(process > sizearrlength -1))
 			{
 				counter = 0;
 				process++;
-				destoffset += elements*colcnt;
+				destoffset = displvec[process];
 				elements = sizearr[process];
 			}
 			
@@ -266,14 +266,15 @@ int main(int argc, char *argv[]){
 		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
 		fst_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
 	}
+	
 
 	/*		Implementation of the first transpose			*/
 	double * sendbuf = malloc(sizeof(double)*globRowLen*procRowAmnt);
 	// Arrange send buffer
-	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize);
+	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize, displacement);
 	
 	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
-
+	
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procRowAmnt; ++i){
 		//Implementation of the first fstinv_() call
@@ -300,7 +301,7 @@ int main(int argc, char *argv[]){
 	/*		Implementation of the second transpose			*/
 	
 	// Arrange send buffer(using same buffer as last time
-	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize);
+	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize, displacement);
 	
 	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
 
