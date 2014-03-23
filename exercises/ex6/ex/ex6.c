@@ -406,25 +406,15 @@ int main(int argc, char *argv[]){
 		printDoubleVector(transpMat->data[0], locMatSz);
 	}
 
-<<<<<<< HEAD
 	/*				Christians implementation				*/
-	packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
-	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
-	unpackTransp(transpMat, matrix, mpiSize, rank, scount, sdisp);
-
-	/*				Erlends implementation				*/
-	//sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
-=======
-				/*Christians implementation*/
-	//preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
+	//packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
 	//MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	//unpackTransp(transpMat, matrix, mpiSize, rank, scount, sdisp);
 
 				/*Erlends implementation*/
 	sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
-	double *recvbuf = malloc(sizeof(double)*globColLen*procColAmnt);
+	//double *recvbuf = malloc(sizeof(double)*globColLen*procColAmnt); //HAR FLYTTET DENNE LINJEN LENGERE OPP! NÅ BLIR DEN INITIALISERT DOBBELT!
 	MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, WorldComm);
->>>>>>> 3f20bf5f6321216d107bfe61e561be2997a17928
-	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 	recvArrange(recvbuf, matrix->data[0], globColLen, procColAmnt);
 
 	if(rank == TEST && print){
