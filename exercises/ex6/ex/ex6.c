@@ -148,8 +148,7 @@ double WallTime(){
 /* Arranges the sendbuffer properly before sending
  * Assumes the columns are arranged continually in the vector
  */
-void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int *sizearr, int sizearrlength, int * displvec)
-{
+void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int *sizearr, int sizearrlength, int * displvec){
 	int elements, counter, process, destoffset;
 
 	for(int i = 0; i < colcnt; i++){	// One pass per col
@@ -278,7 +277,7 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 	#endif
 }
 
-#define TEST 0
+#define TEST 1
 int print = 1;
 
 int main(int argc, char *argv[]){
@@ -359,30 +358,6 @@ int main(int argc, char *argv[]){
 		printDoubleVector(diagMat->data, globColLen);
 	}
 
-<<<<<<< HEAD
-	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < procRowAmnt; ++i){
-		//Implementation of the first fst_() call
-		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-		fst_(matrix->data[i], &globRowLen, tempMat->data, &tempMatSz);
-	}
-	
-
-	/*		Implementation of the first transpose			*/
-	double * sendbuf = malloc(sizeof(double)*globRowLen*procRowAmnt);
-	// Arrange send buffer
-	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize, displacement);
-	
-	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
-	
-	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < procRowAmnt; ++i){
-		//Implementation of the first fstinv_() call
-		tempMat->data = (double*) calloc(tempMatSz, sizeof(double));
-		fstinv_(transpMat->data[i], &globRowLen, tempMat->data, &tempMatSz);
-=======
-	callFourier(matrix, tempMat);
-
 	/*		Implementation of the first transpose			*/
 	if (rank == TEST && print){
 		printf("\nBefore transpose:\n");
@@ -392,8 +367,13 @@ int main(int argc, char *argv[]){
 		printDoubleVector(transpMat->data[0], locMatSz);
 	}
 
+				/*Christians implementation*/
 	preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
 	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+
+				/*Erlends implementation*/
+	//sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
+	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 
 	if(rank == TEST && print){
 		printf("\nAfter transpose:\n");
@@ -402,13 +382,9 @@ int main(int argc, char *argv[]){
 		printf("transpMat:\n");
 		printDoubleVector(transpMat->data[0], locMatSz);
 		printf("\n");
->>>>>>> 05e93b35ef867e82f942674590e305115a7293c1
 	}
 
-	/*sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize); // Arrange send buffer
-	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
-
-	callFourierInvrs(matrix, tempMat);
+	/*callFourierInvrs(matrix, tempMat);
 
 	/*		Implementation of the "tensor" operation		*/
 	//Which for-loop level should get the open mp pragma?
@@ -422,12 +398,11 @@ int main(int argc, char *argv[]){
 	callFourier(matrix, tempMat);
 
 	/*		Implementation of the second transpose			*/
-	
+
 	// Arrange send buffer(using same buffer as last time
-	sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize, displacement);
-	
+	/*sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize, displacement);
 	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
-	
+
 	//Arrange send buffer(using same buffer as last time)
 	/*preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
 	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
