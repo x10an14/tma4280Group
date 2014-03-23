@@ -172,6 +172,22 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
 	}
 }
 
+/* Arranger the receivebuffer back into column order because it will be in partial rows
+ * afte receiving (see the pdf Parallelization of a fast Poisson solver)
+ */
+void recvArrange(double *recvbuf, double *outbuf, int collength, int colcnt)
+{
+	int counter, process;
+	
+	for(int i = 0; i < collength; i++)
+	{
+		for(int j = 0; j < colcnt; j++)
+		{
+			outbuf[j*collength + i] = recvbuf[i*colcnt+j];
+		}
+	}
+}
+
 void preTransp(Matrix inpt, Matrix outpt, int *size, int *scount, int *sdisp, int mpiSize, int rank){
 	int cntr = 0, cols = size[rank];
 	for (int p = 0; p < mpiSize; ++p){ //For each process
@@ -368,13 +384,16 @@ int main(int argc, char *argv[]){
 	}
 
 				/*Christians implementation*/
-	preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
-	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	//preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
+	//MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 
 				/*Erlends implementation*/
-	//sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
+	sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
+	double *recvbuf = malloc(sizeof(double)*globColLen*procColAmnt);
+	MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, WorldComm);
 	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
-
+	recvArrange(recvbuf, matrix->data[0], globColLen, procColAmnt);
+	
 	if(rank == TEST && print){
 		printf("\nAfter transpose:\n");
 		printf("matrix:\n");
