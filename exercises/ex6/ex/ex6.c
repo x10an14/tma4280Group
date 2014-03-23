@@ -198,7 +198,33 @@ void preTransp(Matrix inpt, Matrix outpt, int *size, int *scount, int *sdisp, in
 	}
 }
 
-#define TEST 1
+void fillWithNaturalNumbers(Matrix inpt, int rank, int *size, int totSize){
+	double val = 1;
+
+	if (rank > 0){
+		int start = 0;
+		for (int i = 0; i < rank; ++i){
+			start += size[i];
+		}
+		val += start*globColLen;
+	}
+
+	#pragma omp parallel for schedule(static)
+	for (int i = 0; i < locMatSz; ++i){
+		//Filling up the work-matrix
+		mat->as_vec->data[i] = (double) val+i;
+	}
+}
+
+void fillWithConstant(Matrix inpt, int totSize, double constant){
+	#pragma omp parallel for schedule(static)
+	for (int i = 0; i < locMatSz; ++i){
+		//Filling up the work-matrix
+		matrix->as_vec->data[i] = constant;
+	}
+}
+
+#define TEST 0
 int print = 1;
 
 int main(int argc, char *argv[]){
@@ -269,21 +295,8 @@ int main(int argc, char *argv[]){
 		diagMat->data[i] = (double) 2.0*(1.0-cos(i + 1.0)*M_PI/(double)n);
 	}
 
-	//For filling the matrix with the natural numbers in increasing order per coloumn on all processes.
-	double val = 1;
-	if (rank > 0){
-		int start = 0;
-		for (int i = 0; i < rank; ++i){
-			start += size[i];
-		}
-		val += start*globColLen;
-	}
-	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < locMatSz; ++i){
-		//Filling up the work-matrix
-		//matrix->as_vec->data[i] = h;
-		matrix->as_vec->data[i] = (double) val+i;
-	}
+	fillWithNaturalNumbers(matrix, rank, size, locMatSz);
+	//fillWithConstant(matrix, locMatSz, h);
 
 	time = WallTime();
 
