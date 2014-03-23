@@ -77,10 +77,10 @@ void splitVector(int globLen, int size, int rank, int** len, int** displ, int **
 	}
 }
 
-void printDoubleMatrix(double **ptr, int height, int width){
-	for (int i = 0; i < height; ++i){
+void printDoubleMatrix(double **ptr, int rows, int cols){
+	for (int i = 0; i < rows; ++i){
 		printf("[%.2f", ptr[i][0]);
-		for (int j = 1; j < width; ++j){
+		for (int j = 1; j < cols; ++j){
 			printf(",\t%.2f", ptr[i][j]);
 		}
 		printf("\t]\n");
@@ -95,10 +95,10 @@ void printDoubleVector(double *ptr, int length){
 	printf("]\n");
 }
 
-void printIntMatrix(int **ptr, int height, int width){
-	for (int i = 0; i < height; ++i){
+void printIntMatrix(int **ptr, int rows, int cols){
+	for (int i = 0; i < rows; ++i){
 		printf("[%i", ptr[i][0]);
-		for (int j = 1; j < width; ++j){
+		for (int j = 1; j < cols; ++j){
 			printf(",\t%i", ptr[i][j]);
 		}
 		printf("\t]\n");
@@ -171,21 +171,34 @@ void freeMatrix(Matrix inpt){
 	free(inpt);
 }
 
-void preTransp(Matrix inpt, Matrix sendbuf, int *size, int *scount, int *sdisp, int mpiSize, int rank){
-	int cntr = 0;
+void preTransp(Matrix inpt, Matrix outpt, int *size, int *scount, int *sdisp, int mpiSize, int rank){
+	int cntr = 0, cols = size[rank];
 	for (int p = 0; p < mpiSize; ++p){ //For each process
-		int j_start = sdisp[p]/size[rank];
-		int j_end = (sdisp[p] + scount[p]) / size[rank];
-		for (int i = 0; i < size[i]; ++i){ //For each coloumn
-			for (int j = j_start; j < j_end; ++j){ //Copy the section of the coloumn corresponding to each process into sendbuf
-				sendbuf->as_vec->data[cntr] = inpt->data[i][j];
+		/*if (rank == 0){
+			printf("\nprocess:%i\n", p);
+		}*/
+		int j_start = sdisp[p]/cols;
+		int j_end = (sdisp[p] + scount[p])/cols;
+		/*if (rank == 0){
+			printf("j_start:%i\nj_end:%i\n", j_start, j_end);
+		}*/
+		for (int i = 0; i < cols; ++i){ //For each coloumn
+			/*if(rank == 0){
+				printf("i:%i\n", i);
+			}*/
+			for (int j = j_start; j < j_end; ++j){ //Copy the section of the coloumn corresponding to each process into outpt
+				/*if (rank == 0){
+					printf("j:%i\n", j);
+					printf("Copying value inpt->data[i][j]: %.2f into cntr:%i in outpt.\n", inpt->data[i][j], cntr);
+				}*/
+				outpt->as_vec->data[cntr] = inpt->data[i][j];
 				cntr++;
 			}
 		}
 	}
 }
 
-#define TEST 0
+#define TEST 1
 int print = 1;
 
 int main(int argc, char *argv[]){
@@ -237,7 +250,7 @@ int main(int argc, char *argv[]){
 		printf("\nSize of rank %i matrix: %ix%i\n", TEST, procColAmnt, globColLen);
 		printf("Scount:\n");
 		printIntVector(scount, mpiSize);
-		printf("Sdisp\n");
+		printf("Sdisp:\n");
 		printIntVector(sdisp, mpiSize);
 	}
 
@@ -256,16 +269,18 @@ int main(int argc, char *argv[]){
 		diagMat->data[i] = (double) 2.0*(1.0-cos(i + 1.0)*M_PI/(double)n);
 	}
 
+	double val = (double) ((size[rank]-1)*3)+1; //Filling the whole matrix across processes up with the natural numbers in order.
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < locMatSz; ++i){
 		//Filling up the work-matrix
-		matrix->as_vec->data[i] = h;
+		//matrix->as_vec->data[i] = h;
+		matrix->as_vec->data[i] = (double) val+i;
 	}
 
 	time = WallTime();
 
 	if(rank == TEST && print){
-		printf("Diagonal matrix for rank == %i:\n", TEST);
+		printf("\nDiagonal matrix for rank == %i:\n", TEST);
 		printDoubleVector(diagMat->data, globColLen);
 	}
 
@@ -277,24 +292,22 @@ int main(int argc, char *argv[]){
 	}*/
 
 	/*		Implementation of the first transpose			*/
-	Matrix transpTest = createMatrix(3, 3);
-	for (int i = 0; i < 3; ++i){
-		for (int j = 0; j < 3; ++j){
-			transpTest->data[j][i] = (double) (j+1) + 3*i;
-		}
-	}
-
 	if (rank == TEST && print){
-		printf("Before transpose:\n");
-		printDoubleMatrix(transpTest->data, 3, 3);
+		printf("\nBefore transpose:\n");
+		printf("matrix:\n");
+		printDoubleMatrix(matrix->data, matrix->cols, matrix->rows);
+		printf("transpMat:\n");
+		printDoubleVector(transpMat->data[0], locMatSz);
 	}
-	//double *tst = calloc(9, sizeof(double));
-	//sendArrange(tst, transpTest->data[0], 3, 3, size, mpiSize);
-	//MPI_Alltoallv(&tst, size, displ, MPI_DOUBLE, transpTest->data[0], size, displ, MPI_DOUBLE, WorldComm);
+	preTransp(matrix, transpMat, size, scount, sdisp, mpiSize, rank);
+	//MPI_Alltoallv(transpMat->data[0], size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
 
 	if(rank == TEST && print){
 		printf("\nAfter transpose:\n");
-		printDoubleMatrix(transpTest->data, 3, 3);
+		printf("matrix:\n");
+		printDoubleMatrix(matrix->data, matrix->cols, matrix->rows);
+		printf("transpMat:\n");
+		printDoubleVector(transpMat->data[0], locMatSz);
 		printf("\n");
 	}
 
