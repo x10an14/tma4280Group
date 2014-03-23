@@ -32,7 +32,7 @@ typedef vector_t *Vector;
 typedef struct{
 	double **data;
 	Vector as_vec;
-	Vector *row;
+	Vector *col;
 	MPI_Comm *comm;
 	int comm_size;
 	int comm_rank;
