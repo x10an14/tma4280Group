@@ -285,38 +285,17 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 	#endif
 }
 
-void unpackTransp(Matrix mat, Matrix receive, int mpiSize, int rank, int *scount, int *sdisp){
-	//HUSK Å BYTTE "2" PÅ DE TO INDRE FOR-LØKKENE!!!! (Det skal være size[p]!!!!! (Tror jeg))
-	int cntr = 0, h_start, h_end;
-
-	for (int i = 0; i < 2; i += 1){
-		h_start = sdisp[0]; h_end = h_start + scount[0];
-		for (int h = h_start; h < h_end; h += 2){ //Loop over all even offsets in a section
-			if (rank == 1){
-				printf("Copying %g from receive into %i in mat\n", receive->as_vec->data[h+i], cntr);
-			}
-			mat->as_vec->data[cntr] = receive->as_vec->data[h+i];
+void unpackTransp(Matrix inpt, Matrix outpt){
+	int cntr = 0;
+	for (int i = 0; i < inpt->rows; ++i){
+		for (int j = 0; j < inpt->cols; ++j){
+			inpt->data[j][i] = outpt->as_vec->data[cntr];
 			++cntr;
 		}
-
-		for (int p = 1; p < mpiSize; ++p){ //Loop over all the sections
-			h_start = sdisp[p];
-			h_end = h_start + scount[p];
-
-			for (int h = h_start; h < h_end; h += 2){ //Loop over all even offsets in a section
-				if (rank == 1){
-					printf("Copying %g from receive into %i in mat\n", receive->as_vec->data[h+i], cntr);
-				}
-				mat->as_vec->data[cntr] = receive->as_vec->data[h+i];
-				++cntr;
-			}
-		}
 	}
-
-
 }
 
-#define TEST 1
+#define TEST 0
 int print = 1;
 
 int main(int argc, char *argv[]){
@@ -379,7 +358,7 @@ int main(int argc, char *argv[]){
 	tempMat = createMatrix(getMaxThreads(), tempMatSz);
 	diagMat->data = (double*) malloc(globColLen*sizeof(double));
 	//Transpose temporary buffer
-	double *sendbuf = calloc(locMatSz, sizeof(double));
+	//double *sendbuf = calloc(locMatSz, sizeof(double));
 
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < diagMat->len; ++i){
@@ -397,6 +376,8 @@ int main(int argc, char *argv[]){
 		printDoubleVector(diagMat->data, globColLen);
 	}
 
+	//callFourier(matrix, tempMat);
+
 	/*		Implementation of the first transpose			*/
 	if (rank == TEST && print){
 		printf("\nBefore transpose:\n");
@@ -407,21 +388,21 @@ int main(int argc, char *argv[]){
 	}
 
 	/*				Christians implementation				*/
-	//packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
-	//MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
-	//unpackTransp(transpMat, matrix, mpiSize, rank, scount, sdisp);
+	packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
+	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	unpackTransp(transpMat, matrix);
 
 				/*Erlends implementation*/
-	sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
+	//sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
 	//double *recvbuf = malloc(sizeof(double)*globColLen*procColAmnt); //HAR FLYTTET DENNE LINJEN LENGERE OPP! NÅ BLIR DEN INITIALISERT DOBBELT!
-	MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, WorldComm);
-	recvArrange(recvbuf, matrix->data[0], globColLen, procColAmnt);
+	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, WorldComm);
+	//recvArrange(recvbuf, matrix->data[0], globColLen, procColAmnt);
 
 	if(rank == TEST && print){
 		printf("\nAfter transpose:\n");
-		printf("matrix:\n");
-		printDoubleMatrix(transpMat->data, matrix->cols, matrix->rows);
 		printf("transpMat:\n");
+		printDoubleMatrix(transpMat->data, transpMat->cols, transpMat->rows);
+		printf("matrix:\n");
 		printDoubleVector(matrix->data[0], locMatSz);
 		printf("\n");
 	}
