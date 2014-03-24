@@ -193,6 +193,7 @@ void packTransp(Matrix inpt, Matrix outpt, int *scount, int *sdisp, int mpiSize)
 	for (int p = 0; p < mpiSize; ++p){ //For each process
 		int j_start = sdisp[p]/cols;
 		int j_end = (sdisp[p] + scount[p])/cols;
+		#pragma omp parallel for schedule(static) shared(cntr)
 		for (int i = 0; i < cols; ++i){ //For each coloumn
 			for (int j = j_start; j < j_end; ++j){ //Copy the section of the coloumn corresponding to each process into outpt
 				outpt->as_vec->data[cntr] = inpt->data[i][j];
@@ -275,6 +276,7 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 void unpackTransp(Matrix outpt, Matrix inpt){
 	int cntr = 0;
 	for (int i = 0; i < outpt->rows; ++i){
+		#pragma omp parallel for schedule(static) shared(cntr)
 		for (int j = 0; j < outpt->cols; ++j){
 			outpt->data[j][i] = inpt->as_vec->data[cntr];
 			++cntr;
