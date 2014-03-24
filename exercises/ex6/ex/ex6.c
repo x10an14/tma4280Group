@@ -272,6 +272,7 @@ void unpackTransp(Matrix outpt, Matrix inpt){
 
 #define TEST 0
 #define PRINT 0
+#define MPI_WTIME_IS_GLOBAL 1
 
 int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
@@ -288,7 +289,7 @@ int main(int argc, char *argv[]){
 		/*Displacement array for the above array*/ *sdisp, \
 		/*Typical MPI variables.*/ rank = 0, mpiSize = 1, acquired;
 
-	double /*Global variables*/h,  initTime, runTime, declareTime, singleFourier, \
+	double /*Global variables*/h,  initTime = WallTime(), runTime, declareTime, singleFourier, \
 		preTranspTime, singleTransp, halfWork, singleTensor, totRun, totTime;
 	int /*Global variables*/globColLen, n, \
 		/*Process specific variables*/tempMatSz, locMatSz, procColAmnt;
@@ -301,7 +302,7 @@ int main(int argc, char *argv[]){
 	#endif
 	MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	MPI_Comm_dup(MPI_COMM_WORLD, &WorldComm);
+	MPI_Comm_dup(MPI_COMM_WORLD, &MPI_COMM_WORLD);
 
 	//Check for correct commandline argument
 	if (argc < 2 || atoi(argv[1]) < 4 || atoi(argv[1])%2 != 0){
@@ -373,7 +374,7 @@ int main(int argc, char *argv[]){
 
 	/*				Christians implementation				*/
 	packTransp(matrix, transpMat, scount, sdisp, mpiSize);
-	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
 	unpackTransp(transpMat, matrix);
 
 	singleTransp = WallTime() - preTranspTime;
@@ -381,7 +382,7 @@ int main(int argc, char *argv[]){
 				/*Erlends implementation*/
 	//sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
 	//double *recvbuf = malloc(sizeof(double)*globColLen*procColAmnt); //HAR FLYTTET DENNE LINJEN LENGERE OPP! NÅ BLIR DEN INITIALISERT DOBBELT!
-	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, WorldComm);
+	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
 	//recvArrange(recvbuf, matrix->data[0], globColLen, procColAmnt);
 
 	if(rank == TEST && PRINT){
@@ -398,7 +399,6 @@ int main(int argc, char *argv[]){
 	halfWork = WallTime();
 
 	/*		Implementation of the "tensor" operation		*/
-	//Which for-loop level should get the open mp pragma?
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procColAmnt; ++i){
 		for (int j = 0; j < globColLen; ++j){
@@ -415,15 +415,15 @@ int main(int argc, char *argv[]){
 
 	/*				Christians implementation				*/
 	packTransp(transpMat, matrix, scount, sdisp, mpiSize);
-	MPI_Alltoallv(matrix->data[0], scount, sdisp, MPI_DOUBLE, transpMat->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	MPI_Alltoallv(matrix->data[0], scount, sdisp, MPI_DOUBLE, transpMat->data[0], scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
 	unpackTransp(matrix, transpMat);
 
 	//Arrange send buffer(using same buffer as last runTime)
 	/*packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
-	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
 
 	sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
-	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);*/
+	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, MPI_COMM_WORLD);*/
 
 	callFourierInvrs(matrix, tempMat);
 
@@ -432,25 +432,25 @@ int main(int argc, char *argv[]){
 
 	/*		Print runTime? (not yet implemented)				*/
 	if(rank == TEST){
-		printf("Initializatin + MPI_Init: %gs.\n", declareTime - initTime);
-		printf("Declaration and filling out variables: %gs.\n", runTime - initTime);
-		printf("Single first Fourier-call: %gs.\n", singleFourier);
-		printf("Single first transposition: %gs.\n", singleTransp);
-		printf("Tensor operation: %gs.\n", singleTensor);
-		printf("Half-way time: %gs.\n", halfWork);
-		printf("All tensor, transp, and fourier calls: %gs.\n", totRun);
-		printf("Total time: %fs.\n\n", totTime);
-	}
+		double decTime = (declareTime - initTime)*1000;
+		/*printf("Initializatin + MPI_Init: %fms.\n", decTime);
+		printf("Declaration and filling out variables: %fms.\n", ((runTime - initTime)*1000) - decTime);
+		printf("Single first Fourier-call: %fms.\n", singleFourier*1000);
+		printf("Single first transposition: %fms.\n", singleTransp*1000);
+		printf("Tensor operation: %fms.\n", singleTensor*1000);
+		printf("Half-way time: %fms.\n", halfWork*1000);
+		printf("All tensor, transp, and fourier calls: %fms.\n", totRun*1000);*/
 
+		//The time not including lines 278-312 in main() (from start of main, until declareTime = WallTime();)
+		printf("time: %fms\n\n", (totTime - (declareTime - initTime))*1000);
+	}
 
 	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix);
 	freeMatrix(tempMat);
 	freeMatrix(transpMat);
 	freeVector(diagMat);
-	if(rank == 0){
-		MPI_Comm_free(&WorldComm);
-	}
+
 	MPI_Finalize();
 
 	return 0;
