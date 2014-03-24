@@ -62,25 +62,25 @@ void freeMatrix(Matrix inpt){
 	free(inpt);
 }
 
-void printDoubleMatrix(double **ptr, int rows, int cols){
+void PRINTDoubleMatrix(double **ptr, int rows, int cols){
 	for (int i = 0; i < rows; ++i){
-		printf("[%.2f", ptr[i][0]);
+		printf("[%f", ptr[i][0]);
 		for (int j = 1; j < cols; ++j){
-			printf(",\t%.2f", ptr[i][j]);
+			printf(",\t%f", ptr[i][j]);
 		}
 		printf("]\n");
 	}
 }
 
-void printDoubleVector(double *ptr, int length){
-	printf("[%.2f", ptr[0]);
+void PRINTDoubleVector(double *ptr, int length){
+	printf("[%f", ptr[0]);
 	for (int i = 1; i < length; ++i){
-		printf(",\t%.2f", ptr[i]);
+		printf(",\t%f", ptr[i]);
 	}
 	printf("]\n");
 }
 
-void printIntMatrix(int **ptr, int rows, int cols){
+void PRINTIntMatrix(int **ptr, int rows, int cols){
 	for (int i = 0; i < rows; ++i){
 		printf("[%i", ptr[i][0]);
 		for (int j = 1; j < cols; ++j){
@@ -90,7 +90,7 @@ void printIntMatrix(int **ptr, int rows, int cols){
 	}
 }
 
-void printIntVector(int *ptr, int length){
+void PRINTIntVector(int *ptr, int length){
 	printf("[%i", ptr[0]);
 	for (int i = 1; i < length; ++i){
 		printf(",\t%i", ptr[i]);
@@ -141,7 +141,7 @@ double WallTime(){
 	/*#ifdef defined(HAVE_OPENMP)
 		return omp_get_wrunTime();
 	#else*/
-		return MPI_WrunTime();
+		return MPI_Wtime();
 	//#endif
 }
 
@@ -193,7 +193,6 @@ void packTransp(Matrix inpt, Matrix outpt, int *scount, int *sdisp, int mpiSize)
 	for (int p = 0; p < mpiSize; ++p){ //For each process
 		int j_start = sdisp[p]/cols;
 		int j_end = (sdisp[p] + scount[p])/cols;
-		#pragma omp parallel for schedule(static) shared(cntr)
 		for (int i = 0; i < cols; ++i){ //For each coloumn
 			for (int j = j_start; j < j_end; ++j){ //Copy the section of the coloumn corresponding to each process into outpt
 				outpt->as_vec->data[cntr] = inpt->data[i][j];
@@ -213,7 +212,7 @@ void fillWithNaturalNumbers(Matrix inpt, int rank, int *displ, int totSize){
 	}
 }
 
-void fillWithConstant(Matrix inpt, int totSize, double constant){
+void fillWithH(Matrix inpt, int totSize, double constant){
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < totSize; ++i){
 		//Filling up the work-matrix
@@ -223,21 +222,9 @@ void fillWithConstant(Matrix inpt, int totSize, double constant){
 
 void callFourier(Matrix inpt, Matrix tmp){
 	#ifdef HAVE_OPENMP
-		int thrds = tmp->cols, runs = inpt->cols/thrds, \
-					remains = inpt->cols%thrds, cntr = 0;
-		for (int i = 0; i < runs; ++i){
-			#pragma omp parallel for schedule(static) shared(cntr)
-			for (int j = 0; j < thrds; ++j){
-				fst_(inpt->data[cntr], &inpt->rows, tmp->data[j], &tmp->rows);
-				++cntr;
-			}
-		}
-
-		//If inpt->cols%threads != 0, then the following for-loop is necessary
-		#pragma omp parallel for schedule(static) shared(cntr)
-		for (int i = 0; i < remains; ++i){
-			fst_(inpt->data[cntr], &inpt->rows, tmp->data[i], &tmp->rows);
-			++cntr;
+		#pragma omp parallel for schedule(static)
+		for (int i = 0; i < inpt->cols; ++i){
+			fst_(inpt->data[i], &inpt->rows, tmp->data[omp_get_num_threads()], &tmp->rows);
 		}
 	#else
 		#pragma omp parallel for schedule(static)
@@ -276,7 +263,6 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 void unpackTransp(Matrix outpt, Matrix inpt){
 	int cntr = 0;
 	for (int i = 0; i < outpt->rows; ++i){
-		#pragma omp parallel for schedule(static) shared(cntr)
 		for (int j = 0; j < outpt->cols; ++j){
 			outpt->data[j][i] = inpt->as_vec->data[cntr];
 			++cntr;
@@ -285,7 +271,7 @@ void unpackTransp(Matrix outpt, Matrix inpt){
 }
 
 #define TEST 0
-int print = 1;
+#define PRINT 0
 
 int main(int argc, char *argv[]){
 	Matrix	/*The "work"-matrix*/matrix, \
@@ -302,7 +288,7 @@ int main(int argc, char *argv[]){
 		/*Displacement array for the above array*/ *sdisp, \
 		/*Typical MPI variables.*/ rank = 0, mpiSize = 1, acquired;
 
-	double /*Global variables*/h, runTime, initTime, singleFourier, \
+	double /*Global variables*/h,  initTime, runTime, declareTime, singleFourier, \
 		preTranspTime, singleTransp, halfWork, singleTensor, totRun, totTime;
 	int /*Global variables*/globColLen, n, \
 		/*Process specific variables*/tempMatSz, locMatSz, procColAmnt;
@@ -324,14 +310,14 @@ int main(int argc, char *argv[]){
 		return -1;
 	}
 
-	initTime = WallTime();
+	declareTime = WallTime();
 
 	/*			Initializing variables		*/
 	n = atoi(argv[1]); h = (double) 1.0/(n*n); globColLen = n-1; tempMatSz = n*4;
 	splitVector(globColLen, mpiSize, rank, &size, &displ, &scount, &sdisp);
 	procColAmnt = size[rank]; locMatSz = globColLen*procColAmnt;
 
-	if(rank == TEST && print){
+	if(rank == TEST && PRINT){
 		printf("\nn: %i\nglobColLen: %i\nmpiSize: %i\n\n", n, globColLen, mpiSize);
 		printf("Size vector:\n");
 		printIntVector(size, mpiSize);
@@ -360,10 +346,10 @@ int main(int argc, char *argv[]){
 	}
 
 	//fillWithNaturalNumbers(matrix, rank, displ, locMatSz);
-	fillWithConstant(matrix, locMatSz, h);
+	fillWithH(matrix, locMatSz, h);
 	//fillWithFunction() //For part e) of p6
 
-	if(rank == TEST && print){
+	if(rank == TEST && PRINT){
 		printf("\nDiagonal matrix for rank == %i:\n", TEST);
 		printDoubleVector(diagMat->data, globColLen);
 	}
@@ -375,7 +361,7 @@ int main(int argc, char *argv[]){
 	singleFourier = WallTime() - runTime;
 
 	/*		Implementation of the first transpose			*/
-	if (rank == TEST && print){
+	if (rank == TEST && PRINT){
 		printf("\nBefore transpose:\n");
 		printf("matrix:\n");
 		printDoubleMatrix(matrix->data, matrix->cols, matrix->rows);
@@ -398,7 +384,7 @@ int main(int argc, char *argv[]){
 	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, WorldComm);
 	//recvArrange(recvbuf, matrix->data[0], globColLen, procColAmnt);
 
-	if(rank == TEST && print){
+	if(rank == TEST && PRINT){
 		printf("\nAfter transpose:\n");
 		printf("transpMat:\n");
 		printDoubleMatrix(transpMat->data, transpMat->cols, transpMat->rows);
@@ -446,9 +432,16 @@ int main(int argc, char *argv[]){
 
 	/*		Print runTime? (not yet implemented)				*/
 	if(rank == TEST){
-		runTime = WallTime() - runTime;
-		printf("t: %g\n", runTime);
+		printf("Initializatin + MPI_Init: %gs.\n", declareTime - initTime);
+		printf("Declaration and filling out variables: %gs.\n", runTime - initTime);
+		printf("Single first Fourier-call: %gs.\n", singleFourier);
+		printf("Single first transposition: %gs.\n", singleTransp);
+		printf("Tensor operation: %gs.\n", singleTensor);
+		printf("Half-way time: %gs.\n", halfWork);
+		printf("All tensor, transp, and fourier calls: %gs.\n", totRun);
+		printf("Total time: %fs.\n\n", totTime);
 	}
+
 
 	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix);
