@@ -188,26 +188,13 @@ void recvArrange(double *recvbuf, double *outbuf, int collength, int colcnt)
 	}
 }
 
-void packTransp(Matrix inpt, Matrix outpt, int *scount, int *sdisp, int mpiSize, int rank){
+void packTransp(Matrix inpt, Matrix outpt, int *scount, int *sdisp, int mpiSize){
 	int cntr = 0, cols = inpt->cols;
 	for (int p = 0; p < mpiSize; ++p){ //For each process
-		/*if (rank == 0){
-			printf("\nprocess:%i\n", p);
-		}*/
 		int j_start = sdisp[p]/cols;
 		int j_end = (sdisp[p] + scount[p])/cols;
-		/*if (rank == 0){
-			printf("j_start:%i\nj_end:%i\n", j_start, j_end);
-		}*/
 		for (int i = 0; i < cols; ++i){ //For each coloumn
-			/*if(rank == 0){
-				printf("i:%i\n", i);
-			}*/
 			for (int j = j_start; j < j_end; ++j){ //Copy the section of the coloumn corresponding to each process into outpt
-				/*if (rank == 0){
-					printf("j:%i\n", j);
-					printf("Copying value inpt->data[i][j]: %.2f into cntr:%i in outpt.\n", inpt->data[i][j], cntr);
-				}*/
 				outpt->as_vec->data[cntr] = inpt->data[i][j];
 				cntr++;
 			}
@@ -285,11 +272,11 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 	#endif
 }
 
-void unpackTransp(Matrix inpt, Matrix outpt){
+void unpackTransp(Matrix outpt, Matrix inpt){
 	int cntr = 0;
-	for (int i = 0; i < inpt->rows; ++i){
-		for (int j = 0; j < inpt->cols; ++j){
-			inpt->data[j][i] = outpt->as_vec->data[cntr];
+	for (int i = 0; i < outpt->rows; ++i){
+		for (int j = 0; j < outpt->cols; ++j){
+			outpt->data[j][i] = inpt->as_vec->data[cntr];
 			++cntr;
 		}
 	}
@@ -376,7 +363,7 @@ int main(int argc, char *argv[]){
 		printDoubleVector(diagMat->data, globColLen);
 	}
 
-	//callFourier(matrix, tempMat);
+	callFourier(matrix, tempMat);
 
 	/*		Implementation of the first transpose			*/
 	if (rank == TEST && print){
@@ -388,7 +375,7 @@ int main(int argc, char *argv[]){
 	}
 
 	/*				Christians implementation				*/
-	packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
+	packTransp(matrix, transpMat, scount, sdisp, mpiSize);
 	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 	unpackTransp(transpMat, matrix);
 
@@ -407,31 +394,32 @@ int main(int argc, char *argv[]){
 		printf("\n");
 	}
 
-	/*callFourierInvrs(matrix, tempMat);
+	callFourierInvrs(transpMat, tempMat);
 
 	/*		Implementation of the "tensor" operation		*/
 	//Which for-loop level should get the open mp pragma?
-	/*#pragma omp parallel for schedule(static)
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procColAmnt; ++i){
 		for (int j = 0; j < globColLen; ++j){
-			matrix->data[i][j] /= diagMat->data[j] + diagMat->data[i];
+			transpMat->data[i][j] /= diagMat->data[j] + diagMat->data[i];
 		}
 	}
 
-	callFourier(matrix, tempMat);
+	callFourier(transpMat, tempMat);
 
 	/*		Implementation of the second transpose			*/
 
-	// Arrange send buffer(using same buffer as last time
-	/*sendArrange(sendbuf, matrix->data[0], globRowLen,procRowAmnt, size, mpiSize, displacement);
-	MPI_Alltoallv(&sendbuf, size, displacement, MPI_DOUBLE, matrix->data[0], size, displacement, MPI_DOUBLE, WorldComm);
+	/*				Christians implementation				*/
+	packTransp(transpMat, matrix, scount, sdisp, mpiSize);
+	MPI_Alltoallv(matrix->data[0], scount, sdisp, MPI_DOUBLE, transpMat->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
+	unpackTransp(matrix, transpMat);
 
 	//Arrange send buffer(using same buffer as last time)
 	/*packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
 	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, WorldComm);
 
 	sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
-	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);
+	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, WorldComm);*/
 
 	callFourierInvrs(matrix, tempMat);
 
