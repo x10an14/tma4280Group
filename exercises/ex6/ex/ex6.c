@@ -279,7 +279,7 @@ void unpackTransp(Matrix outpt, Matrix inpt){
 }
 
 double exactSolAppB(int col, int row){
-	double retVal = sin(M_PI*col)*sin(2*M_PI*row);
+	double retVal = sin(M_PI*(col+1))*sin(2*M_PI*(row+1));
 	return (5*M_PI*M_PI)*retVal;
 }
 
