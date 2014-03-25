@@ -14,10 +14,9 @@ module load intelcomp
 module load openmpi/1.4.3-intel
 KMP_AFFINITY="granularity=fine, compact"
 
-for i in $(seq 2 14 2);
+for i in $(seq 4 14 2);
 	do	#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 		n=$(echo "2^$i" | bc)
-		echo 'k: '$i
 		echo 'n: '$n
 		OMP_NUM_THREADS=3 mpirun -npernode 4 ../../../release/ex6 $n
 	done
