@@ -3,7 +3,7 @@
 #PBS -N combined_2n8ppn
 #PBS -A freecycle
 #PBS -q optimist
-#PBS -l walltime=00:00:20
+#PBS -l walltime=00:10:00
 #PBS -l nodes=1:ppn=12:default
 ###PBS -l pmem=750MB
 #PBS -j oe
