@@ -62,7 +62,7 @@ void freeMatrix(Matrix inpt){
 	free(inpt);
 }
 
-void PRINTDoubleMatrix(double **ptr, int rows, int cols){
+void printDoubleMatrix(double **ptr, int rows, int cols){
 	for (int i = 0; i < rows; ++i){
 		printf("[%f", ptr[i][0]);
 		for (int j = 1; j < cols; ++j){
@@ -72,7 +72,7 @@ void PRINTDoubleMatrix(double **ptr, int rows, int cols){
 	}
 }
 
-void PRINTDoubleVector(double *ptr, int length){
+void printDoubleVector(double *ptr, int length){
 	printf("[%f", ptr[0]);
 	for (int i = 1; i < length; ++i){
 		printf(",\t%f", ptr[i]);
@@ -80,7 +80,7 @@ void PRINTDoubleVector(double *ptr, int length){
 	printf("]\n");
 }
 
-void PRINTIntMatrix(int **ptr, int rows, int cols){
+void printIntMatrix(int **ptr, int rows, int cols){
 	for (int i = 0; i < rows; ++i){
 		printf("[%i", ptr[i][0]);
 		for (int j = 1; j < cols; ++j){
@@ -90,7 +90,7 @@ void PRINTIntMatrix(int **ptr, int rows, int cols){
 	}
 }
 
-void PRINTIntVector(int *ptr, int length){
+void printIntVector(int *ptr, int length){
 	printf("[%i", ptr[0]);
 	for (int i = 1; i < length; ++i){
 		printf(",\t%i", ptr[i]);
@@ -177,8 +177,6 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
  */
 void recvArrange(double *recvbuf, double *outbuf, int collength, int colcnt)
 {
-	int counter, process;
-
 	for(int i = 0; i < collength; i++)
 	{
 		for(int j = 0; j < colcnt; j++)
@@ -302,7 +300,7 @@ int main(int argc, char *argv[]){
 	#endif
 	MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	MPI_Comm_dup(MPI_COMM_WORLD, &MPI_COMM_WORLD);
+	//MPI_Comm_dup(MPI_COMM_WORLD, &MPI_COMM_WORLD);
 
 	//Check for correct commandline argument
 	if (argc < 2 || atoi(argv[1]) < 4 || atoi(argv[1])%2 != 0){
