@@ -302,7 +302,7 @@ int main(int argc, char *argv[]){
 	#endif
 	MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	MPI_Comm_dup(MPI_COMM_WORLD, &MPI_COMM_WORLD);
+	//MPI_Comm_dup(MPI_COMM_WORLD, &MPI_COMM_WORLD);
 
 	//Check for correct commandline argument
 	if (argc < 2 || atoi(argv[1]) < 4 || atoi(argv[1])%2 != 0){
