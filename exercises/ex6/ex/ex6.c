@@ -1,11 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <mpi.h>
-#ifdef HAVE_OPENMP
-#include <omp.h>
-#endif
-
 #include "ex6.h"
 
 /* This function does NOT allocate the vector memory data! */
@@ -80,16 +75,6 @@ void printDoubleVector(double *ptr, int length){
 	printf("]\n");
 }
 
-void printIntMatrix(int **ptr, int rows, int cols){
-	for (int i = 0; i < rows; ++i){
-		printf("[%i", ptr[i][0]);
-		for (int j = 1; j < cols; ++j){
-			printf(",\t%i", ptr[i][j]);
-		}
-		printf("]\n");
-	}
-}
-
 void printIntVector(int *ptr, int length){
 	printf("[%i", ptr[0]);
 	for (int i = 1; i < length; ++i){
@@ -104,20 +89,16 @@ void splitVector(int globLen, int size, int rank, int** len, int** displ, int **
 	*displ = (int*) calloc(size, sizeof(int));
 	*sdisp = (int*) malloc(size*sizeof(int));
 	*scount = (int*) malloc(size*sizeof(int));
-
 	//"Old" splitvector loop
 	for (int i=0; i < size; ++i){
 		(*len)[i] = globLen/size;
-
 		if (globLen % size && i >= (size - globLen % size)){
 			(*len)[i]++;
 		}
-
 		if (i < size-1){
 			(*displ)[i+1] = (*displ)[i]+(*len)[i];
 		}
 	}
-
 	//Added loop for transpose purposes
 	for (int i = 0; i < size; ++i){
 		(*scount)[i] = (*len)[rank]*(*len)[i];
@@ -138,11 +119,8 @@ int getMaxThreads(){
 }
 
 double WallTime(){
-	/*#ifdef defined(HAVE_OPENMP)
-		return omp_get_wrunTime();
-	#else*/
-		return MPI_Wtime();
-	//#endif
+	//The process will always run on a separate processor than its threads, so it will always keep running while the threads do their work.
+	return MPI_Wtime();
 }
 
 /* Arranges the sendbuffer properly before sending
@@ -150,22 +128,18 @@ double WallTime(){
  */
 void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int *sizearr, int sizearrlength, int * displvec){
 	int elements, counter, process, destoffset;
-
 	for(int i = 0; i < colcnt; i++){	// One pass per col
 		process = 0;
 		elements = sizearr[process];	// Elements to go to the first process
 		counter  = 0;					// Counter for how many elements have been moved
 		destoffset = 0;					// Destination offset for elements (i.e. which process is this being sent to)
-
 		for(int j = 0; j < collength; j++){	// Iterate through row
-			if ((counter + 1 > elements) && !(process > sizearrlength -1))
-			{
+			if ((counter + 1 > elements) && !(process > sizearrlength -1)){
 				counter = 0;
 				process++;
 				destoffset = displvec[process];
 				elements = sizearr[process];
 			}
-
 			sendbuf[i*elements + counter + destoffset] = vector[i*collength + j];
 			counter++;
 		}
@@ -175,12 +149,9 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
 /* Arranger the receivebuffer back into column order because it will be in partial rows
  * afte receiving (see the pdf Parallelization of a fast Poisson solver)
  */
-void recvArrange(double *recvbuf, double *outbuf, int collength, int colcnt)
-{
-	for(int i = 0; i < collength; i++)
-	{
-		for(int j = 0; j < colcnt; j++)
-		{
+void recvArrange(double *recvbuf, double *outbuf, int collength, int colcnt){
+	for(int i = 0; i < collength; i++){
+		for(int j = 0; j < colcnt; j++){
 			outbuf[j*collength + i] = recvbuf[i*colcnt+j];
 		}
 	}
@@ -202,7 +173,6 @@ void packTransp(Matrix inpt, Matrix outpt, int *scount, int *sdisp, int mpiSize)
 
 void fillWithNaturalNumbers(Matrix inpt, int rank, int *displ, int totSize){
 	double val = (displ[rank]*inpt->rows) + 1;
-
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < totSize; ++i){
 		//Filling up the work-matrix
@@ -210,20 +180,24 @@ void fillWithNaturalNumbers(Matrix inpt, int rank, int *displ, int totSize){
 	}
 }
 
-void fillWithConst(Matrix inpt, int totSize, double constant){
+void fillWithConst(Matrix inpt, double constant){
 	#pragma omp parallel for schedule(static)
-	for (int i = 0; i < totSize; ++i){
-		//Filling up the work-matrix
-		inpt->as_vec->data[i] = constant;
+	for (int i = 0; i < inpt->cols; ++i){
+		for (int j = 0; j < inpt->rows; ++j){
+			//Filling up the work-matrix
+			inpt->data[i][j] = constant;
+		}
+
 	}
 }
 
-void fillWithAppB(Matrix inpt, int rank, int *displ){
-	double offset;
+void fillWithAppB(Matrix inpt, int rank, int *displ, double h){
+	double offset, a = (5*M_PI*M_PI) * h;
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < inpt->cols; ++i){
 		offset = (double) displ[rank];
 		for (int j = 0; j < inpt->rows; ++j){
-			inpt->data[i][j] = sin(M_PI*(i + offset))*sin(2*M_PI*j);
+			inpt->data[i][j] = a * sin(M_PI*(i + offset + 1)) * sin(2*M_PI*(j + 1));
 		}
 	}
 }
@@ -244,26 +218,14 @@ void callFourier(Matrix inpt, Matrix tmp){
 
 void callFourierInvrs(Matrix inpt, Matrix tmp){
 	#ifdef HAVE_OPENMP
-		int thrds = tmp->cols, runs = inpt->cols/thrds, \
-					remains = inpt->cols%thrds, cntr = 0;
-		for (int i = 0; i < runs; ++i){
-			#pragma omp parallel for schedule(static) shared(cntr)
-			for (int j = 0; j < thrds; ++j){
-				fstinv_(inpt->data[cntr], &inpt->rows, tmp->data[j], &tmp->rows);
-				++cntr;
-			}
-		}
-
-		//If inpt->cols%threads != 0, then the following for-loop is necessary
-		#pragma omp parallel for schedule(static) shared(cntr)
-		for (int i = 0; i < remains; ++i){
-			fstinv_(inpt->data[cntr], &inpt->rows, tmp->data[i], &tmp->rows);
-			++cntr;
+		#pragma omp parallel for schedule(static)
+		for (int i = 0; i < inpt->cols; ++i){
+			fstinv_(inpt->data[i], &inpt->rows, tmp->data[omp_get_num_threads()], &tmp->rows);
 		}
 	#else
 		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
-			fst_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
+			fstinv_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
 		}
 	#endif
 }
@@ -280,17 +242,21 @@ void unpackTransp(Matrix outpt, Matrix inpt){
 
 double exactSolAppB(int col, int row){
 	double retVal = sin(M_PI*(col+1))*sin(2*M_PI*(row+1));
-	return (5*M_PI*M_PI)*retVal;
+	return retVal;
 }
 
 double linearAverage(Matrix inpt, double (*funcp)(int, int)){
-	double avgErr = 0.0;
-	for (int i = 0; i < inpt->cols; ++i){
-		for (int j = 0; j < inpt->rows; ++j){
-			avgErr += fabs(inpt->data[i][j] - (*funcp)(i, j));
+	double avgErr = 0.0, col_err, \
+		rows = (double) inpt->rows, cols = (double) inpt->cols;
+	#pragma omp parallel for schedule(static) private(col_err) shared(avgErr)
+	for (int i = 0; i < cols; ++i){
+		col_err = 0.0;
+		for (int j = 0; j < rows; ++j){
+			col_err += fabs(inpt->data[i][j] - (*funcp)(i, j));
 		}
+		avgErr += col_err/rows;
 	}
-	avgErr /= (inpt->rows*inpt->cols);
+	avgErr /= cols;
 	return avgErr;
 }
 
@@ -312,7 +278,7 @@ int main(int argc, char *argv[]){
 		/*Displacement array for the above array*/ *sdisp, \
 		/*Typical MPI variables.*/ rank = 0, mpiSize = 1, acquired;
 
-	double /*Global variables*/h,  initTime = WallTime(), runTime, declareTime, singleFourier, \
+	double /*Global variables*/h, initTime = WallTime(), runTime, declareTime, singleFourier, \
 		preTranspTime, singleTransp, halfWork, singleTensor, totRun, totTime;
 	int /*Global variables*/globColLen, n, \
 		/*Process specific variables*/tempMatSz, locMatSz, procColAmnt;
@@ -325,7 +291,6 @@ int main(int argc, char *argv[]){
 	#endif
 	MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	//MPI_Comm_dup(MPI_COMM_WORLD, &MPI_COMM_WORLD);
 
 	//Check for correct commandline argument
 	if (argc < 2 || atoi(argv[1]) < 4 || atoi(argv[1])%2 != 0){
@@ -360,7 +325,7 @@ int main(int argc, char *argv[]){
 	transpMat = createMatrix(globColLen, procColAmnt);
 	tempMat = createMatrix(getMaxThreads(), tempMatSz);
 	diagMat->data = (double*) malloc(globColLen*sizeof(double));
-	//Transpose temporary buffer
+	/*				Erlends implementation					*/
 	//double *sendbuf = calloc(locMatSz, sizeof(double));
 
 	#pragma omp parallel for schedule(static)
@@ -372,7 +337,7 @@ int main(int argc, char *argv[]){
 	//fillWithNaturalNumbers(matrix, rank, displ, locMatSz);
 	//fillWithConst(matrix, locMatSz, h);
 	//fillWithFunction() //For part e) of p6
-	fillWithAppB(matrix, rank, displ);
+	fillWithAppB(matrix, rank, displ, h);
 
 	if(rank == TEST && PRINT){
 		printf("\nDiagonal matrix for rank == %i:\n", TEST);
@@ -403,7 +368,7 @@ int main(int argc, char *argv[]){
 
 	singleTransp = WallTime() - preTranspTime;
 
-				/*Erlends implementation*/
+	/*				Erlends implementation					*/
 	//sendArrange(sendbuf, matrix->data[0], globColLen, procColAmnt, size, mpiSize, displ);
 	//double *recvbuf = malloc(sizeof(double)*globColLen*procColAmnt); //HAR FLYTTET DENNE LINJEN LENGERE OPP! NÅ BLIR DEN INITIALISERT DOBBELT!
 	//MPI_Alltoallv(sendbuf, scount, sdisp, MPI_DOUBLE, recvbuf, scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
@@ -429,32 +394,27 @@ int main(int argc, char *argv[]){
 			transpMat->data[i][j] /= diagMat->data[j] + diagMat->data[i];
 		}
 	}
-
 	singleTensor = WallTime() - halfWork;
 	halfWork -= runTime;
 
 	callFourier(transpMat, tempMat);
 
 	/*		Implementation of the second transpose			*/
-
 	/*				Christians implementation				*/
 	packTransp(transpMat, matrix, scount, sdisp, mpiSize);
 	MPI_Alltoallv(matrix->data[0], scount, sdisp, MPI_DOUBLE, transpMat->data[0], scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
 	unpackTransp(matrix, transpMat);
 
+	/*				Erlends implementation					*/
 	//Arrange send buffer(using same buffer as last runTime)
-	/*packTransp(matrix, transpMat, scount, sdisp, mpiSize, rank);
-	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
-
-	sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
+	/*sendArrange(sendbuf, matrix->data[0], globColLen,procColAmnt, size, mpiSize);
 	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, MPI_COMM_WORLD);*/
 
 	callFourierInvrs(matrix, tempMat);
 
+	/*				Print timings							*/
 	totRun = WallTime() - runTime;
 	totTime = WallTime() - initTime;
-
-	/*		Print runTime? (not yet implemented)				*/
 	if(rank == TEST){
 		double decTime = (declareTime - initTime)*1000;
 		/*printf("Initializatin + MPI_Init: %fms.\n", decTime);
@@ -466,7 +426,7 @@ int main(int argc, char *argv[]){
 		printf("All tensor, transp, and fourier calls: %fms.\n", totRun*1000);*/
 
 		//The time not including lines 278-312 in main() (from start of main, until declareTime = WallTime();)
-		printf("time: %fms\n\n", (totTime - (declareTime - initTime))*1000);
+		printf("time: %fms\n", (totTime - (declareTime - initTime))*1000);
 	}
 
 	/*					Error checking						*/
@@ -475,7 +435,7 @@ int main(int argc, char *argv[]){
 	MPI_Reduce(&procAvgErr, &globAvgErr, 1, MPI_DOUBLE, MPI_SUM, TEST, MPI_COMM_WORLD);
 	if(rank == TEST){
 		globAvgErr /= mpiSize;
-		printf("Linear error: %e\n", globAvgErr);
+		printf("error: %e\n\n", globAvgErr);
 	}
 
 	/*		Closing up and freeing variables				*/

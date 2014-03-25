@@ -2,17 +2,12 @@
 #define _EXERCISE_6_
 
 #include <mpi.h>
-
-//All the existing .h files I could think of with potential use.
-//#include "../../../examples/common/common.h"
-//#include "../../../examples/common/blaslapack.h"
-//#include "../../../examples/poisson/solvers.h"
-//#include "../../../examples/poisson/possioncommon.h"
+#ifdef HAVE_OPENMP
+#include <omp.h>
+#endif
 
 //! \brief value of pi
 #define M_PI 3.14159265358979323846
-
-/*Whatever we want specific to our solution/implementation.*/
 
 //The necessary prototyping of the fourier sine transform functions
 void fst_(double *v, int *n, double *w, int *nn);
@@ -22,7 +17,6 @@ typedef struct{
 	double *data;
 	int len;
 } vector_t;
-
 typedef vector_t *Vector;
 
 typedef struct{
@@ -35,7 +29,6 @@ typedef struct{
 	int rows;
 	int cols;
 } matrix_t;
-
 typedef matrix_t *Matrix;
 
 // Function prototypes:
@@ -48,19 +41,17 @@ int getMaxThreads();
 double WallTime();
 void sendArrange(double *, double *, int , int , int *, int , int *);
 void recvArrange(double *recvbuf, double *outbuf, int collength, int );
-void packTransp(Matrix , Matrix , int *, int *, int );
+void packTransp(Matrix, Matrix , int *, int *, int );
 void fillWithNaturalNumbers(Matrix , int , int *, int );
-void fillWithConst(Matrix , int , double );
-void callFourier(Matrix , Matrix );
+void fillWithConst(Matrix, double );
+void callFourier(Matrix, Matrix );
 void callFourierInvrs(Matrix , Matrix);
-void unpackTransp(Matrix , Matrix);
+void unpackTransp(Matrix, Matrix);
 void printDoubleMatrix(double **, int, int);
 void printDoubleVector(double *, int);
-void printIntMatrix(int **, int, int);
 void printIntVector(int *, int);
 double linearAverage();
 double exactSolAppB(int, int);
-void fillWithAppendixB(Matrix, int, int *);
-
+void fillWithAppB(Matrix, int, int *, double);
 
 #endif
