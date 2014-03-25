@@ -1,4 +1,4 @@
-cd /home/$USER/tma4280Group/exercises/ex4/runscripts/
+cd /home/$USER/tma4280Group/exercises/ex6/runscripts/
 #Create CMAKE sub-folder
 mkdir ../release_mpi -p
 
