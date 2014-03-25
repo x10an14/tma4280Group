@@ -8,12 +8,6 @@
 
 #include "ex6.h"
 
-// Function prototypes
-void printDoubleMatrix(double **, int, int);
-void printDoubleVector(double *, int);
-void printIntMatrix(int **, int, int);
-void printIntVector(int *, int);
-
 /* This function does NOT allocate the vector memory data! */
 Vector createVector(int len){
 	Vector result = (Vector) calloc(1, sizeof(vector_t));

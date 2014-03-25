@@ -58,5 +58,10 @@ void fillWithH(Matrix , int , double );
 void callFourier(Matrix , Matrix );
 void callFourierInvrs(Matrix , Matrix);
 void unpackTransp(Matrix , Matrix);
+void printDoubleMatrix(double **, int, int);
+void printDoubleVector(double *, int);
+void printIntMatrix(int **, int, int);
+void printIntVector(int *, int);
+
 
 #endif
