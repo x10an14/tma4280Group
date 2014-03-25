@@ -292,7 +292,7 @@ int main(int argc, char *argv[]){
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	//Check for correct commandline argument
-	if (argc < 2 || atoi(argv[1]) < 4 || atoi(argv[1])%2 != 0){
+	if (argc < 2 || atoi(argv[1]) < 4 || atoi(argv[1]) & (atoi(argv[1])-1) != 0){
 		printf("Need a problem size! And it should be a power of 2 greater than or equal to 4!\n");
 		MPI_Finalize();
 		return -1;

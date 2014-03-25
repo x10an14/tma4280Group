@@ -4,14 +4,14 @@ cd /home/$USER/tma4280Group/exercises/ex6/ex/
 ./cmake_kongull_OpenMP.sh
 
 cd /home/$USER/tma4280Group/exercises/ex6/ex/runscripts/omp_mpi/
-chmod +x 1n4ppn.sh
-chmod +x 1n6ppn.sh
-chmod +x 2n4ppn.sh
-chmod +x 2n8ppn.sh
-chmod +x 1n12ppn.sh
+chmod +x p4t3n1.sh
+chmod +x p6t2n1.sh
+chmod +x p8t4n2.sh
+chmod +x p24t4n2.sh
+chmod +x p12t1n1.sh
 
-mkdir 1n4ppn -p && cd 1n4ppn  && qsub ../1n4ppn.sh
-mkdir ../1n6ppn -p && cd ../1n6ppn && qsub ../1n6ppn.sh
-mkdir ../2n4ppn -p && cd ../2n4ppn && qsub ../2n4ppn.sh
-mkdir ../2n8ppn -p && cd ../2n8ppn && qsub ../2n8ppn.sh
-mkdir ../1n12ppn -p && cd ../1n12ppn && qsub ../1n12ppn.sh
+mkdir p4t3n1 -p && cd p4t3n1  && qsub ../p4t3n1.sh
+mkdir ../p6t2n1 -p && cd ../p6t2n1 && qsub ../p6t2n1.sh
+mkdir ../p8t4n2 -p && cd ../p8t4n2 && qsub ../p8t4n2.sh
+mkdir ../p24t4n2 -p && cd ../p24t4n2 && qsub ../p24t4n2.sh
+mkdir ../p12t1n1 -p && cd ../p12t1n1 && qsub ../p12t1n1.sh
