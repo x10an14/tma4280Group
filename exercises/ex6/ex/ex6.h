@@ -42,4 +42,21 @@ typedef struct{
 
 typedef matrix_t *Matrix;
 
+// Function prototypes:
+Vector createVector(int);
+Matrix createMatrix(int, int);
+void freeVector(Vector);
+void freeMatrix(Matrix);
+void splitVector(int , int , int , int **, int **, int **, int **);
+int getMaxThreads();
+double WallTime();
+void sendArrange(double *, double *, int , int , int *, int , int *);
+void recvArrange(double *recvbuf, double *outbuf, int collength, int );
+void packTransp(Matrix , Matrix , int *, int *, int );
+void fillWithNaturalNumbers(Matrix , int , int *, int );
+void fillWithH(Matrix , int , double );
+void callFourier(Matrix , Matrix );
+void callFourierInvrs(Matrix , Matrix);
+void unpackTransp(Matrix , Matrix);
+
 #endif

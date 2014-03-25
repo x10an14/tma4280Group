@@ -8,6 +8,12 @@
 
 #include "ex6.h"
 
+// Function prototypes
+void printDoubleMatrix(double **, int, int);
+void printDoubleVector(double *, int);
+void printIntMatrix(int **, int, int);
+void printIntVector(int *, int);
+
 /* This function does NOT allocate the vector memory data! */
 Vector createVector(int len){
 	Vector result = (Vector) calloc(1, sizeof(vector_t));
@@ -62,7 +68,7 @@ void freeMatrix(Matrix inpt){
 	free(inpt);
 }
 
-void PRINTDoubleMatrix(double **ptr, int rows, int cols){
+void printDoubleMatrix(double **ptr, int rows, int cols){
 	for (int i = 0; i < rows; ++i){
 		printf("[%f", ptr[i][0]);
 		for (int j = 1; j < cols; ++j){
@@ -72,7 +78,7 @@ void PRINTDoubleMatrix(double **ptr, int rows, int cols){
 	}
 }
 
-void PRINTDoubleVector(double *ptr, int length){
+void printDoubleVector(double *ptr, int length){
 	printf("[%f", ptr[0]);
 	for (int i = 1; i < length; ++i){
 		printf(",\t%f", ptr[i]);
@@ -80,7 +86,7 @@ void PRINTDoubleVector(double *ptr, int length){
 	printf("]\n");
 }
 
-void PRINTIntMatrix(int **ptr, int rows, int cols){
+void printIntMatrix(int **ptr, int rows, int cols){
 	for (int i = 0; i < rows; ++i){
 		printf("[%i", ptr[i][0]);
 		for (int j = 1; j < cols; ++j){
@@ -90,7 +96,7 @@ void PRINTIntMatrix(int **ptr, int rows, int cols){
 	}
 }
 
-void PRINTIntVector(int *ptr, int length){
+void printIntVector(int *ptr, int length){
 	printf("[%i", ptr[0]);
 	for (int i = 1; i < length; ++i){
 		printf(",\t%i", ptr[i]);
@@ -177,8 +183,6 @@ void sendArrange(double *sendbuf, double *vector, int collength, int colcnt, int
  */
 void recvArrange(double *recvbuf, double *outbuf, int collength, int colcnt)
 {
-	int counter, process;
-
 	for(int i = 0; i < collength; i++)
 	{
 		for(int j = 0; j < colcnt; j++)
