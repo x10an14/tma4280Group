@@ -18,10 +18,6 @@
 void fst_(double *v, int *n, double *w, int *nn);
 void fstinv_(double *v, int *n, double *w, int *nn);
 
-#ifdef HAVE_MPI
-MPI_Comm WorldComm;
-#endif
-
 typedef struct{
 	double *data;
 	int len;
@@ -54,7 +50,7 @@ void sendArrange(double *, double *, int , int , int *, int , int *);
 void recvArrange(double *recvbuf, double *outbuf, int collength, int );
 void packTransp(Matrix , Matrix , int *, int *, int );
 void fillWithNaturalNumbers(Matrix , int , int *, int );
-void fillWithH(Matrix , int , double );
+void fillWithConst(Matrix , int , double );
 void callFourier(Matrix , Matrix );
 void callFourierInvrs(Matrix , Matrix);
 void unpackTransp(Matrix , Matrix);
@@ -62,6 +58,9 @@ void printDoubleMatrix(double **, int, int);
 void printDoubleVector(double *, int);
 void printIntMatrix(int **, int, int);
 void printIntVector(int *, int);
+double linearAverage();
+double exactSolAppB(int, int);
+void fillWithAppendixB(Matrix, int, int *);
 
 
 #endif

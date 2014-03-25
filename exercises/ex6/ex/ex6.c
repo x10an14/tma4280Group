@@ -210,11 +210,21 @@ void fillWithNaturalNumbers(Matrix inpt, int rank, int *displ, int totSize){
 	}
 }
 
-void fillWithH(Matrix inpt, int totSize, double constant){
+void fillWithConst(Matrix inpt, int totSize, double constant){
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < totSize; ++i){
 		//Filling up the work-matrix
 		inpt->as_vec->data[i] = constant;
+	}
+}
+
+void fillWithAppB(Matrix inpt, int rank, int *displ){
+	double offset;
+	for (int i = 0; i < inpt->cols; ++i){
+		offset = (double) displ[rank];
+		for (int j = 0; j < inpt->rows; ++j){
+			inpt->data[i][j] = sin(M_PI*(i + offset))*sin(2*M_PI*j);
+		}
 	}
 }
 
@@ -268,6 +278,22 @@ void unpackTransp(Matrix outpt, Matrix inpt){
 	}
 }
 
+double exactSolAppB(int col, int row){
+	double retVal = sin(M_PI*(col+1))*sin(2*M_PI*(row+1));
+	return (5*M_PI*M_PI)*retVal;
+}
+
+double linearAverage(Matrix inpt, double (*funcp)(int, int)){
+	double avgErr = 0.0;
+	for (int i = 0; i < inpt->cols; ++i){
+		for (int j = 0; j < inpt->rows; ++j){
+			avgErr += fabs(inpt->data[i][j] - (*funcp)(i, j));
+		}
+	}
+	avgErr /= (inpt->rows*inpt->cols);
+	return avgErr;
+}
+
 #define TEST 0
 #define PRINT 0
 #define MPI_WTIME_IS_GLOBAL 1
@@ -278,7 +304,6 @@ int main(int argc, char *argv[]){
 			/*The fourier-transform temp-store-matrix*/tempMat;
 	Vector	/*The diagonal matrix*/diagMat;
 
-	//Lists for holding how many cols per process (due to MPI division of labour), AKA MPI variables++...
 	int /*Array holding amount of coloumns per process*/*size, \
 		/*Array holding the offset so each process can know which coloumns reside in which process
 		(when used with the above array)*/*displ, \
@@ -345,8 +370,9 @@ int main(int argc, char *argv[]){
 	}
 
 	//fillWithNaturalNumbers(matrix, rank, displ, locMatSz);
-	fillWithH(matrix, locMatSz, h);
+	//fillWithConst(matrix, locMatSz, h);
 	//fillWithFunction() //For part e) of p6
+	fillWithAppB(matrix, rank, displ);
 
 	if(rank == TEST && PRINT){
 		printf("\nDiagonal matrix for rank == %i:\n", TEST);
@@ -441,6 +467,15 @@ int main(int argc, char *argv[]){
 
 		//The time not including lines 278-312 in main() (from start of main, until declareTime = WallTime();)
 		printf("time: %fms\n\n", (totTime - (declareTime - initTime))*1000);
+	}
+
+	/*					Error checking						*/
+	double (*fp)(int, int), procAvgErr, globAvgErr;
+	fp = exactSolAppB; procAvgErr = linearAverage(matrix, fp);
+	MPI_Reduce(&procAvgErr, &globAvgErr, 1, MPI_DOUBLE, MPI_SUM, TEST, MPI_COMM_WORLD);
+	if(rank == TEST){
+		globAvgErr /= mpiSize;
+		printf("Linear error: %e\n", globAvgErr);
 	}
 
 	/*		Closing up and freeing variables				*/
