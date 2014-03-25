@@ -51,7 +51,7 @@ void printDoubleMatrix(double **, int, int);
 void printDoubleVector(double *, int);
 void printIntVector(int *, int);
 double linearAverage();
-double exactSolAppB(int, int);
+double exactSolAppB(int, int, double);
 void fillWithAppB(Matrix, int, int *, double);
 
 #endif

@@ -240,18 +240,18 @@ void unpackTransp(Matrix outpt, Matrix inpt){
 	}
 }
 
-double exactSolAppB(int col, int row){
+double exactSolAppB(int col, int row, double h){
 	//Return the exact solution to the x at coordinate col and row.
-	return sin(M_PI*(col+1))*sin(2*M_PI*(row+1));
+	return sin(M_PI*(col+1)*h)*sin(2*M_PI*(row+1)*h);
 }
 
-double linearAverage(Matrix inpt, double (*funcp)(int, int)){
+double linearAverage(Matrix inpt, double (*funcp)(int, int, double), double h){
 	double avgErr = 0.0, col_err; int rows = inpt->rows, cols = inpt->cols;
 	#pragma omp parallel for schedule(static) private(col_err) shared(avgErr)
 	for (int i = 0; i < cols; ++i){
 		col_err = 0.0;
 		for (int j = 0; j < rows; ++j){
-			col_err += fabs(inpt->data[i][j] - (*funcp)(i, j));
+			col_err += fabs(inpt->data[i][j] - (*funcp)(i, j, h));
 		}
 		avgErr += col_err/((double) rows);
 	}
@@ -421,12 +421,12 @@ int main(int argc, char *argv[]){
 	}
 
 	/*					Error checking						*/
-	double (*fp)(int, int), procAvgErr, globAvgErr;
-	fp = exactSolAppB; procAvgErr = linearAverage(matrix, fp);
+	double (*fp)(int, int, double), procAvgErr, globAvgErr;
+	fp = exactSolAppB; procAvgErr = linearAverage(matrix, fp, h);
 	MPI_Reduce(&procAvgErr, &globAvgErr, 1, MPI_DOUBLE, MPI_SUM, TEST, MPI_COMM_WORLD);
 	if(rank == TEST){
 		globAvgErr /= mpiSize;
-		printf("error: %e\n\n", globAvgErr);
+		printf("error: %g\n\n", globAvgErr);
 	}
 
 	/*		Closing up and freeing variables				*/
