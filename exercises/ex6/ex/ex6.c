@@ -439,10 +439,8 @@ int main(int argc, char *argv[]){
 	}
 
 	/*		Closing up and freeing variables				*/
-	freeMatrix(matrix);
-	freeMatrix(tempMat);
-	freeMatrix(transpMat);
-	freeVector(diagMat);
+	freeMatrix(matrix); freeMatrix(tempMat); freeMatrix(transpMat);
+	freeVector(diagMat); free(size); free(displ); free(scount); free(sdisp);
 
 	MPI_Finalize();
 
