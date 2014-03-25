@@ -1,7 +1,7 @@
 cd /home/$USER/tma4280Group/exercises/ex6/ex/
 
 #Compile
-../cmake_kongull.sh
+./cmake_kongull.sh
 
 cd /home/$USER/tma4280Group/exercises/ex6/ex/runscripts/mpi/
 chmod +x 1n4ppn.sh
