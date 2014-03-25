@@ -241,22 +241,21 @@ void unpackTransp(Matrix outpt, Matrix inpt){
 }
 
 double exactSolAppB(int col, int row){
-	double retVal = sin(M_PI*(col+1))*sin(2*M_PI*(row+1));
-	return retVal;
+	//Return the exact solution to the x at coordinate col and row.
+	return sin(M_PI*(col+1))*sin(2*M_PI*(row+1));
 }
 
 double linearAverage(Matrix inpt, double (*funcp)(int, int)){
-	double avgErr = 0.0, col_err, \
-		rows = (double) inpt->rows, cols = (double) inpt->cols;
+	double avgErr = 0.0, col_err; int rows = inpt->rows, cols = inpt->cols;
 	#pragma omp parallel for schedule(static) private(col_err) shared(avgErr)
 	for (int i = 0; i < cols; ++i){
 		col_err = 0.0;
 		for (int j = 0; j < rows; ++j){
 			col_err += fabs(inpt->data[i][j] - (*funcp)(i, j));
 		}
-		avgErr += col_err/rows;
+		avgErr += col_err/((double) rows);
 	}
-	avgErr /= cols;
+	avgErr /= ((double) cols);
 	return avgErr;
 }
 
@@ -345,11 +344,8 @@ int main(int argc, char *argv[]){
 	}
 
 	runTime = WallTime();
-
 	callFourier(matrix, tempMat);
-
 	singleFourier = WallTime() - runTime;
-
 	/*		Implementation of the first transpose			*/
 	if (rank == TEST && PRINT){
 		printf("\nBefore transpose:\n");
@@ -360,7 +356,6 @@ int main(int argc, char *argv[]){
 	}
 
 	preTranspTime = WallTime();
-
 	/*				Christians implementation				*/
 	packTransp(matrix, transpMat, scount, sdisp, mpiSize);
 	MPI_Alltoallv(transpMat->data[0], scount, sdisp, MPI_DOUBLE, matrix->data[0], scount, sdisp, MPI_DOUBLE, MPI_COMM_WORLD);
@@ -384,9 +379,7 @@ int main(int argc, char *argv[]){
 	}
 
 	callFourierInvrs(transpMat, tempMat);
-
 	halfWork = WallTime();
-
 	/*		Implementation of the "tensor" operation		*/
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < procColAmnt; ++i){
@@ -398,7 +391,6 @@ int main(int argc, char *argv[]){
 	halfWork -= runTime;
 
 	callFourier(transpMat, tempMat);
-
 	/*		Implementation of the second transpose			*/
 	/*				Christians implementation				*/
 	packTransp(transpMat, matrix, scount, sdisp, mpiSize);
@@ -411,7 +403,6 @@ int main(int argc, char *argv[]){
 	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, MPI_COMM_WORLD);*/
 
 	callFourierInvrs(matrix, tempMat);
-
 	/*				Print timings							*/
 	totRun = WallTime() - runTime;
 	totTime = WallTime() - initTime;
@@ -441,7 +432,6 @@ int main(int argc, char *argv[]){
 	/*		Closing up and freeing variables				*/
 	freeMatrix(matrix); freeMatrix(tempMat); freeMatrix(transpMat);
 	freeVector(diagMat); free(size); free(displ); free(scount); free(sdisp);
-
 	MPI_Finalize();
 
 	return 0;
