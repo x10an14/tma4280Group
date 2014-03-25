@@ -20,6 +20,9 @@
 # Sublime files
 *.sublime*
 
+#Erlend Ubuntu files
+*~
+
 #PDF files
 *.aux
 *.log
@@ -42,5 +45,9 @@ exercises/ex5/release/
 #Exercise 6 specific folders
 exercises/ex6/ex/debug/
 exercises/ex6/ex/release/
+exercises/ex6/ex/debug_mpi/
+exercises/ex6/ex/release_mpi/
+exercises/ex6/ex/debug_omp_mpi/
+exercises/ex6/ex/release_omp_mpi/
 exercises/ex6/debug/
 exercises/ex6/release/
