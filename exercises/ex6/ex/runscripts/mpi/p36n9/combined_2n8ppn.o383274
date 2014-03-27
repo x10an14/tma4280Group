@@ -1,0 +1,48 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.383274.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.383274.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.383274.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-0-24' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.383274.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-0-25' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.383274.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-0-27' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.383274.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-0-4' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.383274.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-1-11' (RSA) to the list of known hosts.
+n: 64
+time: 3002.227068ms
+error: 5.17272e-05
+
+n: 128
+time: 14.720917ms
+error: 1.06522e-05
+
+n: 256
+time: 222.640038ms
+error: 2.37749e-06
+
+n: 512
+time: 235.008001ms
+error: 5.58649e-07
+
+n: 1024
+time: 103.985071ms
+error: 1.35195e-07
+
+n: 2048
+time: 304.577112ms
+error: 3.32404e-08
+
+n: 4096
+time: 1307.553053ms
+error: 8.24029e-09
+
+n: 8192
+time: 5519.644022ms
+error: 2.05135e-09
+
+n: 16384
+time: 24057.909012ms
+error: 5.11746e-10
+
