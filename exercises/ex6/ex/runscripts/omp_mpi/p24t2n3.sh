@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#PBS -N combined_2n8ppn
+#PBS -N combined_p24t2n3
 #PBS -A freecycle
 #PBS -q optimist
 #PBS -l walltime=00:10:00
