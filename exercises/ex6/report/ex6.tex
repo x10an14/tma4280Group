@@ -10,7 +10,7 @@
 % \listoffigures
 % \listoftables
 
-{\huge Problem set 4}\\[0.5cm]
+{\huge Problem set 6}\\[0.5cm]
 
 \textsc{\LARGE TMA4280}\\[0.5cm]
 \textsc{\large Introduction to supercomputing -}\\
@@ -19,7 +19,7 @@
 \begin{table}[h]
 \centering
 \begin{tabular}{ccc}
-	\textsc{Christian CHAVEZ}	&	\textsc{Mireia DUASO}	&	\textsc{Erlend SIGHOLT}
+	\textsc{Christian CHAVEZ} & \textsc{Mireia DUASO} & \textsc{Erlend SIGHOLT}
 \end{tabular}
 \end{table}
 
@@ -28,7 +28,7 @@
 \section*{Abstract}
 \end{center}
 
-%\todo[inline]{ABSTRACT}
+\todo[inline]{ABSTRACT}
 
 \addtocounter{chapter}{1}
 
@@ -37,15 +37,164 @@
 
 For the programming code belonging to this problem set, see the $\textit{ex6.c}$
 file in the zipped archive attached to this report. This program calculates the
-solution of the two-dimensional Poisson problems 
-$$
-\left\{
-\begin{array}
--\nabla^2 u & = & f \hspace{.5in} \textrm{in} \,\,\, \Omega = (0,1)\times (0,1) \\
-u & = & 0 \hspace{.5in} \textrm{on} \,\,\, \partial\Omega\, .
-\end{array}
-\right.
-$$
-considering different boundary conditions.
+solution of the two-dimensional Poisson problem
+
+\begin{eqnarray}
+	-\nabla^2 u & = & f \quad \textrm{in} \quad \Omega \\
+	u & = & 0 \quad \textrm{on} \quad \partial\Omega
+	\label{eq:Poisson}
+\end{eqnarray}
+
+considering different sources, boundary conditions and domains.
+
+\todo[inline]{Explain the first points, the code and the results.}
+
+\todo[inline]{When we comment the code we have to say the error we made during
+the execution of the program.}
+
+\section{Modifying the original...}
+
+% (f)
+
+We want to know which part of our code has to be modified if we change the 
+original problem. First of all, we want to deal with the case $u \neq 0$ on 
+$\partial\Omega$, where $\Omega = (0,1) \times (0,1)$. To tackle the new problem
+we define $v$ as a new solution,
+
+\begin{equation}
+	v = u - g
+\end{equation}
+
+for some lifting function $g$. This $g$ is supposed to be the new boundary 
+condition that makes the new defined solution $0$ in the boundary condition.
+This is in the analytic case. If we want to apply this theory in our method we
+are going to transform the original problem like
+
+\begin{displaymath}
+	A \times (u + u_B) = h^2 F
+\end{displaymath}
+
+where $A$ will be a $(n + 1) \times (n + 1)$ matrix, $u$ will be the old
+solution, $F$ the source, $h$ the length of the step and $u_B$ is the function 
+that satisfies the boundary conditions.
+
+We had the next system
+
+\begin{displaymath}
+\begin{bmatrix}
+	2 & -1 &  &  &  &  &  \\
+	-1 & 2 & -1 &  &  &  &  \\
+	 & -1 & 2 &  &  &  &  \\
+	 &  & \ddots & \ddots & \ddots &  & \\
+	 &  &  &  & 2 & -1 &  \\
+	 &  &  &  & -1 & 2 & -1 \\
+	 &  &  &  &  & -1 & 2
+\end{bmatrix}
+\begin{bmatrix*}[c]
+	u_0 \\
+	u_1 \\
+	u_2 \\
+	\vdots \\
+	u_{n - 2} \\
+	u_{n - 1} \\
+	u_n
+\end{bmatrix*}
+=
+\begin{bmatrix*}[c]
+	f_0 \\
+	f_1 \\
+	f_2 \\
+	\vdots \\
+	f_{n - 2} \\
+	f_{n - 1} \\
+	f_n
+\end{bmatrix*}.
+\end{displaymath}
+
+Since we had homogeneous boundary conditions we reduced the problem $2$ 
+dimensions to become an $(n - 1) \times (n - 1)$ system because $u_0 = u_n = 0$ 
+but now we have values for the boundaries so, if we compute the left side 
+operation, we get
+
+\begin{displaymath}
+\begin{bmatrix}
+	2u_0 - u_1 \\
+	- u_0 + 2u_1 - u_2 \\
+	- u_1 + 2u_2 - u_3 \\
+	\vdots \\
+	- u_{n - 1} + 2u_{n - 2} - u_{n - 1} \\
+	- u_{n - 2} + 2u_{n - 1} - u_{n} \\
+	- u_{n - 1} + 2u_n
+\end{bmatrix}
+=
+\begin{bmatrix*}[c]
+	f_0 \\
+	f_1 \\
+	f_2 \\
+	\vdots \\
+	f_{n - 2} \\
+	f_{n - 1} \\
+	f_n
+\end{bmatrix*}.
+\end{displaymath}
+
+but this system is redundant because there are $n - 1$ variables but $n + 1$ 
+euqation so we can remove the first and the last term and we just need to plus a
+vector to our old matrix. And the system is going to be written as
+
+\begin{displaymath}
+\begin{bmatrix}
+	2 & -1 &  &  &  &  &  \\
+	-1 & 2 & -1 &  &  &  &  \\
+	 & -1 & 2 &  &  &  &  \\
+	 &  & \ddots & \ddots & \ddots &  & \\
+	 &  &  &  & 2 & -1 &  \\
+	 &  &  &  & -1 & 2 & -1 \\
+	 &  &  &  &  & -1 & 2
+\end{bmatrix}
+\begin{bmatrix*}[c]
+	u_1 \\
+	u_2 \\
+	\vdots \\
+	u_{n - 2} \\
+	u_{n - 1}
+\end{bmatrix*}
++ \begin{bmatrix*}[c]
+	- u_0 \\
+	0 \\
+	\vdots \\
+	0 \\
+	- u_n
+\end{bmatrix*}
+=
+\begin{bmatrix*}[c]
+	f_1 \\
+	f_2 \\
+	\vdots \\
+	f_{n - 2} \\
+	f_{n - 1}
+\end{bmatrix*}.
+\end{displaymath}
+
+\todo[inline]{Check with the previous points}
+
+%(g)
+
+\todo{Compare with the implementation!}
+
+We want to think in the geometry of the domain. We want to solve the
+PDE~\ref{eq:Poisson} in a rectangle $\Omega = (0, L_x) \times (0, L_y)$. To do
+that we have to declare two length instead of our old $h$, $h_x$ and $h_y$,
+which they will have the same value if we work in a square and different values
+if we work in a rectangle.
+
+Following the diagonalisation done in the lectures the only change it has to be
+implemented is, instead of clear the $A$ up and put the $h^2$ with the $f$, 
+keeping the values $h_x^2$ and $h_y^2$ in $f$. So, when we go trhough the 
+diagonalisation method we will devide de eigenvalues by $h_x^2 + h_y^2$.
+
+\todo[inline]{En vez de despejar la h y ponerla en la f, tenemos que dividirla 
+en los valores propios... Estudiar bien la diagonalización de la matriz con los 
+valores y los vectores propios.}
 
 \end{document}
