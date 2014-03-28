@@ -13,5 +13,5 @@ chmod +x p12t1n1.sh
 mkdir p4t3n1 -p && cd p4t3n1  && qsub ../p4t3n1.sh
 mkdir ../p6t2n1 -p && cd ../p6t2n1 && qsub ../p6t2n1.sh
 mkdir ../p8t4n2 -p && cd ../p8t4n2 && qsub ../p8t4n2.sh
-mkdir ../p24t4n2 -p && cd ../p24t4n2 && qsub ../p24t4n2.sh
+mkdir ../p24t4n3 -p && cd ../p24t4n3 && qsub ../p24t4n3.sh
 mkdir ../p12t1n1 -p && cd ../p12t1n1 && qsub ../p12t1n1.sh
