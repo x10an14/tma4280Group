@@ -1,0 +1,5142 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.383787.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.383787.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-2-4' (RSA) to the list of known hosts.
+p: 1
+t: 2
+n: 4
+[compute-1-6:21353] *** Process received signal ***
+[compute-1-6:21353] Signal: Floating point exception (8)
+[compute-1-6:21353] Signal code: Integer divide-by-zero (1)
+[compute-1-6:21353] Failing at address: 0x40a6c3
+[compute-1-6:21353] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:21353] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:21353] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:21353] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:21353] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 21353 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:04451] *** Process received signal ***
+[compute-2-4:04451] Signal: Aborted (6)
+[compute-2-4:04451] Signal code:  (-6)
+[compute-0-0:12734] *** Process received signal ***
+
+n: 8
+time: 3.865004ms
+error: 0.0253074
+
+
+n: 16
+time: 3.697157ms
+error: 0.00565282
+
+
+n: 32
+time: 5.038023ms
+error: 0.00121036
+
+
+n: 64
+time: 5.673885ms
+error: 0.00026216
+
+
+n: 128
+time: 13.108969ms
+error: 7.6606e-05
+
+
+n: 256
+time: 36.302090ms
+error: 1.81165e-05
+
+
+n: 512
+time: 113.642931ms
+error: 4.64323e-06
+
+
+n: 1024
+time: 388.330936ms
+error: 1.1661e-06
+
+
+n: 2048
+time: 1605.965137ms
+error: 2.94423e-07
+
+
+n: 4096
+time: 6961.683035ms
+error: 7.35693e-08
+
+
+n: 8192
+time: 29226.241112ms
+error: 1.00067e+298
+
+
+n: 16384
+time: 124239.216089ms
+error: nan
+
+
+t: 3
+n: 4
+[compute-1-6:21596] *** Process received signal ***
+[compute-1-6:21596] Signal: Floating point exception (8)
+[compute-1-6:21596] Signal code: Integer divide-by-zero (1)
+[compute-1-6:21596] Failing at address: 0x40a6c3
+[compute-1-6:21596] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:21596] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:21596] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:21596] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:21596] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 21596 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4.local][[10150,1],1][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-0.local][[10150,1],3][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-1.local][[10150,1],2][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-0:12939] *** Process received signal ***
+
+n: 8
+time: 2.661228ms
+error: 0.0253074
+
+
+n: 16
+time: 3.459930ms
+error: 0.00565282
+
+
+n: 32
+time: 3.449917ms
+error: 0.00122913
+
+
+n: 64
+time: 5.006790ms
+error: 0.000290962
+
+
+n: 128
+time: 9.371042ms
+error: 7.17763e-05
+
+
+n: 256
+time: 30.935049ms
+error: 1.79812e-05
+
+
+n: 512
+time: 91.116190ms
+error: 4.60014e-06
+
+
+n: 1024
+time: 313.294172ms
+error: 1.15449e-06
+
+
+n: 2048
+time: 1234.802961ms
+error: 2.94079e-07
+
+
+n: 4096
+time: 5115.149975ms
+error: 7.34844e-08
+
+
+n: 8192
+time: 21869.748116ms
+error: 0.000139554
+
+
+n: 16384
+time: 96662.322044ms
+error: 5190.16
+
+
+t: 4
+n: 4
+[compute-1-6:22030] *** Process received signal ***
+[compute-1-6:22030] Signal: Floating point exception (8)
+[compute-1-6:22030] Signal code: Integer divide-by-zero (1)
+[compute-1-6:22030] Failing at address: 0x40a6c3
+[compute-1-6:22030] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:22030] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:22030] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:22030] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:22030] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 22030 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4.local][[9716,1],1][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-0.local][[9716,1],3][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(9) failed: Connection reset by peer (104)
+[compute-0-1.local][[9716,1],2][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(8) failed: Connection reset by peer (104)
+[compute-0-0:13328] *** Process received signal ***
+[compute-0-0:13328] Signal: Aborted (6)
+[compute-0-0:13328] Signal code:  (-6)
+
+n: 8
+time: 5.686045ms
+error: 0.0253074
+
+
+n: 16
+time: 4.117012ms
+error: 0.00461161
+
+
+n: 32
+time: 4.259825ms
+error: 0.00121036
+
+
+n: 64
+time: 5.574226ms
+error: 0.000289433
+
+
+n: 128
+time: 8.218050ms
+error: 7.19126e-05
+
+
+n: 256
+time: 26.489973ms
+error: 1.74823e-05
+
+
+n: 512
+time: 89.194059ms
+error: 4.45965e-06
+
+
+n: 1024
+time: 264.864922ms
+error: 1.15675e-06
+
+
+n: 2048
+time: 1045.612812ms
+error: 2.92605e-07
+
+
+n: 4096
+time: 4417.111158ms
+error: 0.186254
+
+
+n: 8192
+time: 18781.169891ms
+error: 6.87667e+14
+
+
+n: 16384
+time: 82415.034056ms
+error: 3.74617e+27
+
+
+t: 5
+n: 4
+[compute-1-6:22262] *** Process received signal ***
+[compute-1-6:22262] Signal: Floating point exception (8)
+[compute-1-6:22262] Signal code: Integer divide-by-zero (1)
+[compute-1-6:22262] Failing at address: 0x40a6c3
+[compute-1-6:22262] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:22262] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:22262] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:22262] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:22262] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 22262 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:05314] *** Process received signal ***
+[compute-2-4:05314] Signal: Aborted (6)
+[compute-2-4:05314] Signal code:  (-6)
+[compute-0-0:13534] *** Process received signal ***
+[compute-0-0:13534] Signal: Aborted (6)
+[compute-0-0:13534] Signal code:  (-6)
+[compute-0-1:21653] *** Process received signal ***
+[compute-0-1:21653] Signal: Aborted (6)
+[compute-0-1:21653] Signal code:  (-6)
+
+n: 8
+time: 4.113913ms
+error: 0.0230052
+
+
+n: 16
+time: 3.460169ms
+error: 0.00565282
+
+
+n: 32
+time: 4.985809ms
+error: 0.00112592
+
+
+n: 64
+time: 6.503105ms
+error: 0.000276267
+
+
+n: 128
+time: 9.567022ms
+error: 6.77493e-05
+
+
+n: 256
+time: 24.733067ms
+error: 1.73032e-05
+
+
+n: 512
+time: 77.660084ms
+error: 4.46779e-06
+
+
+n: 1024
+time: 235.608101ms
+error: 1.13662e-06
+
+
+n: 2048
+time: 948.869944ms
+error: 2.93759e-07
+
+
+n: 4096
+time: 3757.412910ms
+error: 3.96594
+
+
+n: 8192
+time: 15496.480942ms
+error: 1.14197e+20
+
+
+n: 16384
+time: 67272.400856ms
+error: 1.05014e+33
+
+
+t: 6
+n: 4
+[compute-1-6:22521] *** Process received signal ***
+[compute-1-6:22521] Signal: Floating point exception (8)
+[compute-1-6:22521] Signal code: Integer divide-by-zero (1)
+[compute-1-6:22521] Failing at address: 0x40a6c3
+[compute-1-6:22521] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:22521] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:22521] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:22521] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:22521] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 22521 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:05521] *** Process received signal ***
+[compute-2-4:05521] Signal: Aborted (6)
+[compute-2-4:05521] Signal code:  (-6)
+[compute-0-0:13743] *** Process received signal ***
+[compute-0-1:21861] *** Process received signal ***
+[compute-0-1:21861] Signal: Aborted (6)
+[compute-0-1:21861] Signal code:  (-6)
+[compute-0-0:13743] Signal: Aborted (6)
+[compute-0-0:13743] Signal code:  (-6)
+[compute-0-0.local][[9225,1],3][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+
+n: 8
+time: 5.429029ms
+error: 0.0253074
+
+
+n: 16
+time: 5.941153ms
+error: 0.00550403
+
+
+n: 32
+time: 5.686045ms
+error: 0.00122242
+
+
+n: 64
+time: 6.637096ms
+error: 0.000269096
+
+
+n: 128
+time: 8.579969ms
+error: 6.34899e-05
+
+
+n: 256
+time: 22.120953ms
+error: 1.62066e-05
+
+
+n: 512
+time: 73.321104ms
+error: 4.34477e-06
+
+
+n: 1024
+time: 213.063002ms
+error: 1.12895e-06
+
+
+n: 2048
+time: 839.820147ms
+error: 2.3602e-05
+
+
+n: 4096
+time: 3343.703032ms
+error: 9.26321e+14
+
+
+n: 8192
+time: 13862.335205ms
+error: 9.0319e+25
+
+
+n: 16384
+time: 59462.126017ms
+error: 7.69278e+51
+
+
+t: 7
+n: 4
+[compute-1-6:22766] *** Process received signal ***
+[compute-1-6:22766] Signal: Floating point exception (8)
+[compute-1-6:22766] Signal code: Integer divide-by-zero (1)
+[compute-1-6:22766] Failing at address: 0x40a6c3
+[compute-1-6:22766] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:22766] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:22766] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:22766] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:22766] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 22766 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-0-1.local][[11028,1],2][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+[compute-2-4.local][[11028,1],1][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+[compute-0-0.local][[11028,1],3][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+[compute-0-0:13962] *** Process received signal ***
+[compute-0-0:13962] Signal: Aborted (6)
+[compute-0-0:13962] Signal code:  (-6)
+
+n: 8
+time: 4.467010ms
+error: 0.0253074
+
+
+n: 16
+time: 5.975008ms
+error: 0.00535526
+
+
+n: 32
+time: 6.059885ms
+error: 0.00112994
+
+
+n: 64
+time: 6.717920ms
+error: 0.00024864
+
+
+n: 128
+time: 11.363983ms
+error: 6.66027e-05
+
+
+n: 256
+time: 26.414871ms
+error: 1.70314e-05
+
+
+n: 512
+time: 70.703030ms
+error: 4.38375e-06
+
+
+n: 1024
+time: 213.946104ms
+error: 1.67992e-06
+
+
+n: 2048
+time: 814.904928ms
+error: 3.18783e+10
+
+
+n: 4096
+time: 3101.823092ms
+error: 3.09682e+28
+
+
+n: 8192
+time: 12569.683075ms
+error: 1.32109e+48
+
+
+n: 16384
+time: 54015.724897ms
+error: 1.42179e+77
+
+
+t: 8
+n: 4
+[compute-1-6:23036] *** Process received signal ***
+[compute-1-6:23036] Signal: Floating point exception (8)
+[compute-1-6:23036] Signal code: Integer divide-by-zero (1)
+[compute-1-6:23036] Failing at address: 0x40a6c3
+[compute-1-6:23036] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:23036] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:23036] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:23036] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:23036] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 23036 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4.local][[10758,1],1][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-0.local][[10758,1],3][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-1.local][[10758,1],2][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-0:14194] *** Process received signal ***
+[compute-0-0:14194] Signal: Aborted (6)
+[compute-0-0:14194] Signal code:  (-6)
+
+n: 8
+time: 6.052971ms
+error: 0.0253074
+
+
+n: 16
+time: 18.717051ms
+error: 0.00476033
+
+
+n: 32
+time: 12.405157ms
+error: 0.000579046
+
+
+n: 64
+time: 7.382154ms
+error: 0.000209884
+
+
+n: 128
+time: 14.642954ms
+error: 6.12203e-05
+
+
+n: 256
+time: 23.885012ms
+error: 2.26493e-05
+
+
+n: 512
+time: 69.092989ms
+error: 0.58732
+
+
+n: 1024
+time: 191.168070ms
+error: 174.861
+
+
+n: 2048
+time: 708.583832ms
+error: 1.3289e+08
+
+
+n: 4096
+time: 2882.355928ms
+error: 2.26847e+33
+
+
+n: 8192
+time: 11736.180067ms
+error: 4.12292e+62
+
+
+n: 16384
+time: 50008.275986ms
+error: 5.6559e+121
+
+
+t: 9
+n: 4
+[compute-1-6:23307] *** Process received signal ***
+[compute-1-6:23307] Signal: Floating point exception (8)
+[compute-1-6:23307] Signal code: Integer divide-by-zero (1)
+[compute-1-6:23307] Failing at address: 0x40a6c3
+[compute-1-6:23307] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:23307] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:23307] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:23307] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:23307] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 23307 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4.local][[10487,1],1][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-0.local][[10487,1],3][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(9) failed: Connection reset by peer (104)
+[compute-0-1.local][[10487,1],2][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(10) failed: Connection reset by peer (104)
+[compute-0-1:22546] *** Process received signal ***
+[compute-0-0:14428] *** Process received signal ***
+[compute-0-0:14428] Signal: Aborted (6)
+[compute-0-0:14428] Signal code:  (-6)
+
+n: 8
+time: 14.415979ms
+error: 0.0253074
+
+
+n: 16
+time: 15.568972ms
+error: 0.00565282
+
+
+n: 32
+time: 10.089159ms
+error: 0.000985171
+
+
+n: 64
+time: 14.408112ms
+error: 0.000208121
+
+
+n: 128
+time: 24.121046ms
+error: 5.68293e-05
+
+
+n: 256
+time: 23.732185ms
+error: 1.48644e-05
+
+
+n: 512
+time: 66.930056ms
+error: 2005.51
+
+
+n: 1024
+time: 187.046051ms
+error: 1.72701e+18
+
+
+n: 2048
+time: 718.460083ms
+error: 1.47094e+24
+
+
+n: 4096
+time: 2764.271021ms
+error: 1.40945e+52
+
+
+n: 8192
+time: 11024.239063ms
+error: 2.65864e+84
+
+
+n: 16384
+time: 46139.530897ms
+error: 4.66974e+161
+
+
+t: 10
+n: 4
+[compute-1-6:23591] *** Process received signal ***
+[compute-1-6:23591] Signal: Floating point exception (8)
+[compute-1-6:23591] Signal code: Integer divide-by-zero (1)
+[compute-1-6:23591] Failing at address: 0x40a6c3
+[compute-1-6:23591] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:23591] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:23591] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:23591] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:23591] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 23591 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:06461] *** Process received signal ***
+[compute-2-4:06461] Signal: Aborted (6)
+[compute-2-4:06461] Signal code:  (-6)
+
+n: 8
+time: 19.886017ms
+error: 0.0253074
+
+
+n: 16
+time: 20.262957ms
+error: 0.00550403
+
+
+n: 32
+time: 29.206038ms
+error: 0.000899389
+
+
+n: 64
+time: 24.806976ms
+error: 0.000207494
+
+
+n: 128
+time: 20.197868ms
+error: 6.04907e-05
+
+
+n: 256
+time: 30.807018ms
+error: 780.009
+
+
+n: 512
+time: 71.434021ms
+error: 1.55461e+07
+
+
+n: 1024
+time: 182.065010ms
+error: 6.76883e+39
+
+
+n: 2048
+time: 677.546978ms
+error: 1.19831e+46
+
+
+n: 4096
+time: 2568.788052ms
+error: 9.2834e+101
+
+
+n: 8192
+time: 10440.245867ms
+error: 1.69565e+114
+
+
+n: 16384
+time: 43690.419912ms
+error: 1.05554e+155
+
+
+t: 11
+n: 4
+[compute-1-6:24060] *** Process received signal ***
+[compute-1-6:24060] Signal: Floating point exception (8)
+[compute-1-6:24060] Signal code: Integer divide-by-zero (1)
+[compute-1-6:24060] Failing at address: 0x40a6c3
+[compute-1-6:24060] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:24060] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:24060] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:24060] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:24060] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 24060 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:06835] *** Process received signal ***
+[compute-2-4:06835] Signal: Aborted (6)
+[compute-2-4:06835] Signal code:  (-6)
+[compute-0-1:23211] *** Process received signal ***
+[compute-0-1:23211] Signal: Aborted (6)
+[compute-0-1:23211] Signal code:  (-6)
+[compute-0-0:15171] *** Process received signal ***
+[compute-0-0:15171] Signal: Aborted (6)
+[compute-0-0:15171] Signal code:  (-6)
+
+n: 8
+time: 24.088144ms
+error: 0.0253074
+
+
+n: 16
+time: 17.472982ms
+error: 0.00565282
+
+
+n: 32
+time: 20.634890ms
+error: 0.000860524
+
+
+n: 64
+time: 35.668135ms
+error: 0.000206279
+
+
+n: 128
+time: 26.972055ms
+error: 47.3316
+
+
+n: 256
+time: 55.279970ms
+error: 3.61122e+17
+
+
+n: 512
+time: 67.338943ms
+error: 6.64546e+14
+
+
+n: 1024
+time: 173.997164ms
+error: 1.31985e+38
+
+
+n: 2048
+time: 667.187929ms
+error: 1.18219e+63
+
+
+n: 4096
+time: 2553.566217ms
+error: 2.08374e+102
+
+
+n: 8192
+time: 9934.605122ms
+error: 2.52056e+196
+
+
+n: 16384
+time: 42183.825970ms
+error: 1.24755e+232
+
+
+t: 12
+n: 4
+[compute-1-6:24370] *** Process received signal ***
+[compute-1-6:24370] Signal: Floating point exception (8)
+[compute-1-6:24370] Signal code: Integer divide-by-zero (1)
+[compute-1-6:24370] Failing at address: 0x40a6c3
+[compute-1-6:24370] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:24370] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:24370] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:24370] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:24370] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 24370 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:07150] *** Process received signal ***
+[compute-2-4:07150] Signal: Aborted (6)
+[compute-2-4:07150] Signal code:  (-6)
+[compute-0-0:15443] *** Process received signal ***
+[compute-0-1:23484] *** Process received signal ***
+[compute-0-1:23484] Signal: Aborted (6)
+[compute-0-1:23484] Signal code:  (-6)
+[compute-0-0:15443] Signal: Aborted (6)
+[compute-0-0:15443] Signal code:  (-6)
+
+n: 8
+time: 37.827015ms
+error: 0.0253074
+
+
+n: 16
+time: 41.491985ms
+error: 0.00565282
+
+
+n: 32
+time: 38.268805ms
+error: 0.00101868
+
+
+n: 64
+time: 32.367945ms
+error: 0.000214626
+
+
+n: 128
+time: 47.688007ms
+error: 46888.5
+
+
+n: 256
+time: 45.542002ms
+error: 127528
+
+
+n: 512
+time: 67.308903ms
+error: 2.47105e+20
+
+
+n: 1024
+time: 168.879986ms
+error: 9.22982e+34
+
+
+n: 2048
+time: 614.845991ms
+error: 6.40511e+64
+
+
+n: 4096
+time: 2455.643892ms
+error: 4.76821e+86
+
+
+n: 8192
+time: 9420.935869ms
+error: 2.11598e+215
+
+
+n: 16384
+time: 40027.554035ms
+error: 1.07328e+243
+
+
+t: 13
+n: 4
+[compute-1-6:24725] *** Process received signal ***
+[compute-1-6:24725] Signal: Floating point exception (8)
+[compute-1-6:24725] Signal code: Integer divide-by-zero (1)
+[compute-1-6:24725] Failing at address: 0x40a6c3
+[compute-1-6:24725] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:24725] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:24725] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:24725] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:24725] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 24725 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4.local][[4973,1],1][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+[compute-0-0.local][[4973,1],3][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+[compute-0-1.local][[4973,1],2][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+
+n: 8
+time: 203.522921ms
+error: 0.0253074
+
+
+n: 16
+time: 206.053019ms
+error: 0.00550403
+
+
+n: 32
+time: 203.886032ms
+error: 0.000836391
+
+
+n: 64
+time: 227.823019ms
+error: 0.000229556
+
+
+n: 128
+time: 207.077980ms
+error: 0.00108109
+
+
+n: 256
+time: 215.749979ms
+error: 1.00924e+16
+
+
+n: 512
+time: 248.426914ms
+error: 2.25593e+17
+
+
+n: 1024
+time: 357.671022ms
+error: 1.04457e+66
+
+
+n: 2048
+time: 877.568007ms
+error: 3.24774e+66
+
+
+n: 4096
+time: 3087.304115ms
+error: 2.11868e+138
+
+
+n: 8192
+time: 11065.307856ms
+error: 7.97482e+187
+
+
+n: 16384
+time: 45796.906948ms
+error: nan
+
+
+t: 14
+n: 4
+[compute-1-6:25063] *** Process received signal ***
+[compute-1-6:25063] Signal: Floating point exception (8)
+[compute-1-6:25063] Signal code: Integer divide-by-zero (1)
+[compute-1-6:25063] Failing at address: 0x40a6c3
+[compute-1-6:25063] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:25063] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:25063] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:25063] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:25063] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 25063 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-0-1.local][[4635,1],2][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+[compute-2-4.local][[4635,1],1][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+[compute-0-0.local][[4635,1],3][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+
+n: 8
+time: 203.245878ms
+error: 0.0253074
+
+
+n: 16
+time: 205.835104ms
+error: 0.00565282
+
+
+n: 32
+time: 203.833818ms
+error: 0.00078278
+
+
+n: 64
+time: 204.306841ms
+error: 0.000230575
+
+
+n: 128
+time: 208.637953ms
+error: 0.0017135
+
+
+n: 256
+time: 214.426994ms
+error: 9.52673e+08
+
+
+n: 512
+time: 245.743990ms
+error: 1.14184e+26
+
+
+n: 1024
+time: 390.687943ms
+error: 5.69869e+53
+
+
+n: 2048
+time: 899.935961ms
+error: 2.25299e+57
+
+
+n: 4096
+time: 3005.648851ms
+error: 1.06687e+133
+
+
+n: 8192
+time: 11309.885025ms
+error: 7.84164e+200
+
+
+n: 16384
+time: 45002.439022ms
+error: 1.38778e+278
+
+
+t: 15
+n: 4
+[compute-1-6:25412] *** Process received signal ***
+[compute-1-6:25412] Signal: Floating point exception (8)
+[compute-1-6:25412] Signal code: Integer divide-by-zero (1)
+[compute-1-6:25412] Failing at address: 0x40a6c3
+[compute-1-6:25412] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:25412] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:25412] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:25412] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:25412] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 25412 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-0-0.local][[4286,1],3][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.208 failed: Connection refused (111)
+
+n: 8
+time: 203.565836ms
+error: 0.0253074
+
+
+n: 16
+time: 203.486919ms
+error: 0.00505789
+
+
+n: 32
+time: 203.325033ms
+error: 0.00117282
+
+
+n: 64
+time: 204.428196ms
+error: 0.000218741
+
+
+n: 128
+time: 207.149029ms
+error: 5.77852e-05
+
+
+n: 256
+time: 216.944218ms
+error: 9.48265e+16
+
+
+n: 512
+time: 249.426126ms
+error: 2.48994e+20
+
+
+n: 1024
+time: 377.576113ms
+error: 3.58505e+55
+
+
+n: 2048
+time: 900.933981ms
+error: 7.33679e+73
+
+
+n: 4096
+time: 3049.190044ms
+error: 2.76962e+140
+
+
+n: 8192
+time: 11120.923042ms
+error: 3.4754e+219
+
+
+n: 16384
+time: 44684.134007ms
+error: nan
+
+
+t: 16
+n: 4
+[compute-0-0:16710] *** Process received signal ***
+[compute-0-0:16710] Signal: Segmentation fault (11)
+[compute-0-0:16710] Signal code: Address not mapped (1)
+[compute-0-0:16710] Failing at address: (nil)
+[compute-1-6:25774] *** Process received signal ***
+[compute-1-6:25774] Signal: Floating point exception (8)
+[compute-1-6:25774] Signal code: Integer divide-by-zero (1)
+[compute-1-6:25774] Failing at address: 0x40a6c3
+[compute-0-0:16710] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:16710] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:16710] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:16710] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aebf8364913]
+[compute-0-0:16710] *** End of error message ***
+[compute-2-4:08410] *** Process received signal ***
+[compute-2-4:08410] Signal: Segmentation fault (11)
+[compute-2-4:08410] Signal code: Address not mapped (1)
+[compute-2-4:08410] Failing at address: (nil)
+[compute-1-6:25774] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:25774] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:25774] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:25774] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:25774] *** End of error message ***
+[compute-2-4:08410] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:08410] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:08410] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:08410] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b016b5ff913]
+[compute-2-4:08410] *** End of error message ***
+[compute-0-1:24748] *** Process received signal ***
+[compute-0-1:24748] Signal: Segmentation fault (11)
+[compute-0-1:24748] Signal code: Address not mapped (1)
+[compute-0-1:24748] Failing at address: (nil)
+[compute-0-1:24748] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:24748] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:24748] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:24748] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b98c253d913]
+[compute-0-1:24748] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 16710 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 204.028130ms
+error: 0.0207085
+
+
+n: 16
+time: 203.597069ms
+error: 0.00550403
+
+
+n: 32
+time: 203.871012ms
+error: 0.000969088
+
+
+n: 64
+time: 204.172134ms
+error: 0.000224048
+
+
+n: 128
+time: 206.708908ms
+error: 2.63312e+12
+
+
+n: 256
+time: 215.214968ms
+error: 1.70763e+12
+
+
+n: 512
+time: 245.625019ms
+error: 1.90656e+51
+
+
+n: 1024
+time: 382.990122ms
+error: 2.30734e+33
+
+
+n: 2048
+time: 833.745003ms
+error: 7.45924e+72
+
+
+n: 4096
+time: 2941.745996ms
+error: 8.03329e+105
+
+
+n: 8192
+time: 10760.763884ms
+error: 2.56281e+121
+
+
+n: 16384
+time: 43485.213041ms
+error: 9.8603e+218
+
+
+t: 17
+n: 4
+[compute-2-4:08746] *** Process received signal ***
+[compute-2-4:08746] Signal: Segmentation fault (11)
+[compute-2-4:08746] Signal code: Address not mapped (1)
+[compute-2-4:08746] Failing at address: 0x891
+[compute-2-4:08746] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:08746] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:08746] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:08746] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b1f743e0913]
+[compute-2-4:08746] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 8746 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[compute-1-6:26149] *** Process received signal ***
+[compute-1-6:26149] Signal: Aborted (6)
+[compute-1-6:26149] Signal code:  (-6)
+[compute-1-6:26149] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:26149] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x345b230285]
+[compute-1-6:26149] [ 2] /lib64/libc.so.6(abort+0x110) [0x345b231d30]
+[compute-1-6:26149] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b08ba835fc2]
+[compute-1-6:26149] *** End of error message ***
+
+n: 8
+time: 203.411818ms
+error: 0.0253074
+
+
+n: 16
+time: 203.654051ms
+error: 0.00505789
+
+
+n: 32
+time: 204.003096ms
+error: 0.00099054
+
+
+n: 64
+time: 205.590010ms
+error: 0.000210158
+
+
+n: 128
+time: 207.946062ms
+error: 5.5051e-05
+
+
+n: 256
+time: 217.391014ms
+error: 1.18272e+16
+
+
+n: 512
+time: 250.232935ms
+error: 7.34883e+20
+
+
+n: 1024
+time: 366.282940ms
+error: 2.99632e+61
+
+
+n: 2048
+time: 890.318155ms
+error: 3.13251e+75
+
+
+n: 4096
+time: 2949.321032ms
+error: 2.42314e+120
+
+
+n: 8192
+time: 10890.273809ms
+error: 3.80384e+256
+
+
+n: 16384
+time: 42285.683870ms
+error: nan
+
+
+t: 18
+n: 4
+[compute-1-6:26549] *** Process received signal ***
+[compute-1-6:26549] Signal: Floating point exception (8)
+[compute-1-6:26549] Signal code: Integer divide-by-zero (1)
+[compute-1-6:26549] Failing at address: 0x40a6c3
+[compute-2-4:09095] *** Process received signal ***
+[compute-2-4:09095] Signal: Segmentation fault (11)
+[compute-2-4:09095] Signal code: Address not mapped (1)
+[compute-2-4:09095] Failing at address: (nil)
+[compute-1-6:26549] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:26549] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:26549] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:26549] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:26549] *** End of error message ***
+[compute-2-4:09095] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:09095] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:09095] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:09095] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b7341670913]
+[compute-2-4:09095] *** End of error message ***
+[compute-0-0:17401] *** Process received signal ***
+[compute-0-0:17401] Signal: Segmentation fault (11)
+[compute-0-0:17401] Signal code: Address not mapped (1)
+[compute-0-0:17401] Failing at address: (nil)
+[compute-0-1:25435] *** Process received signal ***
+[compute-0-1:25435] Signal: Segmentation fault (11)
+[compute-0-1:25435] Signal code: Address not mapped (1)
+[compute-0-1:25435] Failing at address: (nil)
+[compute-0-0:17401] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:17401] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:17401] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:17401] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b4baf369913]
+[compute-0-1:25435] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:25435] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:25435] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:17401] *** End of error message ***
+[compute-0-1:25435] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aaebfeb4913]
+[compute-0-1:25435] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 26549 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+time: 203.605890ms
+error: 0.0253074
+
+
+n: 16
+time: 204.167843ms
+error: 0.00505775
+
+
+n: 32
+time: 203.973055ms
+error: 0.00126665
+
+
+n: 64
+time: 206.983805ms
+error: 0.00565832
+
+
+n: 128
+time: 206.302881ms
+error: 1.05183
+
+
+n: 256
+time: 214.380980ms
+error: 6.19855e+10
+
+
+n: 512
+time: 252.249956ms
+error: 6.70015e+11
+
+
+n: 1024
+time: 378.464937ms
+error: 4.07171e+35
+
+
+n: 2048
+time: 858.656168ms
+error: 5.60892e+62
+
+
+n: 4096
+time: 2852.461100ms
+error: 1.59913e+179
+
+
+n: 8192
+time: 10680.800915ms
+error: 5.75881e+238
+
+
+n: 16384
+time: 40972.033978ms
+error: 4.86245e+283
+
+
+t: 19
+n: 4
+[compute-0-0:17779] *** Process received signal ***
+[compute-0-0:17779] Signal: Segmentation fault (11)
+[compute-0-0:17779] Signal code: Address not mapped (1)
+[compute-0-0:17779] Failing at address: (nil)
+[compute-0-0:17779] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:17779] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:17779] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:17779] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2af80ce0d913]
+[compute-0-0:17779] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 17779 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 204.431057ms
+error: 0.0253074
+
+
+n: 16
+time: 205.803156ms
+error: 0.00550403
+
+
+n: 32
+time: 210.429192ms
+error: 0.00106023
+
+
+n: 64
+time: 212.098122ms
+error: 0.000214548
+
+
+n: 128
+time: 231.483221ms
+error: 6.42594e-05
+
+
+n: 256
+time: 223.006964ms
+error: 4636.63
+
+
+n: 512
+time: 248.570919ms
+error: 1.21619e+21
+
+
+n: 1024
+time: 379.014969ms
+error: 6.22572e+34
+
+
+n: 2048
+time: 1030.272007ms
+error: 1.55183e+50
+
+
+n: 4096
+time: 2998.136997ms
+error: 9.31861e+146
+
+
+n: 8192
+time: 10384.320974ms
+error: 1.99628e+196
+
+
+n: 16384
+time: 41220.616817ms
+error: nan
+
+
+t: 20
+n: 4
+[compute-0-0:18313] *** Process received signal ***
+[compute-0-0:18313] Signal: Segmentation fault (11)
+[compute-0-0:18313] Signal code: Address not mapped (1)
+[compute-0-0:18313] Failing at address: (nil)
+[compute-0-0:18313] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:18313] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:18313] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:09992] *** Process received signal ***
+[compute-0-0:18313] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2af925724913]
+[compute-0-0:18313] *** End of error message ***
+[compute-2-4:09992] Signal: Segmentation fault (11)
+[compute-2-4:09992] Signal code: Address not mapped (1)
+[compute-2-4:09992] Failing at address: (nil)
+[compute-1-6:27524] *** Process received signal ***
+[compute-1-6:27524] Signal: Floating point exception (8)
+[compute-1-6:27524] Signal code: Integer divide-by-zero (1)
+[compute-1-6:27524] Failing at address: 0x40a6c3
+[compute-2-4:09992] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:09992] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:09992] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:09992] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b84c3d85913]
+[compute-2-4:09992] *** End of error message ***
+[compute-0-1:26346] *** Process received signal ***
+[compute-0-1:26346] Signal: Segmentation fault (11)
+[compute-0-1:26346] Signal code: Address not mapped (1)
+[compute-0-1:26346] Failing at address: (nil)
+[compute-1-6:27524] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:27524] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:27524] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:27524] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:27524] *** End of error message ***
+[compute-0-1:26346] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:26346] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:26346] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:26346] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b682b16a913]
+[compute-0-1:26346] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 18313 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 203.398943ms
+error: 0.0253074
+
+
+n: 16
+time: 203.238010ms
+error: 0.00550403
+
+
+n: 32
+time: 253.657818ms
+error: 0.00116478
+
+
+n: 64
+time: 204.840899ms
+error: 0.000185902
+
+
+n: 128
+time: 207.996845ms
+error: 1.19138
+
+
+n: 256
+time: 214.756966ms
+error: 1.97417e+07
+
+
+n: 512
+time: 243.916035ms
+error: 1.10649e+16
+
+
+n: 1024
+time: 366.075993ms
+error: 8.17105e+29
+
+
+n: 2048
+time: 828.000784ms
+error: 2.31389e+49
+
+
+n: 4096
+time: 2925.923824ms
+error: 3.05285e+121
+
+
+n: 8192
+time: 10644.577980ms
+error: 6.13833e+166
+
+
+n: 16384
+time: 40438.088894ms
+error: 6.47957e+292
+
+
+t: 21
+n: 4
+[compute-1-6:27951] *** Process received signal ***
+[compute-1-6:27951] Signal: Floating point exception (8)
+[compute-1-6:27951] Signal code: Integer divide-by-zero (1)
+[compute-1-6:27951] Failing at address: 0x40a6c3
+[compute-2-4:10380] *** Process received signal ***
+[compute-2-4:10380] Signal: Segmentation fault (11)
+[compute-2-4:10380] Signal code: Address not mapped (1)
+[compute-2-4:10380] Failing at address: (nil)
+[compute-1-6:27951] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:27951] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:27951] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:27951] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:27951] *** End of error message ***
+[compute-0-1:26735] *** Process received signal ***
+[compute-0-1:26735] Signal: Segmentation fault (11)
+[compute-0-1:26735] Signal code: Address not mapped (1)
+[compute-0-1:26735] Failing at address: (nil)
+[compute-2-4:10380] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:10380] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:10380] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:26735] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-2-4:10380] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b9742f20913]
+[compute-0-1:26735] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:10380] *** End of error message ***
+[compute-0-1:26735] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:18702] *** Process received signal ***
+[compute-0-0:18702] Signal: Segmentation fault (11)
+[compute-0-0:18702] Signal code: Address not mapped (1)
+[compute-0-0:18702] Failing at address: (nil)
+[compute-0-1:26735] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b8554f31913]
+[compute-0-0:18702] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:18702] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:18702] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:18702] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b908372d913]
+[compute-0-0:18702] *** End of error message ***
+[compute-0-1:26735] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 27951 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+time: 202.882051ms
+error: 0.0253074
+
+
+n: 16
+time: 203.665018ms
+error: 0.00505775
+
+
+n: 32
+time: 264.031172ms
+error: 0.00117283
+
+
+n: 64
+time: 205.924988ms
+error: 0.000219872
+
+
+n: 128
+time: 207.453012ms
+error: 5.8745e-05
+
+
+n: 256
+time: 216.732979ms
+error: 3.20259e+18
+
+
+n: 512
+time: 245.283842ms
+error: 4.38246e+19
+
+
+n: 1024
+time: 373.562098ms
+error: 1.25651e+45
+
+
+n: 2048
+time: 957.392216ms
+error: 8.86995e+75
+
+
+n: 4096
+time: 2865.890980ms
+error: 1.20244e+166
+
+
+n: 8192
+time: 10822.591066ms
+error: nan
+
+
+n: 16384
+time: 42243.505001ms
+error: nan
+
+
+t: 22
+n: 4
+[compute-0-0:19138] *** Process received signal ***
+[compute-0-0:19138] Signal: Segmentation fault (11)
+[compute-0-0:19138] Signal code: Address not mapped (1)
+[compute-0-0:19138] Failing at address: (nil)
+[compute-0-0:19138] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:19138] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:19138] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:19138] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b67c66d5913]
+[compute-0-0:19138] *** End of error message ***
+[compute-1-6:28423] *** Process received signal ***
+[compute-1-6:28423] Signal: Floating point exception (8)
+[compute-1-6:28423] Signal code: Integer divide-by-zero (1)
+[compute-1-6:28423] Failing at address: 0x40a6c3
+[compute-1-6:28423] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:28423] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:28423] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:28423] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:28423] *** End of error message ***
+[compute-2-4:10813] *** Process received signal ***
+[compute-2-4:10813] Signal: Segmentation fault (11)
+[compute-2-4:10813] Signal code: Address not mapped (1)
+[compute-2-4:10813] Failing at address: (nil)
+[compute-2-4:10813] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:10813] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:10813] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:10813] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ad0f4609913]
+[compute-2-4:10813] *** End of error message ***
+[compute-0-1:27172] *** Process received signal ***
+[compute-0-1:27172] Signal: Segmentation fault (11)
+[compute-0-1:27172] Signal code: Address not mapped (1)
+[compute-0-1:27172] Failing at address: (nil)
+[compute-0-1:27172] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:27172] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:27172] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:27172] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ab64e980913]
+[compute-0-1:27172] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 19138 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 206.868887ms
+error: 0.0253074
+
+
+n: 16
+time: 203.565121ms
+error: 0.00505789
+
+
+n: 32
+time: 251.779079ms
+error: 0.00115406
+
+
+n: 64
+time: 210.058928ms
+error: 0.00023708
+
+
+n: 128
+time: 207.055092ms
+error: 0.011327
+
+
+n: 256
+time: 215.862989ms
+error: 1.6565e+11
+
+
+n: 512
+time: 246.762037ms
+error: 2.68567e+24
+
+
+n: 1024
+time: 366.624117ms
+error: 4.48274e+43
+
+
+n: 2048
+time: 830.566883ms
+error: 4.11702e+39
+
+
+n: 4096
+time: 2794.963121ms
+error: 2.67057e+132
+
+
+n: 8192
+time: 10140.851021ms
+error: 5.1132e+172
+
+
+n: 16384
+time: 40369.233847ms
+error: nan
+
+
+t: 23
+n: 4
+[compute-0-0:19555] *** Process received signal ***
+[compute-0-0:19555] Signal: Segmentation fault (11)
+[compute-0-0:19555] Signal code: Address not mapped (1)
+[compute-0-0:19555] Failing at address: (nil)
+[compute-0-0:19555] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:19555] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:19555] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:19555] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ace7fa7e913]
+[compute-0-0:19555] *** End of error message ***
+[compute-2-4:11229] *** Process received signal ***
+[compute-2-4:11229] Signal: Segmentation fault (11)
+[compute-2-4:11229] Signal code: Address not mapped (1)
+[compute-2-4:11229] Failing at address: (nil)
+[compute-2-4:11229] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:11229] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:11229] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:11229] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b1d01319913]
+[compute-2-4:11229] *** End of error message ***
+[compute-1-6:28878] *** Process received signal ***
+[compute-1-6:28878] Signal: Floating point exception (8)
+[compute-1-6:28878] Signal code: Integer divide-by-zero (1)
+[compute-1-6:28878] Failing at address: 0x40a6c3
+[compute-1-6:28878] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:28878] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:28878] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-0-1:27595] *** Process received signal ***
+[compute-1-6:28878] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-0-1:27595] Signal: Segmentation fault (11)
+[compute-0-1:27595] Signal code: Address not mapped (1)
+[compute-0-1:27595] Failing at address: (nil)
+[compute-1-6:28878] *** End of error message ***
+[compute-0-1:27595] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:27595] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:27595] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:27595] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b3b788f7913]
+[compute-0-1:27595] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 19555 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 225.091934ms
+error: 0.0253074
+
+
+n: 16
+time: 203.755856ms
+error: 0.00565282
+
+
+n: 32
+time: 203.917027ms
+error: 0.00120232
+
+
+n: 64
+time: 206.048965ms
+error: 0.000221092
+
+
+n: 128
+time: 316.574097ms
+error: 6.06773e-05
+
+
+n: 256
+time: 216.376066ms
+error: 4.06836e+19
+
+
+n: 512
+time: 249.167919ms
+error: 1.64601e+21
+
+
+n: 1024
+time: 384.345055ms
+error: 2.0585e+30
+
+
+n: 2048
+time: 823.423862ms
+error: 1.60599e+54
+
+
+n: 4096
+time: 2925.909996ms
+error: 1.14756e+139
+
+
+n: 8192
+time: 10216.929197ms
+error: 5.93309e+260
+
+
+n: 16384
+time: 40660.888910ms
+error: nan
+
+
+t: 24
+n: 4
+[compute-1-6:29344] *** Process received signal ***
+[compute-1-6:29344] Signal: Floating point exception (8)
+[compute-1-6:29344] Signal code: Integer divide-by-zero (1)
+[compute-1-6:29344] Failing at address: 0x40a6c3
+[compute-0-0:19983] *** Process received signal ***
+[compute-0-0:19983] Signal: Segmentation fault (11)
+[compute-0-0:19983] Signal code: Address not mapped (1)
+[compute-0-0:19983] Failing at address: (nil)
+[compute-0-0:19983] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:19983] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:19983] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:19983] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b455fc35913]
+[compute-0-0:19983] *** End of error message ***
+[compute-1-6:29344] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:29344] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-0-1:28033] *** Process received signal ***
+[compute-0-1:28033] Signal: Segmentation fault (11)
+[compute-0-1:28033] Signal code: Address not mapped (1)
+[compute-0-1:28033] Failing at address: (nil)
+[compute-1-6:29344] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:29344] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:29344] *** End of error message ***
+[compute-0-1:28033] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:28033] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:28033] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:28033] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2adaed554913]
+[compute-0-1:28033] *** End of error message ***
+[compute-2-4:11668] *** Process received signal ***
+[compute-2-4:11668] Signal: Segmentation fault (11)
+[compute-2-4:11668] Signal code: Address not mapped (1)
+[compute-2-4:11668] Failing at address: (nil)
+[compute-2-4:11668] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:11668] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:11668] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:11668] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b53d482a913]
+[compute-2-4:11668] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 19983 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 203.443050ms
+error: 0.0253074
+
+
+n: 16
+time: 203.444004ms
+error: 0.00565282
+
+
+n: 32
+time: 220.495939ms
+error: 0.00106291
+
+
+n: 64
+time: 227.885962ms
+error: 0.000231907
+
+
+n: 128
+time: 207.269907ms
+error: 0.082214
+
+
+n: 256
+time: 220.988989ms
+error: 794489
+
+
+n: 512
+time: 246.825218ms
+error: 1.92813e+17
+
+
+n: 1024
+time: 350.268126ms
+error: 1.27222e+49
+
+
+n: 2048
+time: 839.010954ms
+error: 1.33623e+52
+
+
+n: 4096
+time: 2832.808971ms
+error: 5.85501e+118
+
+
+n: 8192
+time: 10514.789820ms
+error: 2.98144e+214
+
+
+n: 16384
+time: 40501.046896ms
+error: 9.20887e+287
+
+
+t: 25
+n: 4
+[compute-1-6:29823] *** Process received signal ***
+[compute-1-6:29823] Signal: Floating point exception (8)
+[compute-1-6:29823] Signal code: Integer divide-by-zero (1)
+[compute-1-6:29823] Failing at address: 0x40a6c3
+[compute-1-6:29823] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:29823] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:29823] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:29823] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:29823] *** End of error message ***
+[compute-0-0:20424] *** Process received signal ***
+[compute-0-0:20424] Signal: Segmentation fault (11)
+[compute-0-0:20424] Signal code: Address not mapped (1)
+[compute-0-0:20424] Failing at address: (nil)
+[compute-0-0:20424] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:20424] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:20424] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:20424] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b08ef9f3913]
+[compute-0-0:20424] *** End of error message ***
+[compute-2-4:12108] *** Process received signal ***
+[compute-2-4:12108] Signal: Segmentation fault (11)
+[compute-2-4:12108] Signal code: Address not mapped (1)
+[compute-2-4:12108] Failing at address: (nil)
+[compute-2-4:12108] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:12108] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:12108] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:12108] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ab36eddb913]
+[compute-0-1:28477] *** Process received signal ***
+[compute-0-1:28477] Signal: Segmentation fault (11)
+[compute-0-1:28477] Signal code: Address not mapped (1)
+[compute-0-1:28477] Failing at address: (nil)
+[compute-2-4:12108] *** End of error message ***
+[compute-0-1:28477] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:28477] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:28477] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:28477] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b55f384d913]
+[compute-0-1:28477] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 29823 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+time: 203.374147ms
+error: 0.0253074
+
+
+n: 16
+time: 207.571030ms
+error: 0.00565282
+
+
+n: 32
+time: 203.377008ms
+error: 0.00117283
+
+
+n: 64
+time: 204.817057ms
+error: 0.000251187
+
+
+n: 128
+time: 208.202839ms
+error: 6.00891e-05
+
+
+n: 256
+time: 217.606068ms
+error: 101.553
+
+
+n: 512
+time: 249.193907ms
+error: 3.27542e+13
+
+
+n: 1024
+time: 378.092051ms
+error: 3.55749e+29
+
+
+n: 2048
+time: 908.059120ms
+error: 2.00329e+85
+
+
+n: 4096
+time: 2861.078978ms
+error: 1.23236e+156
+
+
+n: 8192
+time: 10577.100992ms
+error: 6.66752e+214
+
+
+n: 16384
+time: 40627.438068ms
+error: nan
+
+
+t: 26
+n: 4
+[compute-2-4:12561] *** Process received signal ***
+[compute-2-4:12561] Signal: Segmentation fault (11)
+[compute-2-4:12561] Signal code: Address not mapped (1)
+[compute-2-4:12561] Failing at address: (nil)
+[compute-2-4:12561] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:12561] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:12561] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:12561] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ad30d50d913]
+[compute-2-4:12561] *** End of error message ***
+[compute-0-0:20880] *** Process received signal ***
+[compute-0-0:20880] Signal: Segmentation fault (11)
+[compute-0-0:20880] Signal code: Address not mapped (1)
+[compute-0-0:20880] Failing at address: (nil)
+[compute-1-6:30318] *** Process received signal ***
+[compute-1-6:30318] Signal: Floating point exception (8)
+[compute-1-6:30318] Signal code: Integer divide-by-zero (1)
+[compute-1-6:30318] Failing at address: 0x40a6c3
+[compute-0-0:20880] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:20880] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:20880] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:20880] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b925134f913]
+[compute-0-0:20880] *** End of error message ***
+[compute-1-6:30318] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:30318] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:30318] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:30318] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:30318] *** End of error message ***
+[compute-0-1:28935] *** Process received signal ***
+[compute-0-1:28935] Signal: Segmentation fault (11)
+[compute-0-1:28935] Signal code: Address not mapped (1)
+[compute-0-1:28935] Failing at address: (nil)
+[compute-0-1:28935] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:28935] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:28935] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:28935] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b010dc0a913]
+[compute-0-1:28935] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 12561 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 206.850052ms
+error: 0.0253074
+
+
+n: 16
+time: 203.485966ms
+error: 0.00535526
+
+
+n: 32
+time: 203.812838ms
+error: 0.00109106
+
+
+n: 64
+time: 257.141113ms
+error: 0.00024647
+
+
+n: 128
+time: 256.272078ms
+error: 0.000247457
+
+
+n: 256
+time: 214.370966ms
+error: 4.6491e+12
+
+
+n: 512
+time: 246.303082ms
+error: 1.52852e+21
+
+
+n: 1024
+time: 354.074955ms
+error: 4.67842e+37
+
+
+n: 2048
+time: 821.408987ms
+error: 1.51664e+79
+
+
+n: 4096
+time: 2923.648834ms
+error: 1.87544e+123
+
+
+n: 8192
+time: 10174.017906ms
+error: 9.76857e+221
+
+
+n: 16384
+time: 41194.750071ms
+error: nan
+
+
+t: 27
+n: 4
+[compute-1-6:30823] *** Process received signal ***
+[compute-1-6:30823] Signal: Floating point exception (8)
+[compute-1-6:30823] Signal code: Integer divide-by-zero (1)
+[compute-1-6:30823] Failing at address: 0x40a6c3
+[compute-1-6:30823] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:30823] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:30823] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:30823] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:30823] *** End of error message ***
+[compute-0-0:21347] *** Process received signal ***
+[compute-0-0:21347] Signal: Segmentation fault (11)
+[compute-0-0:21347] Signal code: Address not mapped (1)
+[compute-0-0:21347] Failing at address: (nil)
+[compute-2-4:13027] *** Process received signal ***
+[compute-2-4:13027] Signal: Segmentation fault (11)
+[compute-2-4:13027] Signal code: Address not mapped (1)
+[compute-2-4:13027] Failing at address: (nil)
+[compute-0-0:21347] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:21347] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:21347] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:21347] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b3d3c0eb913]
+[compute-0-0:21347] *** End of error message ***
+[compute-2-4:13027] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:13027] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:13027] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:13027] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ac0c4679913]
+[compute-2-4:13027] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 30823 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+time: 256.682873ms
+error: 0.0253074
+
+
+n: 16
+time: 203.880072ms
+error: 0.00550403
+
+
+n: 32
+time: 214.308977ms
+error: 0.00111251
+
+
+n: 64
+time: 205.811977ms
+error: 0.000212901
+
+
+n: 128
+time: 236.901045ms
+error: 6.4588e-05
+
+
+n: 256
+time: 217.108965ms
+error: 0.0233584
+
+
+n: 512
+time: 252.716064ms
+error: 2.02858e+24
+
+
+n: 1024
+time: 366.916895ms
+error: 1.39016e+56
+
+
+n: 2048
+time: 888.492107ms
+error: 1.1052e+77
+
+
+n: 4096
+time: 2961.958885ms
+error: 2.26324e+207
+
+
+n: 8192
+time: 10413.517952ms
+error: 4.87767e+227
+
+
+n: 16384
+time: 42039.132118ms
+error: nan
+
+
+t: 28
+n: 4
+[compute-2-4:13506] *** Process received signal ***
+[compute-2-4:13506] Signal: Segmentation fault (11)
+[compute-2-4:13506] Signal code: Address not mapped (1)
+[compute-2-4:13506] Failing at address: (nil)
+[compute-2-4:13506] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:13506] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:13506] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:13506] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b2e136e1913]
+[compute-2-4:13506] *** End of error message ***
+[compute-1-6:31354] *** Process received signal ***
+[compute-1-6:31354] Signal: Floating point exception (8)
+[compute-1-6:31354] Signal code: Integer divide-by-zero (1)
+[compute-1-6:31354] Failing at address: 0x40a6c3
+[compute-1-6:31354] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:31354] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:31354] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:31354] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:31354] *** End of error message ***
+[compute-0-0:21832] *** Process received signal ***
+[compute-0-0:21832] Signal: Segmentation fault (11)
+[compute-0-0:21832] Signal code: Address not mapped (1)
+[compute-0-0:21832] Failing at address: (nil)
+[compute-0-0:21832] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:21832] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:21832] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:21832] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2abf67c91913]
+[compute-0-1:29888] *** Process received signal ***
+[compute-0-0:21832] *** End of error message ***
+[compute-0-1:29888] Signal: Segmentation fault (11)
+[compute-0-1:29888] Signal code: Address not mapped (1)
+[compute-0-1:29888] Failing at address: (nil)
+[compute-0-1:29888] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:29888] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:29888] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:29888] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b09fd6b1913]
+[compute-0-1:29888] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 13506 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 204.469919ms
+error: 0.0253074
+
+
+n: 16
+time: 203.727961ms
+error: 0.00565282
+
+
+n: 32
+time: 223.693848ms
+error: 0.00122778
+
+
+n: 64
+time: 205.312967ms
+error: 0.000264393
+
+
+n: 128
+time: 207.467079ms
+error: 6.70406e-05
+
+
+n: 256
+time: 217.437983ms
+error: 6.0836e+07
+
+
+n: 512
+time: 246.066093ms
+error: 1.97729e+13
+
+
+n: 1024
+time: 357.784986ms
+error: 1.14081e+28
+
+
+n: 2048
+time: 881.273985ms
+error: 1.62122e+88
+
+
+n: 4096
+time: 2822.939157ms
+error: 2.71933e+113
+
+
+n: 8192
+time: 10142.666101ms
+error: 1.41247e+209
+
+
+n: 16384
+time: 41348.737001ms
+error: nan
+
+
+t: 29
+n: 4
+[compute-1-6:32002] *** Process received signal ***
+[compute-1-6:32002] Signal: Floating point exception (8)
+[compute-1-6:32002] Signal code: Integer divide-by-zero (1)
+[compute-1-6:32002] Failing at address: 0x40a6c3
+[compute-2-4:14117] *** Process received signal ***
+[compute-0-0:22441] *** Process received signal ***
+[compute-0-0:22441] Signal: Segmentation fault (11)
+[compute-0-0:22441] Signal code: Address not mapped (1)
+[compute-0-0:22441] Failing at address: (nil)
+[compute-2-4:14117] Signal: Segmentation fault (11)
+[compute-2-4:14117] Signal code: Address not mapped (1)
+[compute-2-4:14117] Failing at address: (nil)
+[compute-1-6:32002] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:32002] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:32002] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:32002] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:32002] *** End of error message ***
+[compute-0-0:22441] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:22441] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:22441] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:22441] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b81abe40913]
+[compute-0-0:22441] *** End of error message ***
+[compute-2-4:14117] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:14117] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:14117] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:14117] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b125bb79913]
+[compute-2-4:14117] *** End of error message ***
+[compute-0-1:30499] *** Process received signal ***
+[compute-0-1:30499] Signal: Segmentation fault (11)
+[compute-0-1:30499] Signal code: Address not mapped (1)
+[compute-0-1:30499] Failing at address: (nil)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 32002 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-0-1:30499] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:30499] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:30499] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:30499] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2af60fe3f913]
+[compute-0-1:30499] *** End of error message ***
+
+n: 8
+time: 203.435183ms
+error: 0.0253074
+
+
+n: 16
+time: 203.243017ms
+error: 0.00565282
+
+
+n: 32
+time: 215.835094ms
+error: 0.00119159
+
+
+n: 64
+time: 207.360983ms
+error: 0.00024288
+
+
+n: 128
+time: 215.526104ms
+error: 0.000141467
+
+
+n: 256
+time: 217.375994ms
+error: 0.000256161
+
+
+n: 512
+time: 246.806145ms
+error: 9.50125e+31
+
+
+n: 1024
+time: 365.185022ms
+error: 9.91311e+36
+
+
+n: 2048
+time: 913.505077ms
+error: 1.61281e+78
+
+
+n: 4096
+time: 3074.195862ms
+error: 4.02566e+109
+
+
+n: 8192
+time: 10394.436121ms
+error: 6.44216e+198
+
+
+n: 16384
+time: 41741.580963ms
+error: nan
+
+
+t: 30
+n: 4
+[compute-2-4:14698] *** Process received signal ***
+[compute-2-4:14698] Signal: Segmentation fault (11)
+[compute-2-4:14698] Signal code: Address not mapped (1)
+[compute-2-4:14698] Failing at address: (nil)
+[compute-2-4:14698] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:14698] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:14698] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:14698] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b058d1e7913]
+[compute-2-4:14698] *** End of error message ***
+[compute-1-6:32623] *** Process received signal ***
+[compute-1-6:32623] Signal: Floating point exception (8)
+[compute-1-6:32623] Signal code: Integer divide-by-zero (1)
+[compute-1-6:32623] Failing at address: 0x40a6c3
+[compute-1-6:32623] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:32623] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:32623] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:32623] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:32623] *** End of error message ***
+[compute-0-1:31081] *** Process received signal ***
+[compute-0-1:31081] Signal: Segmentation fault (11)
+[compute-0-1:31081] Signal code: Address not mapped (1)
+[compute-0-1:31081] Failing at address: (nil)
+[compute-0-0:23023] *** Process received signal ***
+[compute-0-0:23023] Signal: Segmentation fault (11)
+[compute-0-0:23023] Signal code: Address not mapped (1)
+[compute-0-0:23023] Failing at address: (nil)
+[compute-0-1:31081] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:31081] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:31081] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:31081] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b5b5d198913]
+[compute-0-0:23023] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:23023] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:23023] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:23023] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b8137e3a913]
+[compute-0-1:31081] *** End of error message ***
+[compute-0-0:23023] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 14698 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 202.969790ms
+error: 0.0253074
+
+
+n: 16
+time: 203.573942ms
+error: 0.00565282
+
+
+n: 32
+time: 204.830885ms
+error: 0.00114468
+
+
+n: 64
+time: 204.437971ms
+error: 0.000253773
+
+
+n: 128
+time: 208.070993ms
+error: 6.80635e-05
+
+
+n: 256
+time: 214.279890ms
+error: 9.60762e+13
+
+
+n: 512
+time: 246.564150ms
+error: 6.44601e+12
+
+
+n: 1024
+time: 410.530806ms
+error: 9.85711e+29
+
+
+n: 2048
+time: 863.811016ms
+error: 1.57603e+57
+
+
+n: 4096
+time: 2930.777073ms
+error: 2.29549e+97
+
+
+n: 8192
+time: 10575.181007ms
+error: 1.99857e+175
+
+
+n: 16384
+time: 40223.872900ms
+error: nan
+
+
+t: 31
+n: 4
+[compute-0-0:23542] *** Process received signal ***
+[compute-0-0:23542] Signal: Segmentation fault (11)
+[compute-0-0:23542] Signal code: Address not mapped (1)
+[compute-0-0:23542] Failing at address: (nil)
+[compute-1-6:00751] *** Process received signal ***
+[compute-1-6:00751] Signal: Floating point exception (8)
+[compute-1-6:00751] Signal code: Integer divide-by-zero (1)
+[compute-1-6:00751] Failing at address: 0x40a6c3
+[compute-0-0:23542] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:23542] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:23542] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:23542] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b2460604913]
+[compute-0-0:23542] *** End of error message ***
+[compute-1-6:00751] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:00751] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:00751] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:00751] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:00751] *** End of error message ***
+[compute-2-4:15219] *** Process received signal ***
+[compute-2-4:15219] Signal: Segmentation fault (11)
+[compute-2-4:15219] Signal code: Address not mapped (1)
+[compute-2-4:15219] Failing at address: (nil)
+[compute-2-4:15219] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:15219] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:15219] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:15219] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2abb0b528913]
+[compute-2-4:15219] *** End of error message ***
+[compute-0-1:31602] *** Process received signal ***
+[compute-0-1:31602] Signal: Segmentation fault (11)
+[compute-0-1:31602] Signal code: Address not mapped (1)
+[compute-0-1:31602] Failing at address: (nil)
+[compute-0-1:31602] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:31602] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:31602] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:31602] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b76e914f913]
+[compute-0-1:31602] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 23542 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+time: 203.530073ms
+error: 0.0253074
+
+
+n: 16
+time: 254.439116ms
+error: 0.00565282
+
+
+n: 32
+time: 206.220150ms
+error: 0.0012184
+
+
+n: 64
+time: 206.470013ms
+error: 0.000280303
+
+
+n: 128
+time: 210.331917ms
+error: 741.869
+
+
+n: 256
+time: 242.413998ms
+error: 4.78536e+19
+
+
+n: 512
+time: 255.646944ms
+error: 5.77636e+22
+
+
+n: 1024
+time: 384.806871ms
+error: 2.24884e+53
+
+
+n: 2048
+time: 891.425848ms
+error: 7.79096e+52
+
+
+n: 4096
+time: 2920.897961ms
+error: 1.51954e+107
+
+
+n: 8192
+time: 10600.166082ms
+error: 5.76557e+230
+
+
+n: 16384
+time: 40885.567188ms
+error: nan
+
+
+t: 32
+n: 4
+[compute-1-6:01345] *** Process received signal ***
+[compute-1-6:01345] Signal: Floating point exception (8)
+[compute-1-6:01345] Signal code: Integer divide-by-zero (1)
+[compute-1-6:01345] Failing at address: 0x40a6c3
+[compute-1-6:01345] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:01345] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:01345] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:01345] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:01345] *** End of error message ***
+[compute-2-4:15754] *** Process received signal ***
+[compute-2-4:15754] Signal: Segmentation fault (11)
+[compute-2-4:15754] Signal code: Address not mapped (1)
+[compute-2-4:15754] Failing at address: (nil)
+[compute-0-1:32146] *** Process received signal ***
+[compute-0-1:32146] Signal: Segmentation fault (11)
+[compute-0-1:32146] Signal code: Address not mapped (1)
+[compute-0-1:32146] Failing at address: (nil)
+[compute-2-4:15754] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:15754] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:15754] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:15754] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ada5083c913]
+[compute-2-4:15754] *** End of error message ***
+[compute-0-1:32146] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:32146] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:32146] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:32146] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b998cf6f913]
+[compute-0-1:32146] *** End of error message ***
+[compute-0-0:24086] *** Process received signal ***
+[compute-0-0:24086] Signal: Segmentation fault (11)
+[compute-0-0:24086] Signal code: Address not mapped (1)
+[compute-0-0:24086] Failing at address: (nil)
+[compute-0-0:24086] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:24086] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:24086] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:24086] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ab568ad0913]
+[compute-0-0:24086] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 1345 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-0-0:24127] *** Process received signal ***
+[compute-0-0:24127] Signal: Segmentation fault (11)
+[compute-0-0:24127] Signal code: Address not mapped (1)
+[compute-0-0:24127] Failing at address: (nil)
+[compute-2-4:15794] *** Process received signal ***
+[compute-2-4:15794] Signal: Segmentation fault (11)
+[compute-2-4:15794] Signal code: Address not mapped (1)
+[compute-2-4:15794] Failing at address: (nil)
+[compute-1-6:01388] *** Process received signal ***
+[compute-1-6:01388] Signal: Segmentation fault (11)
+[compute-1-6:01388] Signal code: Address not mapped (1)
+[compute-1-6:01388] Failing at address: (nil)
+[compute-1-6:01388] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:01388] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:01388] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:01388] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2abdd2899913]
+[compute-1-6:01388] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 24127 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[compute-0-1:32186] *** Process received signal ***
+
+n: 16
+time: 204.606056ms
+error: 0.00550403
+
+
+n: 32
+time: 203.555107ms
+error: 0.00121036
+
+
+n: 64
+time: 205.435991ms
+error: 0.00024574
+
+
+n: 128
+time: 209.079981ms
+error: 15304.2
+
+
+n: 256
+time: 213.768005ms
+error: 1.41555e+15
+
+
+n: 512
+time: 249.165058ms
+error: 7.9468e+19
+
+
+n: 1024
+time: 364.679098ms
+error: 1.15509e+30
+
+
+n: 2048
+time: 823.346853ms
+error: 3.04424e+57
+
+
+n: 4096
+time: 2825.886965ms
+error: 3.80938e+104
+
+
+n: 8192
+time: 10290.501118ms
+error: 1.10353e+230
+
+
+n: 16384
+time: 40095.209837ms
+error: nan
+
+
+t: 33
+n: 4
+[compute-2-4:16318] *** Process received signal ***
+[compute-2-4:16318] Signal: Segmentation fault (11)
+[compute-2-4:16318] Signal code: Address not mapped (1)
+[compute-2-4:16318] Failing at address: (nil)
+[compute-2-4:16318] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:16318] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:16318] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:16318] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ae05059d913]
+[compute-2-4:16318] *** End of error message ***
+[compute-0-0:24640] *** Process received signal ***
+[compute-0-0:24640] Signal: Segmentation fault (11)
+[compute-0-0:24640] Signal code: Address not mapped (1)
+[compute-0-0:24640] Failing at address: (nil)
+[compute-1-6:01932] *** Process received signal ***
+[compute-0-0:24640] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:24640] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:24640] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:24640] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b4389575913]
+[compute-0-0:24640] *** End of error message ***
+[compute-1-6:01932] Signal: Floating point exception (8)
+[compute-1-6:01932] Signal code: Integer divide-by-zero (1)
+[compute-1-6:01932] Failing at address: 0x40a6c3
+[compute-0-1:00302] *** Process received signal ***
+[compute-0-1:00302] Signal: Segmentation fault (11)
+[compute-0-1:00302] Signal code: Address not mapped (1)
+[compute-0-1:00302] Failing at address: (nil)
+[compute-1-6:01932] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-0-1:00302] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:00302] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:00302] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:00302] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b23157ca913]
+[compute-1-6:01932] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:01932] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:01932] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:01932] *** End of error message ***
+[compute-0-1:00302] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 16318 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-2-4:16359] *** Process received signal ***
+[compute-1-6:01976] *** Process received signal ***
+[compute-1-6:01976] Signal: Segmentation fault (11)
+[compute-1-6:01976] Signal code: Address not mapped (1)
+[compute-1-6:01976] Failing at address: 0x2111
+[compute-0-1:00343] *** Process received signal ***
+[compute-0-1:00343] Signal: Segmentation fault (11)
+[compute-0-1:00343] Signal code: Address not mapped (1)
+[compute-0-1:00343] Failing at address: 0x2111
+[compute-1-6:01976] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:01976] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:01976] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:01976] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b8dc1613913]
+[compute-1-6:01976] *** End of error message ***
+[compute-0-0:24681] *** Process received signal ***
+[compute-0-0:24681] Signal: Segmentation fault (11)
+[compute-0-0:24681] Signal code: Address not mapped (1)
+[compute-0-0:24681] Failing at address: 0x2111
+[compute-0-0:24681] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:24681] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:24681] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:24681] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b072a064913]
+[compute-0-0:24681] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 16359 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 203.999996ms
+error: 0.00550403
+
+
+n: 32
+time: 203.914881ms
+error: 0.00123851
+
+
+n: 64
+time: 205.434799ms
+error: 0.000270977
+
+
+n: 128
+time: 210.263014ms
+error: 0.00971178
+
+
+n: 256
+time: 234.813929ms
+error: 2.42352e+20
+
+
+n: 512
+time: 260.208130ms
+error: 6.02695e+19
+
+
+n: 1024
+time: 370.095015ms
+error: 2.41565e+28
+
+
+n: 2048
+time: 909.595013ms
+error: 1.08668e+82
+
+
+n: 4096
+time: 2788.396835ms
+error: 4.34201e+128
+
+
+n: 8192
+time: 10059.136152ms
+error: 6.45852e+203
+
+
+n: 16384
+time: 41522.083044ms
+error: 1.86301e+295
+
+
+t: 34
+n: 4
+[compute-0-0:25198] *** Process received signal ***
+[compute-0-0:25198] Signal: Segmentation fault (11)
+[compute-0-0:25198] Signal code: Address not mapped (1)
+[compute-0-0:25198] Failing at address: (nil)
+[compute-2-4:16878] *** Process received signal ***
+[compute-2-4:16878] Signal: Segmentation fault (11)
+[compute-2-4:16878] Signal code: Address not mapped (1)
+[compute-2-4:16878] Failing at address: (nil)
+[compute-0-0:25198] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:25198] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:25198] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:25198] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b66700d0913]
+[compute-0-0:25198] *** End of error message ***
+[compute-2-4:16878] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:16878] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:16878] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:16878] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ad4adf24913]
+[compute-1-6:02541] *** Process received signal ***
+[compute-1-6:02541] Signal: Floating point exception (8)
+[compute-1-6:02541] Signal code: Integer divide-by-zero (1)
+[compute-1-6:02541] Failing at address: 0x40a6c3
+[compute-2-4:16878] *** End of error message ***
+[compute-1-6:02541] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:02541] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:02541] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:02541] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:02541] *** End of error message ***
+[compute-0-1:00908] *** Process received signal ***
+[compute-0-1:00908] Signal: Segmentation fault (11)
+[compute-0-1:00908] Signal code: Address not mapped (1)
+[compute-0-1:00908] Failing at address: (nil)
+[compute-0-1:00908] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:00908] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:00908] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:00908] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ac5f6c02913]
+[compute-0-1:00908] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 16878 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+2 total processes killed (some possibly by mpirun during cleanup)
+
+n: 8
+[compute-2-4:16920] *** Process received signal ***
+[compute-0-0:25240] *** Process received signal ***
+[compute-1-6:02586] *** Process received signal ***
+[compute-1-6:02586] Signal: Segmentation fault (11)
+[compute-1-6:02586] Signal code: Address not mapped (1)
+[compute-1-6:02586] Failing at address: (nil)
+[compute-1-6:02586] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:02586] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:02586] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:02586] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b6995ff7913]
+[compute-1-6:02586] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 16920 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+2 total processes killed (some possibly by mpirun during cleanup)
+
+n: 16
+time: 203.614950ms
+error: 0.00565282
+
+
+n: 32
+time: 204.188108ms
+error: 0.000861865
+
+
+n: 64
+time: 204.978943ms
+error: 0.000278618
+
+
+n: 128
+time: 224.446058ms
+error: 110056
+
+
+n: 256
+time: 219.612122ms
+error: 4.88512e+20
+
+
+n: 512
+time: 244.843006ms
+error: 3.24785e+27
+
+
+n: 1024
+time: 359.219074ms
+error: 1.37785e+77
+
+
+n: 2048
+time: 828.610897ms
+error: 3.54926e+57
+
+
+n: 4096
+time: 2732.727051ms
+error: 1.372e+146
+
+
+n: 8192
+time: 10089.221954ms
+error: 4.74247e+238
+
+
+n: 16384
+time: 40362.754107ms
+error: nan
+
+
+t: 35
+n: 4
+[compute-0-0:25771] *** Process received signal ***
+[compute-0-0:25771] Signal: Segmentation fault (11)
+[compute-0-0:25771] Signal code: Address not mapped (1)
+[compute-0-0:25771] Failing at address: (nil)
+[compute-0-0:25771] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:25771] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:25771] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:25771] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b3e27271913]
+[compute-0-0:25771] *** End of error message ***
+[compute-2-4:17448] *** Process received signal ***
+[compute-2-4:17448] Signal: Segmentation fault (11)
+[compute-2-4:17448] Signal code: Address not mapped (1)
+[compute-2-4:17448] Failing at address: (nil)
+[compute-2-4:17448] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:17448] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:17448] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:17448] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b6d763cf913]
+[compute-2-4:17448] *** End of error message ***
+[compute-1-6:03190] *** Process received signal ***
+[compute-1-6:03190] Signal: Floating point exception (8)
+[compute-1-6:03190] Signal code: Integer divide-by-zero (1)
+[compute-1-6:03190] Failing at address: 0x40a6c3
+[compute-1-6:03190] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:03190] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:03190] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:03190] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:03190] *** End of error message ***
+[compute-0-1:01483] *** Process received signal ***
+[compute-0-1:01483] Signal: Segmentation fault (11)
+[compute-0-1:01483] Signal code: Address not mapped (1)
+[compute-0-1:01483] Failing at address: (nil)
+[compute-0-1:01483] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:01483] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:01483] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:01483] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b380ac4f913]
+[compute-0-1:01483] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 25771 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-1-6:03236] *** Process received signal ***
+[compute-1-6:03236] Signal: Segmentation fault (11)
+[compute-1-6:03236] Signal code: Address not mapped (1)
+[compute-1-6:03236] Failing at address: (nil)
+[compute-0-0:25814] *** Process received signal ***
+[compute-1-6:03236] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:03236] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:03236] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:03236] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ab3eb916913]
+[compute-1-6:03236] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 3236 on node compute-1-6.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 204.061031ms
+error: 0.00520654
+
+
+n: 32
+time: 254.358053ms
+error: 0.00115004
+
+
+n: 64
+time: 207.957983ms
+error: 0.000304756
+
+
+n: 128
+time: 228.814125ms
+error: 0.000115928
+
+
+n: 256
+time: 226.031065ms
+error: 1.23135e+06
+
+
+n: 512
+time: 251.583815ms
+error: 1.01757e+20
+
+
+n: 1024
+time: 367.534876ms
+error: 7.2287e+27
+
+
+n: 2048
+time: 937.513113ms
+error: 1.91336e+96
+
+
+n: 4096
+time: 2980.942965ms
+error: 1.31177e+132
+
+
+n: 8192
+time: 10322.251797ms
+error: 4.64123e+232
+
+
+n: 16384
+time: 40713.701963ms
+error: nan
+
+
+t: 36
+n: 4
+[compute-1-6:03849] *** Process received signal ***
+[compute-1-6:03849] Signal: Floating point exception (8)
+[compute-1-6:03849] Signal code: Integer divide-by-zero (1)
+[compute-1-6:03849] Failing at address: 0x40a6c3
+[compute-1-6:03849] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:03849] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:03849] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:03849] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:03849] *** End of error message ***
+[compute-0-0:26355] *** Process received signal ***
+[compute-0-0:26355] Signal: Segmentation fault (11)
+[compute-0-0:26355] Signal code: Address not mapped (1)
+[compute-0-0:26355] Failing at address: (nil)
+[compute-0-1:02085] *** Process received signal ***
+[compute-2-4:18068] *** Process received signal ***
+[compute-0-1:02085] Signal: Segmentation fault (11)
+[compute-0-1:02085] Signal code: Address not mapped (1)
+[compute-0-1:02085] Failing at address: (nil)
+[compute-2-4:18068] Signal: Segmentation fault (11)
+[compute-2-4:18068] Signal code: Address not mapped (1)
+[compute-2-4:18068] Failing at address: (nil)
+[compute-0-0:26355] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:26355] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:26355] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:26355] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ad8309f6913]
+[compute-0-0:26355] *** End of error message ***
+[compute-2-4:18068] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:18068] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:18068] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:18068] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b9f15740913]
+[compute-2-4:18068] *** End of error message ***
+[compute-0-1:02085] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:02085] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:02085] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:02085] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2af95871e913]
+[compute-0-1:02085] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 3849 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-1-6:03896] *** Process received signal ***
+[compute-1-6:03896] Signal: Segmentation fault (11)
+[compute-1-6:03896] Signal code: Address not mapped (1)
+[compute-1-6:03896] Failing at address: (nil)
+[compute-1-6:03896] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:03896] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:03896] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:03896] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aad3bbe1913]
+[compute-1-6:03896] *** End of error message ***
+[compute-0-0:26399] *** Process received signal ***
+[compute-2-4:18112] *** Process received signal ***
+[compute-0-1:02129] *** Process received signal ***
+[compute-0-1:02129] Signal: Segmentation fault (11)
+[compute-0-1:02129] Signal code: Address not mapped (1)
+[compute-0-1:02129] Failing at address: (nil)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 3896 on node compute-1-6.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 203.517199ms
+error: 0.00565282
+
+
+n: 32
+time: 211.020947ms
+error: 0.00116076
+
+
+n: 64
+time: 204.596996ms
+error: 0.000264472
+
+
+n: 128
+time: 207.684040ms
+error: 1.19991e+10
+
+
+n: 256
+time: 215.209961ms
+error: 169115
+
+
+n: 512
+time: 251.191139ms
+error: 2.16656e+13
+
+
+n: 1024
+time: 358.710051ms
+error: 2.95018e+34
+
+
+n: 2048
+time: 978.393078ms
+error: 2.01873e+40
+
+
+n: 4096
+time: 2804.445982ms
+error: 3.85959e+120
+
+
+n: 8192
+time: 10990.478039ms
+error: 1.6101e+244
+
+
+n: 16384
+time: 40757.950068ms
+error: nan
+
+
+t: 37
+n: 4
+[compute-1-6:04583] *** Process received signal ***
+[compute-1-6:04583] Signal: Floating point exception (8)
+[compute-1-6:04583] Signal code: Integer divide-by-zero (1)
+[compute-1-6:04583] Failing at address: 0x40a6c3
+[compute-1-6:04583] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:04583] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:04583] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:04583] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:04583] *** End of error message ***
+[compute-0-0:26956] *** Process received signal ***
+[compute-0-1:02704] *** Process received signal ***
+[compute-0-0:26956] Signal: Segmentation fault (11)
+[compute-0-0:26956] Signal code: Address not mapped (1)
+[compute-0-0:26956] Failing at address: (nil)
+[compute-0-1:02704] Signal: Segmentation fault (11)
+[compute-0-1:02704] Signal code: Address not mapped (1)
+[compute-0-1:02704] Failing at address: (nil)
+[compute-0-0:26956] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:26956] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:26956] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:26956] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b2049663913]
+[compute-0-0:26956] *** End of error message ***
+[compute-0-1:02704] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:02704] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:02704] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:02704] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b64cf2a1913]
+[compute-0-1:02704] *** End of error message ***
+[compute-2-4:18664] *** Process received signal ***
+[compute-2-4:18664] Signal: Segmentation fault (11)
+[compute-2-4:18664] Signal code: Address not mapped (1)
+[compute-2-4:18664] Failing at address: (nil)
+[compute-2-4:18664] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:18664] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:18664] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:18664] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b97fc9ae913]
+[compute-2-4:18664] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 4583 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-2-4:18721] *** Process received signal ***
+[compute-2-4:18721] Signal: Segmentation fault (11)
+[compute-2-4:18721] Signal code: Address not mapped (1)
+[compute-2-4:18721] Failing at address: (nil)
+[compute-1-6:04631] *** Process received signal ***
+[compute-1-6:04631] Signal: Segmentation fault (11)
+[compute-1-6:04631] Signal code: Address not mapped (1)
+[compute-1-6:04631] Failing at address: (nil)
+[compute-1-6:04631] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:04631] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:04631] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:04631] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b7b85b72913]
+[compute-1-6:04631] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 18721 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[compute-0-1:02761] *** Process received signal ***
+
+n: 16
+time: 205.029964ms
+error: 0.00520654
+
+
+n: 32
+time: 204.051018ms
+error: 0.00104013
+
+
+n: 64
+time: 205.907106ms
+error: 0.000262159
+
+
+n: 128
+time: 210.700989ms
+error: 1.15814e+10
+
+
+n: 256
+time: 248.829126ms
+error: 64.152
+
+
+n: 512
+time: 251.656055ms
+error: 1.61274e+21
+
+
+n: 1024
+time: 390.426159ms
+error: 6.64039e+45
+
+
+n: 2048
+time: 921.272039ms
+error: 1.41833e+68
+
+
+n: 4096
+time: 2851.208925ms
+error: 7.43235e+116
+
+
+n: 8192
+time: 10176.433086ms
+error: 2.81842e+208
+
+
+n: 16384
+time: 42436.486006ms
+error: nan
+
+
+t: 38
+n: 4
+[compute-1-6:05450] *** Process received signal ***
+[compute-1-6:05450] Signal: Floating point exception (8)
+[compute-1-6:05450] Signal code: Integer divide-by-zero (1)
+[compute-1-6:05450] Failing at address: 0x40a6c3
+[compute-1-6:05450] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:05450] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:05450] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:05450] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:05450] *** End of error message ***
+[compute-2-4:19446] *** Process received signal ***
+[compute-2-4:19446] Signal: Segmentation fault (11)
+[compute-2-4:19446] Signal code: Address not mapped (1)
+[compute-2-4:19446] Failing at address: (nil)
+[compute-0-0:27743] *** Process received signal ***
+[compute-0-1:03524] *** Process received signal ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 5450 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:19446] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:19446] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:19446] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:19446] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b96541fc913]
+[compute-0-0:27743] Signal: Segmentation fault (11)
+[compute-0-0:27743] Signal code: Address not mapped (1)
+[compute-0-0:27743] Failing at address: (nil)
+[compute-0-1:03524] Signal: Segmentation fault (11)
+[compute-0-1:03524] Signal code: Address not mapped (1)
+[compute-0-1:03524] Failing at address: (nil)
+[compute-2-4:19446] *** End of error message ***
+[compute-0-0:27743] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-1:03524] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:03524] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:03524] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:03524] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b882ec86913]
+[compute-0-0:27743] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:03524] *** End of error message ***
+[compute-0-0:27743] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:27743] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2afe7768e913]
+[compute-0-0:27743] *** End of error message ***
+
+n: 8
+[compute-2-4:19494] *** Process received signal ***
+[compute-2-4:19494] Signal: Segmentation fault (11)
+[compute-2-4:19494] Signal code: Address not mapped (1)
+[compute-2-4:19494] Failing at address: (nil)
+[compute-2-4:19494] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:19494] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:19494] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:19494] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b4bc8498913]
+[compute-2-4:19494] *** End of error message ***
+[compute-1-6:05499] *** Process received signal ***
+[compute-1-6:05499] Signal: Segmentation fault (11)
+[compute-1-6:05499] Signal code: Address not mapped (1)
+[compute-1-6:05499] Failing at address: (nil)
+[compute-1-6:05499] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:05499] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:05499] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:05499] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ae700f14913]
+[compute-1-6:05499] *** End of error message ***
+[compute-0-1:03570] *** Process received signal ***
+[compute-0-1:03570] Signal: Segmentation fault (11)
+[compute-0-1:03570] Signal code: Address not mapped (1)
+[compute-0-1:03570] Failing at address: (nil)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 19494 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 203.361034ms
+error: 0.00565282
+
+
+n: 32
+time: 211.930037ms
+error: 0.00122913
+
+
+n: 64
+time: 205.662012ms
+error: 0.000272309
+
+
+n: 128
+time: 225.496054ms
+error: 0.000480263
+
+
+n: 256
+time: 218.425035ms
+error: 6.50608e+08
+
+
+n: 512
+time: 248.854160ms
+error: 1.14576e+21
+
+
+n: 1024
+time: 359.642029ms
+error: 2.19438e+37
+
+
+n: 2048
+time: 877.973080ms
+error: 2.06451e+55
+
+
+n: 4096
+time: 2817.419052ms
+error: 1.1987e+104
+
+
+n: 8192
+time: 10390.672922ms
+error: 2.65028e+190
+
+
+n: 16384
+time: 41065.270185ms
+error: nan
+
+
+t: 39
+n: 4
+[compute-0-1:04242] *** Process received signal ***
+[compute-0-1:04242] Signal: Segmentation fault (11)
+[compute-0-1:04242] Signal code: Address not mapped (1)
+[compute-0-1:04242] Failing at address: (nil)
+[compute-0-1:04242] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:04242] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:04242] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:04242] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ad4d00c3913]
+[compute-0-1:04242] *** End of error message ***
+[compute-1-6:06157] *** Process received signal ***
+[compute-1-6:06157] Signal: Floating point exception (8)
+[compute-1-6:06157] Signal code: Integer divide-by-zero (1)
+[compute-1-6:06157] Failing at address: 0x40a6c3
+[compute-1-6:06157] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:06157] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:06157] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:06157] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:06157] *** End of error message ***
+[compute-0-0:28400] *** Process received signal ***
+[compute-0-0:28400] Signal: Segmentation fault (11)
+[compute-0-0:28400] Signal code: Address not mapped (1)
+[compute-0-0:28400] Failing at address: (nil)
+[compute-0-0:28400] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:28400] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:28400] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:28400] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aad35e4d913]
+[compute-0-0:28400] *** End of error message ***
+[compute-2-4:20104] *** Process received signal ***
+[compute-2-4:20104] Signal: Segmentation fault (11)
+[compute-2-4:20104] Signal code: Address not mapped (1)
+[compute-2-4:20104] Failing at address: (nil)
+[compute-2-4:20104] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:20104] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:20104] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:20104] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b9fc1888913]
+[compute-2-4:20104] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 4242 on node compute-0-1 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-1-6:06207] *** Process received signal ***
+[compute-1-6:06207] Signal: Segmentation fault (11)
+[compute-1-6:06207] Signal code: Address not mapped (1)
+[compute-1-6:06207] Failing at address: (nil)
+[compute-0-0:28447] *** Process received signal ***
+[compute-0-1:04290] *** Process received signal ***
+[compute-1-6:06207] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:06207] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:06207] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:06207] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b1f64d8e913]
+[compute-1-6:06207] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 28447 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+2 total processes killed (some possibly by mpirun during cleanup)
+
+n: 16
+time: 210.139036ms
+error: 0.00565282
+
+
+n: 32
+time: 204.370022ms
+error: 0.00119561
+
+
+n: 64
+time: 207.406044ms
+error: 0.000295743
+
+
+n: 128
+time: 261.029005ms
+error: 3.3698e+09
+
+
+n: 256
+time: 223.606110ms
+error: 0.0111636
+
+
+n: 512
+time: 251.859903ms
+error: 1.96976e+08
+
+
+n: 1024
+time: 382.328987ms
+error: 1.30392e+49
+
+
+n: 2048
+time: 959.633112ms
+error: 7.67285e+46
+
+
+n: 4096
+time: 2859.998941ms
+error: 2.62447e+112
+
+
+n: 8192
+time: 10758.316994ms
+error: 3.10546e+223
+
+
+n: 16384
+time: 41605.298996ms
+error: nan
+
+
+t: 40
+n: 4
+[compute-1-6:06874] *** Process received signal ***
+[compute-1-6:06874] Signal: Floating point exception (8)
+[compute-1-6:06874] Signal code: Integer divide-by-zero (1)
+[compute-1-6:06874] Failing at address: 0x40a6c3
+[compute-1-6:06874] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:06874] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:06874] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:06874] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:06874] *** End of error message ***
+[compute-2-4:20739] *** Process received signal ***
+[compute-2-4:20739] Signal: Segmentation fault (11)
+[compute-2-4:20739] Signal code: Address not mapped (1)
+[compute-2-4:20739] Failing at address: (nil)
+[compute-2-4:20739] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:20739] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:20739] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:20739] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aeb06529913]
+[compute-2-4:20739] *** End of error message ***
+[compute-0-0:29038] *** Process received signal ***
+[compute-0-0:29038] Signal: Segmentation fault (11)
+[compute-0-0:29038] Signal code: Address not mapped (1)
+[compute-0-0:29038] Failing at address: (nil)
+[compute-0-0:29038] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:29038] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:29038] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:29038] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aaf88ec2913]
+[compute-0-0:29038] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 6874 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-1-6:06925] *** Process received signal ***
+[compute-1-6:06925] Signal: Segmentation fault (11)
+[compute-1-6:06925] Signal code: Address not mapped (1)
+[compute-1-6:06925] Failing at address: (nil)
+[compute-1-6:06925] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:06925] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:06925] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:06925] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aead3c29913]
+[compute-1-6:06925] *** End of error message ***
+[compute-0-0:29086] *** Process received signal ***
+[compute-0-0:29086] Signal: Segmentation fault (11)
+[compute-0-0:29086] Signal code: Address not mapped (1)
+[compute-0-0:29086] Failing at address: (nil)
+[compute-0-1:05005] *** Process received signal ***
+[compute-0-1:05005] Signal: Segmentation fault (11)
+[compute-0-1:05005] Signal code: Address not mapped (1)
+[compute-0-1:05005] Failing at address: (nil)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 6925 on node compute-1-6.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 204.253912ms
+error: 0.00565282
+
+
+n: 32
+time: 203.863144ms
+error: 0.00128542
+
+
+n: 64
+time: 206.000090ms
+error: 0.000281283
+
+
+n: 128
+time: 211.042881ms
+error: 3.42639e+08
+
+
+n: 256
+time: 217.829943ms
+error: 4.0886e+14
+
+
+n: 512
+time: 246.074200ms
+error: 2.3433e+14
+
+
+n: 1024
+time: 376.489878ms
+error: 1.63373e+36
+
+
+n: 2048
+time: 838.317871ms
+error: 3.32123e+80
+
+
+n: 4096
+time: 2891.788006ms
+error: 1.06439e+99
+
+
+n: 8192
+time: 10490.307093ms
+error: 9.46264e+235
+
+
+n: 16384
+time: 41039.235115ms
+error: inf
+
+
+t: 41
+n: 4
+[compute-1-6:07572] *** Process received signal ***
+[compute-1-6:07572] Signal: Floating point exception (8)
+[compute-1-6:07572] Signal code: Integer divide-by-zero (1)
+[compute-1-6:07572] Failing at address: 0x40a6c3
+[compute-1-6:07572] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:07572] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:07572] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:07572] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:07572] *** End of error message ***
+[compute-2-4:21389] *** Process received signal ***
+[compute-2-4:21389] Signal: Segmentation fault (11)
+[compute-2-4:21389] Signal code: Address not mapped (1)
+[compute-2-4:21389] Failing at address: (nil)
+[compute-0-0:29692] *** Process received signal ***
+[compute-0-0:29692] Signal: Segmentation fault (11)
+[compute-0-0:29692] Signal code: Address not mapped (1)
+[compute-0-0:29692] Failing at address: (nil)
+[compute-2-4:21389] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:21389] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:21389] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:29692] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:29692] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:29692] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:29692] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b3d02607913]
+[compute-0-0:29692] *** End of error message ***
+[compute-2-4:21389] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b595788e913]
+[compute-2-4:21389] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 7572 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-1-6:07624] *** Process received signal ***
+[compute-1-6:07624] Signal: Segmentation fault (11)
+[compute-1-6:07624] Signal code: Address not mapped (1)
+[compute-1-6:07624] Failing at address: (nil)
+[compute-1-6:07624] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:07624] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:07624] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:07624] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ba716522913]
+[compute-1-6:07624] *** End of error message ***
+[compute-0-0:29741] *** Process received signal ***
+[compute-0-0:29741] Signal: Segmentation fault (11)
+[compute-0-0:29741] Signal code: Address not mapped (1)
+[compute-0-0:29741] Failing at address: (nil)
+[compute-0-1:05658] *** Process received signal ***
+[compute-0-0:29741] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:29741] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:29741] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:29741] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ae63dd70913]
+[compute-0-0:29741] *** End of error message ***
+[compute-2-4:21438] *** Process received signal ***
+[compute-2-4:21438] Signal: Segmentation fault (11)
+[compute-2-4:21438] Signal code: Address not mapped (1)
+[compute-2-4:21438] Failing at address: (nil)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 7624 on node compute-1-6.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 203.680992ms
+error: 0.00565282
+
+
+n: 32
+time: 204.077005ms
+error: 0.00120098
+
+
+n: 64
+time: 212.687016ms
+error: 0.000303854
+
+
+n: 128
+time: 209.515095ms
+error: 2.66947e+07
+
+
+n: 256
+time: 222.332001ms
+error: 1.41092e+06
+
+
+n: 512
+time: 253.357172ms
+error: 2.81621e+22
+
+
+n: 1024
+time: 379.587889ms
+error: 9.06196e+33
+
+
+n: 2048
+time: 839.502096ms
+error: 9.30094e+108
+
+
+n: 4096
+time: 2771.413088ms
+error: 5.40176e+123
+
+
+n: 8192
+time: 10247.582912ms
+error: 1.01973e+209
+
+
+n: 16384
+time: 41765.744925ms
+error: nan
+
+
+t: 42
+n: 4
+[compute-0-0:30366] *** Process received signal ***
+[compute-0-0:30366] Signal: Segmentation fault (11)
+[compute-0-0:30366] Signal code: Address not mapped (1)
+[compute-0-0:30366] Failing at address: (nil)
+[compute-0-1:06291] *** Process received signal ***
+[compute-0-1:06291] Signal: Segmentation fault (11)
+[compute-0-1:06291] Signal code: Address not mapped (1)
+[compute-0-1:06291] Failing at address: (nil)
+[compute-2-4:22051] *** Process received signal ***
+[compute-2-4:22051] Signal: Segmentation fault (11)
+[compute-2-4:22051] Signal code: Address not mapped (1)
+[compute-2-4:22051] Failing at address: (nil)
+[compute-2-4:22051] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:22051] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:22051] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:22051] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2accbfbe6913]
+[compute-0-0:30366] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:30366] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:30366] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:30366] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aeede2ff913]
+[compute-0-1:06291] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:06291] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:06291] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:06291] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b2532f81913]
+[compute-0-0:30366] *** End of error message ***
+[compute-2-4:22051] *** End of error message ***
+[compute-0-1:06291] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 6291 on node compute-0-1 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[compute-1-6:08276] *** Process received signal ***
+[compute-1-6:08276] Signal: Aborted (6)
+[compute-1-6:08276] Signal code:  (-6)
+
+n: 8
+[compute-0-1:06342] *** Process received signal ***
+[compute-2-4:22101] *** Process received signal ***
+[compute-2-4:22101] Signal: Segmentation fault (11)
+[compute-2-4:22101] Signal code: Address not mapped (1)
+[compute-2-4:22101] Failing at address: (nil)
+[compute-2-4:22101] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:22101] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:22101] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:22101] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2adadeb03913]
+[compute-2-4:22101] *** End of error message ***
+[compute-1-6:08329] *** Process received signal ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 6342 on node compute-0-1 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[compute-1-6:08329] Signal: Segmentation fault (11)
+[compute-1-6:08329] Signal code: Address not mapped (1)
+[compute-1-6:08329] Failing at address: (nil)
+[compute-1-6:08329] *** Process received signal ***
+[compute-1-6:08329] Signal: Aborted (6)
+[compute-1-6:08329] Signal code:  (-6)
+[compute-1-6:08329] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:08329] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x345b230285]
+[compute-1-6:08329] [ 2] /lib64/libc.so.6(abort+0x110) [0x345b231d30]
+[compute-1-6:08329] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2aeabc664fc2]
+[compute-1-6:08329] *** End of error message ***
+
+n: 16
+time: 203.238010ms
+error: 0.00550403
+
+
+n: 32
+time: 204.076052ms
+error: 0.00131357
+
+
+n: 64
+time: 208.546162ms
+error: 0.000265098
+
+
+n: 128
+time: 224.544048ms
+error: 6.06654e-05
+
+
+n: 256
+time: 219.720840ms
+error: 288.01
+
+
+n: 512
+time: 251.098871ms
+error: 8.33788e+08
+
+
+n: 1024
+time: 385.348082ms
+error: 7.21596e+25
+
+
+n: 2048
+time: 901.975870ms
+error: 3.40034e+48
+
+
+n: 4096
+time: 2963.039875ms
+error: 4.57061e+146
+
+
+n: 8192
+time: 9907.283068ms
+error: 3.02242e+228
+
+
+n: 16384
+time: 41011.296988ms
+error: nan
+
+
+t: 43
+n: 4
+[compute-0-0:31041] *** Process received signal ***
+[compute-0-0:31041] Signal: Segmentation fault (11)
+[compute-0-0:31041] Signal code: Address not mapped (1)
+[compute-0-0:31041] Failing at address: (nil)
+[compute-2-4:22727] *** Process received signal ***
+[compute-2-4:22727] Signal: Segmentation fault (11)
+[compute-2-4:22727] Signal code: Address not mapped (1)
+[compute-2-4:22727] Failing at address: (nil)
+[compute-0-0:31041] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:31041] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:31041] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:31041] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b92c8b21913]
+[compute-0-0:31041] *** End of error message ***
+[compute-2-4:22727] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:22727] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:22727] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:22727] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b32ded60913]
+[compute-2-4:22727] *** End of error message ***
+[compute-0-1:06971] *** Process received signal ***
+[compute-0-1:06971] Signal: Segmentation fault (11)
+[compute-0-1:06971] Signal code: Address not mapped (1)
+[compute-0-1:06971] Failing at address: (nil)
+[compute-0-1:06971] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:06971] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:06971] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:06971] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b4473ca2913]
+[compute-0-1:06971] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 31041 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[compute-1-6:08990] *** Process received signal ***
+[compute-1-6:08990] Signal: Aborted (6)
+[compute-1-6:08990] Signal code:  (-6)
+[compute-1-6:08990] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:08990] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x345b230285]
+[compute-1-6:08990] [ 2] /lib64/libc.so.6(abort+0x110) [0x345b231d30]
+[compute-1-6:08990] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b7726b75fc2]
+[compute-1-6:08990] *** End of error message ***
+
+n: 8
+[compute-2-4:22778] *** Process received signal ***
+[compute-2-4:22778] Signal: Segmentation fault (11)
+[compute-2-4:22778] Signal code: Address not mapped (1)
+[compute-2-4:22778] Failing at address: (nil)
+[compute-1-6:09044] *** Process received signal ***
+[compute-1-6:09044] Signal: Segmentation fault (11)
+[compute-1-6:09044] Signal code: Address not mapped (1)
+[compute-1-6:09044] Failing at address: (nil)
+[compute-1-6:09044] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:09044] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:09044] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:09044] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ad0190c9913]
+[compute-1-6:09044] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 22778 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 203.329086ms
+error: 0.00565282
+
+
+n: 32
+time: 204.192877ms
+error: 0.00131357
+
+
+n: 64
+time: 209.253073ms
+error: 0.00027035
+
+
+n: 128
+time: 207.865000ms
+error: 0.00026822
+
+
+n: 256
+time: 218.868017ms
+error: 51.2358
+
+
+n: 512
+time: 248.022795ms
+error: 9.47635e+25
+
+
+n: 1024
+time: 356.566906ms
+error: 2.24853e+46
+
+
+n: 2048
+time: 836.843014ms
+error: 4.95211e+56
+
+
+n: 4096
+time: 2838.499069ms
+error: 1.47082e+118
+
+
+n: 8192
+time: 10179.070950ms
+error: 3.08321e+263
+
+
+n: 16384
+time: 41299.013853ms
+error: nan
+
+
+t: 44
+n: 4
+[compute-1-6:09716] *** Process received signal ***
+[compute-1-6:09716] Signal: Floating point exception (8)
+[compute-1-6:09716] Signal code: Integer divide-by-zero (1)
+[compute-1-6:09716] Failing at address: 0x40a6c3
+[compute-2-4:23414] *** Process received signal ***
+[compute-2-4:23414] Signal: Segmentation fault (11)
+[compute-2-4:23414] Signal code: Address not mapped (1)
+[compute-2-4:23414] Failing at address: (nil)
+[compute-1-6:09716] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:09716] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:09716] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:09716] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:09716] *** End of error message ***
+[compute-2-4:23414] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:23414] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:23414] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:23414] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b77e3793913]
+[compute-0-0:31730] *** Process received signal ***
+[compute-0-0:31730] Signal: Segmentation fault (11)
+[compute-0-0:31730] Signal code: Address not mapped (1)
+[compute-0-0:31730] Failing at address: (nil)
+[compute-2-4:23414] *** End of error message ***
+[compute-0-0:31730] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:31730] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:31730] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:31730] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b86c0c0b913]
+[compute-0-0:31730] *** End of error message ***
+[compute-0-1:07671] *** Process received signal ***
+[compute-0-1:07671] Signal: Segmentation fault (11)
+[compute-0-1:07671] Signal code: Address not mapped (1)
+[compute-0-1:07671] Failing at address: (nil)
+[compute-0-1:07671] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:07671] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:07671] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:07671] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b872aea1913]
+[compute-0-1:07671] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 9716 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-1-6:09771] *** Process received signal ***
+[compute-1-6:09771] Signal: Segmentation fault (11)
+[compute-1-6:09771] Signal code: Address not mapped (1)
+[compute-1-6:09771] Failing at address: (nil)
+[compute-2-4:23466] *** Process received signal ***
+[compute-2-4:23466] Signal: Segmentation fault (11)
+[compute-2-4:23466] Signal code: Address not mapped (1)
+[compute-2-4:23466] Failing at address: (nil)
+[compute-0-1:07723] *** Process received signal ***
+[compute-0-1:07723] Signal: Segmentation fault (11)
+[compute-0-1:07723] Signal code: Address not mapped (1)
+[compute-0-1:07723] Failing at address: (nil)
+[compute-1-6:09771] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:09771] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:09771] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:09771] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ab4313bc913]
+[compute-1-6:09771] *** End of error message ***
+[compute-0-0:31782] *** Process received signal ***
+[compute-0-0:31782] Signal: Segmentation fault (11)
+[compute-0-0:31782] Signal code: Address not mapped (1)
+[compute-0-0:31782] Failing at address: (nil)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 23466 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+2 total processes killed (some possibly by mpirun during cleanup)
+
+n: 16
+time: 203.269005ms
+error: 0.00565282
+
+
+n: 32
+time: 203.994036ms
+error: 0.00123851
+
+
+n: 64
+time: 205.839872ms
+error: 0.000282772
+
+
+n: 128
+time: 230.075836ms
+error: 3.0098e+13
+
+
+n: 256
+time: 216.066122ms
+error: 27492.9
+
+
+n: 512
+time: 249.463081ms
+error: 6.58463e+17
+
+
+n: 1024
+time: 363.517046ms
+error: 1.06295e+42
+
+
+n: 2048
+time: 856.642008ms
+error: 3.32181e+59
+
+
+n: 4096
+time: 2892.873049ms
+error: 8.73523e+146
+
+
+n: 8192
+time: 10267.827988ms
+error: 6.63092e+168
+
+
+n: 16384
+time: 41186.383963ms
+error: nan
+
+
+t: 45
+n: 4
+[compute-0-0:32433] *** Process received signal ***
+[compute-0-0:32433] Signal: Segmentation fault (11)
+[compute-0-0:32433] Signal code: Address not mapped (1)
+[compute-0-0:32433] Failing at address: (nil)
+[compute-0-0:32433] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:32433] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:32433] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:32433] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b08d8664913]
+[compute-0-0:32433] *** End of error message ***
+[compute-0-1:08373] *** Process received signal ***
+[compute-0-1:08373] Signal: Segmentation fault (11)
+[compute-0-1:08373] Signal code: Address not mapped (1)
+[compute-0-1:08373] Failing at address: (nil)
+[compute-0-1:08373] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:08373] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:08373] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:24114] *** Process received signal ***
+[compute-2-4:24114] Signal: Segmentation fault (11)
+[compute-2-4:24114] Signal code: Address not mapped (1)
+[compute-2-4:24114] Failing at address: (nil)
+[compute-0-1:08373] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b1b780cd913]
+[compute-0-1:08373] *** End of error message ***
+[compute-2-4:24114] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:24114] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:24114] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:24114] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b35ee9bb913]
+[compute-2-4:24114] *** End of error message ***
+[compute-1-6:10455] *** Process received signal ***
+[compute-1-6:10455] Signal: Floating point exception (8)
+[compute-1-6:10455] Signal code: Integer divide-by-zero (1)
+[compute-1-6:10455] Failing at address: 0x40a6c3
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 32433 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[compute-1-6:10455] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:10455] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:10455] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:10455] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:10455] *** End of error message ***
+
+n: 8
+[compute-2-4:24167] *** Process received signal ***
+[compute-2-4:24167] Signal: Segmentation fault (11)
+[compute-2-4:24167] Signal code: Address not mapped (1)
+[compute-2-4:24167] Failing at address: (nil)
+[compute-1-6:10511] *** Process received signal ***
+[compute-2-4:24167] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:24167] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:24167] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:24167] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b2ecedf9913]
+[compute-2-4:24167] *** End of error message ***
+[compute-1-6:10511] Signal: Segmentation fault (11)
+[compute-1-6:10511] Signal code: Address not mapped (1)
+[compute-1-6:10511] Failing at address: (nil)
+[compute-0-0:32486] *** Process received signal ***
+[compute-0-0:32486] Signal: Segmentation fault (11)
+[compute-0-0:32486] Signal code: Address not mapped (1)
+[compute-0-0:32486] Failing at address: (nil)
+[compute-1-6:10511] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:10511] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:10511] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:10511] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2abd7d4cd913]
+[compute-1-6:10511] *** End of error message ***
+[compute-0-0:32486] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:32486] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:32486] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:32486] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b6418a23913]
+[compute-0-0:32486] *** End of error message ***
+[compute-0-1:08426] *** Process received signal ***
+[compute-0-1:08426] Signal: Segmentation fault (11)
+[compute-0-1:08426] Signal code: Address not mapped (1)
+[compute-0-1:08426] Failing at address: (nil)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 10511 on node compute-1-6.local exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 204.503059ms
+error: 0.00565282
+
+
+n: 32
+time: 204.700947ms
+error: 0.00131357
+
+
+n: 64
+time: 206.126928ms
+error: 0.000266744
+
+
+n: 128
+time: 208.450079ms
+error: 3.23915e+07
+
+
+n: 256
+time: 218.297005ms
+error: 4.19455e+08
+
+
+n: 512
+time: 248.941183ms
+error: 4.01564e+16
+
+
+n: 1024
+time: 366.031885ms
+error: 9.81181e+31
+
+
+n: 2048
+time: 917.149067ms
+error: 7.41612e+64
+
+
+n: 4096
+time: 2905.020952ms
+error: 9.04717e+121
+
+
+n: 8192
+time: 10164.329052ms
+error: 1.94907e+211
+
+
+n: 16384
+time: 41094.594002ms
+error: nan
+
+
+t: 46
+n: 4
+[compute-2-4:24854] *** Process received signal ***
+[compute-2-4:24854] Signal: Segmentation fault (11)
+[compute-2-4:24854] Signal code: Address not mapped (1)
+[compute-2-4:24854] Failing at address: (nil)
+[compute-2-4:24854] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:24854] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:24854] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:24854] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2ae2f0a0d913]
+[compute-2-4:24854] *** End of error message ***
+[compute-1-6:11207] *** Process received signal ***
+[compute-1-6:11207] Signal: Floating point exception (8)
+[compute-1-6:11207] Signal code: Integer divide-by-zero (1)
+[compute-1-6:11207] Failing at address: 0x40a6c3
+[compute-1-6:11207] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:11207] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:11207] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:11207] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:11207] *** End of error message ***
+[compute-0-0:00708] *** Process received signal ***
+[compute-0-0:00708] Signal: Segmentation fault (11)
+[compute-0-0:00708] Signal code: Address not mapped (1)
+[compute-0-0:00708] Failing at address: (nil)
+[compute-0-0:00708] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:00708] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:00708] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:00708] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2afe4e0c7913]
+[compute-0-0:00708] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 24854 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-2-4:24908] *** Process received signal ***
+[compute-0-0:00762] *** Process received signal ***
+[compute-0-0:00762] Signal: Segmentation fault (11)
+[compute-0-0:00762] Signal code: Address not mapped (1)
+[compute-0-0:00762] Failing at address: (nil)
+[compute-1-6:11264] *** Process received signal ***
+[compute-1-6:11264] Signal: Segmentation fault (11)
+[compute-1-6:11264] Signal code: Address not mapped (1)
+[compute-1-6:11264] Failing at address: (nil)
+[compute-1-6:11264] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:11264] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:11264] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:11264] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b1c4a5bb913]
+[compute-1-6:11264] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 24908 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 203.737020ms
+error: 0.00565282
+
+
+n: 32
+time: 204.130888ms
+error: 0.00126665
+
+
+n: 64
+time: 205.749989ms
+error: 0.000269801
+
+
+n: 128
+time: 208.909035ms
+error: 3.65962e+11
+
+
+n: 256
+time: 215.312004ms
+error: 8.63022e+07
+
+
+n: 512
+time: 255.994081ms
+error: 6.58405e+19
+
+
+n: 1024
+time: 355.763912ms
+error: 1.21912e+28
+
+
+n: 2048
+time: 925.248861ms
+error: 6.12575e+49
+
+
+n: 4096
+time: 2897.517204ms
+error: 1.07896e+110
+
+
+n: 8192
+time: 10034.739971ms
+error: 6.94558e+186
+
+
+n: 16384
+time: 41378.386974ms
+error: nan
+
+
+t: 47
+n: 4
+[compute-2-4:25697] *** Process received signal ***
+[compute-2-4:25697] Signal: Segmentation fault (11)
+[compute-2-4:25697] Signal code: Address not mapped (1)
+[compute-2-4:25697] Failing at address: (nil)
+[compute-2-4:25697] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:25697] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:25697] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:25697] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b4a34970913]
+[compute-2-4:25697] *** End of error message ***
+[compute-0-0:01617] *** Process received signal ***
+[compute-0-0:01617] Signal: Segmentation fault (11)
+[compute-0-0:01617] Signal code: Address not mapped (1)
+[compute-0-0:01617] Failing at address: (nil)
+[compute-0-0:01617] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:01617] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:01617] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:01617] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b0ead4c8913]
+[compute-0-0:01617] *** End of error message ***
+[compute-1-6:12135] *** Process received signal ***
+[compute-1-6:12135] Signal: Floating point exception (8)
+[compute-1-6:12135] Signal code: Integer divide-by-zero (1)
+[compute-1-6:12135] Failing at address: 0x40a6c3
+[compute-1-6:12135] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:12135] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:12135] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:12135] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:12135] *** End of error message ***
+[compute-0-1:09977] *** Process received signal ***
+[compute-0-1:09977] Signal: Segmentation fault (11)
+[compute-0-1:09977] Signal code: Address not mapped (1)
+[compute-0-1:09977] Failing at address: (nil)
+[compute-0-1:09977] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:09977] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:09977] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:09977] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2af3fff9a913]
+[compute-0-1:09977] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 1617 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-0-0:01672] *** Process received signal ***
+[compute-0-0:01672] Signal: Segmentation fault (11)
+[compute-0-0:01672] Signal code: Address not mapped (1)
+[compute-0-0:01672] Failing at address: (nil)
+[compute-0-0:01672] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:01672] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:01672] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:01672] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2afe7d673913]
+[compute-0-0:01672] *** End of error message ***
+[compute-0-1:10032] *** Process received signal ***
+[compute-1-6:12193] *** Process received signal ***
+[compute-1-6:12193] Signal: Segmentation fault (11)
+[compute-1-6:12193] Signal code: Address not mapped (1)
+[compute-1-6:12193] Failing at address: (nil)
+[compute-1-6:12193] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:12193] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:12193] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:12193] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2acacd181913]
+[compute-1-6:12193] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 3 with PID 1672 on node compute-0-0 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+n: 16
+time: 203.750134ms
+error: 0.00565282
+
+
+n: 32
+time: 205.003977ms
+error: 0.00121036
+
+
+n: 64
+time: 205.402136ms
+error: 0.000289982
+
+
+n: 128
+time: 224.509954ms
+error: 78629.8
+
+
+n: 256
+time: 216.516972ms
+error: 6599.03
+
+
+n: 512
+time: 251.527786ms
+error: 1.73292e+25
+
+
+n: 1024
+time: 375.168085ms
+error: 1.45761e+37
+
+
+n: 2048
+time: 882.624149ms
+error: 6.01051e+44
+
+
+n: 4096
+time: 2997.483015ms
+error: 4.94963e+119
+
+
+n: 8192
+time: 10547.091007ms
+error: 1.54184e+228
+
+
+n: 16384
+time: 42127.490044ms
+error: nan
+
+
+t: 48
+n: 4
+[compute-1-6:12960] *** Process received signal ***
+[compute-1-6:12960] Signal: Floating point exception (8)
+[compute-1-6:12960] Signal code: Integer divide-by-zero (1)
+[compute-1-6:12960] Failing at address: 0x40a6c3
+[compute-1-6:12960] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:12960] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:12960] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:12960] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:12960] *** End of error message ***
+[compute-0-1:10752] *** Process received signal ***
+[compute-0-1:10752] Signal: Segmentation fault (11)
+[compute-0-1:10752] Signal code: Address not mapped (1)
+[compute-0-1:10752] Failing at address: (nil)
+[compute-2-4:26524] *** Process received signal ***
+[compute-2-4:26524] Signal: Segmentation fault (11)
+[compute-2-4:26524] Signal code: Address not mapped (1)
+[compute-2-4:26524] Failing at address: (nil)
+[compute-0-1:10752] [ 0] /lib64/libpthread.so.0 [0x3b3ae0ebe0]
+[compute-0-1:10752] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-1:10752] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-1:10752] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b4abdb17913]
+[compute-2-4:26524] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:26524] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-2-4:26524] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-2-4:26524] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b539b517913]
+[compute-2-4:26524] *** End of error message ***
+[compute-0-1:10752] *** End of error message ***
+[compute-0-0:02410] *** Process received signal ***
+[compute-0-0:02410] Signal: Segmentation fault (11)
+[compute-0-0:02410] Signal code: Address not mapped (1)
+[compute-0-0:02410] Failing at address: (nil)
+[compute-0-0:02410] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:02410] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:02410] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:02410] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2aefc83a6913]
+[compute-0-0:02410] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 12960 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+n: 8
+[compute-0-1:10808] *** Process received signal ***
+[compute-1-6:13019] *** Process received signal ***
+[compute-1-6:13019] Signal: Segmentation fault (11)
+[compute-1-6:13019] Signal code: Address not mapped (1)
+[compute-1-6:13019] Failing at address: (nil)
+[compute-1-6:13019] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:13019] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-1-6:13019] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-1-6:13019] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b27ec18f913]
+[compute-1-6:13019] *** End of error message ***
+[compute-0-0:02466] *** Process received signal ***
+[compute-0-0:02466] Signal: Segmentation fault (11)
+[compute-0-0:02466] Signal code: Address not mapped (1)
+[compute-0-0:02466] Failing at address: (nil)
+[compute-0-0:02466] [ 0] /lib64/libpthread.so.0 [0x327ae0ebe0]
+[compute-0-0:02466] [ 1] ../../../release_omp_mpi/ex6(fst_+0x14) [0x40de34]
+[compute-0-0:02466] [ 2] ../../../release_omp_mpi/ex6(main+0x10d8) [0x40b2b8]
+[compute-0-0:02466] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_invoke_microtask+0x93) [0x2b0223138913]
+[compute-0-0:02466] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 26580 on node compute-2-4 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+2 total processes killed (some possibly by mpirun during cleanup)
+
+n: 16
+time: 203.371048ms
+error: 0.00565282
+
+
+n: 32
+time: 204.133034ms
+error: 0.00112592
+
+
+n: 64
+time: 205.358028ms
+error: 0.000259848
+
+
+n: 128
+time: 209.348917ms
+error: 4.11384e+07
+
+
+n: 256
+time: 216.943026ms
+error: 0.00121621
+
+
+n: 512
+time: 255.264997ms
+error: 3.23732e+10
+
+
+n: 1024
+time: 362.978935ms
+error: 2.54612e+25
+
+
+n: 2048
+time: 844.908953ms
+error: 1.09461e+60
+
+
+n: 4096
+time: 2876.858950ms
+error: 3.44931e+100
+
+
+n: 8192
+time: 9801.151991ms
+error: 3.00773e+253
+
+
+n: 16384
+time: 40682.268858ms
+error: nan
+
+
+p: 2
+t: 2
+n: 4
+[compute-1-6:13752] *** Process received signal ***
+[compute-1-6:13752] Signal: Floating point exception (8)
+[compute-1-6:13752] Signal code: Integer divide-by-zero (1)
+[compute-1-6:13752] Failing at address: 0x40a6c3
+[compute-1-6:13753] *** Process received signal ***
+[compute-1-6:13753] Signal: Floating point exception (8)
+[compute-1-6:13753] Signal code: Integer divide-by-zero (1)
+[compute-1-6:13753] Failing at address: 0x40a6c3
+[compute-1-6:13753] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:13753] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:13753] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:13753] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:13753] *** End of error message ***
+[compute-1-6:13752] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:13752] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:13752] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:13752] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:13752] *** End of error message ***
+[compute-2-4:27280] *** Process received signal ***
+[compute-2-4:27280] Signal: Floating point exception (8)
+[compute-2-4:27280] Signal code: Integer divide-by-zero (1)
+[compute-2-4:27280] Failing at address: 0x40a6c3
+[compute-2-4:27281] *** Process received signal ***
+[compute-2-4:27281] Signal: Floating point exception (8)
+[compute-2-4:27281] Signal code: Integer divide-by-zero (1)
+[compute-2-4:27281] Failing at address: 0x40a6c3
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 13752 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:27280] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:27280] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-2-4:27280] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x380e01d994]
+[compute-2-4:27280] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-2-4:27280] *** End of error message ***
+[compute-2-4:27281] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:27281] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-2-4:27281] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x380e01d994]
+[compute-2-4:27281] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-2-4:27281] *** End of error message ***
+[compute-0-1:11505] *** Process received signal ***
+[compute-0-1:11505] Signal: Aborted (6)
+[compute-0-1:11505] Signal code:  (-6)
+[compute-0-0:03197] *** Process received signal ***
+[compute-0-0:03197] Signal: Aborted (6)
+[compute-0-0:03197] Signal code:  (-6)
+[compute-0-0:03198] *** Process received signal ***
+[compute-0-0:03198] Signal: Aborted (6)
+[compute-0-0:03198] Signal code:  (-6)
+
+n: 8
+[compute-1-6:13772] *** Process received signal ***
+[compute-1-6:13772] Signal: Floating point exception (8)
+[compute-1-6:13772] Signal code: Integer divide-by-zero (1)
+[compute-1-6:13772] Failing at address: 0x40a6c3
+[compute-1-6:13772] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:13772] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:13772] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:13772] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:13772] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 13772 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-1-6:13773] *** Process received signal ***
+[compute-1-6:13773] Signal: Aborted (6)
+[compute-1-6:13773] Signal code:  (-6)
+[compute-1-6:13773] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:13773] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x345b230285]
+[compute-1-6:13773] [ 2] /lib64/libc.so.6(abort+0x110) [0x345b231d30]
+[compute-1-6:13773] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b90f691dfc2]
+[compute-1-6:13773] *** End of error message ***
+[compute-2-4:27297] *** Process received signal ***
+[compute-2-4:27298] *** Process received signal ***
+[compute-2-4:27298] Signal: Aborted (6)
+[compute-2-4:27298] Signal code:  (-6)
+[compute-0-0:03214] *** Process received signal ***
+[compute-2-4:27297] Signal: Aborted (6)
+[compute-2-4:27297] Signal code:  (-6)
+[compute-0-1:11522] *** Process received signal ***
+[compute-0-1:11522] Signal: Aborted (6)
+[compute-0-1:11522] Signal code:  (-6)
+[compute-0-0:03215] *** Process received signal ***
+[compute-0-0:03215] Signal: Aborted (6)
+[compute-0-0:03215] Signal code:  (-6)
+[compute-0-0:03214] Signal: Aborted (6)
+[compute-0-0:03214] Signal code:  (-6)
+
+n: 16
+time: 6.920099ms
+error: 0.00342199
+
+
+n: 32
+time: 7.529974ms
+error: 0.000656809
+
+
+n: 64
+time: 6.520033ms
+error: 0.00015812
+
+
+n: 128
+time: 9.670019ms
+error: 3.8561e-05
+
+
+n: 256
+time: 27.749062ms
+error: 8.40673e-06
+
+
+n: 512
+time: 67.747116ms
+error: 2.0948e-06
+
+
+n: 1024
+time: 212.404966ms
+error: 5.82088e-07
+
+
+n: 2048
+time: 832.631111ms
+error: 1.46783e-07
+
+
+n: 4096
+time: 3486.508846ms
+error: 0.0010783
+
+
+n: 8192
+time: 15011.500120ms
+error: 2.55649e+09
+
+
+n: 16384
+time: 62214.514017ms
+error: 4.91708e+176
+
+
+t: 3
+n: 4
+[compute-1-6:14052] *** Process received signal ***
+[compute-1-6:14052] Signal: Floating point exception (8)
+[compute-1-6:14052] Signal code: Integer divide-by-zero (1)
+[compute-1-6:14052] Failing at address: 0x40a6c3
+[compute-1-6:14053] *** Process received signal ***
+[compute-1-6:14053] Signal: Floating point exception (8)
+[compute-1-6:14053] Signal code: Integer divide-by-zero (1)
+[compute-1-6:14053] Failing at address: 0x40a6c3
+[compute-1-6:14053] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14053] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:14053] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:14053] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:14053] *** End of error message ***
+[compute-1-6:14052] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14052] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:14052] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:14052] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:14052] *** End of error message ***
+[compute-2-4:27527] *** Process received signal ***
+[compute-2-4:27527] Signal: Floating point exception (8)
+[compute-2-4:27527] Signal code: Integer divide-by-zero (1)
+[compute-2-4:27527] Failing at address: 0x40a6c3
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 14052 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-4:27527] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:27527] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-2-4:27527] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x380e01d994]
+[compute-2-4:27527] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-2-4:27527] *** End of error message ***
+[compute-2-4:27528] *** Process received signal ***
+[compute-2-4:27528] Signal: Floating point exception (8)
+[compute-2-4:27528] Signal code: Integer divide-by-zero (1)
+[compute-2-4:27528] Failing at address: 0x40a6c3
+[compute-2-4:27528] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:27528] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-2-4:27528] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x380e01d994]
+[compute-2-4:27528] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-2-4:27528] *** End of error message ***
+[compute-0-0:03470] *** Process received signal ***
+[compute-0-0:03470] Signal: Aborted (6)
+[compute-0-0:03470] Signal code:  (-6)
+[compute-0-0:03471] *** Process received signal ***
+[compute-0-0:03471] Signal: Aborted (6)
+[compute-0-0:03471] Signal code:  (-6)
+
+n: 8
+[compute-1-6:14074] *** Process received signal ***
+[compute-1-6:14074] Signal: Floating point exception (8)
+[compute-1-6:14074] Signal code: Integer divide-by-zero (1)
+[compute-1-6:14074] Failing at address: 0x40a6c3
+[compute-1-6:14074] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14074] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:14074] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:14074] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:14074] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 14074 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-1-6:14075] *** Process received signal ***
+[compute-1-6:14075] Signal: Aborted (6)
+[compute-1-6:14075] Signal code:  (-6)
+[compute-1-6:14075] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14075] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x345b230285]
+[compute-1-6:14075] [ 2] /lib64/libc.so.6(abort+0x110) [0x345b231d30]
+[compute-1-6:14075] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2ba1bde01fc2]
+[compute-1-6:14075] *** End of error message ***
+[compute-2-4:27546] *** Process received signal ***
+[compute-2-4:27546] Signal: Aborted (6)
+[compute-2-4:27546] Signal code:  (-6)
+[compute-2-4:27547] *** Process received signal ***
+[compute-2-4:27547] Signal: Aborted (6)
+[compute-2-4:27547] Signal code:  (-6)
+[compute-0-0:03501] *** Process received signal ***
+[compute-0-0:03501] Signal: Aborted (6)
+[compute-0-0:03501] Signal code:  (-6)
+[compute-0-0:03502] *** Process received signal ***
+[compute-0-0:03502] Signal: Aborted (6)
+[compute-0-0:03502] Signal code:  (-6)
+[compute-0-1:11782] *** Process received signal ***
+[compute-0-1:11782] Signal: Aborted (6)
+[compute-0-1:11782] Signal code:  (-6)
+[compute-0-1:11783] *** Process received signal ***
+[compute-0-1:11783] Signal: Aborted (6)
+[compute-0-1:11783] Signal code:  (-6)
+
+n: 16
+time: 8.492947ms
+error: 0.00342199
+
+
+n: 32
+time: 8.743048ms
+error: 0.000719362
+
+
+n: 64
+time: 9.898901ms
+error: 0.00015283
+
+
+n: 128
+time: 12.610912ms
+error: 3.85635e-05
+
+
+n: 256
+time: 24.233103ms
+error: 9.0625e-06
+
+
+n: 512
+time: 68.598986ms
+error: 2.29849e-06
+
+
+n: 1024
+time: 187.936783ms
+error: 5.76507e-07
+
+
+n: 2048
+time: 679.012060ms
+error: 1.45351e-07
+
+
+n: 4096
+time: 2856.017113ms
+error: 3.67721e-08
+
+
+n: 8192
+time: 11485.275030ms
+error: 0.0148849
+
+
+n: 16384
+time: 48270.369053ms
+error: 2.86453e+19
+
+
+t: 4
+n: 4
+[compute-1-6:14375] *** Process received signal ***
+[compute-1-6:14375] Signal: Floating point exception (8)
+[compute-1-6:14375] Signal code: Integer divide-by-zero (1)
+[compute-1-6:14375] Failing at address: 0x40a6c3
+[compute-1-6:14375] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14375] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:14375] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:14375] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:14375] *** End of error message ***
+[compute-2-4:27824] *** Process received signal ***
+[compute-2-4:27824] Signal: Floating point exception (8)
+[compute-2-4:27824] Signal code: Integer divide-by-zero (1)
+[compute-2-4:27824] Failing at address: 0x40a6c3
+[compute-1-6:14376] *** Process received signal ***
+[compute-1-6:14376] Signal: Floating point exception (8)
+[compute-1-6:14376] Signal code: Integer divide-by-zero (1)
+[compute-1-6:14376] Failing at address: 0x40a6c3
+[compute-2-4:27824] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:27824] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-2-4:27824] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x380e01d994]
+[compute-2-4:27824] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-2-4:27824] *** End of error message ***
+[compute-1-6:14376] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14376] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:14376] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:14376] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:14376] *** End of error message ***
+[compute-2-4:27823] *** Process received signal ***
+[compute-2-4:27823] Signal: Floating point exception (8)
+[compute-2-4:27823] Signal code: Integer divide-by-zero (1)
+[compute-2-4:27823] Failing at address: 0x40a6c3
+[compute-2-4:27823] [ 0] /lib64/libpthread.so.0 [0x380e80ebe0]
+[compute-2-4:27823] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-2-4:27823] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x380e01d994]
+[compute-2-4:27823] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-2-4:27823] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 14375 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-0-0:03775] *** Process received signal ***
+[compute-0-0:03776] *** Process received signal ***
+[compute-0-0:03776] Signal: Aborted (6)
+[compute-0-0:03776] Signal code:  (-6)
+[compute-0-0:03775] Signal: Aborted (6)
+[compute-0-0:03775] Signal code:  (-6)
+
+n: 8
+[compute-1-6:14399] *** Process received signal ***
+[compute-1-6:14399] Signal: Floating point exception (8)
+[compute-1-6:14399] Signal code: Integer divide-by-zero (1)
+[compute-1-6:14399] Failing at address: 0x40a6c3
+[compute-1-6:14399] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14399] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a6c3]
+[compute-1-6:14399] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x345b21d994]
+[compute-1-6:14399] [ 3] ../../../release_omp_mpi/ex6 [0x40a129]
+[compute-1-6:14399] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 14399 on node compute-1-6.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-1-6:14400] *** Process received signal ***
+[compute-1-6:14400] Signal: Aborted (6)
+[compute-1-6:14400] Signal code:  (-6)
+[compute-1-6:14400] [ 0] /lib64/libpthread.so.0 [0x345ba0ebe0]
+[compute-1-6:14400] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x345b230285]
+[compute-1-6:14400] [ 2] /lib64/libc.so.6(abort+0x110) [0x345b231d30]
+[compute-1-6:14400] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b620e781fc2]
+[compute-1-6:14400] *** End of error message ***
+[compute-0-0:03808] *** Process received signal ***
+[compute-0-0:03808] Signal: Aborted (6)
+[compute-0-0:03808] Signal code:  (-6)
+[compute-0-0:03809] *** Process received signal ***
+
+n: 16
+time: 5.977154ms
+error: 0.00342199
+
+
+n: 32
+time: 6.757975ms
+error: 0.000653682
+
+
+n: 64
+time: 7.483959ms
+error: 0.000148715
+
+
+n: 128
+time: 13.285875ms
+error: 3.61496e-05
+
+
+n: 256
+time: 21.592140ms
+error: 8.764e-06
+
+
+n: 512
+time: 52.851915ms
+error: 2.27296e-06
+
+
+n: 1024
+time: 156.148911ms
+error: 5.64614e-07
+
+
+n: 2048
+time: 594.532013ms
+error: 1.45544e-07
+
+
+n: 4096
+time: 2601.448059ms
+error: 0.127873
+
+
+n: 8192
+time: 9748.203039ms
+error: 2.66372e+63
+
+
+n: 16384
+=>> PBS: job killed: walltime 3619 exceeded limit 3600
+mpirun: killing job...
+
+--------------------------------------------------------------------------
+mpirun was unable to cleanly terminate the daemons on the nodes shown
+below. Additional manual cleanup may be required - please refer to
+the "orte-clean" tool for assistance.
+--------------------------------------------------------------------------
+	compute-2-4
+	compute-0-1
+	compute-0-0
