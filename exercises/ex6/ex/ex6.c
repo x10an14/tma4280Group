@@ -247,7 +247,7 @@ double exactSolAppB(int col, int row, double h){
 
 double linearAverage(Matrix inpt, double (*funcp)(int, int, double), double h){
 	double avgErr = 0.0, col_err; int rows = inpt->rows, cols = inpt->cols;
-	#pragma omp parallel for schedule(static) private(col_err) shared(avgErr)
+	#pragma omp parallel for schedule(static) private(col_err) reduction(+:avgErr)
 	for (int i = 0; i < cols; ++i){
 		col_err = 0.0;
 		for (int j = 0; j < rows; ++j){

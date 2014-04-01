@@ -1,0 +1,12 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.384294.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-0-29' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.384294.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-0-31' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.384294.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-1-5' (RSA) to the list of known hosts.
+t: 3
+nodes: 4
+n: 4096
+time: 1603.832960ms
+error: 7.1315e-07
+

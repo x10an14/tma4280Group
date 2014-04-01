@@ -1,0 +1,15 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.384298.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.384298.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.384298.rocks.hpc.ntnu.no': No such file or directory
+t: 3
+nodes: 4
+n: 4096
+time: 1596.801996ms
+error: 2.47512e-06
+
+
+t: 3
+nodes: 4
+n: 8192
+time: 6587.596893ms
+error: 2.60346e+11
