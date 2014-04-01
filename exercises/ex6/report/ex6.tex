@@ -52,7 +52,9 @@ considering different sources, boundary conditions and domains.
 \todo[inline]{When we comment the code we have to say the error we made during
 the execution of the program.}
 
-\section{Modifying the original...}
+\section{Modifying the original problem}
+
+\todo{Dealing with complexities?}
 
 % (f)
 
@@ -65,18 +67,18 @@ we define $v$ as a new solution,
 	v = u - g
 \end{equation}
 
-for some lifting function $g$. This $g$ is supposed to be the new boundary 
-condition that makes the new defined solution $0$ in the boundary condition.
+for some lifting function $g$. This $g$ is supposed to make the new defined 
+solution $0$ in the boundary condition.
 This is in the analytic case. If we want to apply this theory in our method we
 are going to transform the original problem like
 
 \begin{displaymath}
-	A \times (u + u_B) = h^2 F
+	\mathbf{A} \times (\mathbf{u} + \mathbf{u_B}) = h^2 \mathbf{f}
 \end{displaymath}
 
-where $A$ will be a $(n + 1) \times (n + 1)$ matrix, $u$ will be the old
-solution, $F$ the source, $h$ the length of the step and $u_B$ is the function 
-that satisfies the boundary conditions.
+where $\mathbf{A}$ will be a $(n + 1) \times (n + 1)$ matrix, $\mathbf{u}$ will 
+be the old solution, $\mathbf{f}$ the source, $h$ the length of the step and 
+$\mathbf{u_B}$ is the function that satisfies the boundary conditions.
 
 We had the next system
 
@@ -189,9 +191,10 @@ which they will have the same value if we work in a square and different values
 if we work in a rectangle.
 
 Following the diagonalisation done in the lectures the only change it has to be
-implemented is, instead of clear the $A$ up and put the $h^2$ with the $f$, 
-keeping the values $h_x^2$ and $h_y^2$ in $f$. So, when we go trhough the 
-diagonalisation method we will devide de eigenvalues by $h_x^2 + h_y^2$.
+implemented is, instead of clear the $\mathbf{A}$ up and put the $h^2$ with the 
+$\mathbf{f}$, 
+keeping the values $h_x^2$ and $h_y^2$ in $\mathbf{f}$. So, when we go through 
+the diagonalisation method we will devide de eigenvalues by $h_x^2 + h_y^2$.
 
 \todo[inline]{En vez de despejar la h y ponerla en la f, tenemos que dividirla 
 en los valores propios... Estudiar bien la diagonalización de la matriz con los 
