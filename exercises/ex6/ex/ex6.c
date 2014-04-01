@@ -322,7 +322,7 @@ int main(int argc, char *argv[]){
 	diagMat = createVector(globColLen);
 	matrix = createMatrix(globColLen, procColAmnt);
 	transpMat = createMatrix(globColLen, procColAmnt);
-	tempMat = createMatrix(getMaxThreads(), tempMatSz);
+	tempMat = createMatrix(tempMatSz, getMaxThreads());
 	diagMat->data = (double*) malloc(globColLen*sizeof(double));
 	/*				Erlends implementation					*/
 	//double *sendbuf = calloc(locMatSz, sizeof(double));
