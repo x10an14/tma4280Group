@@ -206,10 +206,9 @@ void callFourier(Matrix inpt, Matrix tmp){
 	#ifdef HAVE_OPENMP
 		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
-			fst_(inpt->data[i], &inpt->rows, tmp->data[omp_get_num_threads()], &tmp->rows);
+			fst_(inpt->data[i], &inpt->rows, tmp->data[omp_get_thread_num()], &tmp->rows);
 		}
 	#else
-		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
 			fst_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
 		}
@@ -220,10 +219,9 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 	#ifdef HAVE_OPENMP
 		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
-			fstinv_(inpt->data[i], &inpt->rows, tmp->data[omp_get_num_threads()], &tmp->rows);
+			fstinv_(inpt->data[i], &inpt->rows, tmp->data[omp_get_thread_num()], &tmp->rows);
 		}
 	#else
-		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
 			fstinv_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
 		}
@@ -322,7 +320,7 @@ int main(int argc, char *argv[]){
 	diagMat = createVector(globColLen);
 	matrix = createMatrix(globColLen, procColAmnt);
 	transpMat = createMatrix(globColLen, procColAmnt);
-	tempMat = createMatrix(tempMatSz, getMaxThreads());
+	tempMat = createMatrix(tempMatSz, omp_get_max_threads());
 	diagMat->data = (double*) malloc(globColLen*sizeof(double));
 	/*				Erlends implementation					*/
 	//double *sendbuf = calloc(locMatSz, sizeof(double));
