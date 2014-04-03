@@ -1,0 +1,43 @@
+Warning: Permanently added 'compute-0-0' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.385190.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-0-1' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.385190.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.385190.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.385190.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.385190.rocks.hpc.ntnu.no': No such file or directory
+n: 64
+time: 3021.825075ms
+error: 5.17272e-05
+
+n: 128
+time: 33.699989ms
+error: 1.06522e-05
+
+n: 256
+time: 33.417940ms
+error: 2.37749e-06
+
+n: 512
+time: 3316.457987ms
+error: 5.58649e-07
+
+n: 1024
+time: 3077.374935ms
+error: 1.35195e-07
+
+n: 2048
+time: 3285.732031ms
+error: 3.32404e-08
+
+n: 4096
+time: 1613.662004ms
+error: 8.24029e-09
+
+n: 8192
+time: 6383.339882ms
+error: 2.05135e-09
+
+n: 16384
+time: 25773.599863ms
+error: 5.11746e-10
+
