@@ -1,0 +1,45 @@
+Warning: Permanently added 'compute-0-28' (RSA) to the list of known hosts.
+n: 16
+time: 8.006096ms
+error: 0.00267815
+
+n: 32
+time: 9.558916ms
+error: 0.000537962
+
+n: 64
+time: 3.755808ms
+error: 0.000117562
+
+n: 128
+time: 12.953997ms
+error: 2.72513e-05
+
+n: 256
+time: 14.369011ms
+error: 6.54422e-06
+
+n: 512
+time: 48.043013ms
+error: 1.60241e-06
+
+n: 1024
+time: 172.436953ms
+error: 3.96394e-07
+
+n: 2048
+time: 721.688032ms
+error: 9.85722e-08
+
+n: 4096
+time: 3133.521080ms
+error: 2.45772e-08
+
+n: 8192
+time: 13744.579077ms
+error: 6.13608e-09
+
+n: 16384
+time: 60941.642046ms
+error: 1.53299e-09
+
