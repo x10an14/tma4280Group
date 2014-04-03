@@ -5,6 +5,7 @@
 #PBS -q optimist
 #PBS -l walltime=01:00:00
 #PBS -l nodes=4:ppn=12:default
+#PBS -l pmem=2048MB
 #PBS -j oe
 
 cd ${PBS_O_WORKDIR}
@@ -13,7 +14,6 @@ module load intelcomp
 module load openmpi/1.4.3-intel
 KMP_AFFINITY="granularity=fine, compact"
 
-#There will be an empty newline between each For-loop iteration (AKA "\n\n")
 for (( p = 1; p < 13; p++ )); do
 	if [[ "$p" == '5' ]] && [[ "$p" == '7' ]] && [[ "$p" == '9' ]] && [[ "$p" == "11" ]]; then
 			continue
@@ -24,14 +24,14 @@ for (( p = 1; p < 13; p++ )); do
 			continue
 		fi
 		echo 't: '$t
-		if [[ "$p" -le '3' ]]; then
-			x=2
-		elif [[ "$p" -gt '3' ]] && [[ "$p" -lt '8' ]]; then
+		if [[ "$p" -le '4' ]]; then
+			x=4
+		elif [[ "$p" -gt '5' ]] && [[ "$p" -lt '9' ]]; then
 			#echo '		CHANGED X!!!'
-			x=3
+			x=5
 		else
 			#echo '		CHANGED X!!!'
-			x=4
+			x=6
 		fi
 		#echo 'x: '$x
 		for (( i = x; i < 15; i++ )); do
