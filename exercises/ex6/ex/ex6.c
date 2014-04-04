@@ -265,7 +265,7 @@ double maxError(Matrix inpt, double (*funcp)(int, int, double), double h){
 		for (int j = 0; j < rows; ++j){
 			tmp = fabs(inpt->data[i][j] - (*funcp)(i, j, h));
 			if (tmp > col_err){
-				col_err = tmp
+				col_err = tmp;
 			}
 		}
 		if (col_err > locMax){
