@@ -36,25 +36,32 @@
 \section{Introduction}
 
 For the programming code belonging to this problem set, see the $\textit{ex6.c}$
-file in the zipped archive attached to this report. This program calculates the
-solution of the two-dimensional Poisson problem
+file in the zipped archive attached to this report. 
+
+
+\section{The Poisson problem}
+
+Poisson's equation is a partial differential equation of ellyptic type which is 
+used to model diffusion and it appears in electrostatics, mechanical engineering,
+theoretical physics among many others.
+
+The problem has the next expression
 
 \begin{eqnarray}
 	-\nabla^2 u & = & f \quad \textrm{in} \quad \Omega \\
-	u & = & 0 \quad \textrm{on} \quad \partial\Omega
+	u & = & g \quad \textrm{on} \quad \partial\Omega
 	\label{eq:Poisson}
 \end{eqnarray}
 
-considering different sources, boundary conditions and domains.
+where $f$ is a source, $g$ is the boundary condition and $\Omega$ is a bounded 
+domain.
 
 \todo[inline]{Explain the first points, the code and the results.}
 
 \todo[inline]{When we comment the code we have to say the error we made during
 the execution of the program.}
 
-\section{Modifying the original problem}
-
-\todo{Dealing with complexities?}
+\section{Dealing with complexities}
 
 % (f)
 
