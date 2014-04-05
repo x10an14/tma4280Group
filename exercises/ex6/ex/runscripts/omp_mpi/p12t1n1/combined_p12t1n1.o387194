@@ -1,44 +1,44 @@
 n: 16
-time: 1.141787ms
+time: 53.910017ms
 error: 0.00267815
 
 n: 32
-time: 5.915880ms
+time: 7.262945ms
 error: 0.000537962
 
 n: 64
-time: 4.856110ms
+time: 53.127050ms
 error: 0.000117562
 
 n: 128
-time: 8.225918ms
+time: 42.285919ms
 error: 2.72513e-05
 
 n: 256
-time: 43.227196ms
+time: 98.664999ms
 error: 6.54422e-06
 
 n: 512
-time: 63.463926ms
+time: 38.660049ms
 error: 1.60241e-06
 
 n: 1024
-time: 192.901134ms
+time: 172.769070ms
 error: 3.96394e-07
 
 n: 2048
-time: 748.574018ms
+time: 928.571939ms
 error: 9.85722e-08
 
 n: 4096
-time: 3153.459072ms
+time: 3166.074038ms
 error: 2.45772e-08
 
 n: 8192
-time: 13744.068861ms
+time: 13884.145975ms
 error: 6.13608e-09
 
 n: 16384
-time: 59389.609098ms
+time: 59506.843805ms
 error: 1.53299e-09
 

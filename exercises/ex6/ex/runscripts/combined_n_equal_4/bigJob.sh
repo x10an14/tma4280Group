@@ -3,9 +3,9 @@
 #PBS -N bigJob
 #PBS -A freecycle
 #PBS -q optimist
-#PBS -l walltime=01:00:00
+#PBS -l walltime=03:00:00
 #PBS -l nodes=4:ppn=12:default
-#PBS -l pmem=2048MB
+#PBS -l pmem=2000MB
 #PBS -j oe
 
 cd ${PBS_O_WORKDIR}

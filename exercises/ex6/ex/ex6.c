@@ -206,10 +206,9 @@ void callFourier(Matrix inpt, Matrix tmp){
 	#ifdef HAVE_OPENMP
 		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
-			fst_(inpt->data[i], &inpt->rows, tmp->data[omp_get_num_threads()], &tmp->rows);
+			fst_(inpt->data[i], &inpt->rows, tmp->data[omp_get_thread_num()], &tmp->rows);
 		}
 	#else
-		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
 			fst_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
 		}
@@ -220,10 +219,9 @@ void callFourierInvrs(Matrix inpt, Matrix tmp){
 	#ifdef HAVE_OPENMP
 		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
-			fstinv_(inpt->data[i], &inpt->rows, tmp->data[omp_get_num_threads()], &tmp->rows);
+			fstinv_(inpt->data[i], &inpt->rows, tmp->data[omp_get_thread_num()], &tmp->rows);
 		}
 	#else
-		#pragma omp parallel for schedule(static)
 		for (int i = 0; i < inpt->cols; ++i){
 			fstinv_(inpt->data[i], &inpt->rows, tmp->data[0], &tmp->rows);
 		}
@@ -257,6 +255,24 @@ double linearAverage(Matrix inpt, double (*funcp)(int, int, double), double h){
 	}
 	avgErr /= ((double) cols);
 	return avgErr;
+}
+
+double maxError(Matrix inpt, double (*funcp)(int, int, double), double h){
+	double locMax = 0.0, col_err, tmp; int rows = inpt->rows, cols = inpt->cols;
+	#pragma omp parallel for schedule(static) private(col_err) shared(locMax)
+	for (int i = 0; i < cols; ++i){
+		col_err = 0.0;
+		for (int j = 0; j < rows; ++j){
+			tmp = fabs(inpt->data[i][j] - (*funcp)(i, j, h));
+			if (tmp > col_err){
+				col_err = tmp;
+			}
+		}
+		if (col_err > locMax){
+			locMax = col_err;
+		}
+	}
+	return locMax;
 }
 
 #define TEST 0
@@ -421,12 +437,14 @@ int main(int argc, char *argv[]){
 	}
 
 	/*					Error checking						*/
-	double (*fp)(int, int, double), procAvgErr, globAvgErr;
-	fp = exactSolAppB; procAvgErr = linearAverage(matrix, fp, h);
-	MPI_Reduce(&procAvgErr, &globAvgErr, 1, MPI_DOUBLE, MPI_SUM, TEST, MPI_COMM_WORLD);
+	double (*fp)(int, int, double), procErr, globErr;
+	fp = exactSolAppB;
+	//procErr = linearAverage(matrix, fp, h);
+	procErr = maxError(matrix, fp, h);
+	MPI_Reduce(&procErr, &globErr, 1, MPI_DOUBLE, MPI_MAX, TEST, MPI_COMM_WORLD);
 	if(rank == TEST){
-		globAvgErr /= mpiSize;
-		printf("error: %g\n\n", globAvgErr);
+		globErr /= mpiSize;
+		printf("error: %g\n\n", globErr);
 	}
 
 	/*		Closing up and freeing variables				*/
