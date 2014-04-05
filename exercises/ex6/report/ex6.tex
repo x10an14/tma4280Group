@@ -1,5 +1,5 @@
 %Exercise 4 LaTeX report for TMA 4280
-\documentclass[fontsize=11pt,paper=a4,titlepage]{report}
+\documentclass[fontsize=11pt,paper=a4,titlepage]{article}
 \input{config} %config.tex file in same directory
 
 \begin{document}
@@ -30,22 +30,21 @@
 
 \todo[inline]{ABSTRACT}
 
-\addtocounter{chapter}{1}
 
 \clearpage
 \section{Introduction}
 
 For the programming code belonging to this problem set, see the $\textit{ex6.c}$
-file in the zipped archive attached to this report. 
+and $\textit{ex6.h}$ files in the zipped archive attached to this hand-in.
 
 
 \section{The Poisson problem}
 
-Poisson's equation is a partial differential equation of ellyptic type which is 
-used to model diffusion and it appears in electrostatics, mechanical engineering,
-theoretical physics among many others.
+Poisson's equation is an elliptic Partial Differential Equation (PDE) which is
+used to model diffusion. It appears in electrostatics, mechanical
+engineering, and theoretical physics, among many others.
 
-The problem has the next expression
+The problem follows the expression
 
 \begin{eqnarray}
 	-\nabla^2 u & = & f \quad \textrm{in} \quad \Omega \\
@@ -53,56 +52,21 @@ The problem has the next expression
 	\label{eq:Poisson}
 \end{eqnarray}
 
-where $f$ is a source, $g$ is the boundary condition and $\Omega$ is a bounded 
-domain.
+where $f$ is a source function, $g$ is the boundary condition, and $\Omega$ is a
+bounded domain.
 
-\todo[inline]{Explain the first points, the code and the results.}
+\section{The Problem Discretized}
+\label{sec:Prob-Discr}
 
-\section{MPI-Only Data}
-
-\section{Combined-Solution Data}
-
-%section e)
-\section{Accepting Smooth Functions}
-
-\todo[inline]{When we comment the code we have to say the error we made during
-the execution of the program.}
-
-\section{Dealing with complexities}
-
-% (f)
-
-We want to know which part of our code has to be modified if we change the 
-original problem. First of all, we want to deal with the case $u \neq 0$ on 
-$\partial\Omega$, where $\Omega = (0,1) \times (0,1)$. To tackle the new problem
-we define $v$ as a new solution,
-
-\begin{equation}
-	v = u - g
-\end{equation}
-
-for some lifting function $g$. This $g$ is supposed to make the new defined 
-solution $0$ in the boundary condition.
-This is in the analytic case. If we want to apply this theory in our method we
-are going to transform the original problem like
-
-\begin{displaymath}
-	\mathbf{A} \times (\mathbf{u} + \mathbf{u_B}) = h^2 \mathbf{f}
-\end{displaymath}
-
-where $\mathbf{A}$ will be a $(n + 1) \times (n + 1)$ matrix, $\mathbf{u}$ will 
-be the old solution, $\mathbf{f}$ the source, $h$ the length of the step and 
-$\mathbf{u_B}$ is the function that satisfies the boundary conditions.
-
-We had the next system
+We have the below system.
 
 \begin{displaymath}
 \begin{bmatrix}
 	2 & -1 &  &  &  &  &  \\
 	-1 & 2 & -1 &  &  &  &  \\
-	 & -1 & 2 &  &  &  &  \\
+	 & -1 & 2 & -1 &  &  &  \\
 	 &  & \ddots & \ddots & \ddots &  & \\
-	 &  &  &  & 2 & -1 &  \\
+	 &  &  & -1 & 2 & -1 &  \\
 	 &  &  &  & -1 & 2 & -1 \\
 	 &  &  &  &  & -1 & 2
 \end{bmatrix}
@@ -124,13 +88,65 @@ We had the next system
 	f_{n - 2} \\
 	f_{n - 1} \\
 	f_n
-\end{bmatrix*}.
+\end{bmatrix*}
 \end{displaymath}
 
-Since we had homogeneous boundary conditions we reduced the problem $2$ 
-dimensions to become an $(n - 1) \times (n - 1)$ system because $u_0 = u_n = 0$ 
-but now we have values for the boundaries so, if we compute the left side 
-operation, we get
+Since we have homogeneous boundary conditions, we reduce the problem by $2$
+dimensions to become an $(n - 1) \times (n - 1)$ system since $u_0 = u_n = 0$.
+
+\todo[inline]{Explain the first points, the code and the results.}
+
+\section{Our Implementation}
+
+%section e)
+\subsection{Accepting Smooth Functions}
+
+\subsection{Correctness Convergence}
+
+\subsection{Implementation Analysis}
+
+\todo[inline]{Decide if we keep this section, to analyze and report communication/FLOP, FLOPS, and so on...}
+
+\section{Results}
+
+\subsection{MPI Results}
+
+\subsection{OpenMP Results}
+
+\subsection{Combined Results}
+
+\todo[inline]{When we comment the code we have to say the error we made during
+the execution of the program. \\
+Which error? -C}
+
+% (f)
+\section{Non-Homogenous Dirichlet Boundary Conditions}
+
+We want to know which part of our code has to be modified if we change the
+original problem, when $u \neq 0$ on $\partial\Omega$, and $\Omega = (0,1)
+\times (0,1)$.
+
+In the analytic case, to tackle the new problem we define $v$ as a new solution,
+
+\begin{equation}
+	v = u - g
+\end{equation}
+
+for some lifting function $g$. In the newly defined solution, $g$ is supposed to
+set the values of $v$ along the boundaries to $0$.
+
+If we want our code to solve the problem with these new conditions, we need to
+tranform the original problem into
+
+\begin{displaymath}
+	\mathbf{A} \times (\mathbf{u} + \mathbf{u_B}) = h^2 \mathbf{f}
+\end{displaymath}
+
+where $\mathbf{A}$ will be a $(n + 1) \times (n + 1)$ matrix, $\mathbf{u}$ will
+be the old solution, $\mathbf{f}$ the source, $h$ the length of the step, and
+$\mathbf{u_B}$ the function that satisfies the boundary conditions.
+
+Considering the discretization of the original problem in section~\ref{sec:Prob-Discr}, if we re-compute the left hand-side of that system, we get
 
 \begin{displaymath}
 \begin{bmatrix}
@@ -154,9 +170,11 @@ operation, we get
 \end{bmatrix*}.
 \end{displaymath}
 
-but this system is redundant because there are $n - 1$ variables but $n + 1$ 
-euqation so we can remove the first and the last term and we just need to plus a
-vector to our old matrix. And the system is going to be written as
+but this system is redundant since there are $n - 1$ variables, and $n + 1$
+euqations. Hence, we can remove the first and the last terms, and we only need
+to add a vector to our previous matrix.
+
+Then the system will be written as
 
 \begin{displaymath}
 \begin{bmatrix}
@@ -192,26 +210,27 @@ vector to our old matrix. And the system is going to be written as
 \end{bmatrix*}.
 \end{displaymath}
 
-\todo[inline]{Check with the previous points}
-
+\section{Handling Different Domains}
 %(g)
 
-\todo{Compare with the implementation!}
+If we consider the geometry of the domain, we may want to solve the
+PDE~\ref{eq:Poisson} in a rectangle $\Omega = (0, L_x) \times (0, L_y)$. To
+accomplish this, we need to declare two lengths instead of our old $h$. Namely,
+$h_x$ and $h_y$, which would have the same value if we considered a square, and
+different values than we would get working with a rectangle.
 
-We want to think in the geometry of the domain. We want to solve the
-PDE~\ref{eq:Poisson} in a rectangle $\Omega = (0, L_x) \times (0, L_y)$. To do
-that we have to declare two length instead of our old $h$, $h_x$ and $h_y$,
-which they will have the same value if we work in a square and different values
-if we work in a rectangle.
+Following the diagonalization shown in the lectures, the only change that needs
+to be implemented is the following.
 
-Following the diagonalisation done in the lectures the only change it has to be
-implemented is, instead of clear the $\mathbf{A}$ up and put the $h^2$ with the 
-$\mathbf{f}$, 
-keeping the values $h_x^2$ and $h_y^2$ in $\mathbf{f}$. So, when we go through 
-the diagonalisation method we will devide de eigenvalues by $h_x^2 + h_y^2$.
+In the implemented tensor-operation, instead of simply summing the two
+eigenvalues whose sum we divide the variable with, we need to divide each
+eigenvalue with their corresponding step-lengths of the finite grid, $h_x^2$ and
+$h_y^2$. This is due to the fact that we do not store our step-lengths in the
+source function.
 
-\todo[inline]{En vez de despejar la h y ponerla en la f, tenemos que dividirla 
-en los valores propios... Estudiar bien la diagonalización de la matriz con los 
-valores y los vectores propios.}
+\section{Conclusion}
+
+\todo[inline]{Summarize the best/worst results of the result chapter. Also
+repeat what we can and cannot to do from Mireia's math-section.}
 
 \end{document}
