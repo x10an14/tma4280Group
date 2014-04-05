@@ -49,5 +49,6 @@ exercises/ex6/ex/debug_mpi/
 exercises/ex6/ex/release_mpi/
 exercises/ex6/ex/debug_omp_mpi/
 exercises/ex6/ex/release_omp_mpi/
+exercises/ex6/ex/relsym/
 exercises/ex6/debug/
 exercises/ex6/release/
