@@ -257,6 +257,24 @@ double linearAverage(Matrix inpt, double (*funcp)(int, int, double), double h){
 	return avgErr;
 }
 
+double maxError(Matrix inpt, double (*funcp)(int, int, double), double h){
+	double locMax = 0.0, col_err, tmp; int rows = inpt->rows, cols = inpt->cols;
+	#pragma omp parallel for schedule(static) private(col_err) shared(locMax)
+	for (int i = 0; i < cols; ++i){
+		col_err = 0.0;
+		for (int j = 0; j < rows; ++j){
+			tmp = fabs(inpt->data[i][j] - (*funcp)(i, j, h));
+			if (tmp > col_err){
+				col_err = tmp;
+			}
+		}
+		if (col_err > locMax){
+			locMax = col_err;
+		}
+	}
+	return locMax;
+}
+
 #define TEST 0
 #define PRINT 0
 #define MPI_WTIME_IS_GLOBAL 1
@@ -419,12 +437,14 @@ int main(int argc, char *argv[]){
 	}
 
 	/*					Error checking						*/
-	double (*fp)(int, int, double), procAvgErr, globAvgErr;
-	fp = exactSolAppB; procAvgErr = linearAverage(matrix, fp, h);
-	MPI_Reduce(&procAvgErr, &globAvgErr, 1, MPI_DOUBLE, MPI_SUM, TEST, MPI_COMM_WORLD);
+	double (*fp)(int, int, double), procErr, globErr;
+	fp = exactSolAppB;
+	//procErr = linearAverage(matrix, fp, h);
+	procErr = maxError(matrix, fp, h);
+	MPI_Reduce(&procErr, &globErr, 1, MPI_DOUBLE, MPI_MAX, TEST, MPI_COMM_WORLD);
 	if(rank == TEST){
-		globAvgErr /= mpiSize;
-		printf("error: %g\n\n", globAvgErr);
+		globErr /= mpiSize;
+		printf("error: %g\n\n", globErr);
 	}
 
 	/*		Closing up and freeing variables				*/

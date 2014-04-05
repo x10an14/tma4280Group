@@ -1,0 +1,83 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.387192.rocks.hpc.ntnu.no': No such file or directory
+n: 8
+[compute-0-38:28105] *** Process received signal ***
+[compute-0-38:28105] Signal: Floating point exception (8)
+[compute-0-38:28105] Signal code: Integer divide-by-zero (1)
+[compute-0-38:28105] Failing at address: 0x40a863
+[compute-0-38:28105] [ 0] /lib64/libpthread.so.0 [0x38b520ebe0]
+[compute-0-38:28105] [ 1] ../../../release_omp_mpi/ex6(main+0x4e3) [0x40a863]
+[compute-0-38:28105] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x38b4a1d994]
+[compute-0-38:28105] [ 3] ../../../release_omp_mpi/ex6 [0x40a2c9]
+[compute-0-38:28105] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 28105 on node compute-0-38.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-0-38:28106] *** Process received signal ***
+[compute-0-38:28107] *** Process received signal ***
+[compute-0-38:28106] Signal: Aborted (6)
+[compute-0-38:28106] Signal code:  (-6)
+[compute-0-38:28107] Signal: Aborted (6)
+[compute-0-38:28107] Signal code:  (-6)
+[compute-0-38:28108] *** Process received signal ***
+[compute-0-38:28108] Signal: Aborted (6)
+[compute-0-38:28108] Signal code:  (-6)
+[compute-0-38:28107] [ 0] /lib64/libpthread.so.0 [0x38b520ebe0]
+[compute-0-38:28107] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x38b4a30285]
+[compute-0-38:28107] [ 2] /lib64/libc.so.6(abort+0x110) [0x38b4a31d30]
+[compute-0-38:28107] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b1faac22fc2]
+[compute-0-38:28107] *** End of error message ***
+[compute-0-38:28106] [ 0] /lib64/libpthread.so.0 [0x38b520ebe0]
+[compute-0-38:28106] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x38b4a30285]
+[compute-0-38:28106] [ 2] /lib64/libc.so.6(abort+0x110) [0x38b4a31d30]
+[compute-0-38:28106] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b1379742fc2]
+[compute-0-38:28106] *** End of error message ***
+[compute-0-37:14303] *** Process received signal ***
+[compute-0-38:28108] [ 0] /lib64/libpthread.so.0 [0x38b520ebe0]
+[compute-0-38:28108] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x38b4a30285]
+[compute-0-38:28108] [ 2] /lib64/libc.so.6(abort+0x110) [0x38b4a31d30]
+[compute-0-38:28108] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b8700343fc2]
+[compute-0-38:28108] *** End of error message ***
+n: 16
+time: 268.580914ms
+error: 0.00342199
+
+n: 32
+time: 204.585075ms
+error: 0.000731873
+
+n: 64
+time: 253.210068ms
+error: 0.000166937
+
+n: 128
+time: 206.309080ms
+error: 3.97006e-05
+
+n: 256
+time: 267.750025ms
+error: 9.66927e-06
+
+n: 512
+time: 282.905102ms
+error: 2.38524e-06
+
+n: 1024
+time: 453.782082ms
+error: 5.92294e-07
+
+n: 2048
+time: 775.316954ms
+error: 1.47571e-07
+
+n: 4096
+time: 2568.990946ms
+error: 3.683e-08
+
+n: 8192
+time: 11021.301985ms
+error: 9.19964e-09
+
+n: 16384
+time: 45890.124083ms
+error: 2.29893e-09
+
