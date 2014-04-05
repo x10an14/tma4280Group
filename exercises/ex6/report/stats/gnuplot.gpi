@@ -3,7 +3,7 @@
 
 set xlabel "Values of n"
 set ylabel "Error"
-#set yrange[0:1]
+set xrange[1:1048576]
 
 set format y "$10^{%S}$"
 
@@ -13,9 +13,9 @@ set logscale x 2
 e(x) = x**(-2)
 
 plot e(x) title "Expected" with lines, \
-	"omp_p1_t12v2.txt" using 1:2 title "12 OpenMP threads Max error" with linespoints, \
-	"omp_p1_t12.txt" using 1:2 title "12 OpenMP threads Avg. error" with linespoints, \
 	"mpi_p4.txt" using 1:2 title "4 Processes" with linespoints, \
 	"mpi_p6.txt" using 1:2 title "6 Processes" with linespoints, \
-	"mpi_p8.txt" using 1:2 title "8 Processes" with linespoints
+	"mpi_p8.txt" using 1:2 title "8 Processes" with linespoints, \
+	"omp_p1_t12v2.txt" using 1:2 title "12 OpenMP threads Max error" with linespoints, \
+	"omp_p1_t12.txt" using 1:2 title "12 OpenMP threads Avg. error" with linespoints
 pause -1
