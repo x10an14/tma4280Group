@@ -23,6 +23,9 @@
 #Erlend Ubuntu files
 *~
 
+#Erlend lock files
+*~*
+
 #PDF files
 *.aux
 *.log
