@@ -37,8 +37,14 @@
 For the programming code belonging to this problem set, see the $\textit{ex6.c}$
 and $\textit{ex6.h}$ files in the zipped archive attached to this hand-in.
 
+For this problem set, we have written our solution in C inspired by the work of
+our professor in the subject this problem set belongs to. Hence, our structures,
+the general way of thinking, and the algorithms used are based on the work and
+lectures done in this subject~\cite{tma4280}.
+
 
 \section{The Poisson problem}
+\label{sec:Pois-Prob}
 
 Poisson's equation is an elliptic Partial Differential Equation (PDE) which is
 used to model diffusion. It appears in electrostatics, mechanical
@@ -54,6 +60,10 @@ The problem follows the expression
 
 where $f$ is a source function, $g$ is the boundary condition, and $\Omega$ is a
 bounded domain.
+
+And as such, a parallelized solver for 2-Dimensional Poisson PDE's is the
+objective of this problem set. It's our implementation of this solver we
+describe and analyze in this report.
 
 \section{The Problem Discretized}
 \label{sec:Prob-Discr}
@@ -94,16 +104,63 @@ We have the below system.
 Since we have homogeneous boundary conditions, we reduce the problem by $2$
 dimensions to become an $(n - 1) \times (n - 1)$ system since $u_0 = u_n = 0$.
 
-\todo[inline]{Explain the first points, the code and the results.}
+\section{The Implemented Solver}
 
-\section{Our Implementation}
+This section is divided into four parts; first we describe our implementation
+and analyze its complexity, then we explain how we enabled it to accept smooth
+functions, before we finish this section by explaining how we confirmed that our
+solver converges towards the correct answer for a given smooth function.
+
+\subsection{Our Implementation}
+\label{sec:Impl}
+
+Our implementation is based on the fact and observation that for any Symmetric
+Positive Definite (SPD) matrix, we can through the use of a Fast Fourier
+Transform (FFT), more specifically the the Discrete Sine Transform (DST)
+algorithm, implement a solution whose algorithmic FLOP complexity should be
+$\mathcal{O}(n\times log(n))$.
+
+Therefore, we will below first describe our implementations dataflow and way
+``way of thinking'', before analyzing its final FLOP and memory complexity.
+
+\subsubsection{Implementation Dataflow}
+
+Our implementation is based on the observation that 6 things need to happen in
+the solver for it to function correctly;
+
+\begin{enumerate}
+	\item \label{impl-step-1} Generate the $(N - 1)^2$ unknown variables across
+	all processes, by filling each process $\approx \frac{N-1}{Amount of
+	processes}$, and fill each variable with values corresponding to the
+	function we want to perform the 2-Dimensional Poisson operation on.
+
+	\item \label{impl-step-2} Use the Fourier Sine Transform (FST) on each
+	coloumn of the matrix within each process, before transposing the whole
+	matrix across all processes, requiring one ``round of communication'' across
+	all processes, before performing an inverse FST on the now transposed matrix
+	to work with the inverted matrix.
+
+	\item \label{impl-step-3} Perform the tensor operation based on the the
+	five-point stencile given from the 2-Dimensional nature of the operation on
+	each element by dividing $a_{xy}$ on $d_x + d_y$ where $d$ is a vector
+	(list) containing the eigenvalues for these types of matrices.
+
+	\item \label{impl-step-4} Repeat step~\ref{impl-step-2}, except now perform
+	the FST on the transposed matrix, transpose it back, and perform the inverse
+	FST on the un-transposed matrix.
+
+	%\label{list:impl-steps}
+\end{enumerate}
+
+Test item in enumerate ref:~\ref{impl-step-2}.
+
+\subsubsection{Implementation Complexity}
+
 
 %section e)
 \subsection{Accepting Smooth Functions}
 
 \subsection{Correctness Convergence}
-
-\subsection{Implementation Analysis}
 
 \todo[inline]{Decide if we keep this section, to analyze and report communication/FLOP, FLOPS, and so on...}
 
@@ -228,5 +285,8 @@ source function.
 
 \todo[inline]{Summarize the best/worst results of the result chapter. Also
 repeat what we can and cannot to do from Mireia's math-section.}
+
+\bibliography{bibliography}{}
+\bibliographystyle{plain}
 
 \end{document}
