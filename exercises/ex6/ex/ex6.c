@@ -418,9 +418,18 @@ int main(int argc, char *argv[]){
 	MPI_Alltoallv(&sendbuf, size, displ, MPI_DOUBLE, matrix->data[0], size, displ, MPI_DOUBLE, MPI_COMM_WORLD);*/
 
 	callFourierInvrs(matrix, tempMat);
-	/*				Print timings							*/
+	/*					Timings							*/
 	totRun = WallTime() - runTime;
 	totTime = WallTime() - initTime;
+
+	/*					Error checking					*/
+	double (*fp)(int, int, double), procErr, globErr;
+	fp = exactSolAppB;
+	//procErr = linearAverage(matrix, fp, h);
+	procErr = maxError(matrix, fp, h);
+	MPI_Reduce(&procErr, &globErr, 1, MPI_DOUBLE, MPI_MAX, TEST, MPI_COMM_WORLD);
+
+	/*					Printing Results				*/
 	if(rank == TEST){
 		double decTime = (declareTime - initTime)*1000;
 		/*printf("Initializatin + MPI_Init: %fms.\n", decTime);
@@ -432,18 +441,8 @@ int main(int argc, char *argv[]){
 		printf("All tensor, transp, and fourier calls: %fms.\n", totRun*1000);*/
 
 		//The time not including lines 278-312 in main() (from start of main, until declareTime = WallTime();)
-		printf("time: %fms\n", (totTime - (declareTime - initTime))*1000);
-	}
-
-	/*					Error checking						*/
-	double (*fp)(int, int, double), procErr, globErr;
-	fp = exactSolAppB;
-	//procErr = linearAverage(matrix, fp, h);
-	procErr = maxError(matrix, fp, h);
-	MPI_Reduce(&procErr, &globErr, 1, MPI_DOUBLE, MPI_MAX, TEST, MPI_COMM_WORLD);
-	if(rank == TEST){
-		globErr /= mpiSize;
-		printf("error: %g\n\n", globErr);
+		printf("%i %i %g %g\n", mpiSize, getMaxThreads(), \
+			(totTime - (declareTime - initTime))*1000, globErr);
 	}
 
 	/*		Closing up and freeing variables				*/
