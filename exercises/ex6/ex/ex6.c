@@ -259,7 +259,6 @@ double linearAverage(Matrix inpt, double (*funcp)(int, int, double), double h){
 
 double maxError(Matrix inpt, double (*funcp)(int, int, double), double h){
 	double locMax = 0.0, col_err, tmp; int rows = inpt->rows, cols = inpt->cols;
-	#pragma omp parallel for schedule(static) private(col_err) shared(locMax)
 	for (int i = 0; i < cols; ++i){
 		col_err = 0.0;
 		for (int j = 0; j < rows; ++j){
