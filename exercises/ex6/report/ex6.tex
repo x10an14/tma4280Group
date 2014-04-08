@@ -172,9 +172,25 @@ In the following section we present the runtime-results of our solution.
 We have tested elements of our solution separately, in order to analyze their contribution to the solution as a whole, as well as the whole solution in itself.
 
 \subsection{MPI Results}
-In order to test the MPI-implementation we have tested on selected amounts of processors and nodes, to test both
+In order to test the MPI-implementation we have tested on selected amounts of processors and nodes, to test both the MPI-implementation effectiveness, and the communication delay between nodes.
+
+\subsubsection{One Node}
+First we tested the program on only one node on the Kongull-cluster. Seeing as one node may use up to 12 processors, we elected to test with that, as well as selected increments below that. 
+
+As is shown in the figure on the next page, the MPI-implementation of the solution can in itself be considered successfull, seeing as it is almost perfectly parallel with runtime decreasing linearily with respect to the amount of processors added. The runtime with 8 processors is just about half of that with 4, and similarily with 12 and 6 processors.
 
 \includegraphics[scale=0.5]{pics/pX.png}
+
+\subsubsection{Several nodes}
+Next we examined the communication costs across several nodes on Kongull.
+In order to do this we ran several jobs with a total of 36 processes divided across varying amounts of nodes.
+
+If the communication costs across nodes were negilible, we would expect to se a runtime of approximately \emph{20000 ms}, seeing as that would constitute an improvement in runtime by a factor of 3 with a multiplication in the amount of processes by 3. This in comparison to the runtime with 12 processes on a single node \emph{(60000 ms)}, as shown in the previous section.
+\\\\
+We did not see a linear decrease in runtime, as can be observed in the figure on the next page where the runtimes of 36 processes divided by 3, 6, and 9, can be seen.
+
+One can observe that the runtime approaches the ideal linear increase of \emph{20000 ms} as the amount of nodes the problem is divided across increases. This leads us to believe that the limiting factor in achieving linear speedup in the parallelization is the communication bandwith between nodes.
+Each node receives a part of the whole problem which is in proportion to its amount of processes, and this means that when the 36 processes are divided across fewer nodes, each node receive a larger part. This, in turn, means that more data has to be sent each time the processes communicate, something which obviously takes more time than sending less to more nodes. 
 
 
 \includegraphics[scale=0.5]{pics/p36nX.png}
