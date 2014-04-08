@@ -42,6 +42,10 @@ our professor in the subject this problem set belongs to. Hence, our structures,
 the general way of thinking, and the algorithms used are based on the work and
 lectures done in this subject~\cite{tma4280}.
 
+And as such, a parallelized solver for 2-Dimensional Poisson PDEs is the
+objective of this problem set. It's our implementation of this solver we
+describe and analyze in this report.
+
 
 \section{The Poisson problem}
 \label{sec:Pois-Prob}
@@ -60,10 +64,6 @@ The problem follows the expression
 
 where $f$ is a source function, $g$ is the boundary condition, and $\Omega$ is a
 bounded domain.
-
-And as such, a parallelized solver for 2-Dimensional Poisson PDE's is the
-objective of this problem set. It's our implementation of this solver we
-describe and analyze in this report.
 
 \section{The Problem Discretized}
 \label{sec:Prob-Discr}
@@ -106,7 +106,7 @@ dimensions to become an $(n - 1) \times (n - 1)$ system since $u_0 = u_n = 0$.
 
 \section{The Implemented Solver}
 
-This section is divided into four parts; first we describe our implementation
+This section is divided into three parts; first we describe our implementation
 and analyze its complexity, then we explain how we enabled it to accept smooth
 functions, before we finish this section by explaining how we confirmed that our
 solver converges towards the correct answer for a given smooth function.
@@ -116,12 +116,13 @@ solver converges towards the correct answer for a given smooth function.
 
 Our implementation is based on the fact and observation that for any Symmetric
 Positive Definite (SPD) matrix, we can through the use of a Fast Fourier
-Transform (FFT), more specifically the the Discrete Sine Transform (DST)
+Transform (FFT), more specifically the Discrete Sine Transform (DST)
 algorithm, implement a solution whose algorithmic FLOP complexity should be
 $\mathcal{O}(n\times log(n))$.
 
-Therefore, we will below first describe our implementations dataflow and way
-``way of thinking'', before analyzing its final FLOP and memory complexity.
+Therefore, we first describe the dataflow of our implementation, which steps we
+intend for it to go through, before analyzing its final FLOP and memory
+complexity.
 
 \subsubsection{Implementation Dataflow}
 
@@ -129,23 +130,25 @@ Our implementation is based on the observation that the following four steps
 need to happen in the solver for it to function correctly.
 
 \begin{enumerate}
-	\item \label{impl-step-1} Generate the $(N - 1)^2$ unknown variables across
+	\item \label{istep-gen} Generate the $(N - 1)^2$ unknown variables across
 	all processes, by filling each process $\approx \frac{N-1}{Amount of
 	processes}$, and fill each variable with values corresponding to the
 	function we want to perform the 2-Dimensional Poisson operation on.
 
-	\item \label{impl-step-2} Use the Fourier Sine Transform (FST) on each
+	\item \label{istep-fst1} Use the Fourier Sine Transform (FST) on each
 	coloumn of the matrix within each process, before transposing the whole
 	matrix across all processes, requiring one ``round of communication'' across
 	all processes, before performing an inverse FST on the now transposed matrix
 	to work with the inverted matrix.
 
-	\item \label{impl-step-3} Perform the tensor operation based on the the
+\todo[inline]{Make sure that step~\ref{istep-tens} is correct, and more readable.}
+
+	\item \label{istep-tens} Perform the tensor operation based on the
 	five-point stencile given from the 2-Dimensional nature of the operation on
 	each element by dividing $a_{xy}$ on $d_x + d_y$ where $d$ is a vector
 	(list) containing the eigenvalues for these types of matrices.
 
-	\item \label{impl-step-4} Repeat step~\ref{impl-step-2}, except now perform
+	\item \label{istep-fst2} Repeat step~\ref{istep-fst1}, except now perform
 	the FST on the transposed matrix, transpose it back, and perform the inverse
 	FST on the un-transposed matrix.
 
