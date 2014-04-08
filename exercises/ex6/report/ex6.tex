@@ -120,44 +120,69 @@ Transform (FFT), more specifically the Discrete Sine Transform (DST)
 algorithm, implement a solution whose algorithmic FLOP complexity should be
 $\mathcal{O}(n\times log(n))$.
 
-Therefore, we first describe the dataflow of our implementation, which steps we
+And since TMA4280~\cite{tma4280} is about running mathematical solvers on
+super-computing-clusters, we will use the Application Program Interface (API)
+of two libraries; the MessagePassingInterface (MPI) to implement this in
+parallel across processes, and OpenMultiProcessing (OpenMP) to parallelize this
+solver across threads.
+
+Following, we will describe the dataflow of our implementation, which steps we
 intend for it to go through, before analyzing its final FLOP and memory
 complexity.
 
 \subsubsection{Implementation Dataflow}
+\label{ssec:dataflow}
 
 Our implementation is based on the observation that the following four steps
 need to happen in the solver for it to function correctly.
 
 \begin{enumerate}
+
 	\item \label{istep-gen} Generate the $(N - 1)^2$ unknown variables across
-	all processes, by filling each process $\approx \frac{N-1}{Amount of
-	processes}$, and fill each variable with values corresponding to the
-	function we want to perform the 2-Dimensional Poisson operation on.
+	all processes, by creating a matrix $\mathbf{A}$ that fills each process
+	with $\approx \frac{N-1}{P},\thickspace P = Amount\thickspace of\thickspace
+	Processes$, and fill each variable in $\mathbf{A}$ with values corresponding
+	to the function we want to perform the 2-Dimensional Poisson operation on.
 
 	\item \label{istep-fst1} Use the Fourier Sine Transform (FST) on each
-	coloumn of the matrix within each process, before transposing the whole
-	matrix across all processes, requiring one ``round of communication'' across
-	all processes, before performing an inverse FST on the now transposed matrix
-	to work with the inverted matrix.
+	coloumn of the matrix within each process, thereby Fourier transforming the
+	whole matrix (let's call the transposed matrix $\mathbf{B}$), before
+	transposing it across all processes. The transposition requires one ``round
+	of communication'' across all processes, before an inverse FST is performed
+	on $\mathbf{B}$.
 
 \todo[inline]{Make sure that step~\ref{istep-tens} is correct, and more readable.}
 
 	\item \label{istep-tens} Perform the tensor operation based on the
-	five-point stencile given from the 2-Dimensional nature of the operation on
-	each element by dividing $a_{xy}$ on $d_x + d_y$ where $d$ is a vector
-	(list) containing the eigenvalues for these types of matrices.
+	five-point stencile given from the 2D nature of the Poisson operation on
+	each element $b_{ij}$ by dividing each element on its corresponding $d_i +
+	d_j$, where $\mathbf{D}$ is a vector containing the eigenvalues for these
+	BLEH.
 
 	\item \label{istep-fst2} Repeat step~\ref{istep-fst1}, except now perform
-	the FST on the transposed matrix, transpose it back, and perform the inverse
-	FST on the un-transposed matrix.
+	the FST on $\mathbf{B}$, transpose it back to $\mathbf{A}$, and perform the
+	inverse FST on $\mathbf{A}$. $\mathbf{A}$ now represents the solution found
+	to the function inputted in step~\ref{istep-gen}.
 
 	%\label{list:impl-steps}
 \end{enumerate}
 
-Test item in enumerate ref:~\ref{impl-step-2}.
+The parallelization is achieved by splitting the matrix $\mathbf{A}$'s coloumns
+across the processes used with the MPI API. Since the functions that perform the
+FST are not parallelizable, and they need to perform the transformation on a
+whole coloumn at the time, these can be parallellized by using OpenMP, running
+several concurrent threads.
+
+This division of labor fits well with the implementation, since the OpenMP tasks
+can share memory, and the MPI ones should not (hence the need for its own memory
+as naturally befits a process vs. a thread).
 
 \subsubsection{Implementation Complexity}
+
+The complexity of our implementation can be described as following with the help
+of the list in subsection~\ref{ssec:dataflow}.
+
+
 
 
 %section e)
