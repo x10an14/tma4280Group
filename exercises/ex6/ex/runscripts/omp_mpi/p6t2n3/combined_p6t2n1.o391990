@@ -1,0 +1,183 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.391990.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.391990.rocks.hpc.ntnu.no': No such file or directory
+n: 8
+[compute-0-36:08692] *** Process received signal ***
+[compute-0-36:08692] Signal: Floating point exception (8)
+[compute-0-36:08692] Signal code: Integer divide-by-zero (1)
+[compute-0-36:08692] Failing at address: 0x40a99a
+[compute-0-36:08692] [ 0] /lib64/libpthread.so.0 [0x302c80ebe0]
+[compute-0-36:08692] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-0-36:08692] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x302c01d994]
+[compute-0-36:08692] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-0-36:08692] *** End of error message ***
+[compute-0-36:08690] *** Process received signal ***
+[compute-0-36:08690] Signal: Floating point exception (8)
+[compute-0-36:08690] Signal code: Integer divide-by-zero (1)
+[compute-0-36:08690] Failing at address: 0x40a99a
+[compute-0-36:08690] [ 0] /lib64/libpthread.so.0 [0x302c80ebe0]
+[compute-0-36:08690] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-0-36:08690] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x302c01d994]
+[compute-1-4:03624] *** Process received signal ***
+[compute-1-4:03624] Signal: Floating point exception (8)
+[compute-1-4:03624] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03624] Failing at address: 0x40a99a
+[compute-1-4:03627] *** Process received signal ***
+[compute-1-4:03627] Signal: Floating point exception (8)
+[compute-1-4:03627] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03627] Failing at address: 0x40a99a
+[compute-1-4:03628] *** Process received signal ***
+[compute-1-4:03628] Signal: Floating point exception (8)
+[compute-1-4:03628] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03628] Failing at address: 0x40a99a
+[compute-1-4:03629] *** Process received signal ***
+[compute-1-4:03629] Signal: Floating point exception (8)
+[compute-1-4:03629] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03629] Failing at address: 0x40a99a
+[compute-0-36:08690] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-0-36:08690] *** End of error message ***
+[compute-1-4:03627] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03627] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03627] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03627] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03627] *** End of error message ***
+[compute-1-4:03628] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03628] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03628] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03628] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03628] *** End of error message ***
+[compute-1-4:03624] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03624] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03624] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03624] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03624] *** End of error message ***
+[compute-1-4:03629] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03629] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03629] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03629] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03629] *** End of error message ***
+[compute-1-4:03625] *** Process received signal ***
+[compute-1-4:03625] Signal: Floating point exception (8)
+[compute-1-4:03625] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03625] Failing at address: 0x40a99a
+--------------------------------------------------------------------------
+mpirun noticed that process rank 8 with PID 8692 on node compute-0-36 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-1-4:03625] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03625] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03625] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03625] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03625] *** End of error message ***
+[compute-1-4:03626] *** Process received signal ***
+[compute-1-4:03626] Signal: Floating point exception (8)
+[compute-1-4:03626] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03626] Failing at address: 0x40a99a
+[compute-1-4:03626] *** Process received signal ***
+[compute-1-4:03626] Signal: Aborted (6)
+[compute-1-4:03626] Signal code:  (-6)
+[compute-1-4:03626] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03626] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03626] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03626] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03626] *** End of error message ***
+[compute-0-36:08694] *** Process received signal ***
+[compute-0-36:08694] Signal: Floating point exception (8)
+[compute-0-36:08694] Signal code: Integer divide-by-zero (1)
+[compute-0-36:08694] Failing at address: 0x40a99a
+[compute-0-33:05699] *** Process received signal ***
+[compute-0-33:05699] Signal: Aborted (6)
+[compute-0-33:05699] Signal code:  (-6)
+[compute-0-36:08694] [ 0] /lib64/libpthread.so.0 [0x302c80ebe0]
+[compute-0-36:08694] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-0-36:08694] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x302c01d994]
+[compute-0-36:08694] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-0-36:08694] *** End of error message ***
+[compute-0-36:08691] *** Process received signal ***
+[compute-0-36:08691] Signal: Aborted (6)
+[compute-0-36:08691] Signal code:  (-6)
+[compute-0-33:05700] *** Process received signal ***
+[compute-0-33:05700] Signal: Aborted (6)
+[compute-0-33:05700] Signal code:  (-6)
+[compute-0-33:05701] *** Process received signal ***
+[compute-0-33:05701] Signal: Aborted (6)
+[compute-0-33:05701] Signal code:  (-6)
+n: 16
+[compute-1-4:03673] *** Process received signal ***
+[compute-1-4:03673] Signal: Floating point exception (8)
+[compute-1-4:03673] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03673] Failing at address: 0x40a99a
+[compute-1-4:03673] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03673] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03673] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03673] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03673] *** End of error message ***
+[compute-1-4:03672] *** Process received signal ***
+[compute-1-4:03672] Signal: Floating point exception (8)
+[compute-1-4:03672] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03672] Failing at address: 0x40a99a
+[compute-1-4:03672] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03672] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03672] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03672] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03672] *** End of error message ***
+[compute-1-4:03674] *** Process received signal ***
+[compute-1-4:03674] Signal: Floating point exception (8)
+[compute-1-4:03674] Signal code: Integer divide-by-zero (1)
+[compute-1-4:03674] Failing at address: 0x40a99a
+[compute-1-4:03674] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03674] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-4:03674] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x342141d994]
+[compute-1-4:03674] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-4:03674] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 3673 on node compute-1-4.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-1-4:03675] *** Process received signal ***
+[compute-1-4:03675] Signal: Aborted (6)
+[compute-1-4:03675] Signal code:  (-6)
+[compute-1-4:03676] *** Process received signal ***
+[compute-1-4:03676] Signal: Aborted (6)
+[compute-1-4:03676] Signal code:  (-6)
+[compute-1-4:03677] *** Process received signal ***
+[compute-1-4:03677] Signal: Aborted (6)
+[compute-1-4:03677] Signal code:  (-6)
+[compute-1-4:03676] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03676] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3421430285]
+[compute-1-4:03676] [ 2] /lib64/libc.so.6(abort+0x110) [0x3421431d30]
+[compute-1-4:03676] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b6b5d27bfc2]
+[compute-1-4:03675] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03675] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3421430285]
+[compute-1-4:03675] [ 2] /lib64/libc.so.6(abort+0x110) [0x3421431d30]
+[compute-1-4:03675] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b3313e39fc2]
+[compute-1-4:03675] *** End of error message ***
+[compute-1-4:03676] *** End of error message ***
+[compute-0-36:08735] *** Process received signal ***
+[compute-0-36:08735] Signal: Aborted (6)
+[compute-0-36:08735] Signal code:  (-6)
+[compute-0-33:05744] *** Process received signal ***
+[compute-0-33:05744] Signal: Aborted (6)
+[compute-0-33:05744] Signal code:  (-6)
+[compute-1-4:03677] [ 0] /lib64/libpthread.so.0 [0x3421c0ebe0]
+[compute-1-4:03677] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3421430285]
+[compute-1-4:03677] [ 2] /lib64/libc.so.6(abort+0x110) [0x3421431d30]
+[compute-1-4:03677] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b47d7566fc2]
+[compute-1-4:03677] *** End of error message ***
+n: 32
+18 2 7.92694 0.0011601
+n: 64
+18 2 30.663 0.000296028
+n: 128
+18 2 7.36094 7.46813e-05
+n: 256
+18 2 12.145 1.75775e-05
+n: 512
+18 2 45.557 4.25655e-06
+n: 1024
+18 2 105.325 1.04683e-06
+n: 2048
+18 2 398.447 2.61838e-07
+n: 4096
+18 2 1735.04 6.54755e-08
+n: 8192
+18 2 7150.26 1.63709e-08
+n: 16384
+18 2 30063.8 4.08848e-09
