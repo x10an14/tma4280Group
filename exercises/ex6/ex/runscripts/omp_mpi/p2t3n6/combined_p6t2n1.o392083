@@ -1,0 +1,79 @@
+Warning: Permanently added 'compute-2-10' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.392083.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-2-11' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.392083.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392083.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392083.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392083.rocks.hpc.ntnu.no': No such file or directory
+n: 8
+[compute-2-37:14517] *** Process received signal ***
+[compute-2-37:14517] Signal: Floating point exception (8)
+[compute-2-37:14517] Signal code: Integer divide-by-zero (1)
+[compute-2-37:14517] Failing at address: 0x40a99a
+[compute-2-37:14517] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:14517] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:14517] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:14517] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:14517] *** End of error message ***
+[compute-2-37:14518] *** Process received signal ***
+[compute-2-37:14518] Signal: Floating point exception (8)
+[compute-2-37:14518] Signal code: Integer divide-by-zero (1)
+[compute-2-37:14518] Failing at address: 0x40a99a
+[compute-2-37:14518] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:14518] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:14518] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:14518] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:14518] *** End of error message ***
+[compute-2-35:05628] *** Process received signal ***
+[compute-2-35:05628] Signal: Floating point exception (8)
+[compute-2-35:05628] Signal code: Integer divide-by-zero (1)
+[compute-2-35:05628] Failing at address: 0x40a99a
+[compute-2-35:05627] *** Process received signal ***
+[compute-2-35:05627] Signal: Floating point exception (8)
+[compute-2-35:05627] Signal code: Integer divide-by-zero (1)
+[compute-2-35:05627] Failing at address: 0x40a99a
+[compute-2-35:05628] [ 0] /lib64/libpthread.so.0 [0x33bba0ebe0]
+[compute-2-35:05628] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-35:05628] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33bb21d994]
+[compute-2-35:05628] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-35:05628] *** End of error message ***
+[compute-2-35:05627] [ 0] /lib64/libpthread.so.0 [0x33bba0ebe0]
+[compute-2-35:05627] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-35:05627] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33bb21d994]
+[compute-2-35:05627] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-35:05627] *** End of error message ***
+[compute-2-34:07662] *** Process received signal ***
+[compute-2-34:07662] Signal: Floating point exception (8)
+[compute-2-34:07662] Signal code: Integer divide-by-zero (1)
+[compute-2-34:07662] Failing at address: 0x40a99a
+[compute-2-34:07662] [ 0] /lib64/libpthread.so.0 [0x320ac0ebe0]
+[compute-2-34:07662] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-34:07662] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x320a41d994]
+[compute-2-34:07662] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-34:07662] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 14518 on node compute-2-37.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-10:19004] *** Process received signal ***
+n: 16
+12 3 60.957 0.00883227
+n: 32
+12 3 5.65815 0.00174014
+n: 64
+12 3 6.24108 0.000444042
+n: 128
+12 3 5.87893 0.000102687
+n: 256
+12 3 8.54897 2.57804e-05
+n: 512
+12 3 21.806 6.31144e-06
+n: 1024
+12 3 79.968 1.57943e-06
+n: 2048
+12 3 346.756 3.92756e-07
+n: 4096
+12 3 1489.73 9.82132e-08
+n: 8192
+12 3 6378.37 2.45204e-08
+n: 16384
+12 3 26982.2 6.13047e-09
