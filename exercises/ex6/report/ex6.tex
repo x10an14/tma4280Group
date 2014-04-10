@@ -101,6 +101,7 @@ We have the below system.
 \end{bmatrix*}
 \end{displaymath}
 
+\todo{Too many times since in this paragraph}
 Since we have homogeneous boundary conditions, we reduce the problem by $2$
 dimensions to become an $(n - 1) \times (n - 1)$ system since $u_0 = u_n = 0$.
 
@@ -121,7 +122,7 @@ algorithm, implement a solver whose algorithmic FLOP complexity should be
 $\mathcal{O}(n^2\times log(n))$.
 
 And since TMA4280~\cite{tma4280} is about running mathematical solvers on
-super-computing-clusters, we will use the Application Program Interface (API)
+super-computing-clusters, we will use the ApplicationProgramInterface (API)
 of two libraries; the MessagePassingInterface (MPI) to implement this in
 parallel across processes, and OpenMultiProcessing (OpenMP) to parallelize
 across threads.
