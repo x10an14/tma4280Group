@@ -43,7 +43,7 @@ the general way of thinking, and the algorithms used are based on the work and
 lectures done in this subject~\cite{tma4280}.
 
 And as such, a parallelized solver for 2-Dimensional Poisson PDEs is the
-objective of this problem set. It's our implementation of this solver we
+objective of this problem set. It is our implementation of this solver we
 describe and analyze in this report.
 
 
@@ -131,7 +131,7 @@ intend for it to go through, before analyzing its final FLOP and memory
 complexity.
 
 \subsubsection{Implementation Dataflow}
-\label{ssec:dataflow}
+\label{sssec:dataflow}
 
 Our implementation is based on the observation that the following four steps
 need to happen in the solver for it to function correctly.
@@ -139,38 +139,39 @@ need to happen in the solver for it to function correctly.
 \begin{enumerate}
 
 	\item \label{istep-gen} Generate the $(N - 1)^2$ unknown variables across
-	all processes, by creating a matrix $\mathbf{A}$ that fills each process
-	with $\approx \frac{N-1}{P},\thickspace P = Amount\thickspace of\thickspace
-	Processes$, and fill each variable in $\mathbf{A}$ with values corresponding
-	to the function we want to perform the 2-Dimensional Poisson operation on.
+	all processes, by creating a matrix $\mathbf{A}$ representing a grid of all unknowns, which fills each process with $\sim \frac{N-1}{P \thickspace (=
+	Amount 	\thickspace of\thickspace Processes)}$ coloumns. Assigning each
+	gridpoint in $\mathbf{A}$ with a value given by the function we want to perform 2-Dimensional Poisson operation on (which is given the $i$th and
+	$j$th position as input) multiplied with step-length between our gridpoints
+	due to the discretization of the 2D Poisson problem, $h^2, \thickspace h =
+	\frac{1}{N}$.
 
 	\item \label{istep-fst1} Use the Fourier Sine Transform (FST) on each
 	coloumn of the matrix within each process, thereby Fourier transforming the
-	whole matrix (let's call the transposed matrix $\mathbf{B}$), before
-	transposing it across all processes. The transposition requires one ``round
+	whole matrix, before transposing it across all processes (let us call the
+	transposed matrix $\mathbf{B}$). The transposition requires one ``round
 	of communication'' across all processes, before an inverse FST is performed
 	on $\mathbf{B}$.
 
-\todo[inline]{Make sure that step~\ref{istep-tens} is correct, and more readable.}
-
 	\item \label{istep-tens} Perform the tensor operation based on the
 	five-point stencile given from the 2D nature of the Poisson operation on
-	each element $b_{ij}$ by dividing each element on its corresponding $d_i +
-	d_j$, where $\mathbf{D}$ is a vector containing the eigenvalues for these
-	BLEH.
+	each element $b_{ij}$ by dividing each element on its corresponding sum of
+	the terms $d_i + d_j$, which are the respective eigenvalues of the matrix $
+	\mathbf{A}$.
 
 	\item \label{istep-fst2} Repeat step~\ref{istep-fst1}, except now perform
 	the FST on $\mathbf{B}$, transpose it back to $\mathbf{A}$, and perform the
-	inverse FST on $\mathbf{A}$. $\mathbf{A}$ now represents the solution found
-	to the function inputted in step~\ref{istep-gen}.
+	inverse FST on $\mathbf{A}$. $\mathbf{A}$ (spread across all $P$ processes
+	used) now represents the solution found to the function inputted in
+	step~\ref{istep-gen}.
 
 	%\label{list:impl-steps}
 \end{enumerate}
 
-The parallelization is achieved by splitting the matrix $\mathbf{A}$'s coloumns
+The parallelization is achieved by splitting the matrix $\mathbf{A}$'s columns
 across the processes used with the MPI API. Since the functions that perform the
-FST are not parallelizable, and they need to perform the transformation on a
-whole coloumn at the time, these can be parallellized by using OpenMP, running
+FST are not parallelization, and they need to perform the transformation on a
+whole column at the time, these can be parallelized by using OpenMP, running
 several concurrent threads.
 
 This division of labor fits well with the implementation, since the OpenMP tasks
@@ -180,24 +181,28 @@ as naturally befits a process vs. a thread).
 \subsubsection{Implementation Complexity}
 
 The complexity of our implementation can be described as following with the help
-of the list in subsection~\ref{ssec:dataflow}.
+of the list in subsection~\ref{sssec:dataflow}.
 
+\paragraph{Complexity of Step~\ref{istep-gen}}
 
-
+This step generates the datastructures with which the solver performs the 2D
+Poisson operation. Hence, each process $p$,
 
 %section e)
 \subsection{Accepting Smooth Functions}
 
 \subsection{Correctness Convergence}
 
-\todo[inline]{Decide if we keep this section, to analyze and report communication/FLOP, FLOPS, and so on...}
+\todo[inline]{Decide if we make another section, to analyze and report
+communication, FLOP, FLOPS, and so on...}
 
 \section{Results}
 
-In the following section we present the runtime-results of our solution. We have
-tested elements of our solution separately, in order to analyze their
-contribution to the solution as a whole, as well as the whole solution in
-itself.
+In this section we present the runtime-results of our solution.
+
+We have tested the different parallelizations of our solution separately, in
+order to analyze their contribution to the solution as a whole, as well as the
+whole solution in itself.
 
 \subsection{MPI Results}
 
@@ -205,55 +210,58 @@ In order to test the MPI-implementation we have tested on selected amounts of
 processors and nodes, to test both the MPI-implementation effectiveness, and the
 communication delay between nodes.
 
-\subsubsection{One Node}
+\subsubsection{Single Node}
 
 First we tested the program on only one node on the Kongull-cluster. Seeing as
 one node may use up to 12 processors, we elected to test with that, as well as
 selected increments below that.
 
 As is shown in the figure on the next page, the MPI-implementation of the
-solution can in itself be considered successfull, seeing as it is almost
-perfectly parallel with runtime decreasing linearily with respect to the amount
+solution can in itself be considered successful, seeing as it is almost
+perfectly parallel with runtime decreasing linearly with respect to the amount
 of processors added. The runtime with 8 processors is just about half of that
-with 4, and similarily with 12 and 6 processors.
+with 4, and similarly with 12 and 6 processors.
 
-\includegraphics[scale=0.5]{pics/pX.png}
+\begin{centering}
+	\includegraphics[scale=0.425]{pics/pX.png}
+\end{centering}
 
-\subsubsection{Several nodes}
+\subsubsection{Multiple Nodes}
 
 Next we examined the communication costs across several nodes on Kongull. In
 order to do this we ran several jobs with a total of 36 processes divided across
 varying amounts of nodes.
 
-If the communication costs across nodes were negilible, we would expect to se a
-runtime of approximately \emph{20000 ms}, seeing as that would constitute an
+If the communication costs across nodes were negligible, we would expect to see
+a runtime of approximately \emph{20000 ms}, seeing as that would constitute an
 improvement in runtime by a factor of 3 with a multiplication in the amount of
 processes by 3. This in comparison to the runtime with 12 processes on a single
 node \emph{(60000 ms)}, as shown in the previous section.
 
 We did not see a linear decrease in runtime, as can be observed in the figure
-on the next page where the runtimes of 36 processes divided by 3, 6, and 9, can
+on the next page where the run-times of 36 processes divided by 3, 6, and 9, can
 be seen.
 
 One can observe that the runtime approaches the ideal linear increase of
 \emph{20000 ms} as the amount of nodes the problem is divided across increases.
 This leads us to believe that the limiting factor in achieving linear speedup in
-the parallelization is the communication bandwith between nodes. Each node
+the parallelization is the communication bandwidth between nodes. Each node
 receives a part of the whole problem which is in proportion to its amount of
 processes, and this means that when the 36 processes are divided across fewer
 nodes, each node receive a larger part. This, in turn, means that more data has
 to be sent each time the processes communicate, something which obviously takes
 more time than sending less to more nodes.
 
-
-\includegraphics[scale=0.5]{pics/p36nX.png}
+\begin{centering}
+	\includegraphics[scale=0.5]{pics/p36nX.png}
+\end{centering}
 
 \subsection{OpenMP Results}
 
 \subsection{Combined Results}
 
 % (f)
-\section{Non-Homogenous Dirichlet Boundary Conditions}
+\section{Non-Homogeneous Dirichlet Boundary Conditions}
 
 We want to know which part of our code has to be modified if we change the
 original problem, when $u \neq 0$ on $\partial\Omega$, and $\Omega = (0,1)
@@ -305,7 +313,7 @@ Discr}, if we re-compute the left hand-side of that system, we get
 \end{displaymath}
 
 but this system is redundant since there are $n - 1$ variables, and $n + 1$
-euqations. Hence, we can remove the first and the last terms, and we only need
+equations. Hence, we can remove the first and the last terms, and we only need
 to add a vector to our previous matrix.
 
 Then the system will be written as
