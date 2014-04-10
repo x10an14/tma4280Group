@@ -1,0 +1,64 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392085.rocks.hpc.ntnu.no': No such file or directory
+n: 8
+[compute-2-7:10178] *** Process received signal ***
+[compute-2-7:10178] Signal: Floating point exception (8)
+[compute-2-7:10178] Signal code: Integer divide-by-zero (1)
+[compute-2-7:10178] Failing at address: 0x40a99a
+[compute-2-7:10178] [ 0] /lib64/libpthread.so.0 [0x3d0920ebe0]
+[compute-2-7:10178] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-7:10178] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3d08a1d994]
+[compute-2-7:10178] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-7:10178] *** End of error message ***
+[compute-2-9:06439] *** Process received signal ***
+[compute-2-9:06439] Signal: Floating point exception (8)
+[compute-2-9:06439] Signal code: Integer divide-by-zero (1)
+[compute-2-9:06439] Failing at address: 0x40a99a
+[compute-2-9:06439] [ 0] /lib64/libpthread.so.0 [0x33d1a0ebe0]
+[compute-2-9:06439] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-9:06439] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33d121d994]
+[compute-2-9:06439] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-9:06439] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 10178 on node compute-2-7 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-34:08304] *** Process received signal ***
+[compute-0-36:28778] *** Process received signal ***
+[compute-2-18:01565] *** Process received signal ***
+[compute-2-34:08304] Signal: Aborted (6)
+[compute-2-34:08304] Signal code:  (-6)
+[compute-2-34.local][[41933,1],8][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] [compute-0-36:28778] Signal: Aborted (6)
+[compute-0-36:28778] Signal code:  (-6)
+[compute-2-18:01565] Signal: Aborted (6)
+[compute-2-18:01565] Signal code:  (-6)
+[compute-2-37:15214] *** Process received signal ***
+[compute-2-37:15214] Signal: Aborted (6)
+[compute-2-37:15214] Signal code:  (-6)
+n: 16
+9 4 4.44007 0.00883227
+n: 32
+9 4 4.6289 0.00232016
+n: 64
+9 4 4.39191 0.000518048
+n: 128
+9 4 5.31197 0.000140027
+n: 256
+9 4 9.07207 3.39832e-05
+n: 512
+9 4 20.319 8.36633e-06
+n: 1024
+9 4 76.8061 2.09367e-06
+n: 2048
+9 4 339.321 5.23675e-07
+n: 4096
+9 4 1431.27 1.30664e-07
+n: 8192
+9 4 6189.3 3.27058e-08
+n: 16384
+9 4 26416.4 8.17247e-09

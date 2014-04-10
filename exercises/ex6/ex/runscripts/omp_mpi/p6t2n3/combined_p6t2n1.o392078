@@ -1,0 +1,202 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.392078.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392078.rocks.hpc.ntnu.no': No such file or directory
+n: 8
+[compute-2-35:04596] *** Process received signal ***
+[compute-2-35:04596] Signal: Floating point exception (8)
+[compute-2-35:04596] Signal code: Integer divide-by-zero (1)
+[compute-2-35:04596] Failing at address: 0x40a99a
+[compute-2-35:04589] *** Process received signal ***
+[compute-2-35:04590] *** Process received signal ***
+[compute-2-35:04590] Signal: Floating point exception (8)
+[compute-2-35:04590] Signal code: Integer divide-by-zero (1)
+[compute-2-35:04590] Failing at address: 0x40a99a
+[compute-2-35:04589] Signal: Floating point exception (8)
+[compute-2-35:04589] Signal code: Integer divide-by-zero (1)
+[compute-2-35:04589] Failing at address: 0x40a99a
+[compute-2-37:13266] *** Process received signal ***
+[compute-2-37:13266] Signal: Floating point exception (8)
+[compute-2-37:13266] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13266] Failing at address: 0x40a99a
+[compute-2-35:04590] [ 0] /lib64/libpthread.so.0 [0x33bba0ebe0]
+[compute-2-35:04590] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-35:04590] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33bb21d994]
+[compute-2-35:04590] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-35:04590] *** End of error message ***
+[compute-2-35:04589] [ 0] /lib64/libpthread.so.0 [0x33bba0ebe0]
+[compute-2-35:04589] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-35:04596] [ 0] /lib64/libpthread.so.0 [0x33bba0ebe0]
+[compute-2-35:04596] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-35:04596] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33bb21d994]
+[compute-2-35:04596] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-35:04596] *** End of error message ***
+[compute-2-35:04589] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33bb21d994]
+[compute-2-35:04597] *** Process received signal ***
+[compute-2-35:04589] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-35:04597] Signal: Floating point exception (8)
+[compute-2-35:04597] Signal code: Integer divide-by-zero (1)
+[compute-2-35:04597] Failing at address: 0x40a99a
+[compute-2-35:04589] *** End of error message ***
+[compute-2-35:04595] *** Process received signal ***
+[compute-2-35:04595] Signal: Floating point exception (8)
+[compute-2-35:04595] Signal code: Integer divide-by-zero (1)
+[compute-2-35:04595] Failing at address: 0x40a99a
+[compute-2-35:04595] [ 0] /lib64/libpthread.so.0 [0x33bba0ebe0]
+[compute-2-35:04595] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-35:04595] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33bb21d994]
+[compute-2-35:04595] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-35:04595] *** End of error message ***
+[compute-2-35:04597] [ 0] /lib64/libpthread.so.0 [0x33bba0ebe0]
+[compute-2-35:04597] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-35:04597] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x33bb21d994]
+[compute-2-35:04597] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-35:04597] *** End of error message ***
+[compute-2-37:13270] *** Process received signal ***
+[compute-2-37:13270] Signal: Floating point exception (8)
+[compute-2-37:13270] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13270] Failing at address: 0x40a99a
+[compute-2-37:13268] *** Process received signal ***
+[compute-2-37:13268] Signal: Floating point exception (8)
+[compute-2-37:13268] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13268] Failing at address: 0x40a99a
+--------------------------------------------------------------------------
+mpirun noticed that process rank 7 with PID 4590 on node compute-2-35 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-37:13268] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13268] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13268] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13268] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13268] *** End of error message ***
+[compute-2-37:13267] *** Process received signal ***
+[compute-2-37:13267] Signal: Floating point exception (8)
+[compute-2-37:13267] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13267] Failing at address: 0x40a99a
+[compute-2-37:13267] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13267] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13267] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13267] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13267] *** End of error message ***
+[compute-2-37:13270] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13270] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13270] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13270] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13270] *** End of error message ***
+[compute-2-37:13269] *** Process received signal ***
+[compute-2-37:13269] Signal: Floating point exception (8)
+[compute-2-37:13269] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13269] Failing at address: 0x40a99a
+[compute-2-37:13269] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13269] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13269] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13269] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13269] *** End of error message ***
+[compute-2-37:13266] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13266] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13266] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13266] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13266] *** End of error message ***
+[compute-2-37:13271] *** Process received signal ***
+[compute-2-37:13271] Signal: Floating point exception (8)
+[compute-2-37:13271] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13271] Failing at address: 0x40a99a
+[compute-2-37:13271] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13271] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13271] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13271] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13271] *** End of error message ***
+[compute-2-34.local][[60009,1],12][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.159 failed: Connection refused (111)
+[compute-2-34.local][[60009,1],16][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(9) failed: Connection reset by peer (104)
+[compute-2-34:06654] *** Process received signal ***
+[compute-2-35:04598] *** Process received signal ***
+[compute-2-34:06656] *** Process received signal ***
+[compute-2-35:04598] Signal: Aborted (6)
+[compute-2-35:04598] Signal code:  (-6)
+[compute-2-34:06653] *** Process received signal ***
+[compute-2-34:06653] Signal: Aborted (6)
+[compute-2-34:06653] Signal code:  (-6)
+[compute-2-34:06654] Signal: Aborted (6)
+[compute-2-34:06654] Signal code:  (-6)
+[compute-2-34:06652] *** Process received signal ***
+[compute-2-34:06657] *** Process received signal ***
+[compute-2-34:06657] Signal: Aborted (6)
+[compute-2-34:06657] Signal code:  (-6)
+[compute-2-34:06656] Signal: Aborted (6)
+[compute-2-34:06656] Signal code:  (-6)
+[compute-2-34:06652] Signal: Aborted (6)
+[compute-2-34:06652] Signal code:  (-6)
+[compute-2-34:06655] *** Process received signal ***
+[compute-2-34:06655] Signal: Aborted (6)
+[compute-2-34:06655] Signal code:  (-6)
+n: 16
+[compute-2-37:13314] *** Process received signal ***
+[compute-2-37:13314] Signal: Floating point exception (8)
+[compute-2-37:13314] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13314] Failing at address: 0x40a99a
+[compute-2-37:13314] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13314] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13314] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13314] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13314] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 13314 on node compute-2-37.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-37:13316] *** Process received signal ***
+[compute-2-37:13316] Signal: Floating point exception (8)
+[compute-2-37:13316] Signal code: Integer divide-by-zero (1)
+[compute-2-37:13316] Failing at address: 0x40a99a
+[compute-2-37:13316] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13316] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-37:13316] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eeb41d994]
+[compute-2-37:13316] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-37:13316] *** End of error message ***
+[compute-2-37:13317] *** Process received signal ***
+[compute-2-37:13317] Signal: Aborted (6)
+[compute-2-37:13317] Signal code:  (-6)
+[compute-2-37:13317] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13317] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3eeb430285]
+[compute-2-37:13317] [ 2] /lib64/libc.so.6(abort+0x110) [0x3eeb431d30]
+[compute-2-37:13317] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b3aa2244fc2]
+[compute-2-37:13317] *** End of error message ***
+[compute-2-37:13318] *** Process received signal ***
+[compute-2-37:13318] Signal: Aborted (6)
+[compute-2-37:13318] Signal code:  (-6)
+[compute-2-37:13318] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13318] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3eeb430285]
+[compute-2-37:13318] [ 2] /lib64/libc.so.6(abort+0x110) [0x3eeb431d30]
+[compute-2-37:13318] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2b68f0b0dfc2]
+[compute-2-37:13318] *** End of error message ***
+[compute-2-37:13315] *** Process received signal ***
+[compute-2-37:13315] Signal: Aborted (6)
+[compute-2-37:13315] Signal code:  (-6)
+[compute-2-37:13319] *** Process received signal ***
+[compute-2-37:13319] Signal: Aborted (6)
+[compute-2-37:13319] Signal code:  (-6)
+[compute-2-37:13315] [ 0] /lib64/libpthread.so.0 [0x3eebc0ebe0]
+[compute-2-37:13315] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3eeb430285]
+[compute-2-37:13315] [ 2] /lib64/libc.so.6(abort+0x110) [0x3eeb431d30]
+[compute-2-37:13315] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2ba78bc34fc2]
+[compute-2-37:13315] *** End of error message ***
+[compute-2-34:06698] *** Process received signal ***
+[compute-2-35:04651] *** Process received signal ***
+[compute-2-35:04652] *** Process received signal ***
+[compute-2-35:04652] Signal: Aborted (6)
+[compute-2-35:04652] Signal code:  (-6)
+n: 32
+18 2 7.60603 0.0011601
+n: 64
+18 2 8.497 0.000296028
+n: 128
+18 2 20.0448 7.46813e-05
+n: 256
+18 2 22.6529 1.75775e-05
+n: 512
+18 2 24.754 4.25655e-06
+n: 1024
+18 2 98.278 1.04683e-06
+n: 2048
+18 2 394.028 2.61838e-07
+n: 4096
+18 2 1701.25 6.54755e-08
+n: 8192
+18 2 7228.44 1.63709e-08
+n: 16384
+18 2 30175.1 4.08848e-09
