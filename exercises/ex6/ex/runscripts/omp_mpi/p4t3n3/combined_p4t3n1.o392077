@@ -1,0 +1,71 @@
+chown: cannot access `/state/partition1/scratch/pbstmp.392077.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.392077.rocks.hpc.ntnu.no': No such file or directory
+n: 8
+[compute-1-13:25808] *** Process received signal ***
+[compute-1-13:25808] Signal: Floating point exception (8)
+[compute-1-13:25808] Signal code: Integer divide-by-zero (1)
+[compute-1-13:25808] Failing at address: 0x40a99a
+[compute-1-13:25808] [ 0] /lib64/libpthread.so.0 [0x3cd2a0ebe0]
+[compute-1-13:25808] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-13:25808] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3cd221d994]
+[compute-1-13:25808] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-13:25808] *** End of error message ***
+[compute-1-14:30485] *** Process received signal ***
+[compute-1-14:30485] Signal: Floating point exception (8)
+[compute-1-14:30485] Signal code: Integer divide-by-zero (1)
+[compute-1-14:30485] Failing at address: 0x40a99a
+[compute-1-14:30485] [ 0] /lib64/libpthread.so.0 [0x3ecb00ebe0]
+[compute-1-14:30485] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-14:30485] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eca81d994]
+[compute-1-14:30485] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-14:30485] *** End of error message ***
+[compute-1-14:30484] *** Process received signal ***
+[compute-1-14:30484] Signal: Floating point exception (8)
+[compute-1-14:30484] Signal code: Integer divide-by-zero (1)
+[compute-1-14:30484] Failing at address: 0x40a99a
+[compute-1-14:30484] [ 0] /lib64/libpthread.so.0 [0x3ecb00ebe0]
+[compute-1-14:30484] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-14:30484] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x3eca81d994]
+[compute-1-14:30484] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-14:30484] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 4 with PID 25808 on node compute-1-13 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-1-14:30483] *** Process received signal ***
+[compute-1-14:30483] Signal: Aborted (6)
+[compute-1-14:30483] Signal code:  (-6)
+[compute-1-14:30486] *** Process received signal ***
+[compute-1-14:30486] Signal: Aborted (6)
+[compute-1-14:30486] Signal code:  (-6)
+[compute-1-14:30483] [ 0] /lib64/libpthread.so.0 [0x3ecb00ebe0]
+[compute-1-14:30483] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3eca830285]
+[compute-1-14:30483] [ 2] /lib64/libc.so.6(abort+0x110) [0x3eca831d30]
+[compute-1-14:30483] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2acc2e1b5fc2]
+[compute-1-14:30483] *** End of error message ***
+[compute-1-14:30486] [ 0] /lib64/libpthread.so.0 [0x3ecb00ebe0]
+[compute-1-14:30486] [ 1] /lib64/libc.so.6(gsignal+0x35) [0x3eca830285]
+[compute-1-14:30486] [ 2] /lib64/libc.so.6(abort+0x110) [0x3eca831d30]
+[compute-1-14:30486] [ 3] /share/apps/modulessoftware/intel/compilers/11.1.059/lib/intel64/libiomp5.so(__kmp_do_abort+0x2a) [0x2ba5430b9fc2]
+[compute-1-14:30486] *** End of error message ***
+n: 16
+12 3 26.7169 0.00883227
+n: 32
+12 3 10.8161 0.00174014
+n: 64
+12 3 38.949 0.000444042
+n: 128
+12 3 42.542 0.000102687
+n: 256
+12 3 31.7891 2.57804e-05
+n: 512
+12 3 70.926 6.31144e-06
+n: 1024
+12 3 135.381 1.57943e-06
+n: 2048
+12 3 438.998 3.92756e-07
+n: 4096
+12 3 1793.33 9.82132e-08
+n: 8192
+12 3 7452.6 2.45204e-08
+n: 16384
+12 3 30951.6 6.13047e-09

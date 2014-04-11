@@ -1,0 +1,38 @@
+Warning: Permanently added 'compute-0-33' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.391989.rocks.hpc.ntnu.no': No such file or directory
+chown: cannot access `/state/partition1/scratch/pbstmp.391989.rocks.hpc.ntnu.no': No such file or directory
+n: 8
+[compute-0-36:08158] *** Process received signal ***
+[compute-0-36:08158] Signal: Floating point exception (8)
+[compute-0-36:08158] Signal code: Integer divide-by-zero (1)
+[compute-0-36:08158] Failing at address: 0x40a99a
+[compute-0-36:08158] [ 0] /lib64/libpthread.so.0 [0x302c80ebe0]
+[compute-0-36:08158] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-0-36:08158] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x302c01d994]
+[compute-0-36:08158] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-0-36:08158] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 4 with PID 8158 on node compute-0-36 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+n: 16
+12 3 33.6568 0.00883227
+n: 32
+12 3 40.446 0.00174014
+n: 64
+12 3 21.4319 0.000444042
+n: 128
+12 3 12.054 0.000102687
+n: 256
+12 3 41.796 2.57804e-05
+n: 512
+12 3 54.101 6.31144e-06
+n: 1024
+12 3 106.034 1.57943e-06
+n: 2048
+12 3 403.091 3.92756e-07
+n: 4096
+12 3 1708.05 9.82132e-08
+n: 8192
+12 3 7309.08 2.45204e-08
+n: 16384
+12 3 30704 6.13047e-09

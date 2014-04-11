@@ -1,0 +1,64 @@
+Warning: Permanently added 'compute-1-12' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.391993.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-1-13' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.391993.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-1-14' (RSA) to the list of known hosts.
+Warning: Permanently added 'compute-2-34' (RSA) to the list of known hosts.
+Warning: Permanently added 'compute-2-35' (RSA) to the list of known hosts.
+Warning: Permanently added 'compute-2-37' (RSA) to the list of known hosts.
+n: 8
+[compute-1-13:25470] *** Process received signal ***
+[compute-1-13:25470] Signal: Floating point exception (8)
+[compute-1-13:25470] Signal code: Integer divide-by-zero (1)
+[compute-1-13:25470] Failing at address: 0x40a99a
+[compute-1-13:25471] *** Process received signal ***
+[compute-1-14:30022] *** Process received signal ***
+[compute-1-14:30022] Signal: Floating point exception (8)
+[compute-1-14:30022] Signal code: Integer divide-by-zero (1)
+[compute-1-14:30022] Failing at address: 0x40a99a
+[compute-1-13:25471] Signal: Floating point exception (8)
+[compute-1-13:25471] Signal code: Integer divide-by-zero (1)
+[compute-1-13:25471] Failing at address: 0x40a99a
+[compute-1-12:08245] *** Process received signal ***
+[compute-1-12:08245] Signal: Floating point exception (8)
+[compute-1-12:08245] Signal code: Integer divide-by-zero (1)
+[compute-1-12:08245] Failing at address: 0x40a99a
+[compute-1-14:30021] *** Process received signal ***
+[compute-1-14:30021] Signal: Floating point exception (8)
+[compute-1-14:30021] Signal code: Integer divide-by-zero (1)
+[compute-1-14:30021] Failing at address: 0x40a99a
+[compute-1-12:08245] [ 0] /lib64/libpthread.so.0 [0x35f4e0ebe0]
+[compute-1-12:08245] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-1-12:08245] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x35f461d994]
+[compute-1-12:08245] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-1-12:08245] *** End of error message ***
+[compute-2-37.local][[57050,1],6][btl_tcp_endpoint.c:456:mca_btl_tcp_endpoint_recv_blocking] recv(8) failed: Connection reset by peer (104)
+--------------------------------------------------------------------------
+mpirun noticed that process rank 4 with PID 8245 on node compute-1-12 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-37:12874] *** Process received signal ***
+[compute-2-37:12875] *** Process received signal ***
+[compute-2-37:12875] Signal: Aborted (6)
+[compute-2-37:12875] Signal code:  (-6)
+n: 16
+12 3 8.42881 0.00883227
+n: 32
+12 3 8.28981 0.00174014
+n: 64
+12 3 8.02898 0.000444042
+n: 128
+12 3 9.19795 0.000102687
+n: 256
+12 3 15.8889 2.57804e-05
+n: 512
+12 3 39.8521 6.31144e-06
+n: 1024
+12 3 108.314 1.57943e-06
+n: 2048
+12 3 371.881 3.92756e-07
+n: 4096
+12 3 1585.42 9.82132e-08
+n: 8192
+12 3 6509.08 2.45204e-08
+n: 16384
+12 3 27268.1 6.13047e-09

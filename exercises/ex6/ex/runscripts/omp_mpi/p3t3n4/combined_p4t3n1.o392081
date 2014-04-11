@@ -1,0 +1,83 @@
+Warning: Permanently added 'compute-2-15' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.392081.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-2-30' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.392081.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-2-31' (RSA) to the list of known hosts.
+chown: cannot access `/state/partition1/scratch/pbstmp.392081.rocks.hpc.ntnu.no': No such file or directory
+Warning: Permanently added 'compute-2-32' (RSA) to the list of known hosts.
+n: 8
+[compute-2-32:00301] *** Process received signal ***
+[compute-2-32:00301] Signal: Floating point exception (8)
+[compute-2-32:00301] Signal code: Integer divide-by-zero (1)
+[compute-2-32:00301] Failing at address: 0x40a99a
+[compute-2-32:00301] [ 0] /lib64/libpthread.so.0 [0x391f80ebe0]
+[compute-2-32:00301] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-32:00301] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x391f01d994]
+[compute-2-32:00301] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-32:00301] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 301 on node compute-2-32.local exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+[compute-2-32:00303] *** Process received signal ***
+[compute-2-32:00303] Signal: Floating point exception (8)
+[compute-2-32:00303] Signal code: Integer divide-by-zero (1)
+[compute-2-32:00303] Failing at address: 0x40a99a
+[compute-2-32:00303] [ 0] /lib64/libpthread.so.0 [0x391f80ebe0]
+[compute-2-32:00303] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-32:00303] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x391f01d994]
+[compute-2-32:00303] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-32:00303] *** End of error message ***
+[compute-2-32:00302] *** Process received signal ***
+[compute-2-32:00302] Signal: Floating point exception (8)
+[compute-2-32:00302] Signal code: Integer divide-by-zero (1)
+[compute-2-32:00302] Failing at address: 0x40a99a
+[compute-2-32:00302] [ 0] /lib64/libpthread.so.0 [0x391f80ebe0]
+[compute-2-32:00302] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-32:00302] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x391f01d994]
+[compute-2-32:00302] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-32:00302] *** End of error message ***
+[compute-2-30.local][[33184,1],6][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] connect() to 10.1.255.167 failed: Connection refused (111)
+[compute-2-31:21867] *** Process received signal ***
+[compute-2-31:21867] Signal: Floating point exception (8)
+[compute-2-31:21867] Signal code: Integer divide-by-zero (1)
+[compute-2-31:21867] Failing at address: 0x40a99a
+[compute-2-30.local][[33184,1],8][btl_tcp_endpoint.c:636:mca_btl_tcp_endpoint_complete_connect] [compute-2-31:21866] *** Process received signal ***
+[compute-2-31:21866] Signal: Floating point exception (8)
+[compute-2-31:21866] Signal code: Integer divide-by-zero (1)
+[compute-2-31:21866] Failing at address: 0x40a99a
+[compute-2-31:21867] [ 0] /lib64/libpthread.so.0 [0x333980ebe0]
+[compute-2-31:21867] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-31:21867] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x333901d994]
+[compute-2-31:21867] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+connect() to 10.1.255.163 failed: Connection refused (111)
+[compute-2-31:21866] [ 0] /lib64/libpthread.so.0 [0x333980ebe0]
+[compute-2-31:21866] [ 1] ../../../release_omp_mpi/ex6(main+0x63a) [0x40a99a]
+[compute-2-31:21866] [ 2] /lib64/libc.so.6(__libc_start_main+0xf4) [0x333901d994]
+[compute-2-31:21866] [ 3] ../../../release_omp_mpi/ex6 [0x40a2a9]
+[compute-2-31:21866] *** End of error message ***
+[compute-2-31:21867] *** End of error message ***
+[compute-2-31:21868] *** Process received signal ***
+[compute-2-31:21868] Signal: Aborted (6)
+[compute-2-31:21868] Signal code:  (-6)
+n: 16
+12 3 19.7179 0.00883227
+n: 32
+12 3 10.2789 0.00174014
+n: 64
+12 3 21.0512 0.000444042
+n: 128
+12 3 10.0329 0.000102687
+n: 256
+12 3 27.034 2.57804e-05
+n: 512
+12 3 25.5921 6.31144e-06
+n: 1024
+12 3 87.3442 1.57943e-06
+n: 2048
+12 3 380.175 3.92756e-07
+n: 4096
+12 3 1630.23 9.82132e-08
+n: 8192
+12 3 6953.31 2.45204e-08
+n: 16384
+12 3 29159.6 6.13047e-09
