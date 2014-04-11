@@ -305,7 +305,7 @@ perfectly parallel with runtime decreasing linearly with respect to the amount
 of processors added. The runtime with 8 processors is just about half of that
 with 4, and similarly with 12 and 6 processors.
 
-\hspace*{-3.3cm}\includegraphics[scale=0.6]{pics/pX.png}
+\hspace*{-1.7cm}\includegraphics[scale=0.6]{pics/pX.png}
 
 \subsubsection{Multiple Nodes}
 
@@ -335,18 +335,19 @@ more time than sending less to more nodes on this architecture.
 
 While the data for smaller problem sizes is cluttered with noise, we can clearly see from the plot that the bandwith starts to limit the paralellization around $n = 2^{13}$, and that adding more nodes past this point clearly is beneficial to the parallelization efficiency. One could expect that as the problem size increases past the scope we have tested on, one could see sevaral more such points, where dividing across 9 nodes as we have done at the most in our testing would also start seeing falloff in paralell efficiency as it would have to send to much data between each of the nodes.
 
-\hspace*{-3.3cm}\includegraphics[scale=0.6]{pics/p36nX.png}
+\hspace*{-1.5cm}\includegraphics[scale=0.6]{pics/p36nX.png}
 
 \newpage
 \subsection{OpenMP Results}
 When it came to testing the OpenMP speedup, we were more limited by what we could test, due to being limited to a single node on Kongull, and thus a maximum of 12 threads. Below is a plot of the timing, which shows that while OpenMP in itself grants a decent speedup, it is inferior to MPI by itself. OpenMP by itself is not of much interest however, seeing as it cannot make use of more than one node on Kongull, and therefore is limited to adding a maximum of 12 threads. In the next section however, we will look at how it performs in concert with MPI.
 
-\hspace*{-3.3cm}\includegraphics[scale=0.6]{pics/omp.png}
+\hspace*{-1.7cm}\includegraphics[scale=0.6]{pics/omp.png}
 \newpage
 \subsection{Combined Results}
+\subsubsection{The Data}
 For testing the combined implementation of both OpenMP- and MPI-parallelization we used the same amount of nodes and processes as in the MPI test. The MPI test was done with one thread per process and 36 processes total, which gives $p*t = 36*1 = 36$. Here we also tested with various combinations of $p*t=36$, and with 3, 6, and 9 nodes, for good comparison. The legend on this plot is slightly different from the MPI one, where its \emph{p(rosessor per node)t(hreads per node)n(odes)}, so one multiplies them together to get a total of 36 for each case.
 
-\hspace*{-3.3cm}\includegraphics[scale=0.73]{pics/plot.png}
+\hspace*{-2.3cm}\includegraphics[scale=0.73]{pics/plot.png}
 
 It is clearly visible that dividing just the threads over several nodes, as in $p1t12n3$, is not the most effective parallelization strategy. It behaves like the pure OpenMP implementation does in relation to the pure MPI implementation. One can observe the same in the ther test cases: One process and several threads performs worse than the opposite, or a mix of several of each.
 
@@ -354,14 +355,19 @@ One can also observe that if one ignores the test-cases where one processor per 
 
 In addition to this it should be said that $p2t2n9$ behaved exactly like the p4t1n9 shown in the plot, and the same goes for $p3t2n6$ in relation to $p2t3n6$. From this we can conclude that as long as one avoids using just one processor per node, the combined implementation is about equivalent with the pure MPI implementation, but if you do use just one prosessor per node, it is worse.
 
+\subsubsection{Conclusions From Results}
+By testing the combined implementation of MPI and OpenMP, we have learned that if certain configurations are avoided, it may be desirable to use both parallelization technique seeing as it does not perform any worse than only MPI. The possible benefit of using both comes from the ability to better utilize all processors on a node when dividing a certain amount of processes across nodes. Any leftover processors on a node can then be utilized to add additional threads to solve the problem on each node, without affecting any specific desired processor division. 
+
+We have not tested this assumption to a sufficiently large degree, and it might therefore be desirable to do more extensive testing, but we believe it is safe to say that such a solution probably is the most flexible one, assuming one has the time to implement both. However, should one only have time to implement one solution, the OpenMP one is decidedly faster, while the MPI one provides for a better level of parallelization.
+
 \subsection{Scaling and Complexity}
-When it comes to scaling, we are of course also interested in how the results scale to the computational complexity of the problem. Solving the problem with the Discrete Sine Transform takes $n^2log(n)$ floating point operations, and it is therefore important to compare the implementation to this, in order to see how the algorithm implementation compares to the theory.
+When it comes to scaling, we are of course also interested in how the results scale to the computational complexity of the problem. Solving the problem with the DST takes $n^2log(n)$ floating point operations, and it is therefore important to compare the implementation to this, in order to see how the algorithm implementation compares to the theory.
 
 Below is a plot comparing the timing results from 36 processors, with an $n^2log(n)$ plot of the problems input size. (The $n^2log(n)$ plot is divided by a costant to improve the plot, seeing as constants are inconsequential anyway).
 
-\hspace*{-2.5cm}\includegraphics[scale=0.55]{pics/logplot.png}
+\hspace*{-1cm}\includegraphics[scale=0.55]{pics/logplot.png}
 
-We can see that for $n>1024$ they scale identically, while below this point thede are some differences. Most of this, however, should be explainable by noise in our data, as well as startup-costs of the program. Other than that, this is as should be expected, and indicates that the implementation is correct as far as complexity is concerned. 
+We can see that for $n>1024$ they scale identically, while below this point there are some differences. Most of this, however, should be explainable by noise in our data, as well as startup-costs of the program. Other than that, this is as should be expected, and indicates that the implementation is correct as far as complexity is concerned. 
 
 % (f)
 \section{Non-Homogeneous Dirichlet Boundary Conditions}
@@ -473,9 +479,14 @@ $h_y^2$. This is due to the fact that we do not store our step-lengths in the
 source function.
 
 \section{Conclusion}
+We can conclude from our results, that parallelization of a DST-based solver for the Poisson problem is an excellent way to improve performance and enable solving of larger problem sizes. We have also learned that a distributed solution can be limited in its parallel efficiency by communication bandwidth between different nodes in a distributed architecture, when the problem size grows large enough, as seems to be the case on the Kongull system.
+
+We have also observed that a combined solution of MPI and OpenMP offers the largest amount of flexibility, at no downsides other than more time required to implement and test it, while solutions with just MPI or OpenMP has downsides compared to each other. The MPI solution takes considerably more time to implement and test, but offers the superior speedup and parallelization degree. While on the other hand OpenMP-support is very fast to implement, but offers a significantly worse speedup compered to MPI.
 
 \todo[inline]{Summarize the best/worst results of the result chapter. Also
 repeat what we can and cannot to do from Mireia's math-section.}
+
+
 
 \bibliography{bibliography}{}
 \bibliographystyle{plain}
