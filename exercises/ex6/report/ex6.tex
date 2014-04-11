@@ -25,11 +25,12 @@
 
 \large{\today}
 \vfill
-% \section*{Abstract}
+\section*{Abstract}
+This is report covers the analysis and implementation of a parallel solver for the Poisson problem through the use of the Discrete Sine Transform (DST), and the use of the OpenMP and MPI APIs.
+
+It covers teoretical analysis of the parallelisation, as well as practical analysis of the runtime results of the solver implementation. Finally, there is some discussion on how to enable the solver to handle different domains, as well as what has been learned from the implementation results.
 \end{center}
-
-\todo[inline]{ABSTRACT}
-
+  
 
 \clearpage
 \section{Introduction}
@@ -587,8 +588,9 @@ implement and test, but offers the superior speedup and parallelization degree.
 While on the other hand OpenMP-support is very fast to implement, but offers a
 significantly worse speedup compared to MPI.
 
-\todo[inline]{Summarize the best/worst results of the result chapter. Also
-repeat what we can and cannot to do from Mireia's math-section.}
+Analysis of possibilities for extending the capabilities of the parallel solver has also shown
+ that we can extend the capability of handling domains by making a change in the tensor-operation,
+  which would enable us to solve a wider range of problems.
 
 
 
