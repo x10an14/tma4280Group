@@ -306,6 +306,15 @@ One can also observe that if one ignores the test-cases where one processor per 
 
 In addition to this it should be said that $p2t2n9$ behaved exactly like the p4t1n9 shown in the plot, and the same goes for $p3t2n6$ in relation to $p2t3n6$. From this we can conclude that as long as one avoids using just one processor per node, the combined implementation is about equivalent with the pure MPI implementation, but if you do use just one prosessor per node, it is worse.
 
+\subsection{Scaling and Complexity}
+When it comes to scaling, we are of course also interested in how the results scale to the computational complexity of the problem. Solving the problem with the Discrete Sine Transform takes $n^2log(n)$ floating point operations, and it is therefore important to compare the implementation to this, in order to see how the algorithm implementation compares to the theory.
+
+Below is a plot comparing the timing results from 36 processors, with an $n^2log(n)$ plot of the problems input size. (The $n^2log(n)$ plot is divided by a costant to improve the plot, seeing as constants are inconsequential anyway).
+
+\hspace*{-2.5cm}\includegraphics[scale=0.55]{pics/logplot.png}
+
+We can see that for $n>1024$ they scale identically, while below this point thede are some differences. Most of this, however, should be explainable by noise in our data, as well as startup-costs of the program. Other than that, this is as should be expected, and indicates that the implementation is correct as far as complexity is concerned. 
+
 % (f)
 \section{Non-Homogeneous Dirichlet Boundary Conditions}
 
