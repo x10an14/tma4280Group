@@ -303,12 +303,13 @@ implementation.
 
 For each process' $\mathbf{A}$ to know which values it needs to initialize with,
 since that depends on what part of the grid this $\mathbf{A}$ represents, all
-processes have an array which stores the $offset$ of which each column of the
-grid point said process' $\mathbf{A}$ starts representing.
+processes have an array which stores the \textit{offset} of which each column of
+the grid point said process' $\mathbf{A}$ starts representing.
 
 \subsection{Correctness Convergence}
 
-Our program runs
+To confirm that our solver actually returns a grid of values representing the
+correct values for the function ``solved'',
 
 \todo[inline]{Decide if we make another section, to analyze and report
 communication, FLOP, FLOPS, and so on...}
