@@ -309,7 +309,17 @@ the grid point said process' $\mathbf{A}$ starts representing.
 \subsection{Correctness Convergence}
 
 To confirm that our solver actually returns a grid of values representing the
-correct values for the function ``solved'',
+correct values for the function ``solved'', we hard code a function which gives
+the correct values we should expect into the implementation. The values this
+function then returns at the end of a program run are then compared with the
+values the implementation returns.
+
+Because of the nature of the 2D Poisson problem our implementation solves, we
+should expect for each increase of $n$, a decrease of $(\frac{1}{n})^2 = h$,
+for each increment of $n$, and hence expect to see a parallel line between $h$
+and the maximum error of our implementation.
+
+Below, we show a
 
 \todo[inline]{Decide if we make another section, to analyze and report
 communication, FLOP, FLOPS, and so on...}
