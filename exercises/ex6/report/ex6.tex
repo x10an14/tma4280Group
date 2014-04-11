@@ -367,7 +367,7 @@ nodes, each node receive a larger part. This, in turn, means that more data has
 to be sent each time the processes communicate, something which obviously takes
 more time than sending less to more nodes on this architecture.
 
-<<<<<<< HEAD
+
 While the data for smaller problem sizes is cluttered with noise, we can clearly
 see from the plot that the bandwidth starts to limit the parallelization around
 $n = 2^{13}$, and that adding more nodes past this point clearly is beneficial
@@ -375,10 +375,7 @@ to the parallelization efficiency. One could expect that as the problem size
 increases past the scope we have tested on, one could see several more such
 points, where dividing across 9 nodes as we have done at the most in our testing
 would also start seeing falloff in parallel efficiency as it would have to send
-to much data between each of the nodes.
-=======
-While the data for smaller problem sizes is cluttered with noise, we can clearly see from the plot that the bandwith starts to limit the parallelization around $n = 2^{13}$, and that adding more nodes past this point clearly is beneficial to the parallelization efficiency. One could expect that as the problem size increases past the scope we have tested on, one could see sevaral more such points, where dividing across 9 nodes as we have done at the most in our testing would also start seeing falloff in parallel efficiency as it would have to send to much data between each of the nodes.
->>>>>>> 37daa512471c957a0cfea64c277fbde5271a96ef
+too much data between each of the nodes.
 
 \hspace*{-1.5cm}\includegraphics[scale=0.6]{pics/p36nX.png}
 
