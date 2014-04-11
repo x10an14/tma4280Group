@@ -101,6 +101,7 @@ We have the below system.
 \end{bmatrix*}
 \end{displaymath}
 
+\todo{Too many times since in this paragraph}
 Since we have homogeneous boundary conditions, we reduce the problem by $2$
 dimensions to become an $(n - 1) \times (n - 1)$ system since $u_0 = u_n = 0$.
 
@@ -121,7 +122,7 @@ algorithm, implement a solver whose algorithmic FLOP complexity should be
 $\mathcal{O}(n^2\times log(n))$.
 
 And since TMA4280~\cite{tma4280} is about running mathematical solvers on
-super-computing-clusters, we will use the Application Program Interface (API)
+super-computing-clusters, we will use the ApplicationProgramInterface (API)
 of two libraries; the MessagePassingInterface (MPI) to implement this in
 parallel across processes, and OpenMultiProcessing (OpenMP) to parallelize
 across threads.
@@ -142,10 +143,11 @@ need to happen in the solver for it to function correctly.
 	all processes, by creating a matrix $\mathbf{A}$ representing a grid of all
 	unknowns, which fills each process with $\sim \frac{N-1}{P \thickspace (=
 	Amount 	\thickspace of\thickspace Processes)}$ coloumns. Assigning each
-	gridpoint in $\mathbf{A}$ with a value given by the function we want to perform 2-Dimensional Poisson operation on (which is given the $i$th and
+	gridpoint in $\mathbf{A}$ with a value given by the function we want to 
+	perform 2-Dimensional Poisson operation on (which is given the $i$th and
 	$j$th position as input) multiplied with step-length between our gridpoints
 	due to the discretization of the 2D Poisson problem, e.g. $h^2, \thickspace
-	h = \frac{1}{N}$.
+	h = \frac{1}{n}$.
 
 	\item \label{istep-fst1} Use the Fourier Sine Transform (FST) on each
 	coloumn of the matrix within each process, thereby Fourier transforming the
@@ -189,36 +191,37 @@ This step generates the datastructures with which the solver performs the 2D
 Poisson operation. Hence, in step~\ref{istep-gen}, the following datastructures
 are created with the following operations inside of each process;
 
-(From here on out, $N$ is the input size given as parameter to the solver).
+(From here on out, $n$ is the input size given as parameter to the solver).
 \begin{itemize}
 	\item The ``work-matrix'', which we called $\mathbf{A}$ in
 	step~\ref{istep-gen}, will have $k = \frac{(N-1)}{P}$ columns, which each
 	have $N-1$ rows, giving a total size to matrix; $ProcSize = k\times(N-1)$.
 	To initialize each of the matrix variables with values, the run-time
 	complexity is a constant. Thus, for initializing matrix $\mathbf{A}$, it
-	requires $\mathcal{O}(ProcSize)\Rightarrow \mathcal{O}(N^2)$ run-time
+	requires $\mathcal{O}(ProcSize)\Rightarrow \mathcal{O}(n^2)$ run-time
 	complexity and memory. (Since more often than not, $P \ll N$, the complexity
-	is simplified from being $\mathcal{O}(N^2 + \frac{(N-1)^2}{P}$, to $\mathcal
-	{O}(N^2\times \frac{1-\frac{2}{N}+\frac{1}{N^2}}{P}$, and finally into
-	$\mathcal{O}(N^2)$).
+	is simplified from being $\mathcal{O}(\frac{(N-1)^2}{P})$, to $\mathcal
+	{O}(n^2\times \frac{1-\frac{2}{n}+\frac{1}{n^2}}{P})$, and finally into
+	$\mathcal{O}(n^2)$).
 
-	\item The ``transpose matrix'', called $\mathbf{B}$ in step~\ref{istep-fst1}
-	is identical in size and run-time complexity when comparing with matrix
-	$\mathbf{A}$; $\mathcal{O}(N^2)$. This one is also initialized in step~\ref
-	{istep-gen}.
+	\item The ``transpose matrix'', called $\mathbf{B}$ in
+	step~\ref{istep-fst1}, is identical in size and run-time complexity when
+	comparing with matrix $\mathbf{A}$; $\mathcal{O}(n^2)$. This one is also
+	initialized in step~\ref{istep-gen}.
 
 	\item The ``eigenvalue vector'', mentioned in step~\ref{istep-tens}, is a
 	vector containing the eigenvalues for the 2D Poisson problem. As such they
 	are not dependent on the function the solver performs on (the \emph{f}
-	function, if you will). It's complexity in run-time will be constant, once
+	function, if you will). Its complexity in run-time will be constant, once
 	for each variable; $\mathcal{O}(N-1)$, while the memory depends as hinted
 	by the run-time complexity on the input size. And since the vector is $N-1$
 	elements long, the memory complexity will also be $\mathcal{O}(N-1)$.
+	In other words, $\mathcal{O}(N)$.
 
 	\item There are several other help-variables used, but these are not
 	dependent on the problem size input $N$, and will hence not incur any
-	greater complexity beyond a constant added; $\mathcal{O}(N^2 + C)$. Which
-	again can be simplified into $\Rightarrow \mathcal{O}(N^2)$.
+	greater complexity beyond a constant $C$ added, like $\mathcal{O}(f(n) + C)$
+	Which again can be simplified into $\Rightarrow \mathcal{O}(n^2)$.
 \end{itemize}
 
 \paragraph{Complexity of Step~\ref{istep-fst1}}
@@ -226,7 +229,27 @@ are created with the following operations inside of each process;
 %section e)
 \subsection{Accepting Smooth Functions}
 
+We are asked to enable our implemented solver to accept smooth functions, by
+changing the initial values we give the gridpoints in the above mentioned matrix
+$\mathbf{A}$. We chose to test this with the function given in the Problem 
+Text~\cite{Insert Reference Here}, namely $f(x,y) = 5\pi^2 sin(\pi x) sin(2\pi 
+y)$. 
+
+The function our implemented solver performs the 2D Poisson operation on has to 
+be hardcoded into the code. Hence, the smooth function we use (and the code we
+use to check its correctness with), is hardcoded into the program. If, at any 
+point, it is desired that the solver performs the Poisson 2D operation on any
+other function, that function would also have to be hardcoded into our 
+implementation.
+
+For each process' $\mathbf{A}$ to know which values it needs to initialize with,
+since that depends on what part of the grid this $\mathbf{A}$ represents, all
+processes have an array which stores the $offset$ of which each column of the 
+gridpoint said process' $\mathbf{A}$ starts representing.
+
 \subsection{Correctness Convergence}
+
+Our program runs 
 
 \todo[inline]{Decide if we make another section, to analyze and report
 communication, FLOP, FLOPS, and so on...}
@@ -333,7 +356,8 @@ set the values of $v$ along the boundaries to $0$.
 
 If we want our code to solve the problem with these new conditions, we need to
 tranform the original problem into
-
+\todo{Should we use an other letter for the matrix A? It might confuse with the 
+matrix A above.}
 \begin{displaymath}
 	\mathbf{A} \times (\mathbf{u} + \mathbf{u_B}) = h^2 \mathbf{f}
 \end{displaymath}
@@ -377,9 +401,7 @@ Then the system will be written as
 \begin{bmatrix}
 	2 & -1 &  &  &  &  &  \\
 	-1 & 2 & -1 &  &  &  &  \\
-	 & -1 & 2 &  &  &  &  \\
 	 &  & \ddots & \ddots & \ddots &  & \\
-	 &  &  &  & 2 & -1 &  \\
 	 &  &  &  & -1 & 2 & -1 \\
 	 &  &  &  &  & -1 & 2
 \end{bmatrix}
