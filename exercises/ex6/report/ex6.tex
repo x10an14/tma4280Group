@@ -118,7 +118,7 @@ Our implementation is based on the fact and observation that for any Symmetric
 Positive Definite (SPD) matrix, we can through the use of a Fast Fourier
 Transform (FFT), more specifically the Discrete Sine Transform (DST)
 algorithm, implement a solver whose algorithmic FLOP complexity should be
-${\it O}(n^2\times log(n))$.
+$\textit{O}(n^2log(n))$.
 
 And since TMA4280~\cite{tma4280} is about running mathematical solvers on
 super-computing-clusters, we will use the ApplicationProgramInterface (API)
@@ -141,10 +141,10 @@ need to happen in the solver for it to function correctly.
 	\item \label{istep-gen} Generate the $(N - 1)^2$ unknown variables across
 	all processes, by creating a matrix $\mathbf{A}$ representing a grid of all
 	unknowns, which fills each process with $\sim \frac{N-1}{P \thickspace (=
-	Amount 	\thickspace of\thickspace Processes)}$ coloumns. Assigning each
+	Amount 	\thickspace of\thickspace Processes)}$ columns. Assigning each
 	gridpoint in $\mathbf{A}$ with a value given by the function we want to
 	perform 2-Dimensional Poisson operation on (which is given the $i$th and
-	$j$th position as input) multiplied with step-length between our gridpoints
+	$j$th position as input) multiplied with step-length between our grid points
 	due to the discretization of the 2D Poisson problem, e.g. $h^2, \thickspace
 	h = \frac{1}{n}$.
 
@@ -190,40 +190,40 @@ solver).
 \paragraph{The Complexity of Step~\ref{istep-gen}} comes from the following
 actions the solver performs in this step.
 
-It generates the datastructures with which the solver performs the 2D Poisson
-operation. Hence, in step~\ref{istep-gen}, the following datastructures are
+It generates the data structures with which the solver performs the 2D Poisson
+operation. Hence, in step~\ref{istep-gen}, the following data structures are
 created with the following operations inside of each process;
 
 \begin{itemize}
 	\item The ``work-matrix'', which we called $\mathbf{A}$ in
 	step~\ref{istep-gen}, will have $k = \frac{(N-1)}{P}$ columns, which each
-	have $N-1$ rows, giving a total size to matrix; $ProcSize = k\times(N-1)$.
+	have $N-1$ rows, giving a total size to matrix; $ProcSize = k\cdot(N-1)$.
 	To initialize each of the matrix variables with values, the run-time
 	complexity is a constant. Thus, for initializing matrix $\mathbf{A}$, it
-	requires ${\it O}(ProcSize)\Rightarrow {\it O}(n^2)$ run-time
+	requires $\textit{O}(ProcSize)\Rightarrow \textit{O}(n^2)$ run-time
 	complexity and memory. (Since more often than not, $P \ll N$, the complexity
-	is simplified from being ${\it O}(\frac{(N-1)^2}{P})$, to $\it
+	is simplified from being $\textit{O}(\frac{(N-1)^2}{P})$, to $\it
 	{O}(n^2\times \frac{1-\frac{2}{n}+\frac{1}{n^2}}{P})$, and finally into
-	${\it O}(n^2)$).
+	$\textit{O}(n^2)$).
 
 	\item The ``transpose matrix'', called $\mathbf{B}$ in
 	step~\ref{istep-fst1}, is identical in size and run-time complexity when
-	comparing with matrix $\mathbf{A}$; ${\it O}(n^2)$. This one is also
+	comparing with matrix $\mathbf{A}$; $\textit{O}(n^2)$. This one is also
 	initialized in step~\ref{istep-gen}.
 
 	\item The ``eigenvalue vector'', mentioned in step~\ref{istep-tens}, is a
 	vector containing the eigenvalues for the 2D Poisson problem. As such they
 	are not dependent on the function the solver performs on (the \emph{f}
 	function, if you will). Its complexity in run-time will be constant, once
-	for each variable; ${\it O}(N-1)$, while the memory depends as hinted
+	for each variable; $\textit{O}(N-1)$, while the memory depends as hinted
 	by the run-time complexity on the input size. And since the vector is $N-1$
-	elements long, the memory complexity will also be ${\it O}(N-1)$.
-	In other words, ${\it O}(N)$.
+	elements long, the memory complexity will also be $\textit{O}(N-1)$.
+	In other words, $\textit{O}(N)$.
 
 	\item There are several other help-variables used, but these are not
 	dependent on the problem size input $N$, and will hence not incur any
-	greater complexity beyond a constant $C$ added, like ${\it O}(f(n) + C)$
-	Which again can be simplified into $\Rightarrow {\it O}(n^2)$.
+	greater complexity beyond a constant $C$ added, like $\textit{O}(f(n) + C)$
+	Which again can be simplified into $\Rightarrow \textit{O}(n^2)$.
 \end{itemize}
 
 \paragraph{The Complexity of Step~\ref{istep-fst1}} comes from the from the
@@ -241,63 +241,70 @@ single process;
 \begin{itemize}
 	\item The first FST operation is performed on each column of $\mathbf{A}$
 	present in the process, let us call this number $k$ like in the previous
-	step complexity analysis. Since the FST requires ${\it O}(k\times (n-1)
-	\times (n-1)\times log(n-1))$, which simplified turn into ${\it O}(n^2
-	\times log(n))$. Memory complexity however, is not {\it O}$(n^2\times log(n)
+	step complexity analysis. Since the FST requires $\textit{O}(k(n-1)
+	(n-1)log(n-1))$, which simplified turn into $\textit{O}(n^2
+	log(n))$. Memory complexity however, is not \textit{O}$(n^2log(n)
 	)$. The FST requires an extra ``work-space'' in which to store temporary
 	variables which represent the inputted ones. But it needs not only to store
 	two duplicates, but also to store their complex values, resulting into {\it
-	O}$(4k\times(n-1)) \Rightarrow$ {\it O}$(n)$.
+	O}$(4k\cdot(n-1)) \Rightarrow$ \textit{O}$(n)$.
 
 	\item The transpose operation is performed on the matrix as a whole, across
 	all processes, and requires an iteration over each element in matrix $
 	\mathbf{B}$. Hence, since the transpose needs to re-order the elements
 	twice, once before sending, and once after, the complexity of this operation
-	ends up as {\it O}$(3(n-1)^2)$. This in turn can be simplified into
-	{\it O}$(n^2)$. There is no added memory compexity needed for the transpose.
+	ends up as \textit{O}$(3(n-1)^2)$. This in turn can be simplified into
+	\textit{O}$(n^2)$. There is no added memory complexity needed for the transpose.
 
 	\item The inverse FST is identical to the regular FST in terms of complexity
 	both for run-time and memory.
 \end{itemize}
 
 \paragraph{The Complexity of Step~\ref{istep-tens}} is smaller than the other
-steps, since in this step only involved one new dataelement requiring storage,
+steps, since in this step only involved one new data element requiring storage,
 the vector containing the eigenvalues of $\mathbf{A}$, of which there are {\it
 O}$(n-1)$.
 
 Run-time complexity is constant per element, and we need to traverse all
 elements in $\mathbf{B}$ (which represents $mathbf{A}$ transposed), per process.
-Hence, the run-time complexity becomes {\it O}$(n^2)$ for a serial
-implementation, but {\it O}$(\frac{n^2}{T\thickspace (=Amount\thickspace of
+Hence, the run-time complexity becomes \textit{O}$(n^2)$ for a serial
+implementation, but \textit{O}$(\frac{n^2}{T\thickspace (=Amount\thickspace of
 \thickspace threads)})$ for our implemented solver.
 
 \paragraph{The Complexity of Step~\ref{istep-fst2}} is identical to the
-complexity of step~\ref{istep-fst1} in terms of run-time, namely {\it O}$(n^2
-\times log(n) + n^2 + n^2\times log(n) = ${\it O}$(n^2\times
-log(n))$. Memory complexity however becomes only {\it O}$(C\times n^2)$ where $
-C$ is a constant offset, dependent only on the amount of processes and therads
+complexity of step~\ref{istep-fst1} in terms of run-time, namely \textit{O}$(n^2
+log(n) + n^2 + n^2log(n) = $\textit{O}$(n^2\cdot
+log(n))$. Memory complexity however becomes only \textit{O}$(Cn^2)$ where $
+C$ is a constant offset, dependent only on the amount of processes and threads
 the solver utilizes.
 
-%section e)
+\paragraph{The Total Complexity} then becomes as following for our
+implementation:
+
+\begin{itemize}
+	\item Memory: \textit{O}$(n^2)$
+	\item Run-time: \textit{O}$(n^2log(n))$
+\end{itemize}
+
+%section (e)
 \subsection{Accepting Smooth Functions}
 
 We are asked to enable our implemented solver to accept smooth functions, by
-changing the initial values we give the gridpoints in the above mentioned matrix
-$\mathbf{A}$. We chose to test this with the function given in the Problem
-Text~\cite{InsertReferenceHere}, namely $f(x,y) = 5\pi^2 sin(\pi x) sin(2\pi
-y)$.
+changing the initial values we give the grid points in the above mentioned matrix
+$\mathbf{A}$. We chose to test this with the function given in the problem
+text's appendix \textit{B}, namely $f(x,y) = 5\pi^2 sin(\pi x) sin(2\pi y)$.
 
 The function our implemented solver performs the 2D Poisson operation on has to
-be hardcoded into the code. Hence, the smooth function we use (and the code we
-use to check its correctness with), is hardcoded into the program. If, at any
+be hard coded into the code. Hence, the smooth function we use (and the code we
+use to check its correctness with), is hard coded into the program. If, at any
 point, it is desired that the solver performs the Poisson 2D operation on any
-other function, that function would also have to be hardcoded into our
+other function, that function would also have to be hard coded into our
 implementation.
 
 For each process' $\mathbf{A}$ to know which values it needs to initialize with,
 since that depends on what part of the grid this $\mathbf{A}$ represents, all
 processes have an array which stores the $offset$ of which each column of the
-gridpoint said process' $\mathbf{A}$ starts representing.
+grid point said process' $\mathbf{A}$ starts representing.
 
 \subsection{Correctness Convergence}
 
@@ -360,7 +367,18 @@ nodes, each node receive a larger part. This, in turn, means that more data has
 to be sent each time the processes communicate, something which obviously takes
 more time than sending less to more nodes on this architecture.
 
+<<<<<<< HEAD
+While the data for smaller problem sizes is cluttered with noise, we can clearly
+see from the plot that the bandwidth starts to limit the parallelization around
+$n = 2^{13}$, and that adding more nodes past this point clearly is beneficial
+to the parallelization efficiency. One could expect that as the problem size
+increases past the scope we have tested on, one could see several more such
+points, where dividing across 9 nodes as we have done at the most in our testing
+would also start seeing falloff in parallel efficiency as it would have to send
+to much data between each of the nodes.
+=======
 While the data for smaller problem sizes is cluttered with noise, we can clearly see from the plot that the bandwith starts to limit the parallelization around $n = 2^{13}$, and that adding more nodes past this point clearly is beneficial to the parallelization efficiency. One could expect that as the problem size increases past the scope we have tested on, one could see sevaral more such points, where dividing across 9 nodes as we have done at the most in our testing would also start seeing falloff in parallel efficiency as it would have to send to much data between each of the nodes.
+>>>>>>> 37daa512471c957a0cfea64c277fbde5271a96ef
 
 \hspace*{-1.5cm}\includegraphics[scale=0.6]{pics/p36nX.png}
 
@@ -376,7 +394,7 @@ threads. In the next section however, we will look at how it performs in concert
 with MPI.
 
 \hspace*{-1.7cm}\includegraphics[scale=0.6]{pics/omp.png}
-\newpage
+
 \subsection{Combined Results}
 \subsubsection{The Data}
 
@@ -394,21 +412,21 @@ case.
 It is clearly visible that dividing just the threads over several nodes, as in
 $p1t12n3$, is not the most effective parallelization strategy. It behaves like
 the pure OpenMP implementation does in relation to the pure MPI implementation.
-One can observe the same in the ther test cases: One process and several threads
+One can observe the same in the test cases: One process and several threads
 performs worse than the opposite, or a mix of several of each.
 
 One can also observe that if one ignores the test-cases where one processor per
 node was used, the performance for each node amount is about the same as in the
 pure MPI-case. This indicates that the node amount is quite significant in terms
 of parallel efficiency as the problem size grows, something which strongly
-implicates the communication bandwith between nodes as a major limiting factor,
+implicates the communication bandwidth between nodes as a major limiting factor,
 as previously discussed in the MPI-result section.
 
 In addition to this it should be said that $p2t2n9$ behaved exactly like the
 p4t1n9 shown in the plot, and the same goes for $p3t2n6$ in relation to
 $p2t3n6$. From this we can conclude that as long as one avoids using just one
 processor per node, the combined implementation is about equivalent with the
-pure MPI implementation, but if you do use just one prosessor per node, it is
+pure MPI implementation, but if you do use just one processor per node, it is
 worse.
 
 \subsubsection{Conclusions From Results}
@@ -464,7 +482,7 @@ for some lifting function $g$. In the newly defined solution, $g$ is supposed to
 set the values of $v$ along the boundaries to $0$.
 
 If we want our code to solve the problem with these new conditions, we need to
-tranform the original problem into
+transform the original problem into
 
 \begin{displaymath}
 	\mathbf{A} \times (\mathbf{u} + \mathbf{u_B}) = h^2 \mathbf{f}
@@ -570,7 +588,7 @@ implement and test it, while solutions with just MPI or OpenMP has downsides
 compared to each other. The MPI solution takes considerably more time to
 implement and test, but offers the superior speedup and parallelization degree.
 While on the other hand OpenMP-support is very fast to implement, but offers a
-significantly worse speedup compered to MPI.
+significantly worse speedup compared to MPI.
 
 \todo[inline]{Summarize the best/worst results of the result chapter. Also
 repeat what we can and cannot to do from Mireia's math-section.}
