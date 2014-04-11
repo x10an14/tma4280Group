@@ -118,7 +118,7 @@ Our implementation is based on the fact and observation that for any Symmetric
 Positive Definite (SPD) matrix, we can through the use of a Fast Fourier
 Transform (FFT), more specifically the Discrete Sine Transform (DST)
 algorithm, implement a solver whose algorithmic FLOP complexity should be
-$\mathcal{O}(n^2\times log(n))$.
+${\it O}(n^2\times log(n))$.
 
 And since TMA4280~\cite{tma4280} is about running mathematical solvers on
 super-computing-clusters, we will use the ApplicationProgramInterface (API)
@@ -184,6 +184,9 @@ as naturally befits a process vs. a thread).
 The complexity of our implementation can be described as following with the help
 of the list in subsection~\ref{sssec:dataflow}.
 
+In the following subsection, $n$ is the input size given as parameter to the
+solver).
+
 \paragraph{The Complexity of Step~\ref{istep-gen}} comes from the following
 actions the solver performs in this step.
 
@@ -191,37 +194,36 @@ It generates the datastructures with which the solver performs the 2D Poisson
 operation. Hence, in step~\ref{istep-gen}, the following datastructures are
 created with the following operations inside of each process;
 
-(In the following list, $n$ is the input size given as parameter to the solver).
 \begin{itemize}
 	\item The ``work-matrix'', which we called $\mathbf{A}$ in
 	step~\ref{istep-gen}, will have $k = \frac{(N-1)}{P}$ columns, which each
 	have $N-1$ rows, giving a total size to matrix; $ProcSize = k\times(N-1)$.
 	To initialize each of the matrix variables with values, the run-time
 	complexity is a constant. Thus, for initializing matrix $\mathbf{A}$, it
-	requires $\mathcal{O}(ProcSize)\Rightarrow \mathcal{O}(n^2)$ run-time
+	requires ${\it O}(ProcSize)\Rightarrow {\it O}(n^2)$ run-time
 	complexity and memory. (Since more often than not, $P \ll N$, the complexity
-	is simplified from being $\mathcal{O}(\frac{(N-1)^2}{P})$, to $\mathcal
+	is simplified from being ${\it O}(\frac{(N-1)^2}{P})$, to $\it
 	{O}(n^2\times \frac{1-\frac{2}{n}+\frac{1}{n^2}}{P})$, and finally into
-	$\mathcal{O}(n^2)$).
+	${\it O}(n^2)$).
 
 	\item The ``transpose matrix'', called $\mathbf{B}$ in
 	step~\ref{istep-fst1}, is identical in size and run-time complexity when
-	comparing with matrix $\mathbf{A}$; $\mathcal{O}(n^2)$. This one is also
+	comparing with matrix $\mathbf{A}$; ${\it O}(n^2)$. This one is also
 	initialized in step~\ref{istep-gen}.
 
 	\item The ``eigenvalue vector'', mentioned in step~\ref{istep-tens}, is a
 	vector containing the eigenvalues for the 2D Poisson problem. As such they
 	are not dependent on the function the solver performs on (the \emph{f}
 	function, if you will). Its complexity in run-time will be constant, once
-	for each variable; $\mathcal{O}(N-1)$, while the memory depends as hinted
+	for each variable; ${\it O}(N-1)$, while the memory depends as hinted
 	by the run-time complexity on the input size. And since the vector is $N-1$
-	elements long, the memory complexity will also be $\mathcal{O}(N-1)$.
-	In other words, $\mathcal{O}(N)$.
+	elements long, the memory complexity will also be ${\it O}(N-1)$.
+	In other words, ${\it O}(N)$.
 
 	\item There are several other help-variables used, but these are not
 	dependent on the problem size input $N$, and will hence not incur any
-	greater complexity beyond a constant $C$ added, like $\mathcal{O}(f(n) + C)$
-	Which again can be simplified into $\Rightarrow \mathcal{O}(n^2)$.
+	greater complexity beyond a constant $C$ added, like ${\it O}(f(n) + C)$
+	Which again can be simplified into $\Rightarrow {\it O}(n^2)$.
 \end{itemize}
 
 \paragraph{The Complexity of Step~\ref{istep-fst1}} comes from the from the
@@ -236,20 +238,45 @@ transform on each of column of $\mathbf{B}$.
 Below we will detail the complexity for each of these three steps, considering a
 single process;
 
-(In the following list, $n$ is the input size given as parameter to the solver).
 \begin{itemize}
 	\item The first FST operation is performed on each column of $\mathbf{A}$
 	present in the process, let us call this number $k$ like in the previous
-	step complexity analysis. Since the FST requires $\mathcal{O}(k\times (n-1)
-	\times (n-1)\times log(n-1))$, which simplified turn into $\mathcal{O}(n^2
-	\times log(n))$.
+	step complexity analysis. Since the FST requires ${\it O}(k\times (n-1)
+	\times (n-1)\times log(n-1))$, which simplified turn into ${\it O}(n^2
+	\times log(n))$. Memory complexity however, is not {\it O}$(n^2\times log(n)
+	)$. The FST requires an extra ``work-space'' in which to store temporary
+	variables which represent the inputted ones. But it needs not only to store
+	two duplicates, but also to store their complex values, resulting into {\it
+	O}$(4k\times(n-1)) \Rightarrow$ {\it O}$(n)$.
 
 	\item The transpose operation is performed on the matrix as a whole, across
 	all processes, and requires an iteration over each element in matrix $
 	\mathbf{B}$. Hence, since the transpose needs to re-order the elements
 	twice, once before sending, and once after, the complexity of this operation
-	ends up as \it{O}$(nlog(n))$ vs. $\mathcal{O}(nlog(n))$
+	ends up as {\it O}$(3(n-1)^2)$. This in turn can be simplified into
+	{\it O}$(n^2)$. There is no added memory compexity needed for the transpose.
+
+	\item The inverse FST is identical to the regular FST in terms of complexity
+	both for run-time and memory.
 \end{itemize}
+
+\paragraph{The Complexity of Step~\ref{istep-tens}} is smaller than the other
+steps, since in this step only involved one new dataelement requiring storage,
+the vector containing the eigenvalues of $\mathbf{A}$, of which there are {\it
+O}$(n-1)$.
+
+Run-time complexity is constant per element, and we need to traverse all
+elements in $\mathbf{B}$ (which represents $mathbf{A}$ transposed), per process.
+Hence, the run-time complexity becomes {\it O}$(n^2)$ for a serial
+implementation, but {\it O}$(\frac{n^2}{T\thickspace (=Amount\thickspace of
+\thickspace threads)})$ for our implemented solver.
+
+\paragraph{The Complexity of Step~\ref{istep-fst2}} is identical to the
+complexity of step~\ref{istep-fst1} in terms of run-time, namely {\it O}$(n^2
+\times log(n) + n^2 + n^2\times log(n) = ${\it O}$(n^2\times
+log(n))$. Memory complexity however becomes only {\it O}$(C\times n^2)$ where $
+C$ is a constant offset, dependent only on the amount of processes and therads
+the solver utilizes.
 
 %section e)
 \subsection{Accepting Smooth Functions}
@@ -361,7 +388,7 @@ Below is a plot comparing the timing results from 36 processors, with an $n^2log
 
 \hspace*{-2.5cm}\includegraphics[scale=0.55]{pics/logplot.png}
 
-We can see that for $n>1024$ they scale identically, while below this point thede are some differences. Most of this, however, should be explainable by noise in our data, as well as startup-costs of the program. Other than that, this is as should be expected, and indicates that the implementation is correct as far as complexity is concerned. 
+We can see that for $n>1024$ they scale identically, while below this point thede are some differences. Most of this, however, should be explainable by noise in our data, as well as startup-costs of the program. Other than that, this is as should be expected, and indicates that the implementation is correct as far as complexity is concerned.
 
 % (f)
 \section{Non-Homogeneous Dirichlet Boundary Conditions}
