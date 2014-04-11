@@ -320,10 +320,12 @@ should expect for each increase of $n$, a decrease of $(\frac{1}{n})^2 = h$,
 for each increment of $n$, and hence expect to see a parallel line between $h$
 and the maximum error of our implementation.
 
-Below, we show a
+Below, we show a log-linear plot of some selected maximum error levels for different configurations of our solver.
+We have plotted $h$ as the expected value, with the maximum error rates below.
 
-\todo[inline]{Decide if we make another section, to analyze and report
-communication, FLOP, FLOPS, and so on...}
+\hspace*{-0.5cm}\includegraphics[scale=0.6]{pics/error_plot.png}
+
+It is clearly visible that not utilizing OpenMP ($t = 1$) leads to a significantly lower rate of error, while $t = 12$ has the highest rate of max errors. This might indicate an error in our OpenMP implementation, or it mig tbe due to other casues. However, all of them decrease at the same rate as the expected one, which indicates that the level of error decreases correctly as the size of the problem increases.
 
 \section{Results}
 
