@@ -101,8 +101,7 @@ We have the below system.
 \end{bmatrix*}
 \end{displaymath}
 
-\todo{Too many times since in this paragraph}
-Since we have homogeneous boundary conditions, we reduce the problem by $2$
+Because of the homogeneous boundary conditions, we reduce the problem by $2$
 dimensions to become an $(n - 1) \times (n - 1)$ system since $u_0 = u_n = 0$.
 
 \section{The Implemented Solver}
@@ -143,7 +142,7 @@ need to happen in the solver for it to function correctly.
 	all processes, by creating a matrix $\mathbf{A}$ representing a grid of all
 	unknowns, which fills each process with $\sim \frac{N-1}{P \thickspace (=
 	Amount 	\thickspace of\thickspace Processes)}$ coloumns. Assigning each
-	gridpoint in $\mathbf{A}$ with a value given by the function we want to 
+	gridpoint in $\mathbf{A}$ with a value given by the function we want to
 	perform 2-Dimensional Poisson operation on (which is given the $i$th and
 	$j$th position as input) multiplied with step-length between our gridpoints
 	due to the discretization of the 2D Poisson problem, e.g. $h^2, \thickspace
@@ -185,13 +184,14 @@ as naturally befits a process vs. a thread).
 The complexity of our implementation can be described as following with the help
 of the list in subsection~\ref{sssec:dataflow}.
 
-\paragraph{Complexity of Step~\ref{istep-gen}}
+\paragraph{The Complexity of Step~\ref{istep-gen}} comes from the following
+actions the solver performs in this step.
 
-This step generates the datastructures with which the solver performs the 2D
-Poisson operation. Hence, in step~\ref{istep-gen}, the following datastructures
-are created with the following operations inside of each process;
+It generates the datastructures with which the solver performs the 2D Poisson
+operation. Hence, in step~\ref{istep-gen}, the following datastructures are
+created with the following operations inside of each process;
 
-(From here on out, $n$ is the input size given as parameter to the solver).
+(In the following list, $n$ is the input size given as parameter to the solver).
 \begin{itemize}
 	\item The ``work-matrix'', which we called $\mathbf{A}$ in
 	step~\ref{istep-gen}, will have $k = \frac{(N-1)}{P}$ columns, which each
@@ -224,32 +224,57 @@ are created with the following operations inside of each process;
 	Which again can be simplified into $\Rightarrow \mathcal{O}(n^2)$.
 \end{itemize}
 
-\paragraph{Complexity of Step~\ref{istep-fst1}}
+\paragraph{The Complexity of Step~\ref{istep-fst1}} comes from the from the
+Fourier Transforms and the transpose operation we perform on the $\mathbf{A}$
+matrix.
+
+There are three operations performed in this step; a Fourier transform on each
+column of $\mathbf{A}$, a transpose of $\mathbf{A}$ (and it is now we start
+referring to the transposed matrix as $\mathbf{B}$), and then an inverse Fourier
+transform on each of column of $\mathbf{B}$.
+
+Below we will detail the complexity for each of these three steps, considering a
+single process;
+
+(In the following list, $n$ is the input size given as parameter to the solver).
+\begin{itemize}
+	\item The first FST operation is performed on each column of $\mathbf{A}$
+	present in the process, let us call this number $k$ like in the previous
+	step complexity analysis. Since the FST requires $\mathcal{O}(k\times (n-1)
+	\times (n-1)\times log(n-1))$, which simplified turn into $\mathcal{O}(n^2
+	\times log(n))$.
+
+	\item The transpose operation is performed on the matrix as a whole, across
+	all processes, and requires an iteration over each element in matrix $
+	\mathbf{B}$. Hence, since the transpose needs to re-order the elements
+	twice, once before sending, and once after, the complexity of this operation
+	ends up as \it{O}$(nlog(n))$ vs. $\mathcal{O}(nlog(n))$
+\end{itemize}
 
 %section e)
 \subsection{Accepting Smooth Functions}
 
 We are asked to enable our implemented solver to accept smooth functions, by
 changing the initial values we give the gridpoints in the above mentioned matrix
-$\mathbf{A}$. We chose to test this with the function given in the Problem 
-Text~\cite{Insert Reference Here}, namely $f(x,y) = 5\pi^2 sin(\pi x) sin(2\pi 
-y)$. 
+$\mathbf{A}$. We chose to test this with the function given in the Problem
+Text~\cite{InsertReferenceHere}, namely $f(x,y) = 5\pi^2 sin(\pi x) sin(2\pi
+y)$.
 
-The function our implemented solver performs the 2D Poisson operation on has to 
+The function our implemented solver performs the 2D Poisson operation on has to
 be hardcoded into the code. Hence, the smooth function we use (and the code we
-use to check its correctness with), is hardcoded into the program. If, at any 
+use to check its correctness with), is hardcoded into the program. If, at any
 point, it is desired that the solver performs the Poisson 2D operation on any
-other function, that function would also have to be hardcoded into our 
+other function, that function would also have to be hardcoded into our
 implementation.
 
 For each process' $\mathbf{A}$ to know which values it needs to initialize with,
 since that depends on what part of the grid this $\mathbf{A}$ represents, all
-processes have an array which stores the $offset$ of which each column of the 
+processes have an array which stores the $offset$ of which each column of the
 gridpoint said process' $\mathbf{A}$ starts representing.
 
 \subsection{Correctness Convergence}
 
-Our program runs 
+Our program runs
 
 \todo[inline]{Decide if we make another section, to analyze and report
 communication, FLOP, FLOPS, and so on...}
@@ -336,7 +361,7 @@ set the values of $v$ along the boundaries to $0$.
 
 If we want our code to solve the problem with these new conditions, we need to
 tranform the original problem into
-\todo{Should we use an other letter for the matrix A? It might confuse with the 
+\todo{Should we use an other letter for the matrix A? It might confuse with the
 matrix A above.}
 \begin{displaymath}
 	\mathbf{A} \times (\mathbf{u} + \mathbf{u_B}) = h^2 \mathbf{f}
